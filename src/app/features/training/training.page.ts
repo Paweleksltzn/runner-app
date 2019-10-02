@@ -34,7 +34,6 @@ export class TrainingPage implements OnInit {
       this.mapThemeIcon = this.trainingOptions.darkThemeIcon;
       this.mapStyles = this.trainingOptions.mapLightMode;
     } else {
-      console.log('test2')
       this.mapThemeIcon = this.trainingOptions.lightThemeIcon;
       this.mapStyles = this.trainingOptions.mapDarkMode;
     }
