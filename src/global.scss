@@ -27,3 +27,16 @@
 
 @import "./styles/_variables.scss";
 @import "./styles/typography/_typography.scss";
+
+@import "./styles/components/_header.scss";
+.gmnoprint, .gm-style-cc {
+    display: none !important;
+}
+.map {
+    a {
+        img {
+            display: none !important;
+        }
+        
+    }
+}

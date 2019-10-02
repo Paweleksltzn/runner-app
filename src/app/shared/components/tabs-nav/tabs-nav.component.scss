@@ -1,0 +1,10 @@
+@import '../../../../styles/_variables.scss';
+.ion-tab-bar {
+    background: #efefef;
+    &-button {
+        background: inherit;
+    }
+    .tab-selected {
+        color: $primary-color;
+    }
+}

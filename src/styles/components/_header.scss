@@ -1,0 +1,15 @@
+@import "../_variables.scss";
+.header__bar {
+    --background: linear-gradient(to left bottom, #15e6b5, #39e9b1, #4fecad, #61efaa,#71f2a6, #6ff19e, #6eef95, #6eee8c, #5ce87b, #49e268, #32dc55, #09d63f);
+    color: #111;
+    &--statistic {
+        margin: 0;
+        font-size: 1.2rem;
+        &-small {
+            font-size: .85rem;
+        }
+        &-icon {
+            margin-left: .5rem;
+        }
+    }
+}
