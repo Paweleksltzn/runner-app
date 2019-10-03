@@ -3,17 +3,19 @@ import { trainingOptions } from './options/training.options';
 import { ModalController } from '@ionic/angular';
 import { TrainingStatisticsComponent } from 'src/app/features/training/components/training.statistics/training.statistics.component';
 
+
 @Component({
   selector: 'app-training',
   templateUrl: './training.page.html',
   styleUrls: ['./training.page.scss'],
 })
 export class TrainingPage implements OnInit {
-  public lat: number = +51;
-  public lng: number = +7;
+  public userLat: number = +51;
+  public userLng: number = +7;
   public trainingModeIcon: string;
   public mapThemeIcon: string;
   public mapStyles: any;
+  public markerIcon: any; 
   private trainingOptions = trainingOptions;
 
   constructor(private modalController: ModalController) { }
@@ -22,6 +24,7 @@ export class TrainingPage implements OnInit {
     this.trainingModeIcon = 'pause'; // docelowo czytanie ze store
     this.mapThemeIcon = this.trainingOptions.lightThemeIcon; //docelowo czytanie z pamieci
     this.mapStyles = this.trainingOptions.mapDarkMode;
+    this.markerIcon = this.trainingOptions.markerCustomIcon;
   }
 
   public toggleTrainingState(): void {

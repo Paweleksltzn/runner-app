@@ -1,5 +1,6 @@
 import { mapLightMode } from './mapLightMode';
 import { mapDarkMode } from './mapDarkMode';
+import {markerCustomIcon} from './markerCustomIcon';
 
 export const trainingOptions = {
     playIcon: 'play',
@@ -7,5 +8,6 @@ export const trainingOptions = {
     lightThemeIcon: 'sunny',
     darkThemeIcon: 'moon',
     mapLightMode: mapLightMode,
-    mapDarkMode: mapDarkMode
+    mapDarkMode: mapDarkMode,
+    markerCustomIcon: markerCustomIcon
 }
