@@ -18,14 +18,14 @@
 <ion-content class="container">
   <div class="map">
       <agm-map 
-      [latitude] = "lat" 
-      [longitude] = "lng"
+      [latitude] = "userLat" 
+      [longitude] = "userLng"
       [zoom] = "16"
       [styles] = "mapStyles"
       [panControl] = "true"
       [zoomControl] = "false"
       >
-        <agm-marker [latitude]="userLat" [longitude]="userLng"></agm-marker>
+        <agm-marker [latitude]="userLat" [longitude]="userLng" [iconUrl]="icon"></agm-marker>
       </agm-map>
   </div>
   <button class="short-button short-button-secondary theme-swap-button" (click)="toggleMapMode()">
@@ -52,3 +52,4 @@
   </ion-grid>
 
 </ion-content>
+<!--Icons by icon8-->
