@@ -142,7 +142,7 @@ export const mapLightMode = [
         "elementType": "labels",
         "stylers": [
             {
-                "visibility": "off"
+                "visibility": "on"
             }
         ]
     },
