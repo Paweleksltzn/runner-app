@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { TrainingPage } from './training.page';
 import { TrainingStatisticsComponent } from 'src/app/features/training/components/training.statistics/training.statistics.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { StoreModule } from '@ngrx/store';
+import { trainingReducer } from './store/training.reducer';
 
 const routes: Routes = [
   {
@@ -20,12 +23,16 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    StoreModule.forFeature('training', trainingReducer),
     RouterModule.forChild(routes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCcI_2vg4KgEFgvUVBfqshvqmxQmVlx_vk'
     })
   ],
   declarations: [TrainingPage, TrainingStatisticsComponent],
-  entryComponents: [TrainingStatisticsComponent]
+  entryComponents: [TrainingStatisticsComponent],
+  providers: [
+    Geolocation
+  ]
 })
 export class TrainingPageModule {}

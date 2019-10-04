@@ -8,15 +8,39 @@
     height: 3rem;
     color: black;
     outline: none !important;
+    z-index: 10;
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 50%;
+        z-index: -10;
+    }
+    &:hover {
+        &::after {
+            transition: all .5s;
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
     &-icon {
         font-size: 1.4rem;
     }
 }
 .short-button.short-button-primary {
     background: $green-teal-gradient;
+    &::after {
+        background: $green-teal-gradient;
+    }
 }
 .short-button.short-button-secondary {
     background: $green-blue-gradient;
+    &::after {
+        background: $green-blue-gradient;
+    }
 }
 .short-button.bigger {
     ion-icon {

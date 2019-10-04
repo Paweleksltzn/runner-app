@@ -1,5 +1,8 @@
 {
   "name": "runner-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular"
 }

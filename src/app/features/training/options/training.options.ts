@@ -9,5 +9,6 @@ export const trainingOptions = {
     darkThemeIcon: 'moon',
     mapLightMode: mapLightMode,
     mapDarkMode: mapDarkMode,
-    markerCustomIcon: markerCustomIcon
+    markerCustomIcon: markerCustomIcon,
+    mapTraceColor: '#09d63f'
 }

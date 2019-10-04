@@ -4,9 +4,12 @@
     position: relative;
     .bottom-buttons-row {
         position: fixed;
-        bottom: 1rem;
+        bottom: 4rem;
         left: 2rem;
         right: 2rem;
+        .short-button {
+            position: relative;
+        }
     }
     .map {
         height: 100%;

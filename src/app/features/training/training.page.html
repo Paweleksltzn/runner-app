@@ -3,11 +3,11 @@
     <ion-grid>
       <ion-row class="ion-text-center ion">
         <ion-col>
-          <h6 class="header__bar--statistic">0.13 <span class="header__bar--statistic-small">Km</span></h6>
+          <h6 class="header__bar--statistic"> {{ distancePassed }} <span class="header__bar--statistic-small">Km</span></h6>
         </ion-col>
         <ion-col>
           <ion-row class="ion-align-items-center ion-justify-content-center">
-              <h6 class="header__bar--statistic">00.15</h6>
+              <h6 class="header__bar--statistic">{{ trainingTime.minutes }}.{{ trainingTime.seconds }}</h6>
               <ion-icon name="time" class="header__bar--statistic-icon ion-align-self-end"></ion-icon>
           </ion-row>
         </ion-col>
@@ -26,6 +26,13 @@
       [zoomControl] = "false"
       >
         <agm-marker [latitude]="userLat" [longitude]="userLng" [iconUrl]="markerIcon"></agm-marker>
+        <agm-polyline [editable]="false" [strokeColor]="trainingOptions.mapTraceColor">
+          <agm-polyline-point *ngFor="let data of traceMap" 
+              [latitude]="data.lat"
+              [longitude]="data.lng"
+              >
+          </agm-polyline-point>
+      </agm-polyline>
       </agm-map>
   </div>
   <button class="short-button short-button-secondary theme-swap-button" (click)="toggleMapMode()">
@@ -50,6 +57,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>
-

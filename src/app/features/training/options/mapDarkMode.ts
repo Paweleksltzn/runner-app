@@ -144,7 +144,7 @@ export const mapDarkMode = [
         "elementType": "labels",
         "stylers": [
             {
-                "visibility": "off"
+                "visibility": "on"
             }
         ]
     },
