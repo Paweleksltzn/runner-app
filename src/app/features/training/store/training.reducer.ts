@@ -18,7 +18,8 @@ export const initialState: TrainingState = {
     markerIcon: trainingOptions.markerCustomIcon, 
     traceMap: [],
     trainingTime: startingTrainingTime,
-    distancePassed: 0
+    distancePassed: 0,
+    firstTimeAfterStop: true
 }
 
 const trainingReducerOptions = createReducer(initialState,
@@ -37,6 +38,8 @@ const trainingReducerOptions = createReducer(initialState,
      })),
      on(actions.trainingActions.toggleTrainingTheme, ( state, action ) => ({...state, mapStyles: action.mapStyles, mapThemeIcon: action.mapThemeIcon })),
      on(actions.trainingActions.toggleTrainingState, ( state, action ) => ({...state, trainingModeIcon: action.trainingModeIcon })),
+     on(actions.trainingActions.togglePositionWatcher, ( state, action ) => ({...state, firstTimeAfterStop: action.newWatchingState })),
+     on(actions.trainingActions.pausePositionWatcher, ( state, action ) => ({...state, firstTimeAfterStop: action.newWatchingState}))
 );
   
 export function trainingReducer(state: TrainingState | undefined, action: Action) {

@@ -25,7 +25,8 @@ export class TrainingPage implements OnInit {
   public traceMap: Coordinates[] = [];
   public trainingTime: TrainingTime;
   public distancePassed: number;
-  private trainingOptions = trainingOptions;
+  public trainingOptions = trainingOptions;
+  private firstTimeAfterStop: boolean;
   private userPositionSubscription: Subscription;
   private timerSubscription: Subscription;
   constructor(private modalController: ModalController, private geolocation: Geolocation,
@@ -41,11 +42,12 @@ export class TrainingPage implements OnInit {
       this.mapThemeIcon = state.mapThemeIcon;
       this.mapStyles = state.mapStyles;
       this.markerIcon = state.markerIcon;
+      this.firstTimeAfterStop = state.firstTimeAfterStop;
       this.distancePassed = state.distancePassed;
+      if (this.distancePassed > state.distancePassed) this.distancePassed = state.distancePassed;
       this.traceMap = state.traceMap;
     });
     this.watchUserCurrentPosition();
-    this.runTimer();
   } 
 
   private watchUserCurrentPosition(): void {
@@ -54,13 +56,17 @@ export class TrainingPage implements OnInit {
       const newLat = data.coords.latitude;
       const newLng = data.coords.longitude;
       this.calculateDistance(newLat, newLng);
+      if (!this.firstTimeAfterStop && !this.timerSubscription) {
+        this.runTimer();
+      } 
     }, err => {
       // redirect gdzies indziej jak cos sie spierdoli
     });
   }
 
   private calculateDistance(newLat: number, newLng: number): void {
-    if (this.userLat && this.userLng) {
+    let d = 0;
+    if (!this.firstTimeAfterStop) {
       const R = 6371; // Radius of the earth in km
       const dLat = this.degree2radian(newLat - this.userLat);
       const dLon = this.degree2radian(newLng - this.userLng); 
@@ -70,10 +76,15 @@ export class TrainingPage implements OnInit {
         Math.sin(dLon/2) * Math.sin(dLon/2)
         ; 
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-      var d = R * c; // Distance in km
+      d = R * c; // Distance in km
+    } else {
+      this.store.dispatch(actions.trainingActions.togglePositionWatcher({
+        newWatchingState: !this.firstTimeAfterStop
+      }));
     }
+    const newDistanceToBeSet = Math.round((this.distancePassed + d) * 1000) / 1000;
     this.store.dispatch(actions.trainingActions.changePosition({ 
-      newDistance: Math.round((this.distancePassed + d || 0) * 100) / 100,
+      newDistance: newDistanceToBeSet,
       newLat,
       newLng
      }));
@@ -89,18 +100,20 @@ export class TrainingPage implements OnInit {
 
   public toggleTrainingState(): void {
     if (this.trainingModeIcon === this.trainingOptions.pauseIcon) {
-      //pauzowanie
       this.store.dispatch(actions.trainingActions.toggleTrainingState({
         trainingModeIcon: this.trainingOptions.playIcon
       }));
+      this.store.dispatch(actions.trainingActions.pausePositionWatcher({
+        newWatchingState: true
+      }));
       this.userPositionSubscription.unsubscribe();
       this.timerSubscription.unsubscribe();
+      this.timerSubscription = undefined;
     } else {
       this.store.dispatch(actions.trainingActions.toggleTrainingState({
         trainingModeIcon: this.trainingOptions.pauseIcon
       }));
       this.watchUserCurrentPosition();
-      this.runTimer();
     }
   }
 
