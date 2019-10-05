@@ -7,20 +7,16 @@
 ion-content{
     text-align: center;
 }
-.goals-label{
-    font-size: 2em;
-    --color: #09d63f ;
 
-}
-
-
-.goals-input{
-    margin-top: 3%;
-    & :focus+ .goals-label{
-        --color: #09d63f;
+.goal-input{
+    border: solid 1px #09d63f;
+    border-radius: 8px;
+    border-bottom: solid 3px #09d63f;
+    margin-top: 8%;
+    width: 200px;
+    height: 50px;
+    &:focus{
+        border: solid 1px #09d63f;
+        border-bottom: solid 3px #09d63f; 
     }
-}
-.goals-item{
-    margin-top: 5%;
-    border: solid 2px #09d63f;
 }

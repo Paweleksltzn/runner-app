@@ -8,12 +8,17 @@ import { ActionSheetController } from '@ionic/angular';
   styleUrls: ['./training-type.component.scss'],
 })
 export class TrainingTypeComponent implements OnInit {
-  public sportDyscypline: any;
+  public sportDyscypline: any = 'none' ;
+  public selectedOption: any = 'none';
   public trainingGoalsSelects = [
+    {goalValue: 'none', goalText: 'Brak'},
     {goalValue: 'kcal', goalText: 'Kalorie do spalenia'},
     {goalValue: 'km', goalText: 'Kilometry do przebiegnięcia'},
     {goalValue: 'min', goalText: 'Czas do pokonania'},
   ];
+  OptionsFilter(event: any){
+    this.selectedOption = event.target.value;
+  }
 
   constructor(public actionSheetCtrl: ActionSheetController) { }
 
