@@ -6,16 +6,24 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+    <ion-button  class="activity-menu-button" fill="outline" (click)="activityMenu()">Dyscyplina<ion-icon name="arrow-forward"></ion-icon></ion-button>
     <ion-item>
         <ion-label>Cele treningowe</ion-label>
-        <ion-select value="traingoals" interface="action-sheet">
-          <ion-select-option value="time">Czas do pobcia</ion-select-option>
-          <ion-select-option value="kcal">Spalone kalorie</ion-select-option>
-          <ion-select-option value="kilometers">Pokonane kilometry</ion-select-option>
+        <ion-select value="traingoals" interface="action-sheet" >
+          <ng-container *ngFor="let selects of trainingGoalsSelects; let ind = index" >
+            <ion-select-option value="{{trainingGoalsSelects[ind].goalValue}}">{{trainingGoalsSelects[ind].goalText}}</ion-select-option>
+          </ng-container>
         </ion-select>
       </ion-item>
-
-  <ion-button  class="activity-menu-button" fill="outline" (click)="activityMenu()">Dyscyplina<ion-icon name="arrow-forward"></ion-icon></ion-button>
+    <template #goalInput>
+      <form>
+          <mat-form-field>
+              <input matInput placeholder="Favorite food" value="Sushi">
+          </mat-form-field>
+      </form>
+    </template>
+    
+  
 </ion-content>
 <ion-button  color="danger" fill="outline">Rozpocznij trening</ion-button>
 </ion-app>
