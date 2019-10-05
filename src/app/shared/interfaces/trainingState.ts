@@ -11,4 +11,5 @@ export interface TrainingState {
      traceMap: Coordinates[];
      trainingTime: TrainingTime;
      distancePassed: number;
+     firstTimeAfterStop: boolean
 }
