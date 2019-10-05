@@ -1,0 +1,21 @@
+<ion-app>
+<ion-header>
+  <ion-toolbar class="header__bar">
+    <ion-title>Trening</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-item>
+        <ion-label>Cele treningowe</ion-label>
+        <ion-select value="traingoals" interface="action-sheet">
+          <ion-select-option value="time">Czas do pobcia</ion-select-option>
+          <ion-select-option value="kcal">Spalone kalorie</ion-select-option>
+          <ion-select-option value="kilometers">Pokonane kilometry</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+  <ion-button  class="activity-menu-button" fill="outline" (click)="activityMenu()">Dyscyplina<ion-icon name="arrow-forward"></ion-icon></ion-button>
+</ion-content>
+<ion-button  color="danger" fill="outline">Rozpocznij trening</ion-button>
+</ion-app>

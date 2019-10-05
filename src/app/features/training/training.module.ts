@@ -10,11 +10,16 @@ import { TrainingStatisticsComponent } from 'src/app/features/training/component
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { StoreModule } from '@ngrx/store';
 import { trainingReducer } from './store/training.reducer';
+import { TrainingTypeComponent } from './components/training-type/training-type.component';
 
 const routes: Routes = [
   {
     path: '',
     component: TrainingPage
+  },
+  {
+    path: 'type',
+    component: TrainingTypeComponent
   }
 ];
 
@@ -29,7 +34,7 @@ const routes: Routes = [
       apiKey: 'AIzaSyCcI_2vg4KgEFgvUVBfqshvqmxQmVlx_vk'
     })
   ],
-  declarations: [TrainingPage, TrainingStatisticsComponent],
+  declarations: [TrainingPage, TrainingStatisticsComponent, TrainingTypeComponent],
   entryComponents: [TrainingStatisticsComponent],
   providers: [
     Geolocation

@@ -6,3 +6,4 @@ export const markerCustomIcon = {
     },
     rotation: 80
   };
+  

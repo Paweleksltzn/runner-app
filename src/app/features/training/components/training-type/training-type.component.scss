@@ -1,0 +1,26 @@
+@import '../../../../../styles/_variables.scss';
+.activity-menu-button {
+    --border-color: #09d63f;
+    --color: #09d63f;
+    margin-top: 5%;
+}
+ion-content{
+    text-align: center;
+}
+.goals-label{
+    font-size: 2em;
+    --color: #09d63f ;
+
+}
+
+
+.goals-input{
+    margin-top: 3%;
+    & :focus+ .goals-label{
+        --color: #09d63f;
+    }
+}
+.goals-item{
+    margin-top: 5%;
+    border: solid 2px #09d63f;
+}
