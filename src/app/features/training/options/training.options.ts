@@ -1,6 +1,7 @@
 import { mapLightMode } from './mapLightMode';
 import { mapDarkMode } from './mapDarkMode';
 import {markerCustomIcon} from './markerCustomIcon';
+import { loaderOptions } from './loaderOptions';
 
 export const trainingOptions = {
     playIcon: 'play',
@@ -10,5 +11,6 @@ export const trainingOptions = {
     mapLightMode: mapLightMode,
     mapDarkMode: mapDarkMode,
     markerCustomIcon: markerCustomIcon,
-    mapTraceColor: '#09d63f'
+    mapTraceColor: '#09d63f',
+    loaderOptions: loaderOptions
 }

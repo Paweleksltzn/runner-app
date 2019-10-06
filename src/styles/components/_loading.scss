@@ -1,0 +1,9 @@
+@import "../_variables.scss";
+.loading-wrapper {
+    background: $green-teal-gradient !important;
+    border-radius: .6rem !important;
+    color: #111 !important;
+    .spinner-bubbles {
+        color:darken($tertiary-color, 50%);
+    }
+}

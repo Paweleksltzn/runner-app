@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, LoadingController } from '@ionic/angular';
 
 import { TrainingPage } from './training.page';
 import { TrainingStatisticsComponent } from 'src/app/features/training/components/training.statistics/training.statistics.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { StoreModule } from '@ngrx/store';
 import { trainingReducer } from './store/training.reducer';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 const routes: Routes = [
   {
@@ -32,7 +34,9 @@ const routes: Routes = [
   declarations: [TrainingPage, TrainingStatisticsComponent],
   entryComponents: [TrainingStatisticsComponent],
   providers: [
-    Geolocation
+    Geolocation,
+    BackgroundMode,
+    LoadingController
   ]
 })
 export class TrainingPageModule {}
