@@ -1,0 +1,67 @@
+@import '../../../../styles/_variables.scss';
+@import '../../../../styles/components/_auth-form.scss';
+.container {
+    width: 100vw;
+    height: 100vh;
+    background: darken($auth-background, 15%);
+    &--form {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        overflow-x: hidden;
+        padding-top: 10%;
+        &-icon {    
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #ddd;
+            transition: all .2s;
+        }
+        &-reminder {
+            text-align: center;
+            cursor: pointer;
+            color: #ddd;
+            transition: all .5s;
+        }
+    }
+    &--logo {
+        margin-top: 5%;
+        height: 30%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+        img {
+            width: 100%;
+        }
+    }
+}
+.auth-submit {
+    --background: linear-gradient(to left bottom, #15e6b5, #39e9b1, #4fecad, #61efaa,#71f2a6, #6ff19e, #6eef95, #6eee8c, #5ce87b, #49e268, #32dc55, #09d63f); 
+    --color: #555;
+}
+input:focus ~ .container--form-icon {
+    color: $secondary-color;
+}
+.has-no-account {
+    color: #ddd;
+    text-align: center;
+    left: 0;
+    right: 0;
+    position: absolute;
+    bottom: 2rem;
+    &-registration {
+        transition: all .5s;
+        background: $green-teal-gradient;
+        background-clip: text;
+        color: transparent;
+        margin-top: 1rem;
+        cursor: pointer;
+    }
+}
+.invalid-response {
+    text-align: center;
+    color: #ff172e;
+    font-weight: bold;
+}

@@ -2,9 +2,9 @@ import { TabsNavLink } from '../../interfaces/tabsNavLink';
 
 export const tabNavOptions: TabsNavLink[] = [
     {
-        label: 'Trening',
+        label: 'Logowanie',
         iconName: 'globe',
-        link: 'training'
+        link: 'auth/registration'
     },
     {
         label: 'Więcej',
