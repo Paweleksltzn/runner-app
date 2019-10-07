@@ -16,7 +16,19 @@ ion-content{
     width: 200px;
     height: 50px;
     &:focus{
-        border: solid 1px #09d63f;
-        border-bottom: solid 3px #09d63f; 
+        border: solid 2px #09d63f;
+        border-bottom: solid 5px #09d63f; 
+        outline: 0;
+    }
+}
+#goalSelect {
+    width: 100px;
+    height: 40px;
+    border: solid 2px #09d63f;
+    border-radius: 8px;
+    &:focus{
+        border: solid 2px #09d63f;
+        border-bottom: solid 5px #09d63f; 
+        outline: 0;
     }
 }

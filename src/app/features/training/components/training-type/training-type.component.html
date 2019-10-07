@@ -11,14 +11,13 @@
         <ion-label>Cele treningowe</ion-label>
         <select id="goalSelect" value="traingoals" interface="action-sheet" (change)="OptionsFilter($event)">
           <ng-container *ngFor="let selects of trainingGoalsSelects; let ind = index" >
-            <option value="{{trainingGoalsSelects[ind].goalValue}}">{{trainingGoalsSelects[ind].goalText}}</option>
+            <option class="option-type" value="{{trainingGoalsSelects[ind].goalValue}}">{{trainingGoalsSelects[ind].goalText}}</option>
           </ng-container>
         </select>
       </ion-item> 
       
-      <div *ngIf= "selectedOption != 'none'">
-          
-          <input placeholder="Twój cel" class="animated bounceInDown" class="goal-input">
+      <div *ngIf= "selectedOption != 'none'"> 
+          <input placeholder="Twój cel" class="goal-input"  > 
           <p>{{selectedOption}}</p>
       </div>
       
