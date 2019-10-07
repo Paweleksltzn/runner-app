@@ -6,11 +6,12 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
-
+/appAPK
 # dependencies
 /node_modules
 /server/util/credentials.js
 /nodemon.json
+/plugins
 /android
 /server/node_modules
 /resources

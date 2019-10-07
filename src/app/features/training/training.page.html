@@ -3,13 +3,16 @@
     <ion-grid>
       <ion-row class="ion-text-center ion">
         <ion-col>
-          <h6 class="header__bar--statistic"> {{ distancePassed }} <span class="header__bar--statistic-small">Km</span></h6>
+          <h6 class="header__bar--statistic"> 00.00 <span class="header__bar--statistic-small">Km</span></h6>
         </ion-col>
         <ion-col>
           <ion-row class="ion-align-items-center ion-justify-content-center">
               <h6 class="header__bar--statistic">{{ trainingTime.minutes }}.{{ trainingTime.seconds }}</h6>
               <ion-icon name="time" class="header__bar--statistic-icon ion-align-self-end"></ion-icon>
           </ion-row>
+        </ion-col>
+        <ion-col>
+            <h6 class="header__bar--statistic"> 00.0 <span class="header__bar--statistic-small">Km / h</span></h6>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -4,7 +4,7 @@ import { LoginComponent } from './core/auth/login/login.component';
 
 const routes: Routes = [
   { path: 'training', loadChildren: './features/training/training.module#TrainingPageModule' },
-  { path: 'more', component: LoginComponent }
+  { path: 'auth', loadChildren: './core/auth/auth.module#AuthModule' }
 ];
 @NgModule({
   imports: [

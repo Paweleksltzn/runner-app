@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trainingOptions } from './options/training.options';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { TrainingStatisticsComponent } from 'src/app/features/training/components/training.statistics/training.statistics.component';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import { Subscription, interval } from 'rxjs';
@@ -9,6 +9,7 @@ import { Store, select } from '@ngrx/store';
 import { TrainingState } from '../../shared/interfaces/trainingState';
 import { Coordinates } from '../../shared/interfaces/coordinates';
 import { actions } from '../../store/index';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 @Component({
   selector: 'app-training',
@@ -29,11 +30,19 @@ export class TrainingPage implements OnInit {
   private firstTimeAfterStop: boolean;
   private userPositionSubscription: Subscription;
   private timerSubscription: Subscription;
-  constructor(private modalController: ModalController, private geolocation: Geolocation,
-  private store: Store<{training: TrainingState}>) { }
+  private mapLoader: any;
+  constructor(
+  private modalController: ModalController,
+  private geolocation: Geolocation,
+  private backgroundMode: BackgroundMode,
+  private store: Store<{training: TrainingState}>,
+  public loadingController: LoadingController
+  ) { }
 
   ngOnInit() {
     // docelowo czytanie ze store telefonu
+    this.backgroundMode.enable();
+    this.showLoader();
     this.store.pipe(select('training')).subscribe((state: TrainingState) => {
       this.userLat = state.userLat;
       this.userLng = state.userLng;
@@ -48,14 +57,16 @@ export class TrainingPage implements OnInit {
       this.traceMap = state.traceMap;
     });
     this.watchUserCurrentPosition();
-  } 
+  }
 
   private watchUserCurrentPosition(): void {
-    this.userPositionSubscription = this.geolocation.watchPosition({ enableHighAccuracy: true })
+    this.userPositionSubscription = this.geolocation.watchPosition()
     .subscribe((data: Geoposition)=> {
       const newLat = data.coords.latitude;
       const newLng = data.coords.longitude;
+      console.log(data.coords.speed / 1000 * 3600)
       this.calculateDistance(newLat, newLng);
+      this.mapLoader.dismiss();
       if (!this.firstTimeAfterStop && !this.timerSubscription) {
         this.runTimer();
       } 
@@ -82,7 +93,7 @@ export class TrainingPage implements OnInit {
         newWatchingState: !this.firstTimeAfterStop
       }));
     }
-    const newDistanceToBeSet = Math.round((this.distancePassed + d) * 1000) / 1000;
+    const newDistanceToBeSet = Math.round((this.distancePassed + d) * 100) / 100;
     this.store.dispatch(actions.trainingActions.changePosition({ 
       newDistance: newDistanceToBeSet,
       newLat,
@@ -92,10 +103,6 @@ export class TrainingPage implements OnInit {
 
   private degree2radian(deg): number {
     return deg * (Math.PI / 180);
-  }
-
-  private calculateSpeed() {
-    
   }
 
   public toggleTrainingState(): void {
@@ -157,6 +164,13 @@ export class TrainingPage implements OnInit {
         minutes = `0${ minutes }`
       }
       this.store.dispatch(actions.trainingActions.trainingSecondPassed({ seconds, minutes }));
+    });
+  }
+
+  private showLoader() {
+    const loading = this.loadingController.create(this.trainingOptions.loaderOptions).then(loading => {
+      this.mapLoader = loading;
+      this.mapLoader.present();
     });
   }
 
