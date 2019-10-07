@@ -1,5 +1,52 @@
-<ion-header>
-  <ion-toolbar class="header__bar">
-    <ion-title>Rejestracja</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="main-container">
+  <div class="main-container--logo">
+    <ion-img src="assets/images/logo.png"></ion-img>
+    <p class="logo-text">Train with professionals and make yourself a professional.</p>
+  </div>
+  <div class="main-container--form">
+    <form>
+        <div class="group-reg">      
+            <input class ="reg-input" type="text" required>
+            <ion-icon name="person" class="main-container--form-icon"></ion-icon>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Imie I Nazwisko</label>
+        </div>
+        <div class="group-reg">      
+          <input class ="reg-input" type="text" required>
+          <ion-icon name="mail" class="main-container--form-icon"></ion-icon>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Email</label>
+        </div>  
+        <div class="group-reg">      
+          <input class ="reg-input" type="password" required>
+          <ion-icon name="lock" class="main-container--form-icon"></ion-icon>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Hasło</label>
+        </div>
+        <div  class="group-reg">      
+          <input class ="reg-input" type="password" required>
+          <ion-icon name="lock" class="main-container--form-icon"></ion-icon>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Powtórz hasło</label>
+        </div>
+        <ion-segment>
+            <ion-segment-button >
+              <ion-icon name="woman"></ion-icon>
+            </ion-segment-button>
+            <ion-segment-button checked>
+              <ion-icon name="man"></ion-icon>
+            </ion-segment-button>
+          </ion-segment>
+        <ion-button expand="block" class="reg-submit">Zarejstruj się</ion-button>    
+        <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzaz się na warunki podane w <span class="policy">umowie</span></div>
+      </form>
+      <div class="has-account">
+          <span class="has-account-message">Masz już konto?  <span class="has-account-login"> Zaloguj się </span> </span>
+      </div>
+      
+  </div>
+</div>
