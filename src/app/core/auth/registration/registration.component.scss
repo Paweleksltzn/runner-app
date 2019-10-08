@@ -60,6 +60,22 @@ $primary-kolor2:#555;
     position:relative; 
     margin-bottom:30px; 
   }
+.group-reg-2{
+    position:relative; 
+    margin-bottom:30px; 
+    width: 40vw;
+    &-right {
+        position:relative; 
+        margin-bottom:30px; 
+        width: 40vw;
+        margin-left:2vw;
+    }
+    
+}
+.name-surname-cont{
+    display: flex;
+}
+
 .reg-policy{
     text-align:center;
     font-size: 11px;
@@ -72,6 +88,10 @@ $primary-kolor2:#555;
     margin-top: 1rem;
     cursor: pointer;
 }
+.reg-input-2{
+    width:40vw;
+}
+
 .reg-input{
     color:$primary-kolor2;
     &:focus{
@@ -82,6 +102,7 @@ $primary-kolor2:#555;
     }
 }
 ion-segment-button{
+    width: 30vw;
     --color-checked: black;
 }
 
