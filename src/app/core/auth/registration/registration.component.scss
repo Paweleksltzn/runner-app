@@ -45,8 +45,9 @@ $primary-kolor2:#555;
     text-align: center;
     left: 0;
     right: 0;
+    
     position: absolute;
-    bottom: 2rem;
+    bottom: 1rem;
     &-login {
         transition: all .5s;
         background: $green-teal-gradient;
@@ -72,24 +73,38 @@ $primary-kolor2:#555;
     }
     
 }
-.name-surname-cont{
+.name-surname-cont , .sex-check{
     display: flex;
+}
+.sex-check{
+    width: 40vw;
+    height: 6vh;
+    margin: 0 auto;
+}
+.sex-m , .sex-w {
+    width: 20vw;
+    height: 6vh;
+    text-align:center;
+    font-size: 30px;
+    
 }
 
 .reg-policy{
     text-align:center;
     font-size: 11px;
+    margin-top: 4vh;
 }
 .policy{
     transition: all .5s;
     background: $green-teal-gradient;
     background-clip: text;
     color: transparent;
-    margin-top: 1rem;
+    margin-top: 0.7rem;
     cursor: pointer;
 }
 .reg-input-2{
     width:40vw;
+    color:$primary-kolor2;
 }
 
 .reg-input{
@@ -102,7 +117,7 @@ $primary-kolor2:#555;
     }
 }
 ion-segment-button{
-    width: 30vw;
+    width: 10vw;
     --color-checked: black;
 }
 

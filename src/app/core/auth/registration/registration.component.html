@@ -8,14 +8,13 @@
       <div class="name-surname-cont">
         <div class="group-reg-2">      
             <input class ="reg-input-2" type="text" required>
-            <ion-icon name="person" class="main-container--form-icon"></ion-icon>
             <span class="highlight"></span>
             <span class="bar-name"></span>
             <label>Imie</label>
         </div>
+
         <div class="group-reg-2-right">      
           <input class ="reg-input-2" type="text" required>
-          <ion-icon name="person" class="main-container--form-icon"></ion-icon>
           <span class="highlight"></span>
           <span class="bar-name"></span>
           <label>Nazwisko</label>
@@ -42,14 +41,18 @@
           <span class="bar"></span>
           <label>Powtórz hasło</label>
         </div>
-        <ion-segment>
+        <!--<ion-segment>
             <ion-segment-button >
               <ion-icon name="woman"></ion-icon>
             </ion-segment-button>
             <ion-segment-button checked>
               <ion-icon name="man"></ion-icon>
             </ion-segment-button>
-          </ion-segment>
+          </ion-segment>-->
+          <div class="sex-check">
+            <div class="sex-m" id="sexMale" (click)=emphasizeIconM()><ion-icon name="man"></ion-icon></div>
+            <div class="sex-w" id="sexFemale" (click)=emphasizeIconF()><ion-icon name="woman"></ion-icon></div>
+          </div>
         <ion-button expand="block" class="reg-submit">Zarejstruj się</ion-button>    
         <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w <span class="policy">umowie</span></div>
       </form>
