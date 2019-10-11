@@ -82,24 +82,29 @@ $primary-kolor2:#555;
     margin: 0 auto;
 }
 .sex-m , .sex-w {
-    width: 20vw;
-    height: 6vh;
+    width: 50%;
+    height: 100%;
     text-align:center;
-    font-size: 30px;
+    font-size: 2rem;
+    
+}
+
+.sex-checker{
+    border-bottom: solid 2px $mixed-main-colours;
     
 }
 
 .reg-policy{
     text-align:center;
     font-size: 11px;
-    margin-top: 4vh;
+    margin-top: 2rem;
 }
 .policy{
     transition: all .5s;
     background: $green-teal-gradient;
     background-clip: text;
     color: transparent;
-    margin-top: 0.7rem;
+    margin-top: .7rem;
     cursor: pointer;
 }
 .reg-input-2{
@@ -116,11 +121,6 @@ $primary-kolor2:#555;
         animation:inputHighlighterTeal 0.1s ease;
     }
 }
-ion-segment-button{
-    width: 10vw;
-    --color-checked: black;
-}
-
 @-webkit-keyframes inputHighlighterTeal {
     from { background:$green-teal-gradient;; }
   to 	{ width:0; background:transparent; }
@@ -133,3 +133,4 @@ ion-segment-button{
     from { background:$green-teal-gradient;; }
   to 	{ width:0; background:transparent; }
 }
+

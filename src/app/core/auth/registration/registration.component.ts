@@ -6,30 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit {
-  public sexChecked = 0;
-  // 0 => nobody is checked
-  // 1 => male is checked
-  // 2 => female is checked
+  public isMale : boolean ;
+  
   constructor() { }
 
-  ngOnInit() {}
-  emphasizeIconM() {
-    const male = document.getElementById('sexMale');
-    const female = document.getElementById('sexFemale');
-    if (this.sexChecked === 0 || this.sexChecked === 2 ) {
-      male.style.borderBottom = '3px solid #555';
-      female.style.borderBottom = 'none';
-      this.sexChecked = 1;
-    }
+  ngOnInit() {
   }
-  emphasizeIconF() {
-    const male = document.getElementById('sexMale');
-    const female = document.getElementById('sexFemale');
-    if (this.sexChecked === 0 || this.sexChecked === 1 ) {
-      female.style.borderBottom = '3px solid #555';
-      male.style.borderBottom = 'none';
-      this.sexChecked = 2;
-    }
+  switchSex(sexState){
+    this.isMale = sexState; 
   }
+
 
 }
