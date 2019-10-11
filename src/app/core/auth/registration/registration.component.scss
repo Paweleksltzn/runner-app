@@ -79,21 +79,18 @@ $primary-kolor2:#555;
 .sex-check{
     width: 40vw;
     height: 6vh;
-    margin: 0 auto;
+    margin: 0 auto .75rem auto;
 }
 .sex-m , .sex-w {
     width: 50%;
     height: 100%;
     text-align:center;
     font-size: 2rem;
-    
+    transition: all .5s;
 }
-
 .sex-checker{
-    border-bottom: solid 2px $mixed-main-colours;
-    
+    color: darken($mixed-main-colours, 15%)
 }
-
 .reg-policy{
     text-align:center;
     font-size: 11px;
