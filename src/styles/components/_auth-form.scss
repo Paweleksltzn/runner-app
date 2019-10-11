@@ -89,14 +89,14 @@
   
   /* ANIMATIONS ================ */
   @-webkit-keyframes inputHighlighter {
-      from { background:$green-blue-gradient;; }
+      from { background:$green-teal-gradient;; }
     to 	{ width:0; background:transparent; }
   }
   @-moz-keyframes inputHighlighter {
-      from { background:$green-blue-gradient;; }
+      from { background:$green-teal-gradient;; }
     to 	{ width:0; background:transparent; }
   }
   @keyframes inputHighlighter {
-      from { background:$green-blue-gradient;; }
+      from { background:$green-teal-gradient;; }
     to 	{ width:0; background:transparent; }
   }

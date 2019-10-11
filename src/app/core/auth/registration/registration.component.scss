@@ -116,21 +116,8 @@ $primary-kolor2:#555;
     color:$primary-kolor2;
     &:focus{
         
-        -webkit-animation:inputHighlighterTeal 0.1s ease;
-        -moz-animation:inputHighlighterTeal 0.1s ease;
-        animation:inputHighlighterTeal 0.1s ease;
+        -webkit-animation:inputHighlighter 0.1s ease;
+        -moz-animation:inputHighlighter 0.1s ease;
+        animation:inputHighlighter 0.1s ease;
     }
 }
-@-webkit-keyframes inputHighlighterTeal {
-    from { background:$green-teal-gradient;; }
-  to 	{ width:0; background:transparent; }
-}
-@-moz-keyframes inputHighlighterTeal {
-    from { background:$green-teal-gradient;; }
-  to 	{ width:0; background:transparent; }
-}
-@keyframes inputHighlighterTeal {
-    from { background:$green-teal-gradient;; }
-  to 	{ width:0; background:transparent; }
-}
-

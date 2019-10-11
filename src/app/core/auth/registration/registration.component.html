@@ -42,8 +42,12 @@
           <label>Powtórz hasło</label>
         </div>
           <div class="sex-check">
-            <div class="sex-m" (click)="switchSex(true)" [ngClass]="{'sex-checker':isMale === true}" ><ion-icon name="man"></ion-icon></div>
-            <div class="sex-w" (click)="switchSex(false)" [ngClass]="{'sex-checker':isMale === false}" ><ion-icon name="woman"></ion-icon></div>
+            <div class="sex-m" (click)="switchSex(true)" [ngClass]="{'sex-checker':isMale === true}" >
+              <ion-icon name="man"></ion-icon>
+            </div>
+            <div class="sex-w" (click)="switchSex(false)" [ngClass]="{'sex-checker':isMale === false}" >
+              <ion-icon name="woman"></ion-icon>
+            </div>
           </div>
           <ion-button expand="block" class="reg-submit">Zarejstruj się</ion-button>    
         <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w <span class="policy">umowie</span></div>
