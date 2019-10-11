@@ -1,1 +1,120 @@
+@import '../../../../styles/_variables.scss';
+@import '../../../../styles/components/_auth-form.scss';
+$primary-kolor2:#555;
+.main-container{
+    width: 100vw;
+    height: 100vh;
+    &--form {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        overflow-x: hidden;
+        padding-top: 10%;
+        color: #555;
+        &-icon {    
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #555;
+            transition: all .2s;
+        }
+    }
+    &--logo{
+        margin-top: 5%;
+        height: 10%;
+        float: left;
+        width: 80%;
+        display:flex;
+        img {
+            width: 100%;
+        }  
+    }
+}
+.logo-text{
+    color:#555;
+}
+.reg-submit {
+    --background: linear-gradient(to left bottom, #15e6b5, #39e9b1, #4fecad, #61efaa,#71f2a6, #6ff19e, #6eef95, #6eee8c, #5ce87b, #49e268, #32dc55, #09d63f); 
+    --color: #555;
+}
 
+.has-account {
+    color: $primary-kolor2;
+    text-align: center;
+    left: 0;
+    right: 0;
+    
+    position: absolute;
+    bottom: 1rem;
+    &-login {
+        transition: all .5s;
+        background: $green-teal-gradient;
+        background-clip: text;
+        color: transparent;
+        margin-top: 1rem;
+        cursor: pointer;
+    }
+}
+.group-reg { 
+    position:relative; 
+    margin-bottom:30px; 
+  }
+.group-reg-2{
+    position:relative; 
+    margin-bottom:30px; 
+    width: 40vw;
+    &-right {
+        position:relative; 
+        margin-bottom:30px; 
+        width: 40vw;
+        margin-left:2vw;
+    }
+    
+}
+.name-surname-cont , .sex-check{
+    display: flex;
+}
+.sex-check{
+    width: 40vw;
+    height: 6vh;
+    margin: 0 auto .75rem auto;
+}
+.sex-m , .sex-w {
+    width: 50%;
+    height: 100%;
+    text-align:center;
+    font-size: 2rem;
+    transition: all .5s;
+}
+.sex-checker{
+    color: darken($mixed-main-colours, 15%)
+}
+.reg-policy{
+    text-align:center;
+    font-size: 11px;
+    margin-top: 2rem;
+}
+.policy{
+    transition: all .5s;
+    background: $green-teal-gradient;
+    background-clip: text;
+    color: transparent;
+    margin-top: .7rem;
+    cursor: pointer;
+}
+.reg-input-2{
+    width:40vw;
+    color:$primary-kolor2;
+}
+
+.reg-input{
+    color:$primary-kolor2;
+    &:focus{
+        
+        -webkit-animation:inputHighlighter 0.1s ease;
+        -moz-animation:inputHighlighter 0.1s ease;
+        animation:inputHighlighter 0.1s ease;
+    }
+}

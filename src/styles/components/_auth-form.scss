@@ -1,6 +1,6 @@
 .group 			  { 
     position:relative; 
-    margin-bottom:45px; 
+    margin-bottom: 2.5rem; 
   }
   input 	{
     background-color: transparent;
@@ -35,8 +35,18 @@
   }
   
   /* BOTTOM BARS ================================= */
-  .bar 	{ position:relative; display:block; width:300px; }
-  .bar:before, .bar:after 	{
+  .bar 	{ 
+    position:relative; 
+    display:block; 
+    width:18.75rem; 
+  
+  }
+  .bar-name{
+    position:relative; 
+    display:block; 
+    width:8.125rem; 
+  }
+  .bar:before, .bar:after , .bar-name:before, .bar-name:after	{
     content:'';
     height: 3px; 
     width:0;
@@ -47,15 +57,15 @@
     -moz-transition:0.2s ease all; 
     -webkit-transition:0.2s ease all;
   }
-  .bar:before {
+  .bar:before , .bar-name:before {
     left:50%;
   }
-  .bar:after {
+  .bar:after , .bar-name:after{
     right:50%; 
   }
   
   /* active state */
-  input:focus ~ .bar:before, input:focus ~ .bar:after {
+  input:focus ~ .bar:before, input:focus ~ .bar:after,input:focus ~ .bar-name:before, input:focus ~ .bar-name:after  {
     width:50%;
   }
   
@@ -79,14 +89,14 @@
   
   /* ANIMATIONS ================ */
   @-webkit-keyframes inputHighlighter {
-      from { background:$green-blue-gradient;; }
+      from { background:$green-teal-gradient;; }
     to 	{ width:0; background:transparent; }
   }
   @-moz-keyframes inputHighlighter {
-      from { background:$green-blue-gradient;; }
+      from { background:$green-teal-gradient;; }
     to 	{ width:0; background:transparent; }
   }
   @keyframes inputHighlighter {
-      from { background:$green-blue-gradient;; }
+      from { background:$green-teal-gradient;; }
     to 	{ width:0; background:transparent; }
   }
