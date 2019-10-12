@@ -3,23 +3,22 @@
       <ion-img src="assets/images/logo.png"></ion-img>
   </div>
   <div class="container--form">
-    <form>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
         <div class="group">      
-          <input type="text" required>
+          <input type="text" required formControlName="email">
           <ion-icon name="mail" class="container--form-icon"></ion-icon>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Email</label>
         </div>
-          
         <div class="group">      
-          <input type="password" required>
+          <input type="password" required formControlName="password">
           <ion-icon name="lock" class="container--form-icon"></ion-icon>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Hasło</label>
         </div>
-        <ion-button expand="block" class="auth-submit">Zaloguj</ion-button>
+        <ion-button expand="block" class="auth-submit" type="submit">Zaloguj</ion-button>
         <p class="invalid-response" >Konto nieaktywne, link aktywacyjny został wysłany ponownie</p>
         <p class="container--form-reminder">Nie pamiętasz hasła ?</p>
       </form>
