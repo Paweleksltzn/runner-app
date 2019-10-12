@@ -1,10 +1,14 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom" class="ion-tab-bar">
-    <ng-container *ngFor="let navLink of navLinks">
-        <ion-tab-button [tab]="navLink.link" class="ion-tab-bar-button">
+    <ng-container *ngIf="false">
+        <ion-tab-button [tab]="navLink.link" class="ion-tab-bar-button" *ngFor="let navLink of navLinks">
             <ion-icon [name]="navLink.iconName"></ion-icon>
             <ion-label>{{ navLink.label }}</ion-label>
         </ion-tab-button>
     </ng-container>
+    <ion-tab-button tab="auth/login" class="ion-tab-bar-button perma-active" *ngIf="true">
+      <ion-icon name="log-in"></ion-icon>
+      <ion-label>Zaloguj</ion-label>
+  </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

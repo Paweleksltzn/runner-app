@@ -5,6 +5,9 @@
         background: inherit;
     }
     .tab-selected {
-        color: $primary-color;
+        color: $mixed-main-colours;
+    }
+    .perma-active {
+        color: $mixed-main-colours;
     }
 }

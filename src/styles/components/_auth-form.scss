@@ -63,7 +63,6 @@
   .bar:after , .bar-name:after{
     right:50%; 
   }
-  
   /* active state */
   input:focus ~ .bar:before, input:focus ~ .bar:after,input:focus ~ .bar-name:before, input:focus ~ .bar-name:after  {
     width:50%;

@@ -48,7 +48,8 @@
               <ion-icon name="woman"></ion-icon>
             </div>
           </div>
-          <ion-button expand="block" class="reg-submit" type="submit">Zarejstruj się</ion-button>    
+          <ion-button expand="block" class="reg-submit" type="submit">Zarejstruj się</ion-button>
+          <p class="response" *ngIf="validationMessage" [ngClass]="messageClass"> {{validationMessage}} </p>    
         <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w 
           <span class="policy">umowie</span>
         </div>

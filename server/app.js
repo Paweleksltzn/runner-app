@@ -10,6 +10,8 @@ const app = express();
 
 const jwtManager = require('./auth-guards/jwt-managment');
 
+const authRouter = require('./routes/auth');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
@@ -29,6 +31,8 @@ app.use((req, res, next) => {
   // Pass to next layer of middleware
   next();
 });
+
+app.use('/api/auth', authRouter); 
 
 mongoose
   .connect(credentials.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})

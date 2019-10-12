@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class RegistrationComponent implements OnInit {
   public isMale: boolean;
   public authForm: FormGroup;
+  public validationMessage = '';
+  public messageClass = '';
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
@@ -33,29 +35,26 @@ export class RegistrationComponent implements OnInit {
   }
 
   public onSubmit() {
-      if (this.isMale ===  undefined && this.authForm.valid) {
-
-      } else {
-        const userData = {
-          ...this.authForm.value,
-          sex: this.isMale
-        }
+    const userData = {
+      ...this.authForm.value,
+      isMale: this.isMale
+    }
+    this.authService.postSignUp(userData).subscribe(
+      (res: string) => {
+        this.validationMessage = res;
+        this.messageClass = 'valid-response';
+        this.authForm.reset();
+      },
+      err => {
+        console.log(err)
+        this.authForm.patchValue({
+          password: '',
+          confirmedPassword: ''
+        });
+        this.validationMessage = err.error;
+        this.messageClass = 'invalid-response';
       }
-
-      // this.authenticationService.postSignUp(userData).subscribe(
-      //   res => {
-      //     this.router.navigate(['confirmation', this.authForm.value.email]);
-      //     this.validationError = '';
-      //   },
-      //   err => {
-      //     this.authForm.patchValue({
-      //       password: '',
-      //       confirmPassword: '',
-      //       email: ''
-      //     });
-      //     this.validationError = err.error;
-      //   }
-      // )
+    )
   }
 
 }
