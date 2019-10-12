@@ -19,7 +19,7 @@
           <label>Hasło</label>
         </div>
         <ion-button expand="block" class="auth-submit" type="submit">Zaloguj</ion-button>
-        <p class="invalid-response" >Konto nieaktywne, link aktywacyjny został wysłany ponownie</p>
+        <p class="invalid-response" *ngIf="validationMessage">{{ validationMessage }}</p>
         <p class="container--form-reminder">Nie pamiętasz hasła ?</p>
       </form>
       <div class="has-no-account">

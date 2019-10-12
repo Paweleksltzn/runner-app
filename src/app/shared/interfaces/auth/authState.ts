@@ -3,4 +3,5 @@ export interface AuthState {
     name: string;
     surname: string;
     isMale: boolean;
+    accessLevel: number;
 }

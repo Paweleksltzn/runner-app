@@ -37,4 +37,6 @@ router.post('/signup',[
     })
 ], authenticationController.registerUser);
 
+router.post('/login', authenticationController.login);
+
 module.exports = router;

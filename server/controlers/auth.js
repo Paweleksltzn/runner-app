@@ -5,8 +5,7 @@ const crypto = require('crypto');
 const User = require('../models/user');
 const emailSender = require('../util/emailSender');
 const emailOptions = require('../enums/emailOptions');
-// const jwtManagment = require('../authGuards/jwt-managment');
-
+const jwtManagment = require('../auth-guards/jwt-managment');
 
 exports.registerUser = (req, res, next) => {
     const errors = validationResult(req);
@@ -36,4 +35,27 @@ exports.registerUser = (req, res, next) => {
         console.log(err)
         return res.status(500).send('Wystąpił błąd');
     })
+}
+
+exports.login = (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    User.findOne({email}).then(user => {
+        if (user) {
+            if (!user.isActive) {
+                return res.status(500).send('Email nie został potwierdzony');
+            }
+            bcrypt.compare(password, user.password).then(doMatch => {
+                if(doMatch) {
+                    return res.json(jwtManagment.jwtFactory(user));
+                } else {
+                    return res.status(500).send('Nieprawidłowe dane logowania');
+                }
+            })
+        } else {
+            return res.status(500).send('Nieprawidłowe dane logowania');
+        }
+    }).catch(err => {
+        return res.status(500).send('Nieprawidłowe dane logowania');
+    });
 }

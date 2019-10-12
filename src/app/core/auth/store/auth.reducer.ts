@@ -8,11 +8,28 @@ export const initialState: AuthState = {
     email: '',
     name: '',
     surname: '',
-    isMale: undefined
+    isMale: undefined,
+    accessLevel: undefined
 }
 
 const authReducerOptions = createReducer(initialState,
-     on(actions.trainingActions.trainingSecondPassed, ( state, action ) => ({...state, trainingTime: action }))
+     on(actions.authActions.signIn, ( state, action ) => ({
+         ...state,
+         name: action.name,
+         surname: action.surname,
+         email: action.email,
+         isMale: action.isMale,
+         accessLevel: action.accessLevel
+    })),
+    on(actions.authActions.signOut, ( state, action ) => ({
+        ...state,
+        email: '',
+        name: '',
+        surname: '',
+        isMale: undefined,
+        accessLevel: undefined
+    })),
+
 );
   
 export function authReducer(state: AuthState | undefined, action: Action) {
