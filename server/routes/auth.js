@@ -14,7 +14,7 @@ router.post('/signup',[
         return User.findOne({ email: value }).then(userDoc => {
             if (userDoc) {
                 return Promise.reject(
-                    'Adres email jest zajęty'
+                    'Ten adres email jest już używany'
                   );
             }
             return true;
