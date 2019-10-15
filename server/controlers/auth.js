@@ -59,3 +59,68 @@ exports.login = (req, res, next) => {
         return res.status(500).send('Nieprawidłowe dane logowania');
     });
 }
+
+exports.emailConfirmed = (req, res, next) => {
+    const token = req.body.confirmToken;
+    let resetUser;
+    User.findOne({ confirmationToken: token }).then(user => {
+        if (user) {
+            resetUser = user;
+            resetUser.isActive = true;
+            resetUser.confirmationToken = '';
+            resetUser.save();
+            return res.json('Twoje konto zostało aktywowane');
+        } else {
+            return res.status(500).send('Wystąpił błąd')
+        }
+    }).catch(err => {
+        return res.status(500).send('Wystąpił błąd')
+    });
+}
+
+exports.passwordReset = (req, res, next) => {
+    const email = req.body.email;
+    const buffer = crypto.randomBytes(256);
+    const confirmationToken = buffer.toString('hex');
+    let resetPasswordUser;
+
+    User.findOne({ email, isActive: true }).then(user => {
+        if (user) {
+            resetPasswordUser = user;
+            return emailSender(email, emailOptions.passwordReset, confirmationToken);
+        } else { 
+            return res.status(500).send('Nieprawidłowy adres email');
+        }
+    }).then(result => {
+        resetPasswordUser.confirmationToken = confirmationToken;
+        resetPasswordUser.save();
+        return res.json('Link resetujący hasło został wysłany');
+    }).catch(err => {
+        return res.status(500).send('Wystąpił błąd');
+    });
+}
+
+exports.passwordResetAttempt = (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).send(errors.array()[0].msg);
+    }
+    let resetPasswordUser;
+    const confirmationToken = req.body.token;
+    const password = req.body.password;
+    User.findOne({ confirmationToken }).then(user => {
+        if (user) {
+            resetPasswordUser = user;
+            return bcrypt.hash(password, 12)
+        } else {
+            return res.status(500).send('Wystąpił błąd')
+        }
+    }).then(hashedPassword => {
+        resetPasswordUser.password = hashedPassword;
+        resetPasswordUser.confirmationToken = '';
+        resetPasswordUser.save();
+        return res.json('Twoje hasło zostało zmienione');
+    }).catch(err => {
+        return res.status(500).send('Wystąpił błąd');
+    });
+}

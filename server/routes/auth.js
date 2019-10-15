@@ -37,6 +37,22 @@ router.post('/signup',[
     })
 ], authenticationController.registerUser);
 
-router.post('/login', authenticationController.login);
+router.post('/login', [
+    check('email').normalizeEmail()
+ ],authenticationController.login);
+
+ router.post('/emailConfirmed', authenticationController.emailConfirmed);
+ router.post('/password/reset', authenticationController.passwordReset);
+ 
+ router.post('/password/reset/attempt', [
+     check('password').isLength({ min: 8 }).withMessage('Haslo musi miec conajmniej 8 znakow'),
+     check('confirmPassword').custom((value, { req }) => {
+         if (value !== req.body.password) {
+             throw new Error('Hasła muszą być identyczne!');
+           }
+         return true;
+     }),
+ ],authenticationController.passwordResetAttempt)
+
 
 module.exports = router;

@@ -29,13 +29,14 @@ const emailHtmlFactory = (subject, confirmToken, receiver) => {
         case emailOptions.emailConfirmation: {
             return `
                 <h1>Link aktywacyjny: </h1>
-                <a href="https://test.pl/#/confirm/${confirmToken}">Aktywuj</a>
+                <a href="localhost:4200/#/confirm/${confirmToken}">Aktywuj</a>
             `
-            break;
         }
         case emailOptions.passwordReset: {
-            return ``
-            break;
+            return `
+                <h1>Link resetujacy: </h1>
+                <a href="localhost:4200/#/reset-password/${confirmToken}">Reset</a>
+            `
         }
     }
 }
