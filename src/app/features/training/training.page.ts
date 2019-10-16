@@ -42,7 +42,7 @@ export class TrainingPage implements OnInit {
   ngOnInit() {
     // docelowo czytanie ze store telefonu
     this.backgroundMode.enable();
-    this.showLoader();
+    // this.showLoader();
     this.store.pipe(select('training')).subscribe((state: TrainingState) => {
       this.userLat = state.userLat;
       this.userLng = state.userLng;

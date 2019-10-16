@@ -1,7 +1,7 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom" class="ion-tab-bar">
-    <ng-container *ngFor="let navLink of navLinks">
-        <ion-tab-button [tab]="navLink.link" class="ion-tab-bar-button">
+    <ng-container *ngIf="accessLevel">
+        <ion-tab-button [tab]="navLink.link" class="ion-tab-bar-button" *ngFor="let navLink of navLinks">
             <ion-icon [name]="navLink.iconName"></ion-icon>
             <ion-label>{{ navLink.label }}</ion-label>
         </ion-tab-button>

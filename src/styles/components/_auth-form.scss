@@ -10,7 +10,7 @@
     width:300px;
     border:none;
     border-bottom: 2px solid #a9a9a9;
-    color: #ddd;
+    color: #555;
   }
   input:focus 		{ outline:none; border-color: transparent;}
   
@@ -63,7 +63,6 @@
   .bar:after , .bar-name:after{
     right:50%; 
   }
-  
   /* active state */
   input:focus ~ .bar:before, input:focus ~ .bar:after,input:focus ~ .bar-name:before, input:focus ~ .bar-name:after  {
     width:50%;

@@ -1,0 +1,47 @@
+Adresy stron : 
+
+link aktywacyjny email
+
+localhost:4200/#/confirm/${confirmToken} -> confirm token jako param
+
+Link do resetu hasla 
+
+href="localhost:4200/#/reset-password/${confirmToken} -> confirm token jako param
+
+Docelowo localhost zostanie zmieniony na nazwe domeny 
+
+( te linki sa w mailach ) 
+
+API : 
+
+
+Ustanawiajac adresy skorzystaj z plikow environment.ts i environment.prod.ts czytaj doc.
+
+Potwierdzenie emaila : 
+
+lokalny adres: localhost:3000/api/auth/emailConfirmed
+adres web: ?????? ->
+
+Do przeslania jako body ( post ) confirmToken -> token przychodzacy w linku
+
+-------------------------------------------------------------------------------
+
+Zmiana hasla 
+
+lokalny adres: localhost:3000/api/auth/password/reset/attempt
+adres web: ?????? ->
+
+
+Do przeslania jako body ( post ) token -> token przychodzacy w linku, password -> nowe haslo, confirmPassword -> potwierdzenie nowego hasla
+
+
+
+---------------------------------------------------------------------
+
+Request o maila do zmiany hasla
+
+lokalny adres: localhost:3000/api/auth/password/reset
+adres web: ?????? ->
+
+Do przeslania jako body ( post ) email-> adres email do ktorego ma isc email z linkiem do resetu hasla -> to odpalone w aplikacji mobilnej a nie na stronie
+

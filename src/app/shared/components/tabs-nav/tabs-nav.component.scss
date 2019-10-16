@@ -4,7 +4,7 @@
     &-button {
         background: inherit;
     }
-    .tab-selected {
-        color: $primary-color;
+    .tab-selected, .perma-active {
+        color: $mixed-main-colours;
     }
 }

@@ -2,22 +2,18 @@ const  jwt = require('jsonwebtoken');
 
 const secret = 'secr3t';
 
-// exports.jwtFactory = (user) => {
-//     return  jwt.sign({
-//         exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 14), // 2 tygodnie
-//         data: {
-//             email: user.email,
-//             nickName: user.nickName,
-//             platform: user.platform,
-//             team: user.team,
-//             accessLevel: user.accessLevel,
-//             teamPosition: user.teamPosition,
-//             nationality: user.nationality,
-//             registrationYear: user.registrationYear,
-//             firstStepsYear: user.firstStepsYear
-//         }
-//       }, secret);
-// }
+exports.jwtFactory = (user) => {
+    return  jwt.sign({
+        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 14), // 2 tygodnie
+        data: {
+            email: user.email,
+            name: user.name,
+            isMale: user.isMale,
+            surname: user.surname,
+            accessLevel: user.accessLevel,
+        }
+      }, secret);
+}
 
 exports.jwtVerivier = (req, res, next) => {
     const bearerHeader = req.headers.authorization;
