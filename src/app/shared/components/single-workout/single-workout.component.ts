@@ -24,4 +24,8 @@ export class SingleWorkoutComponent implements OnInit {
     ev.detail.complete();
   }
 
+  test() {
+    console.log('test')
+  }
+
 }

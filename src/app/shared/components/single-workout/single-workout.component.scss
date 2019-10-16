@@ -1,3 +1,6 @@
+@import '../../../../styles/_variables.scss';
+@import '../../../../styles/components/_buttons.scss';
+
 ion-item {
     --background: #fafafa;
 }
@@ -9,9 +12,37 @@ ion-reorder-group {
 .item-inener {
     --border: none !important;
 }
-.mat-expansion-panel-header {
-    margin-left: 0;
+
+.result-counter {
+    margin-right: .7rem;
 }
-.mat-expansion-panel-header-description, .mat-expansion-panel-header-title {
-    align-items: center;
+.result-input {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 2.5rem;
+    background-color: transparent;
+    text-align: center;
+    outline: none;
+    &:focus {
+        border-bottom-color: $mixed-main-colours;
+        color: $mixed-main-colours;
+    }
+}
+.result-description {
+    font-size: .75rem;
+}
+.short-button {
+    width: 2rem;
+    height: 2rem;
+}
+.exercise-name {
+    margin-left: .5rem;
+}
+.short-button {
+    position: relative;
+}
+ion-row:not(:last-child) {
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: .5rem;
+    margin-bottom: .5rem;
 }

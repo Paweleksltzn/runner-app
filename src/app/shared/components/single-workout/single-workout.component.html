@@ -6,11 +6,44 @@
             <mat-expansion-panel-header>
               <mat-panel-title>
                   <ion-reorder slot="start"></ion-reorder>
-                Wyciskanie sztangi na leząco
+                  <span class="exercise-name">Wyciskanie sztangi na leząco</span>
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <p>Seria 1 5 razy 10kg</p>
-            <p>Seria 2 5 razy 10kg</p>
+            <ion-grid class="justify-content-between">
+              <ion-row>
+                <ion-col size="auto">
+                  <span class="result-counter">Seria 1.</span>
+                </ion-col>
+                <ion-col>
+                  <input type="text" value="5" class="result-input"> <span class="result-description">razy</span>
+                </ion-col>
+                <ion-col>
+                  <input type="text" value="5" class="result-input"> <span class="result-description">kg</span>
+                </ion-col>
+                <ion-col size="auto">
+                  <button class="short-button short-button-tertiary" (click)="test()">
+                      <ion-icon name="trash"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col size="auto">
+                    <span class="result-counter">Seria 2.</span>
+                  </ion-col>
+                  <ion-col>
+                    <input type="text" value="8" class="result-input"> <span class="result-description">razy</span>
+                  </ion-col>
+                  <ion-col>
+                    <input type="text" value="20" class="result-input"> <span class="result-description">kg</span>
+                  </ion-col>
+                  <ion-col size="auto">
+                    <button class="short-button short-button-tertiary" (click)="test()">
+                        <ion-icon name="trash"></ion-icon>
+                    </button>
+                  </ion-col>
+                </ion-row>
+            </ion-grid>
+
         </mat-expansion-panel>
     </ion-item>
     <ion-item lines="none">
