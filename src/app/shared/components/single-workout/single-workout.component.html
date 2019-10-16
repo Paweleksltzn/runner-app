@@ -1,0 +1,42 @@
+<mat-accordion>
+  <ion-reorder-group disabled="false" (ionItemReorder)="doReorder($event)">
+    <ion-item lines="none">
+        <mat-expansion-panel (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  <ion-reorder slot="start"></ion-reorder>
+                Wyciskanie sztangi na leząco
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>Seria 1 5 razy 10kg</p>
+            <p>Seria 2 5 razy 10kg</p>
+        </mat-expansion-panel>
+    </ion-item>
+    <ion-item lines="none">
+        <mat-expansion-panel (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  <ion-reorder slot="start"></ion-reorder>
+                Wyciskanie sztangi na barki
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+    </ion-item>
+    <ion-item lines="none">
+      <mat-expansion-panel (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                <ion-reorder slot="start"></ion-reorder>
+              Wyciskanie sztangi na stojąco
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+    </ion-item>
+  </ion-reorder-group>
+</mat-accordion>
+

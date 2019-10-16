@@ -16,14 +16,12 @@ export class NotLoggedGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
       let isUserNotLoggedIn: boolean;
-      this.store.pipe(select('auth')).subscribe(result=> {
-        isUserNotLoggedIn = !!result.accessLevel
+      this.store.pipe(select('auth')).subscribe(result => {
+        isUserNotLoggedIn = !!result.accessLevel;
         if (isUserNotLoggedIn) {
           this.router.navigate(['/training']);
-        }        
+        }
       });
-    return !isUserNotLoggedIn;
+      return !isUserNotLoggedIn;
   }
-}{
-  
 }

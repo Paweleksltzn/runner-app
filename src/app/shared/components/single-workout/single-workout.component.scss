@@ -1,0 +1,17 @@
+ion-item {
+    --background: #fafafa;
+}
+ion-reorder-group {
+    ion-item:nth-child(2n) {
+        --background: #eee;
+    }
+}
+.item-inener {
+    --border: none !important;
+}
+.mat-expansion-panel-header {
+    margin-left: 0;
+}
+.mat-expansion-panel-header-description, .mat-expansion-panel-header-title {
+    align-items: center;
+}
