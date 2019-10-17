@@ -22,7 +22,7 @@ export class TrainingPage implements OnInit {
   public trainingModeIcon: string;
   public mapThemeIcon: string;
   public mapStyles: any;
-  public markerIcon: any; 
+  public markerIcon: any;
   public traceMap: Coordinates[] = [];
   public trainingTime: TrainingTime;
   public distancePassed: number;
@@ -53,7 +53,7 @@ export class TrainingPage implements OnInit {
       this.markerIcon = state.markerIcon;
       this.firstTimeAfterStop = state.firstTimeAfterStop;
       this.distancePassed = state.distancePassed;
-      if (this.distancePassed > state.distancePassed) this.distancePassed = state.distancePassed;
+      if (this.distancePassed > state.distancePassed) { this.distancePassed = state.distancePassed; }
       this.traceMap = state.traceMap;
     });
     this.watchUserCurrentPosition();
@@ -61,15 +61,15 @@ export class TrainingPage implements OnInit {
 
   private watchUserCurrentPosition(): void {
     this.userPositionSubscription = this.geolocation.watchPosition()
-    .subscribe((data: Geoposition)=> {
+    .subscribe((data: Geoposition) => {
       const newLat = data.coords.latitude;
       const newLng = data.coords.longitude;
-      console.log(data.coords.speed / 1000 * 3600)
+      console.log(data.coords.speed / 1000 * 3600);
       this.calculateDistance(newLat, newLng);
       this.mapLoader.dismiss();
       if (!this.firstTimeAfterStop && !this.timerSubscription) {
         this.runTimer();
-      } 
+      }
     }, err => {
       // redirect gdzies indziej jak cos sie spierdoli
     });
@@ -80,13 +80,13 @@ export class TrainingPage implements OnInit {
     if (!this.firstTimeAfterStop) {
       const R = 6371; // Radius of the earth in km
       const dLat = this.degree2radian(newLat - this.userLat);
-      const dLon = this.degree2radian(newLng - this.userLng); 
-      const a = 
-        Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(this.degree2radian(this.userLat)) * Math.cos(this.degree2radian(newLat)) * 
-        Math.sin(dLon/2) * Math.sin(dLon/2)
-        ; 
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      const dLon = this.degree2radian(newLng - this.userLng);
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(this.degree2radian(this.userLat)) * Math.cos(this.degree2radian(newLat)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2)
+        ;
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       d = R * c; // Distance in km
     } else {
       this.store.dispatch(actions.trainingActions.togglePositionWatcher({
@@ -94,7 +94,7 @@ export class TrainingPage implements OnInit {
       }));
     }
     const newDistanceToBeSet = Math.round((this.distancePassed + d) * 100) / 100;
-    this.store.dispatch(actions.trainingActions.changePosition({ 
+    this.store.dispatch(actions.trainingActions.changePosition({
       newDistance: newDistanceToBeSet,
       newLat,
       newLng
@@ -138,19 +138,19 @@ export class TrainingPage implements OnInit {
       }));
     }
   }
-  
+
   public async showInformations() {
     const modal = await this.modalController.create({
       component: TrainingStatisticsComponent
     });
     return await modal.present();
-  } 
+  }
 
   private runTimer(): void {
     let minutes = this.trainingTime.minutes;
     let seconds = this.trainingTime.seconds;
-    if (!minutes) minutes = '0';
-    if (!seconds) seconds ='0';
+    if (!minutes) { minutes = '0'; }
+    if (!seconds) { seconds = '0'; }
     this.timerSubscription = interval(1000).subscribe((data) => {
       seconds = `${ +seconds + 1 }`;
       if (+seconds === 60) {
@@ -158,20 +158,20 @@ export class TrainingPage implements OnInit {
         seconds = '0';
       }
       if (seconds.length < 2) {
-        seconds = `0${ seconds }`
+        seconds = `0${ seconds }`;
       }
       if (minutes.length < 2) {
-        minutes = `0${ minutes }`
+        minutes = `0${ minutes }`;
       }
       this.store.dispatch(actions.trainingActions.trainingSecondPassed({ seconds, minutes }));
     });
   }
 
-  private showLoader() {
-    const loading = this.loadingController.create(this.trainingOptions.loaderOptions).then(loading => {
-      this.mapLoader = loading;
-      this.mapLoader.present();
-    });
-  }
+  // private showLoader() {
+  //   const loading = this.loadingController.create(this.trainingOptions.loaderOptions).then(loading => {
+  //     this.mapLoader = loading;
+  //     this.mapLoader.present();
+  //   });
+  // }
 
 }

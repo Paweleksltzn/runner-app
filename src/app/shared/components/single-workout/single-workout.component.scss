@@ -1,0 +1,55 @@
+@import '../../../../styles/_variables.scss';
+@import '../../../../styles/components/_buttons.scss';
+
+ion-item {
+    --background: #fafafa;
+}
+ion-reorder-group {
+    ion-item:nth-child(2n) {
+        --background: #eee;
+    }
+}
+.item-inener {
+    --border: none !important;
+}
+
+.result-counter {
+    margin-right: .7rem;
+}
+.result-input {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 2.5rem;
+    background-color: transparent;
+    text-align: center;
+    outline: none;
+    &:focus {
+        border-bottom-color: $mixed-main-colours;
+        color: $mixed-main-colours;
+    }
+}
+.result-description {
+    font-size: .75rem;
+}
+.short-button {
+    width: 2rem;
+    height: 2rem;
+}
+.exercise-name {
+    margin-left: .5rem;
+}
+.short-button {
+    position: relative;
+}
+.series-grid {
+    margin-bottom: 1rem;
+}
+.series-grid ion-row:not(:last-child) {
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: .5rem;
+    margin-bottom: .5rem;
+}
+.delete-exercise {
+    --background: linear-gradient(to right top, #f41919, #f41b25, #f41f2f, #f32338, #f22840, #f32b43, #f32e45, #f43148, #f73346, #fa3543, #fc3741, #ff393e);
+    margin-right: 2rem;
+}

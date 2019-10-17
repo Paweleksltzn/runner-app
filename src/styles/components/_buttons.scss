@@ -42,6 +42,13 @@
         background: $green-blue-gradient;
     }
 }
+.short-button.short-button-tertiary {
+    background: $red-gradient;
+    color: white;
+    &::after {
+        background: $red-gradient;
+    }
+}
 .short-button.bigger {
     ion-icon {
         background-size: 20px 30px;

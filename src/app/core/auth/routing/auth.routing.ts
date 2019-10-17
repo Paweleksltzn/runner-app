@@ -6,7 +6,7 @@ import { NotLoggedGuard } from 'src/app/core/auth/authGuards/notLoggedGuard';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent, canActivate: [NotLoggedGuard]},
-  { path: 'login', component: LoginComponent, canActivate: [NotLoggedGuard]}, 
+  { path: 'login', component: LoginComponent, canActivate: [NotLoggedGuard]},
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 
