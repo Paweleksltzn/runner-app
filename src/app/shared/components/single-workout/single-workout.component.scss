@@ -41,8 +41,15 @@ ion-reorder-group {
 .short-button {
     position: relative;
 }
-ion-row:not(:last-child) {
+.series-grid {
+    margin-bottom: 1rem;
+}
+.series-grid ion-row:not(:last-child) {
     border-bottom: 1px solid lightgrey;
     padding-bottom: .5rem;
     margin-bottom: .5rem;
+}
+.delete-exercise {
+    --background: linear-gradient(to right top, #f41919, #f41b25, #f41f2f, #f32338, #f22840, #f32b43, #f32e45, #f43148, #f73346, #fa3543, #fc3741, #ff393e);
+    margin-right: 2rem;
 }

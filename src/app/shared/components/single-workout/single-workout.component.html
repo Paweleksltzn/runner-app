@@ -1,75 +1,41 @@
+<ion-header>
+  <ion-toolbar class="header__bar">
+    <ion-title>{{ currentWorkout.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
 <mat-accordion>
   <ion-reorder-group disabled="false" (ionItemReorder)="doReorder($event)">
-    <ion-item lines="none">
-        <mat-expansion-panel (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false">
+    <ion-item lines="none" *ngFor="let excercise of currentWorkout.excercises">
+        <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
                   <ion-reorder slot="start"></ion-reorder>
-                  <span class="exercise-name">Wyciskanie sztangi na leząco</span>
+                  <span class="exercise-name">{{ excercise.name }}</span>
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <ion-grid class="justify-content-between">
-              <ion-row>
+            <ion-grid class="justify-content-between" class="series-grid">
+              <ion-row *ngFor="let singleSet of excercise.series; let i = index;">
                 <ion-col size="auto">
-                  <span class="result-counter">Seria 1.</span>
+                  <span class="result-counter">Seria {{ i + 1 }}.</span>
                 </ion-col>
                 <ion-col>
-                  <input type="text" value="5" class="result-input"> <span class="result-description">razy</span>
+                  <input type="text" [(ngModel)]="singleSet.repeats" class="result-input" name="repeats"> <span class="result-description">razy</span>
                 </ion-col>
                 <ion-col>
-                  <input type="text" value="5" class="result-input"> <span class="result-description">kg</span>
+                  <input type="text" [(ngModel)]="singleSet.weight" class="result-input" name="weight"> <span class="result-description">kg</span>
                 </ion-col>
                 <ion-col size="auto">
-                  <button class="short-button short-button-tertiary" (click)="test()">
+                  <button class="short-button short-button-tertiary">
                       <ion-icon name="trash"></ion-icon>
                   </button>
                 </ion-col>
               </ion-row>
-              <ion-row>
-                  <ion-col size="auto">
-                    <span class="result-counter">Seria 2.</span>
-                  </ion-col>
-                  <ion-col>
-                    <input type="text" value="8" class="result-input"> <span class="result-description">razy</span>
-                  </ion-col>
-                  <ion-col>
-                    <input type="text" value="20" class="result-input"> <span class="result-description">kg</span>
-                  </ion-col>
-                  <ion-col size="auto">
-                    <button class="short-button short-button-tertiary" (click)="test()">
-                        <ion-icon name="trash"></ion-icon>
-                    </button>
-                  </ion-col>
-                </ion-row>
             </ion-grid>
-
+            <ion-button class="delete-exercise ion-float-left">Usuń ćwiczenie</ion-button>
+            <button class="short-button short-button-primary ">
+                <ion-icon name="add" class="short-button-icon"></ion-icon>
+            </button>
         </mat-expansion-panel>
-    </ion-item>
-    <ion-item lines="none">
-        <mat-expansion-panel (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                  <ion-reorder slot="start"></ion-reorder>
-                Wyciskanie sztangi na barki
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <p>I'm visible because I am open</p>
-        </mat-expansion-panel>
-    </ion-item>
-    <ion-item lines="none">
-      <mat-expansion-panel (opened)="panelOpenState = true"
-      (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-                <ion-reorder slot="start"></ion-reorder>
-              Wyciskanie sztangi na stojąco
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
-      </mat-expansion-panel>
     </ion-item>
   </ion-reorder-group>
-</mat-accordion>
-
+</mat-accordion>  

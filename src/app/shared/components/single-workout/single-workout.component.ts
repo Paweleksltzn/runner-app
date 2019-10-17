@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonReorderGroup } from '@ionic/angular';
+import { testWorkout } from './testWorkoutData';
 
 @Component({
   selector: 'app-single-workout',
@@ -8,24 +9,18 @@ import { IonReorderGroup } from '@ionic/angular';
 })
 export class SingleWorkoutComponent implements OnInit {
   panelOpenState = false;
-
+  public currentWorkout = testWorkout;
   constructor() { }
 
   ngOnInit() {}
 
   doReorder(ev: any) {
-    // The `from` and `to` properties contain the index of the item
-    // when the drag started and ended, respectively
-    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
-
-    // Finish the reorder and position the item in the DOM based on
-    // where the gesture ended. This method can also be called directly
-    // by the reorder group
+    const from = ev.detail.from;
+    const to = ev.detail.to;
+    const movedElement = this.currentWorkout.excercises[from];
+    this.currentWorkout.excercises.splice(from, 1);
+    this.currentWorkout.excercises.splice(to, 0, movedElement);
     ev.detail.complete();
-  }
-
-  test() {
-    console.log('test')
   }
 
 }
