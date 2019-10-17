@@ -1,0 +1,9 @@
+@import "../_variables.scss";
+.alert-input-wrapper .alert-input {
+    &:focus {
+        border-bottom-color: $mixed-main-colours;
+    }
+}
+.alert-title {
+    font-size: 1rem !important;
+}

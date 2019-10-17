@@ -53,3 +53,16 @@ ion-reorder-group {
     --background: linear-gradient(to right top, #f41919, #f41b25, #f41f2f, #f32338, #f22840, #f32b43, #f32e45, #f43148, #f73346, #fa3543, #fc3741, #ff393e);
     margin-right: 2rem;
 }
+.add-exercise {
+    float: right;
+    margin:1.75rem 1.75rem 1.75rem 0
+}
+.end-training {
+    --background: linear-gradient(to right top, #15e6b5, #39e9b1, #4fecad, #61efaa, #71f2a6, #6af2ae, #63f3b6, #5cf3be, #3ef0d1, #22ede2, #1ce8f0, #34e3fa);
+    margin-top: 6rem;
+    --color: black;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 50%;
+}
