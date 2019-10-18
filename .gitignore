@@ -8,6 +8,7 @@
 /bazel-out
 /appAPK
 # dependencies
+/website/node_modules
 /node_modules
 /server/util/credentials.js
 /nodemon.json
