@@ -1,19 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import {  AlertController } from '@ionic/angular';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {  AlertController, ModalController } from '@ionic/angular';
 import { testWorkout } from './testWorkoutData';
 import { Excersise } from '../../interfaces/workout/exercise';
 import { emptySingleSet } from './singleWorkoutHelper';
+import { TimerComponent } from './timer/timer.component';
+import { Store } from '@ngrx/store';
+import { WorkoutState } from '../../interfaces/workout/WorkoutState';
+import { actions } from 'src/app/store';
+import { Workout } from '../../interfaces/workout/workout';
 
 @Component({
   selector: 'app-single-workout',
   templateUrl: './single-workout.component.html',
   styleUrls: ['./single-workout.component.scss'],
 })
-export class SingleWorkoutComponent implements OnInit {
-  public currentWorkout = testWorkout;
-  constructor(public alertController: AlertController) { }
+export class SingleWorkoutComponent implements OnInit, OnDestroy {
+  public currentWorkout: Workout = testWorkout;
+  constructor(public alertController: AlertController, public modalController: ModalController,
+              private store: Store<{singleWorkout: WorkoutState}>) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // zapisywac do store sekunde rozpoczecia treningu, oraz date treningu przy pierwszej inicjacji ( wybranie typu treningu)
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(actions.singleWorkoutActions.saveTrainingState({trainingState: this.currentWorkout}));
+  }
 
   public doReorder(ev: any) {
     const from = ev.detail.from;
@@ -34,6 +46,13 @@ export class SingleWorkoutComponent implements OnInit {
 
   public deleteSingleSet(excercise: Excersise, singleSetIndex: number) {
     excercise.series.splice(singleSetIndex, 1);
+  }
+
+  public async openTimer() {
+    const modal = await this.modalController.create({
+      component: TimerComponent
+    });
+    return await modal.present();
   }
 
   public async addExercise() {
