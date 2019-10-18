@@ -1,0 +1,58 @@
+.logo {
+  width: 100vw;
+  height: 15vh;
+  text-align: center;
+  background-color: grey;
+}
+.logo-image {
+  width: 10%;
+  height: 90%
+}
+.main-screen {
+  --main-gradient: linear-gradient(to left bottom, #15e6b5, #39e9b1, #4fecad, #61efaa,#71f2a6, #6ff19e, #6eef95, #6eee8c, #5ce87b, #49e268, #32dc55, #09d63f);
+  background-image: var(--main-gradient);
+  width: 100vw;
+  height: 78vh;
+  text-align: center;
+
+}
+.footer {
+  background-color: grey;
+  width: 100vw;
+  height: 7vh;
+}
+.step {
+  margin-top: 15rem;
+  margin-left: 17rem;
+  width: 10%;
+  height: 20%;
+}
+.info-graph {
+  width: 99%;
+  height:50%;
+  display: flex;
+}
+.email-status {
+  width: 40%;
+  height: 10%;
+  text-align: center;
+  margin: auto;
+  padding: 3rem;
+ }
+ .material-icons{
+   font-size: 5rem;
+ }
+ @media only screen and (max-width: 600px) {
+  .info-graph {
+    display: block;
+  }
+  .step {
+    margin-top: 6rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+  }
+  .main-screen{
+    overflow: auto;
+  }
+}

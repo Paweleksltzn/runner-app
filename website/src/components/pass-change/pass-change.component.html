@@ -1,0 +1,16 @@
+<div class="logo">
+  <img class="logo-image" src="assets/images/logo.png">
+</div>
+<div class="main-screen">
+  <form [formGroup]="passForm" (ngSubmit)="onSubmit()">
+    <label>Wprowadź nowe hasło:
+      <input (blur)="changePass($event)" #pass1 formControlName="pass"  type="password" required ></label><br>
+    <label>Powtórz nowe hasło:
+      <input (blur)="changePassCheck($event)"  required formControlName="passChk" type="password"></label><br><br>
+    <ng-container  *ngIf="this.newPasswordCheck === this.newPassword && newPassword !== '' && newPasswordCheck !== ''">
+      <button >Zmień hasło</button>
+    </ng-container>
+  </form>
+  <div [innerHTML]="alertDiv"></div>
+</div>
+<div  class="footer"></div>
