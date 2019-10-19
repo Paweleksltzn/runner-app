@@ -10,52 +10,50 @@ import { FormGroup, FormControl , Validators , FormBuilder } from '@angular/form
   styleUrls: ['./pass-change.component.css']
 })
 export class PassChangeComponent implements OnInit {
-  public alertDiv: any = '';
   public newPassword: string;
   public newPasswordCheck: string;
   public validationMessage: string;
-  passForm: FormGroup;
-  constructor(private httpService: PasswordService, private route: ActivatedRoute, private passFb: FormBuilder) { }
+  public passForm: FormGroup;
+  public isFormValid: boolean;
+  constructor(private passwordService: PasswordService, private activatedRoute: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createForm();
   }
 
-  onSubmit() {
-    const hs: Password = ({
+  public onSubmit() {
+    const password: PasswordResetData = ({
       password: this.newPassword,
       confirmPassword: this.newPasswordCheck,
-      token: this.route.snapshot.paramMap.get('token_pass')
+      token: this.activatedRoute.snapshot.paramMap.get('token_pass')
     });
-
-    if (this.passForm.invalid) {
-      this.alertDiv = '<p>Hasło musi zawierać conajmniej 8 znaków</p>';
-    } else {
-      this.alertDiv = '';
-      this.httpService.changedPassword(hs).subscribe((res: any) => {
-        console.log(this.newPassword);
+    this.isFormValid = this.passForm.valid;
+    console.log(this.isFormValid);
+    if (this.isFormValid && this.newPassword === this.newPasswordCheck ) {
+      console.log("succes");
+      this.passwordService.changedPassword(password).subscribe((res: any) => {
       });
+    } else{
+      console.log("not kurwa succes");
     }
   }
 
-  changePass(event: any) {
-    this.newPassword = (event.target as HTMLInputElement).value;
-    console.log(this.newPassword);
+  public changePass() {
+    this.newPassword = this.passForm.value.pass;
   }
 
-  changePassCheck(eventCheck: any) {
-    this.newPasswordCheck = (eventCheck.target as HTMLInputElement).value;
-    console.log(this.newPasswordCheck);
+  public changePassCheck() {
+    this.newPasswordCheck = this.passForm.value.passChk;
   }
 
-  createForm() {
-    this.passForm = this.passFb.group({
+  public createForm() {
+    this.passForm = this.fb.group({
        pass: ['', [Validators.required, Validators.minLength(8)]],
        passChk: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
   }
-export interface Password {
+export interface PasswordResetData {
     password: string;
     confirmPassword: string;
     token: string;

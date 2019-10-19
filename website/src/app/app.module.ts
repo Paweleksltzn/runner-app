@@ -11,10 +11,7 @@ import { Routes , RouterModule, Router} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import {EmailService} from '../components/email-confirm/email.service';
-const appRoutes: Routes = [
-  {path: 'confirm/:token' , component: EmailConfirmComponent},
-  {path: 'reset-password/:token_pass' , component: PassChangeComponent}
-];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,10 +25,6 @@ const appRoutes: Routes = [
     MatInputModule,
     ReactiveFormsModule,
     NoopAnimationsModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { useHash: true }
-    )
   ],
   providers: [EmailService],
   bootstrap: [AppComponent]

@@ -1,26 +1,74 @@
 .logo {
-  width: 100vw;
   height: 15vh;
   text-align: center;
   background-color: grey;
+  margin-bottom: 10rem;
 }
 .logo-image {
   width: 10%;
   height: 90%
 }
-.main-screen {
-  --main-gradient: linear-gradient(to left bottom, #15e6b5, #39e9b1, #4fecad, #61efaa,#71f2a6, #6ff19e, #6eef95, #6eee8c, #5ce87b, #49e268, #32dc55, #09d63f);
+.form-container{
+  width: 35%;
+  height: 30%;
+  margin: 0 auto;
+  border: solid 2px black;
+  border-radius: 1rem;
+  padding: 1rem;
+  background-size: cover;
+  background-position: center;
+   --main-gradient: linear-gradient(to left bottom, #15e6b5, #39e9b1, #4fecad, #61efaa,#71f2a6, #6ff19e, #6eef95, #6eee8c, #5ce87b, #49e268, #32dc55, #09d63f);
   background-image: var(--main-gradient);
-  width: 100vw;
-  height: 78vh;
+  padding-bottom: 3rem;
+  display: block;
   text-align: center;
 }
-.footer {
-  background-color: grey;
-  width: 100vw;
-  height: 7vh;
+.main-screen {
+  height: 100vh;
+  text-align: center;
 }
-input{
-  margin-top: 5rem;
+input 	{
+  background-color: transparent;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 60%;
   outline: 0;
+  border: none;
+  border-bottom: 2px solid black;
+  color: black;
+  margin: 0 auto;
+}
+.input-container{
+  margin-top: 2rem;
+}
+button{
+  background-color: transparent;
+  color: black;
+  border: solid 2px black;
+  margin-top: 2rem;
+  padding: 5px;
+  border-radius: 0.2rem;
+  outline: 0;
+}
+p{
+  color: red;
+}
+button:focus{
+  border-bottom: solid 4px;
+}
+@media only screen and (max-width: 900px) {
+  .form-container{
+    width: 50%;
+    height: 35%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .form-container{
+    width: 50%;
+    height: 45%;
+  }
+  .logo{
+    margin-bottom: 5rem;
+  }
 }
