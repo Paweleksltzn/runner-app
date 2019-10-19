@@ -12,7 +12,6 @@ import { FormGroup, FormControl , Validators , FormBuilder } from '@angular/form
 export class PassChangeComponent implements OnInit {
   public newPassword: string;
   public newPasswordCheck: string;
-  public validationMessage: string;
   public passForm: FormGroup;
   public isFormValid: boolean;
   constructor(private passwordService: PasswordService, private activatedRoute: ActivatedRoute, private fb: FormBuilder) { }

@@ -10,13 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EmailConfirmComponent implements OnInit {
   public confirmToken: string;
-  constructor(private httpService: EmailService, private activatedRoute: ActivatedRoute) { }
+  constructor(private emailService: EmailService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
 
       this.confirmToken = this.activatedRoute.snapshot.paramMap.get('token');
 
-      this.httpService.confirmMail(this.confirmToken).subscribe( (res: string) => {
+      this.emailService.confirmMail(this.confirmToken).subscribe( (res: string) => {
 
     });
   }
