@@ -23,4 +23,3 @@ export class EmailConfirmComponent implements OnInit {
 
 
 }
-

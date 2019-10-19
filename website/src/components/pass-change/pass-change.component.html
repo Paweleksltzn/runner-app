@@ -6,16 +6,16 @@
     <form [formGroup]="passForm" (ngSubmit)="onSubmit()">
       <div class="input-container">
         <label>Wprowadź nowe hasło:
-          <input (blur)="changePass($event)" formControlName="pass"  type="password" ></label>
+          <input (blur)="changePass()" formControlName="pass"  type="password" ></label>
       </div>
       <div class="input-container">
         <label>Powtórz nowe hasło:
-          <input (blur)="changePassCheck($event)"  formControlName="passChk" type="password"></label>
+          <input (blur)="changePassCheck()"  formControlName="passChk" type="password"></label>
       </div>
-      <ng-container  *ngIf="newPasswordCheck === newPassword && newPassword">
         <button >Zmień hasło</button>
-      </ng-container>
     </form>
+    <div *ngIf="isFormValid === false" ><p>Hasło musi zawierać conajmniej 8 znaków</p></div>
+    <div *ngIf="newPassword !== newPasswordCheck " ><p>Wpisane hasła muszą być takie same</p></div>
   </div>
-  <div [innerHTML]="alertDiv"></div>
+
 </div>

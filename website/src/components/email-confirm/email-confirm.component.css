@@ -1,5 +1,4 @@
 .logo {
-  width: 100vw;
   height: 15vh;
   text-align: center;
   background-color: grey;
@@ -11,7 +10,6 @@
 }
 .main-screen {
 
-  width: 100vw;
   height: 100vh;
   text-align: center;
   background-image: url("../../assets/images/background.jpg");
@@ -19,8 +17,12 @@
 .main-info{
   margin-bottom: 5rem;
 }
+i{
+  margin: 0 auto;
+}
 .step{
   width: 50%;
+  display: block;
 }
 .info-handler{
   display: flex;
@@ -56,6 +58,6 @@
 }
 @media only screen and (max-width: 600px) {
   .main-screen {
-    background-image:none;
+    background-image: none;
   }
 }

@@ -10,11 +10,11 @@ import { FormGroup, FormControl , Validators , FormBuilder } from '@angular/form
   styleUrls: ['./pass-change.component.css']
 })
 export class PassChangeComponent implements OnInit {
-  public alertDiv: any = '';
   public newPassword: string;
   public newPasswordCheck: string;
   public validationMessage: string;
   public passForm: FormGroup;
+  public isFormValid: boolean;
   constructor(private passwordService: PasswordService, private activatedRoute: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -27,25 +27,23 @@ export class PassChangeComponent implements OnInit {
       confirmPassword: this.newPasswordCheck,
       token: this.activatedRoute.snapshot.paramMap.get('token_pass')
     });
-
-    if (this.passForm.invalid) {
-      this.alertDiv = '<p>Hasło musi zawierać conajmniej 8 znaków</p>';
-    } else {
-      this.alertDiv = '';
+    this.isFormValid = this.passForm.valid;
+    console.log(this.isFormValid);
+    if (this.isFormValid && this.newPassword === this.newPasswordCheck ) {
+      console.log("succes");
       this.passwordService.changedPassword(password).subscribe((res: any) => {
-
       });
+    } else{
+      console.log("not kurwa succes");
     }
   }
 
-  public changePass(event: any) {
-    this.newPassword = (event.target as HTMLInputElement).value;
-
+  public changePass() {
+    this.newPassword = this.passForm.value.pass;
   }
 
-  public changePassCheck(eventCheck: any) {
-    this.newPasswordCheck = (eventCheck.target as HTMLInputElement).value;
-    console.log(this.newPasswordCheck);
+  public changePassCheck() {
+    this.newPasswordCheck = this.passForm.value.passChk;
   }
 
   public createForm() {
