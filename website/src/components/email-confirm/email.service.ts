@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Token } from './email-confirm.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmailService {
 
-  constructor(private emailConfirm: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  confirmMail(token: Token): Observable<Token>{
-    return this.emailConfirm.post<Token>('http://localhost:3000/api/auth/emailConfirmed', token);
+  public confirmMail(token: string): Observable<string>{
+    return this.http.post<string>('http://localhost:3000/api/auth/emailConfirmed', token);
   }
 }

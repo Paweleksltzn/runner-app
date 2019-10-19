@@ -9,23 +9,18 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./email-confirm.component.css']
 })
 export class EmailConfirmComponent implements OnInit {
-
-  constructor(private httpService: EmailService, private route: ActivatedRoute) { }
+  public confirmToken: string;
+  constructor(private httpService: EmailService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
 
-    const confirmToken: Token = ({
-      confirmToken: this.route.snapshot.paramMap.get('token')
-    });
+      this.confirmToken = this.activatedRoute.snapshot.paramMap.get('token');
 
-    this.httpService.confirmMail(confirmToken).subscribe( (res: any) => {
-      console.log(confirmToken);
+      this.httpService.confirmMail(this.confirmToken).subscribe( (res: string) => {
+
     });
   }
 
 
-}
-export interface Token {
-  confirmToken?: string;
 }
 

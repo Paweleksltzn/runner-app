@@ -14,48 +14,48 @@ export class PassChangeComponent implements OnInit {
   public newPassword: string;
   public newPasswordCheck: string;
   public validationMessage: string;
-  passForm: FormGroup;
-  constructor(private httpService: PasswordService, private route: ActivatedRoute, private passFb: FormBuilder) { }
+  public passForm: FormGroup;
+  constructor(private passwordService: PasswordService, private activatedRoute: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createForm();
   }
 
-  onSubmit() {
-    const hs: Password = ({
+  public onSubmit() {
+    const password: PasswordResetData = ({
       password: this.newPassword,
       confirmPassword: this.newPasswordCheck,
-      token: this.route.snapshot.paramMap.get('token_pass')
+      token: this.activatedRoute.snapshot.paramMap.get('token_pass')
     });
 
     if (this.passForm.invalid) {
       this.alertDiv = '<p>Hasło musi zawierać conajmniej 8 znaków</p>';
     } else {
       this.alertDiv = '';
-      this.httpService.changedPassword(hs).subscribe((res: any) => {
-        console.log(this.newPassword);
+      this.passwordService.changedPassword(password).subscribe((res: any) => {
+
       });
     }
   }
 
-  changePass(event: any) {
+  public changePass(event: any) {
     this.newPassword = (event.target as HTMLInputElement).value;
-    console.log(this.newPassword);
+
   }
 
-  changePassCheck(eventCheck: any) {
+  public changePassCheck(eventCheck: any) {
     this.newPasswordCheck = (eventCheck.target as HTMLInputElement).value;
     console.log(this.newPasswordCheck);
   }
 
-  createForm() {
-    this.passForm = this.passFb.group({
+  public createForm() {
+    this.passForm = this.fb.group({
        pass: ['', [Validators.required, Validators.minLength(8)]],
        passChk: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
   }
-export interface Password {
+export interface PasswordResetData {
     password: string;
     confirmPassword: string;
     token: string;

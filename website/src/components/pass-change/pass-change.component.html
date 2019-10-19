@@ -4,13 +4,12 @@
 <div class="main-screen">
   <form [formGroup]="passForm" (ngSubmit)="onSubmit()">
     <label>Wprowadź nowe hasło:
-      <input (blur)="changePass($event)" #pass1 formControlName="pass"  type="password" required ></label><br>
+      <input (blur)="changePass($event)" formControlName="pass"  type="password" ></label>
     <label>Powtórz nowe hasło:
-      <input (blur)="changePassCheck($event)"  required formControlName="passChk" type="password"></label><br><br>
-    <ng-container  *ngIf="this.newPasswordCheck === this.newPassword && newPassword !== '' && newPasswordCheck !== ''">
+      <input (blur)="changePassCheck($event)"  formControlName="passChk" type="password"></label>
+    <ng-container  *ngIf="newPasswordCheck === newPassword && newPassword">
       <button >Zmień hasło</button>
     </ng-container>
   </form>
   <div [innerHTML]="alertDiv"></div>
 </div>
-<div  class="footer"></div>
