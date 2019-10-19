@@ -9,8 +9,8 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                  <ion-reorder slot="start"></ion-reorder>
-                  <span class="exercise-name">{{ excercise.name }}</span>
+                <ion-reorder slot="start"></ion-reorder>
+                <span class="exercise-name">{{ excercise.name }}</span>
               </mat-panel-title>
             </mat-expansion-panel-header>
             <ion-grid class="justify-content-between" class="series-grid">
@@ -31,10 +31,23 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-            <ion-button class="delete-exercise ion-float-left" (click)="deleteExercise(excerciseIndex)">Usuń ćwiczenie</ion-button>
-            <button class="short-button short-button-primary" (click)="addSingleSet(excercise)">
-                <ion-icon name="add" class="short-button-icon"></ion-icon>
-            </button>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-button class="delete-exercise ion-float-left" (click)="deleteExercise(excerciseIndex)">Usuń ćwiczenie</ion-button>
+                </ion-col>
+                <ion-col size="auto">
+                  <button class="short-button short-button-primary" (click)="addSingleSet(excercise)">
+                    <ion-icon name="add" class="short-button-icon"></ion-icon>
+                  </button>
+                </ion-col>
+                <ion-col>
+                  <button class="short-button short-button-secondary margin-left-auto" (click)="changeExerciseName(excercise)">
+                    <ion-icon name="create" class="short-button-icon"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
         </mat-expansion-panel>
     </ion-item>
   </ion-reorder-group>

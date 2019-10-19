@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {  AlertController, ModalController } from '@ionic/angular';
-import { testWorkout } from './testWorkoutData';
 import { Excersise } from '../../interfaces/workout/exercise';
 import { emptySingleSet, singleWorkoutModes } from './singleWorkoutHelper';
 import { TimerComponent } from './timer/timer.component';
@@ -57,6 +56,36 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
 
   public deleteSingleSet(excercise: Excersise, singleSetIndex: number) {
     excercise.series.splice(singleSetIndex, 1);
+  }
+
+  public async changeExerciseName(exercise: Excersise, accordion: any) {
+    const alert = await this.alertController.create({
+      header: 'Podaj nazwę ćwiczenia',
+      inputs: [
+        {
+          name: 'newExerciseName',
+          type: 'text',
+          value: exercise.name
+        }
+      ],
+      buttons: [
+        {
+          text: 'Anuluj',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            const newExerciseName = data.newExerciseName;
+            if (newExerciseName) {
+              exercise.name = newExerciseName;
+            }
+
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   public async openTimer() {
