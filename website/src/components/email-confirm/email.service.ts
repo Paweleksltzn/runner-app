@@ -9,7 +9,7 @@ export class EmailService {
 
   constructor(private http: HttpClient) { }
 
-  public confirmMail(token: string): Observable<string>{
-    return this.http.post<string>('http://localhost:3000/api/auth/emailConfirmed', token);
+  public confirmMail(confirmToken: string): Observable<string>{
+    return this.http.post<string>('http://localhost:3000/api/auth/emailConfirmed', { confirmToken });
   }
 }
