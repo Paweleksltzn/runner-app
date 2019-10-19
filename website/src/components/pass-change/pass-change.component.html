@@ -1,15 +1,21 @@
-<div class="logo">
-  <img class="logo-image" src="assets/images/logo.png">
-</div>
 <div class="main-screen">
-  <form [formGroup]="passForm" (ngSubmit)="onSubmit()">
-    <label>Wprowadź nowe hasło:
-      <input (blur)="changePass($event)" formControlName="pass"  type="password" ></label>
-    <label>Powtórz nowe hasło:
-      <input (blur)="changePassCheck($event)"  formControlName="passChk" type="password"></label>
-    <ng-container  *ngIf="newPasswordCheck === newPassword && newPassword">
-      <button >Zmień hasło</button>
-    </ng-container>
-  </form>
+  <div class="logo">
+  <img class="logo-image" src="assets/images/logo.png">
+  </div>
+  <div class="form-container">
+    <form [formGroup]="passForm" (ngSubmit)="onSubmit()">
+      <div class="input-container">
+        <label>Wprowadź nowe hasło:
+          <input (blur)="changePass($event)" formControlName="pass"  type="password" ></label>
+      </div>
+      <div class="input-container">
+        <label>Powtórz nowe hasło:
+          <input (blur)="changePassCheck($event)"  formControlName="passChk" type="password"></label>
+      </div>
+      <ng-container  *ngIf="newPasswordCheck === newPassword && newPassword">
+        <button >Zmień hasło</button>
+      </ng-container>
+    </form>
+  </div>
   <div [innerHTML]="alertDiv"></div>
 </div>
