@@ -3,59 +3,62 @@
     <ion-title>{{ currentWorkout.title }}</ion-title>
   </ion-toolbar>
 </ion-header>
-<mat-accordion *ngIf="currentWorkout">
-  <ion-reorder-group disabled="false" (ionItemReorder)="doReorder($event)">
-    <ion-item lines="none" *ngFor="let excercise of currentWorkout.excercises;let excerciseIndex = index;">
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <ion-reorder slot="start"></ion-reorder>
-                <span class="exercise-name">{{ excercise.name }}</span>
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ion-grid class="justify-content-between" class="series-grid">
-              <ion-row *ngFor="let singleSet of excercise.series; let i = index;">
-                <ion-col size="auto">
-                  <span class="result-counter">Seria {{ i + 1 }}.</span>
-                </ion-col>
-                <ion-col>
-                  <input type="text" [(ngModel)]="singleSet.repeats" class="result-input" name="repeats"> <span class="result-description">razy</span>
-                </ion-col>
-                <ion-col>
-                  <input type="text" [(ngModel)]="singleSet.weight" class="result-input" name="weight"> <span class="result-description">kg</span>
-                </ion-col>
-                <ion-col size="auto">
-                  <button class="short-button short-button-tertiary" (click)="deleteSingleSet(excercise, i)">
-                      <ion-icon name="trash"></ion-icon>
-                  </button>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                  <ion-button class="delete-exercise ion-float-left" (click)="deleteExercise(excerciseIndex)">Usuń ćwiczenie</ion-button>
-                </ion-col>
-                <ion-col size="auto">
-                  <button class="short-button short-button-primary" (click)="addSingleSet(excercise)">
-                    <ion-icon name="add" class="short-button-icon"></ion-icon>
-                  </button>
-                </ion-col>
-                <ion-col>
-                  <button class="short-button short-button-secondary margin-left-auto" (click)="changeExerciseName(excercise)">
-                    <ion-icon name="create" class="short-button-icon"></ion-icon>
-                  </button>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-        </mat-expansion-panel>
-    </ion-item>
-  </ion-reorder-group>
-</mat-accordion>  
-<button class="short-button short-button-primary add-exercise" (click)="addExercise()">
-  <ion-icon name="add" class="short-button-icon"></ion-icon>
-</button>
-<button class="short-button short-button-secondary add-exercise" (click)="openTimer()">
-  <ion-icon name="time" class="short-button-icon"></ion-icon>
-</button>
-<ion-button class="end-training" (click)="finishWorkout()">Zakończ trening</ion-button>
+<ion-content>
+  <mat-accordion *ngIf="currentWorkout">
+    <ion-reorder-group disabled="false" (ionItemReorder)="doReorder($event)">
+      <ion-item lines="none" *ngFor="let excercise of currentWorkout.excercises;let excerciseIndex = index;">
+          <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <ion-reorder slot="start"></ion-reorder>
+                  <span class="exercise-name">{{ excercise.name }}</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <ion-grid class="justify-content-between" class="series-grid">
+                <ion-row *ngFor="let singleSet of excercise.series; let i = index;">
+                  <ion-col size="auto">
+                    <span class="result-counter">Seria {{ i + 1 }}.</span>
+                  </ion-col>
+                  <ion-col>
+                    <input type="text" [(ngModel)]="singleSet.repeats" class="result-input" name="repeats"> <span class="result-description">razy</span>
+                  </ion-col>
+                  <ion-col>
+                    <input type="text" [(ngModel)]="singleSet.weight" class="result-input" name="weight"> <span class="result-description">kg</span>
+                  </ion-col>
+                  <ion-col size="auto">
+                    <button class="short-button short-button-tertiary" (click)="deleteSingleSet(excercise, i)">
+                        <ion-icon name="trash"></ion-icon>
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-button class="delete-exercise ion-float-left" (click)="deleteExercise(excerciseIndex)">Usuń ćwiczenie</ion-button>
+                  </ion-col>
+                  <ion-col size="auto">
+                    <button class="short-button short-button-primary" (click)="addSingleSet(excercise)">
+                      <ion-icon name="add" class="short-button-icon"></ion-icon>
+                    </button>
+                  </ion-col>
+                  <ion-col>
+                    <button class="short-button short-button-secondary margin-left-auto" (click)="changeExerciseName(excercise)">
+                      <ion-icon name="create" class="short-button-icon"></ion-icon>
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+          </mat-expansion-panel>
+      </ion-item>
+    </ion-reorder-group>
+  </mat-accordion>  
+  <button class="short-button short-button-primary add-exercise" (click)="addExercise()">
+    <ion-icon name="add" class="short-button-icon"></ion-icon>
+  </button>
+  <button class="short-button short-button-secondary add-exercise" (click)="openTimer()">
+    <ion-icon name="time" class="short-button-icon"></ion-icon>
+  </button>
+  <ion-button class="end-training" (click)="finishWorkout()">Zakończ trening</ion-button>
+</ion-content>
+
