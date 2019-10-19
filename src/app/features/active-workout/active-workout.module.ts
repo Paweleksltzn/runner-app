@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ActiveWorkoutPage } from './active-workout.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ActiveWorkoutSelectorComponent } from './active-workout-selector/active-workout-selector.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ActiveWorkoutPage]
+  declarations: [ActiveWorkoutPage, ActiveWorkoutSelectorComponent],
+  entryComponents: [ActiveWorkoutSelectorComponent]
 })
 export class ActiveWorkoutPageModule {}

@@ -7,4 +7,6 @@ export interface WorkoutState {
     trainingTime: TrainingTime;
     isTimerOn: boolean;
     timerSubscription: Subscription;
+    trainingMode: string;
+    workoutToShow;
 }

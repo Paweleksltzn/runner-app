@@ -3,7 +3,7 @@
     <ion-title>{{ currentWorkout.title }}</ion-title>
   </ion-toolbar>
 </ion-header>
-<mat-accordion>
+<mat-accordion *ngIf="currentWorkout">
   <ion-reorder-group disabled="false" (ionItemReorder)="doReorder($event)">
     <ion-item lines="none" *ngFor="let excercise of currentWorkout.excercises;let excerciseIndex = index;">
         <mat-expansion-panel>

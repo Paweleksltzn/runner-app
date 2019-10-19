@@ -1,6 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
 import { actions } from 'src/app/store';
+import { testWorkout } from '../testWorkoutData';
 
 const startingTrainingTime = {
     seconds: '00',
@@ -8,12 +9,14 @@ const startingTrainingTime = {
 };
 
 export const initialState: WorkoutState = {
-    currentWorkout: undefined,
+    currentWorkout: testWorkout,
+    workoutToShow: undefined,
     trainingTime: {
         ...startingTrainingTime
     },
     isTimerOn: false,
-    timerSubscription: undefined
+    timerSubscription: undefined,
+    trainingMode: ''
 };
 
 const singleWorkoutReducerOptions = createReducer(initialState,
@@ -33,7 +36,10 @@ const singleWorkoutReducerOptions = createReducer(initialState,
       ({...state, trainingTime: {...startingTrainingTime} })),
 
       on(actions.singleWorkoutActions.saveTrainingState, ( state, action ) =>
-      ({...state, currentWorkout: action.trainingState }))
+      ({...state, currentWorkout: action.trainingState })),
+
+      on(actions.singleWorkoutActions.changeTrainingMode, ( state, action ) =>
+      ({...state, trainingMode: action.newTrainingMode }))
 );
 
 export function singleWorkoutReducer(state: WorkoutState | undefined, action: Action) {

@@ -8,5 +8,6 @@ export const singleWorkoutActions = {
     subscribeTimer: createAction('Timer has been subscribed', props<{timerSubscription: Subscription}>()),
     unsubscribeTimer: createAction('Timer has been unsubscribed', props<{}>()),
     resetTimer: createAction('Timer is being reset', props<{}>()),
-    saveTrainingState: createAction('Traing state has been saved', props<{trainingState: Workout}>())
+    saveTrainingState: createAction('Traing state has been saved', props<{trainingState: Workout}>()),
+    changeTrainingMode: createAction('Training mode has been changed', props<{newTrainingMode: string}>())
 };

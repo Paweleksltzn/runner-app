@@ -7,8 +7,13 @@ export const tabNavOptions: TabsNavLink[] = [
         link: 'more'
     },
     {
-        label: 'Mój trening',
+        label: 'Nowy Trening',
         iconName: 'flash',
         link: 'workout'
-    }
+    },
+    {
+        label: 'Moje treningi',
+        iconName: 'today',
+        link: 'my-workouts'
+    },
 ];

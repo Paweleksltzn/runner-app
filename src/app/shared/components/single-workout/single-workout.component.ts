@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {  AlertController, ModalController } from '@ionic/angular';
 import { testWorkout } from './testWorkoutData';
 import { Excersise } from '../../interfaces/workout/exercise';
-import { emptySingleSet } from './singleWorkoutHelper';
+import { emptySingleSet, singleWorkoutModes } from './singleWorkoutHelper';
 import { TimerComponent } from './timer/timer.component';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { WorkoutState } from '../../interfaces/workout/WorkoutState';
 import { actions } from 'src/app/store';
 import { Workout } from '../../interfaces/workout/workout';
@@ -15,16 +15,27 @@ import { Workout } from '../../interfaces/workout/workout';
   styleUrls: ['./single-workout.component.scss'],
 })
 export class SingleWorkoutComponent implements OnInit, OnDestroy {
-  public currentWorkout: Workout = testWorkout;
+  public currentWorkout: Workout;
+  public workoutMode: string;
+
   constructor(public alertController: AlertController, public modalController: ModalController,
               private store: Store<{singleWorkout: WorkoutState}>) { }
 
   ngOnInit() {
-    // zapisywac do store sekunde rozpoczecia treningu, oraz date treningu przy pierwszej inicjacji ( wybranie typu treningu)
+    this.store.pipe(select('singleWorkout')).subscribe((state: WorkoutState) => {
+      if (state.trainingMode === singleWorkoutModes.training) {
+        this.currentWorkout = this.currentWorkout ? this.currentWorkout : state.currentWorkout;
+      } else {
+        this.currentWorkout = this.currentWorkout ? this.currentWorkout : state.workoutToShow;
+      }
+      this.workoutMode = state.trainingMode;
+    });
   }
 
   ngOnDestroy() {
-    this.store.dispatch(actions.singleWorkoutActions.saveTrainingState({trainingState: this.currentWorkout}));
+    if (this.workoutMode === singleWorkoutModes.training) {
+      this.store.dispatch(actions.singleWorkoutActions.saveTrainingState({trainingState: this.currentWorkout}));
+    }
   }
 
   public doReorder(ev: any) {
