@@ -31,7 +31,10 @@
   width: 50%;
   margin: 0 auto;
   border: solid 2px black;
-  border-radius: 8px;
+  border-radius: 1rem;
+  padding: 1rem;
+  background-size: cover;
+  background-position: center;
    --main-gradient: linear-gradient(to left bottom, #15e6b5, #39e9b1, #4fecad, #61efaa,#71f2a6, #6ff19e, #6eef95, #6eee8c, #5ce87b, #49e268, #32dc55, #09d63f);
   background-image: var(--main-gradient);
   padding-bottom: 3rem;
