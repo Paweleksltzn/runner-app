@@ -14,35 +14,27 @@ export class PassChangeComponent implements OnInit {
   public newPasswordCheck: string;
   public passForm: FormGroup;
   public isFormValid: boolean;
+  public tokenString;
   constructor(private passwordService: PasswordService, private activatedRoute: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createForm();
+    this.tokenString = this.activatedRoute.snapshot.paramMap.get('token_pass');
   }
 
   public onSubmit() {
     const password: PasswordResetData = ({
       password: this.newPassword,
       confirmPassword: this.newPasswordCheck,
-      token: this.activatedRoute.snapshot.paramMap.get('token_pass')
+      token: this.tokenString
     });
     this.isFormValid = this.passForm.valid;
     console.log(this.isFormValid);
-    if (this.isFormValid && this.newPassword === this.newPasswordCheck ) {
-      console.log("succes");
+    if (this.isFormValid && this.passForm.value.pass === this.passForm.value.passChk ) {
       this.passwordService.changedPassword(password).subscribe((res: any) => {
       });
     } else{
-      console.log("not kurwa succes");
     }
-  }
-
-  public changePass() {
-    this.newPassword = this.passForm.value.pass;
-  }
-
-  public changePassCheck() {
-    this.newPasswordCheck = this.passForm.value.passChk;
   }
 
   public createForm() {
