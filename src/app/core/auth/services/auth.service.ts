@@ -10,6 +10,7 @@ import { actions } from '../../../store';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../../../shared/interfaces/auth/AuthState';
 import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class AuthService {
   public postLogIn(loginData: UserLoginData) {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.auth}/login`, loginData);
   }
-  
+
   public signIn(token: string) {
     const decodedToken =  jwt_decode(token);
     this.token = token;

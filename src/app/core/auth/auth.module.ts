@@ -10,6 +10,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { StoreModule } from '@ngrx/store';
 import { authReducer } from './store/auth.reducer';
 import { JwtInterceptor } from 'src/app/core/auth/interceptors/tokenInterceptor';
+import { ErrorStatementComponent } from './error-statement/error-statement.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { JwtInterceptor } from 'src/app/core/auth/interceptors/tokenInterceptor'
   ],
   declarations: [
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ErrorStatementComponent
   ],
   providers: [
     NativeStorage,
