@@ -8,5 +8,5 @@ export interface WorkoutState {
     isTimerOn: boolean;
     timerSubscription: Subscription;
     trainingMode: string;
-    workoutToShow;
+    workoutToShow: Workout;
 }

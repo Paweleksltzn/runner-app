@@ -83,3 +83,15 @@ ion-content {
     height: calc(100vh - 112px);
     padding-bottom: 1rem;
 }
+.title-input {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    font-size: 1.1rem;
+    margin-left: .7rem;
+    font-weight: bold;
+}
+.delete-workout {
+    --background: linear-gradient(to right top, #f41919, #f41b25, #f41f2f, #f32338, #f22840, #f32b43, #f32e45, #f43148, #f73346, #fa3543, #fc3741, #ff393e);
+    --color: white;
+}

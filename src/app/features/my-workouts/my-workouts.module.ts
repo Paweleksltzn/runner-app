@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
 import { IonicModule } from '@ionic/angular';
-
 import { MyWorkoutsPage } from './my-workouts.page';
 import { MyWorkoutComponent } from './my-workout/my-workout.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { myWorkoutReducer } from './store/my-workout-store';
 
 const routes: Routes = [
   {
@@ -14,7 +15,7 @@ const routes: Routes = [
     component: MyWorkoutsPage
   },
   {
-    path: 'singleWorkout',
+    path: 'singleWorkout/:workoutIndex',
     component: MyWorkoutComponent
   }
 
@@ -25,7 +26,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule,
+    StoreModule.forFeature('myWorkouts', myWorkoutReducer)
   ],
   declarations: [MyWorkoutsPage, MyWorkoutComponent]
 })

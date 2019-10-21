@@ -39,7 +39,11 @@ const singleWorkoutReducerOptions = createReducer(initialState,
       ({...state, currentWorkout: action.trainingState })),
 
       on(actions.singleWorkoutActions.changeTrainingMode, ( state, action ) =>
-      ({...state, trainingMode: action.newTrainingMode }))
+      ({...state, trainingMode: action.newTrainingMode })),
+
+      on(actions.singleWorkoutActions.loadTrainingToShow, ( state, action ) =>
+      ({...state, workoutToShow: action.newTrainingToShow }))
+
 );
 
 export function singleWorkoutReducer(state: WorkoutState | undefined, action: Action) {

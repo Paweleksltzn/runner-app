@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar class="header__bar">
-    <ion-title>{{ currentWorkout.title }}</ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="my-workouts"></ion-back-button>
+      </ion-buttons>
+      <input type="text" [(ngModel)]="currentWorkout.title" class="title-input" name="repeats">
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -56,9 +59,11 @@
   <button class="short-button short-button-primary add-exercise" (click)="addExercise()">
     <ion-icon name="add" class="short-button-icon"></ion-icon>
   </button>
-  <button class="short-button short-button-secondary add-exercise" (click)="openTimer()">
+  <button class="short-button short-button-secondary add-exercise" (click)="openTimer()" *ngIf="workoutMode === modes.training">
     <ion-icon name="time" class="short-button-icon"></ion-icon>
   </button>
-  <ion-button class="end-training" (click)="finishWorkout()">Zakończ trening</ion-button>
+  <ion-button class="end-training" (click)="finishWorkout()" *ngIf="workoutMode === modes.training">Zakończ trening</ion-button>
+  <ion-button class="end-training delete-workout" (click)="removeWorkout()" *ngIf="workoutMode === modes.trainingList">Usuń trening</ion-button>
+
 </ion-content>
 

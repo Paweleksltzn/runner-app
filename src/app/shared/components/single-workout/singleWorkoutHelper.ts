@@ -8,3 +8,12 @@ export const singleWorkoutModes = {
     history: 'history',
     trainingList: 'onTrainingList'
 };
+
+export const emptyWorkoutTemplate = {
+    excercises: [{
+        name: 'Cwiczenie 1',
+        series: [{
+            ...emptySingleSet
+        }]
+    }]
+};

@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import {  AlertController, ModalController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import {  AlertController, ModalController, NavController } from '@ionic/angular';
 import { Excersise } from '../../interfaces/workout/exercise';
 import { emptySingleSet, singleWorkoutModes } from './singleWorkoutHelper';
 import { TimerComponent } from './timer/timer.component';
@@ -7,34 +7,34 @@ import { Store, select } from '@ngrx/store';
 import { WorkoutState } from '../../interfaces/workout/WorkoutState';
 import { actions } from 'src/app/store';
 import { Workout } from '../../interfaces/workout/workout';
+import { ActivatedRoute } from '@angular/router';
+import { MyWorkoutState } from '../../interfaces/my-workouts/myWorkoutState';
 
 @Component({
   selector: 'app-single-workout',
   templateUrl: './single-workout.component.html',
   styleUrls: ['./single-workout.component.scss'],
 })
-export class SingleWorkoutComponent implements OnInit, OnDestroy {
+export class SingleWorkoutComponent implements OnInit {
   public currentWorkout: Workout;
   public workoutMode: string;
+  public modes = singleWorkoutModes;
+  public activeIndex: number;
 
   constructor(public alertController: AlertController, public modalController: ModalController,
-              private store: Store<{singleWorkout: WorkoutState}>) { }
+              private store: Store<{singleWorkout: WorkoutState, myWorkouts: MyWorkoutState}>, private activatedRoute: ActivatedRoute,
+              private navCtrl: NavController) { }
 
   ngOnInit() {
     this.store.pipe(select('singleWorkout')).subscribe((state: WorkoutState) => {
-      if (state.trainingMode === singleWorkoutModes.training) {
+      if (state.trainingMode === this.modes.training) {
         this.currentWorkout = this.currentWorkout ? this.currentWorkout : state.currentWorkout;
       } else {
-        this.currentWorkout = this.currentWorkout ? this.currentWorkout : state.workoutToShow;
+        this.currentWorkout = this.currentWorkout ? this.currentWorkout : {...state.workoutToShow};
+        this.activeIndex = +this.activatedRoute.snapshot.paramMap.get('workoutIndex');
       }
       this.workoutMode = state.trainingMode;
     });
-  }
-
-  ngOnDestroy() {
-    if (this.workoutMode === singleWorkoutModes.training) {
-      this.store.dispatch(actions.singleWorkoutActions.saveTrainingState({trainingState: this.currentWorkout}));
-    }
   }
 
   public doReorder(ev: any) {
@@ -158,6 +158,14 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
       ]
     });
     await alert.present();
+  }
+
+  public removeWorkout(index: number) {
+    this.store.dispatch(actions.myWorkoutActions.removeWorkoutListElement({
+      workoutsListItem: this.currentWorkout,
+      index: this.activeIndex
+    }));
+    this.navCtrl.back();
   }
 
 }
