@@ -34,6 +34,7 @@ export class PassChangeComponent implements OnInit {
       this.passwordService.changedPassword(password).subscribe((res: any) => {
       });
     } else{
+      this.isFormValid = false;
     }
   }
 
