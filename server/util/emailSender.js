@@ -36,6 +36,7 @@ const emailHtmlFactory = (subject, confirmToken, receiver) => {
             return `
                 <h1>Link resetujacy: </h1>
                 <a href="localhost:4200/#/reset-password/${confirmToken}">Reset</a>
+                <p>localhost:4200/#/reset-password/${confirmToken}">Reset</p>
             `
         }
     }
