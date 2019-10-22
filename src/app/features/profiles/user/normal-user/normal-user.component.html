@@ -1,7 +1,21 @@
-
-<div class="main-container">
-  <div class="main-container-profile">
-    <div class="profile-picture"><img src="../../../../../assets/images/profile-picture.png"></div>
-    <div class="profile-description"><p>{{profileDescription}}</p></div>
+<ion-content>
+  <div class="main-container">
+    <div class="main-container-profile">
+      <div class="profile-picture"><img src="../../../../../assets/images/profile-picture.png"></div>
+      <div class="profile-description"><h2>{{userName}} {{userSurname}}</h2><p>{{profileDescription}}</p></div>
+    </div>
+    <div class="profile-tab">
+      <div class="trainings"><ion-icon name="fitness"></ion-icon><span>Treningi</span></div>
+      <div class="friends"><ion-icon name="contacts"></ion-icon><span>Znajmomi</span></div>
+      <div class="achivments"><ion-icon name="trophy"></ion-icon><span>Osiągnięcia</span></div>
+    </div>
+    <div *ngFor="let train of previewedTrainings">
+    <ion-card >
+      <ion-card-header>
+        <ion-card-title>{{train.name}}</ion-card-title>
+        <ion-card-subtitle>Ćwiczeń: {{train.exercises}}, Powtórzeń: {{train.reps}} <br> Autor: {{train.author}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+    </div>
   </div>
-</div>
+</ion-content>
