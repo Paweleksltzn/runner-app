@@ -11,7 +11,11 @@
     <ion-grid>
       <ion-row class="ion-align-items-end">
         <ion-col>
-            <h5 class="workout__container--title">{{ workoutIndex + 1 }}. {{myWorkout.title}}</h5>
+          <h5 class="workout__container--title">{{ workoutIndex + 1 }}. {{myWorkout.title}}</h5>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
             <p class="workout__container--info">Liczba ćwiczeń: {{ myWorkout.excercises.length }}</p>
             <p class="workout__container--info">Liczba seri: {{ calcSeriesAmount(myWorkout) }}</p>
         </ion-col>
