@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { actions } from 'src/app/store';
 import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
@@ -13,7 +13,7 @@ import { MyWorkoutState } from 'src/app/shared/interfaces/my-workouts/myWorkoutS
   templateUrl: './my-workouts.page.html',
   styleUrls: ['./my-workouts.page.scss'],
 })
-export class MyWorkoutsPage implements OnInit {
+export class MyWorkoutsPage implements OnInit, OnDestroy {
   public myWorkouts: Workout[] = [];
 
   constructor(private store: Store<{singleWorkout: WorkoutState, myWorkouts: MyWorkoutState}>, private alertController: AlertController,
@@ -28,6 +28,10 @@ export class MyWorkoutsPage implements OnInit {
 
   ionViewWillLeave() {
     console.log('testt');
+  }
+
+  ngOnDestroy() {
+
   }
 
   public calcSeriesAmount(myWorkout: Workout) {
@@ -62,7 +66,17 @@ export class MyWorkoutsPage implements OnInit {
             if (newExerciseName) {
               const newTraining: Workout = {
                 title: newExerciseName,
-                ...emptyWorkoutTemplate
+                excercises: [
+                  {
+                    name: 'Cwiczenie 1',
+                    series: [
+                      {
+                        repeats: undefined,
+                        weight: undefined
+                      }
+                    ]
+                  }
+                ]
               };
               this.store.dispatch(actions.myWorkoutActions.addWorkoutListElement({
                 workoutsListItem: newTraining

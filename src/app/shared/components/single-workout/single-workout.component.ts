@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {  AlertController, ModalController, NavController } from '@ionic/angular';
 import { Excersise } from '../../interfaces/workout/exercise';
 import { emptySingleSet, singleWorkoutModes } from './singleWorkoutHelper';
@@ -15,7 +15,7 @@ import { MyWorkoutState } from '../../interfaces/my-workouts/myWorkoutState';
   templateUrl: './single-workout.component.html',
   styleUrls: ['./single-workout.component.scss'],
 })
-export class SingleWorkoutComponent implements OnInit {
+export class SingleWorkoutComponent implements OnInit, OnDestroy {
   public currentWorkout: Workout;
   public workoutMode: string;
   public modes = singleWorkoutModes;
@@ -35,6 +35,15 @@ export class SingleWorkoutComponent implements OnInit {
       }
       this.workoutMode = state.trainingMode;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.workoutMode === this.modes.trainingList) {
+      this.store.dispatch(actions.myWorkoutActions.updateWorkoutListElement({
+        index: this.activeIndex,
+        workoutListItem: this.currentWorkout
+      }));
+    }
   }
 
   public doReorder(ev: any) {
@@ -162,7 +171,6 @@ export class SingleWorkoutComponent implements OnInit {
 
   public removeWorkout(index: number) {
     this.store.dispatch(actions.myWorkoutActions.removeWorkoutListElement({
-      workoutsListItem: this.currentWorkout,
       index: this.activeIndex
     }));
     this.navCtrl.back();
