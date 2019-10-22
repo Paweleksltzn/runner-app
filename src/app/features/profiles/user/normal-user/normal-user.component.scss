@@ -1,0 +1,27 @@
+@import '../../../../../styles/variables';
+.main-container{
+    height: 100vh;
+    &-profile{
+        height: 60%;
+        display: block;     
+    }
+}
+.profile-picture{
+    height: 60%;
+    text-align: center;
+    background-image: $green-teal-gradient;
+    background-size: 100% 70%;
+    background-repeat: no-repeat;
+}
+.profile-description{
+    height: 40%;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    color: #555;
+}
+img{
+    height: 70%;
+    z-index: 3;
+    margin-top: 15%;
+}

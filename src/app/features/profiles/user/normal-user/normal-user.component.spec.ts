@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CoachComponent } from './coach.component';
+import { NormalUserComponent } from './normal-user.component';
 
-describe('CoachComponent', () => {
-  let component: CoachComponent;
-  let fixture: ComponentFixture<CoachComponent>;
+describe('NormalUserComponent', () => {
+  let component: NormalUserComponent;
+  let fixture: ComponentFixture<NormalUserComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoachComponent ],
+      declarations: [ NormalUserComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoachComponent);
+    fixture = TestBed.createComponent(NormalUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

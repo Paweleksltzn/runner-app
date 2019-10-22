@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from 'src/app/core/auth/auth.module';
+import { UserModule } from './features/profiles/user/user.module';
 import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -21,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
      BrowserAnimationsModule,
      IonicModule.forRoot(),
      AppRoutingModule,
-     SharedModule, AuthModule,
+     SharedModule, AuthModule, UserModule,
      StoreModule.forRoot({})
   ],
   providers: [
