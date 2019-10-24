@@ -8,7 +8,7 @@ export const initialState: AuthState = {
     surname: '',
     isMale: undefined,
     accessLevel: undefined
-}
+};
 
 const authReducerOptions = createReducer(initialState,
      on(actions.authActions.signIn, ( state, action ) => ({
@@ -29,7 +29,7 @@ const authReducerOptions = createReducer(initialState,
     })),
 
 );
-  
+
 export function authReducer(state: AuthState | undefined, action: Action) {
     return authReducerOptions(state, action);
 }

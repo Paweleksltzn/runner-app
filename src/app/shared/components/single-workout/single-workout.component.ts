@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {  AlertController, ModalController, NavController } from '@ionic/angular';
+import {  AlertController, ModalController } from '@ionic/angular';
 import { Excersise } from '../../interfaces/workout/exercise';
 import { emptySingleSet, singleWorkoutModes } from './singleWorkoutHelper';
 import { TimerComponent } from './timer/timer.component';
@@ -7,7 +7,7 @@ import { Store, select } from '@ngrx/store';
 import { WorkoutState } from '../../interfaces/workout/WorkoutState';
 import { actions } from 'src/app/store';
 import { Workout } from '../../interfaces/workout/workout';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MyWorkoutState } from '../../interfaces/my-workouts/myWorkoutState';
 
 @Component({
@@ -20,10 +20,11 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
   public workoutMode: string;
   public modes = singleWorkoutModes;
   public activeIndex: number;
+  public isItemDeleted: boolean;
 
   constructor(public alertController: AlertController, public modalController: ModalController,
               private store: Store<{singleWorkout: WorkoutState, myWorkouts: MyWorkoutState}>, private activatedRoute: ActivatedRoute,
-              private navCtrl: NavController) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.store.pipe(select('singleWorkout')).subscribe((state: WorkoutState) => {
@@ -38,11 +39,13 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.workoutMode === this.modes.trainingList) {
-      this.store.dispatch(actions.myWorkoutActions.updateWorkoutListElement({
-        index: this.activeIndex,
-        workoutListItem: this.currentWorkout
-      }));
+    if (!this.isItemDeleted) {
+      if (this.workoutMode === this.modes.trainingList) {
+        this.store.dispatch(actions.myWorkoutActions.updateWorkoutListElement({
+          index: this.activeIndex,
+          workoutListItem: this.currentWorkout
+        }));
+      }
     }
   }
 
@@ -140,6 +143,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
   }
 
   public async finishWorkout() {
+    // wyswietlic toasta ze zostal zapisany do listy, zrobic chekboxa czy ma byc dodany do listy treningow czy jaki chuj
     const alert = await this.alertController.create({
       header: 'Czy napewno chcesz zakończyć trening?',
       inputs: [
@@ -169,11 +173,12 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
     await alert.present();
   }
 
-  public removeWorkout(index: number) {
+  public removeWorkout() {
     this.store.dispatch(actions.myWorkoutActions.removeWorkoutListElement({
       index: this.activeIndex
     }));
-    this.navCtrl.back();
+    this.isItemDeleted = true;
+    this.router.navigate(['/my-workouts']);
   }
 
 }

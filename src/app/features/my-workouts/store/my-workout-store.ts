@@ -3,12 +3,13 @@ import { actions } from 'src/app/store';
 import { MyWorkoutState } from 'src/app/shared/interfaces/my-workouts/myWorkoutState';
 
 export const initialState: MyWorkoutState = {
-    workoutsList: []
+    workoutsList: [],
+    isStateLoaded: false
 };
 
 const myWorkoutReducerOptions = createReducer(initialState,
      on(actions.myWorkoutActions.loadWorkoutsList, ( state, action ) =>
-     ({...state, workoutsList: [...action.workoutsList]})),
+     ({...state, workoutsList: [...action.workoutsList], isStateLoaded: true})),
 
      on(actions.myWorkoutActions.addWorkoutListElement, ( state, action ) => {
         const workoutListClone = [...state.workoutsList];
@@ -25,7 +26,6 @@ const myWorkoutReducerOptions = createReducer(initialState,
      on(actions.myWorkoutActions.updateWorkoutListElement, ( state, action ) => {
         const workoutListClone = [...state.workoutsList];
         workoutListClone[action.index] = action.workoutListItem;
-        console.log(workoutListClone);
         return ({...state, workoutsList: [...workoutListClone]});
      }),
 );

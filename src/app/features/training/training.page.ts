@@ -64,7 +64,6 @@ export class TrainingPage implements OnInit {
     .subscribe((data: Geoposition) => {
       const newLat = data.coords.latitude;
       const newLng = data.coords.longitude;
-      console.log(data.coords.speed / 1000 * 3600);
       this.calculateDistance(newLat, newLng);
       this.mapLoader.dismiss();
       if (!this.firstTimeAfterStop && !this.timerSubscription) {

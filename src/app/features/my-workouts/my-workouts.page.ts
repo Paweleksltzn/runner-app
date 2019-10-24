@@ -7,6 +7,8 @@ import { Workout } from 'src/app/shared/interfaces/workout/workout';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MyWorkoutState } from 'src/app/shared/interfaces/my-workouts/myWorkoutState';
+import { MyWorkoutService } from './services/my-workout.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-my-workouts',
@@ -15,22 +17,41 @@ import { MyWorkoutState } from 'src/app/shared/interfaces/my-workouts/myWorkoutS
 })
 export class MyWorkoutsPage implements OnInit, OnDestroy {
   public myWorkouts: Workout[] = [];
+  private saverSubscription: Subscription;
 
   constructor(private store: Store<{singleWorkout: WorkoutState, myWorkouts: MyWorkoutState}>, private alertController: AlertController,
-              private router: Router) { }
+              private router: Router, private myWorkoutService: MyWorkoutService) { }
 
   ngOnInit() {
-    this.store.dispatch(actions.singleWorkoutActions.changeTrainingMode({ newTrainingMode: singleWorkoutModes.trainingList}));
+    this.myWorkoutService.loadUserWorkoutsToStore();
     this.store.pipe(select('myWorkouts')).subscribe((state: MyWorkoutState) => {
       this.myWorkouts = state.workoutsList || [];
     });
   }
 
+  ionViewWillEnter() {
+    this.store.dispatch(actions.singleWorkoutActions.changeTrainingMode({ newTrainingMode: singleWorkoutModes.trainingList}));
+    this.saverSubscription = interval(1000 * 60 * 3).subscribe((data) => {
+      this.saveMyWorkoutsStage();
+    });
+  }
+
   ionViewWillLeave() {
-    console.log('testt');
+    this.saveMyWorkoutsStage();
+    this.saverSubscription.unsubscribe();
   }
 
   ngOnDestroy() {
+    this.saveMyWorkoutsStage();
+    this.saverSubscription.unsubscribe();
+  }
+
+  private saveMyWorkoutsStage() {
+    this.myWorkoutService.saveUserWorkouts(this.myWorkouts || []).subscribe(response => {
+        // brak reakcji -> success
+      }, err => {
+        // todo -> toast z info co jest nie tak
+      });
 
   }
 
