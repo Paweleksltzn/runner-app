@@ -29,8 +29,8 @@ img{
     height: 15%;
     display: flex;
 }
-.trainings, .friends, .achivments{
-    width: 33.33%;
+.trainings, .friends, .achivments, .settings{
+    width: 25%;
     text-align: center;
     display: block;
     outline: 0;
@@ -46,3 +46,7 @@ ion-icon{
 ion-badge{
     opacity: 0.8;
 }
+/*.settings{
+    float: right;
+    background-color: crimson;
+}*/

@@ -6,6 +6,7 @@ import { NormalUserComponent } from './normal-user/normal-user.component';
 import { TrainingsComponent  } from './profile-tab-components/trainings/trainings.component';
 import { AchivmentsComponent } from './profile-tab-components/achivments/achivments.component';
 import { FriendsComponent } from './profile-tab-components/friends/friends.component';
+import { SettingsComponent } from './profile-tab-components/settings/settings.component';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -16,7 +17,8 @@ const routes: Routes = [
     children:  [
       {path: 'friends', component: FriendsComponent},
       {path: 'trainings', component: TrainingsComponent},
-      {path: 'achivment', component: AchivmentsComponent}
+      {path: 'achivment', component: AchivmentsComponent},
+      {path: 'settings', component: SettingsComponent}
     ]
   },
   {
@@ -33,6 +35,7 @@ const routes: Routes = [
     FriendsComponent,
     AchivmentsComponent,
     TrainingsComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,

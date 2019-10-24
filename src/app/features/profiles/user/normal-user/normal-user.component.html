@@ -16,12 +16,16 @@
       </div>
       <div class="friends" routerLink="/normal/friends" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
         <ion-icon name="contacts"></ion-icon>
-        <ion-badge color="danger" slot="end">99+</ion-badge>
+        <!--<ion-badge color="danger" slot="end">99+</ion-badge>-->
         <span>Znajomi</span>
       </div>
       <div class="achivments" routerLink="/normal/achivment" (click)="switchProfileTab(3)" [ngClass]="{'tab-select':selectedProfileTab  === 3}">
         <ion-icon name="trophy"></ion-icon>
         <span>Osiągnięcia</span>
+      </div>
+      <div class="settings" routerLink="/normal/settings" (click)="switchProfileTab(4)" [ngClass]="{'tab-select':selectedProfileTab  === 4}">
+        <ion-icon name="settings"></ion-icon>
+        <span>Ustawienia</span>
       </div>
     </div>
     <router-outlet></router-outlet>
