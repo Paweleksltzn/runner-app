@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar class="header__bar">
+  <ion-toolbar class="header__bar" *ngIf="currentWorkout">
       <ion-buttons slot="start" *ngIf="workoutMode !== modes.training">
           <ion-back-button defaultHref="my-workouts"></ion-back-button>
       </ion-buttons>

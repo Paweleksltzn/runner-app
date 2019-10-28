@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: '',
     component: ActiveWorkoutPage
+  },
+  {
+    path: 'selection-mode',
+    component: ActiveWorkoutSelectorComponent
   }
 ];
 
@@ -24,7 +28,6 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ActiveWorkoutPage, ActiveWorkoutSelectorComponent],
-  entryComponents: [ActiveWorkoutSelectorComponent]
+  declarations: [ActiveWorkoutPage, ActiveWorkoutSelectorComponent]
 })
 export class ActiveWorkoutPageModule {}

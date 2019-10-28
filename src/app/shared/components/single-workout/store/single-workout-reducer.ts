@@ -9,7 +9,7 @@ const startingTrainingTime = {
 };
 
 export const initialState: WorkoutState = {
-    currentWorkout: testWorkout,
+    currentWorkout: undefined,
     workoutToShow: undefined,
     trainingTime: {
         ...startingTrainingTime
@@ -42,7 +42,12 @@ const singleWorkoutReducerOptions = createReducer(initialState,
       ({...state, trainingMode: action.newTrainingMode })),
 
       on(actions.singleWorkoutActions.loadTrainingToShow, ( state, action ) =>
-      ({...state, workoutToShow: action.newTrainingToShow }))
+      ({...state, workoutToShow: action.newTrainingToShow })),
+
+      on(actions.singleWorkoutActions.startWorkout, ( state, action ) => {
+        const newWorkout = JSON.parse(JSON.stringify(action.workoutStartingTemplate));
+        return {...state, currentWorkout: newWorkout};
+      })
 
 );
 

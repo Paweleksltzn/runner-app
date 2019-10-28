@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { ActiveWorkoutSelectorComponent } from './active-workout-selector/active-workout-selector.component';
 import { Router } from '@angular/router';
 import { MyWorkoutService } from '../my-workouts/services/my-workout.service';
+import { ActiveWorkoutService } from './services/active-workout.service';
 
 @Component({
   selector: 'app-active-workout',
@@ -15,7 +16,8 @@ import { MyWorkoutService } from '../my-workouts/services/my-workout.service';
 })
 export class ActiveWorkoutPage implements OnInit {
 
-  constructor(private store: Store<{singleWorkout: WorkoutState}>, private router: Router, private myWorkoutService: MyWorkoutService) { }
+  constructor(private store: Store<{singleWorkout: WorkoutState}>, private router: Router, private myWorkoutService: MyWorkoutService,
+              private activeWorkoutService: ActiveWorkoutService) { }
 
   ngOnInit() {
     // zapisywac do store sekunde rozpoczecia treningu, oraz date treningu przy pierwszej inicjacji ( wybranie typu treningu)
@@ -24,12 +26,14 @@ export class ActiveWorkoutPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.showTrainingSelector();
+    if (!this.activeWorkoutService.getTrainingType) {
+      this.showTrainingSelector();
+    }
     this.store.dispatch(actions.singleWorkoutActions.changeTrainingMode({ newTrainingMode: singleWorkoutModes.training}));
   }
 
   public showTrainingSelector() {
-
+    this.router.navigate(['/workout/selection-mode']);
   }
 
 }

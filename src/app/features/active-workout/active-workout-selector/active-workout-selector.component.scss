@@ -1,1 +1,33 @@
-
+@import "../../../../styles/variables";
+.start-training {
+    --background: linear-gradient(to right top, #15e6b5, #39e9b1, #4fecad, #61efaa, #71f2a6, #6af2ae, #63f3b6, #5cf3be, #3ef0d1, #22ede2, #1ce8f0, #34e3fa);
+    margin-top: 6rem;
+    --color: black;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 50%;
+    margin-bottom: 2rem;
+}
+.amount {
+    font-size: 1.25rem;
+    color: $mixed-main-colours;
+    font-weight: bold;
+}
+.title-input {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 80%;
+    margin-left: 10%;
+    background-color: transparent;
+    margin-top: 3rem;
+    outline: none;
+    &:disabled {
+        color: #444;
+        border-bottom-color: #444;
+    }
+    &:focus {
+        border-bottom-color: $mixed-main-colours;
+        color: $mixed-main-colours;
+    }
+}

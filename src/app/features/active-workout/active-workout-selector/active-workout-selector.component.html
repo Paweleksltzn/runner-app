@@ -1,13 +1,24 @@
 <ion-header>
   <ion-toolbar class="header__bar">
-      <ion-buttons slot="primary">
-        <ion-button (click)="cancel()">
-          <ion-icon name="close" ></ion-icon>
-        </ion-button>
-      </ion-buttons>
     <ion-title>Nowy Trening</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  Test
+  <ion-item>
+    <ion-label>Wybierz trening z listy</ion-label>
+    <ion-select  interface="alert" multiple="false" placeholder="Wybierz" (ionChange)="optionSelected($event)">
+      <ion-select-option value="-5" selected>Nowy trening</ion-select-option>
+      <ion-select-option [value]="workoutIndex" *ngFor="let myWorkout of workoutsList;let workoutIndex = index;" >
+        <p>{{myWorkout.title}}</p>
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <input type="text" [(ngModel)]="workoutTitle" class="title-input" name="title" placeholder="Nowy trening" [disabled]="selectedWorkout">
+  <ion-grid >
+    <ion-row *ngIf="selectedWorkout" class="ion-justify-content-around">
+      <ion-col size="auto"><p class="workout__container--info">Liczba ćwiczeń: <span class="amount">{{ selectedWorkout.excercises.length }}</span> </p></ion-col>
+      <ion-col size="auto"><p class="workout__container--info">Liczba seri: <span class="amount">{{ calcSeriesAmount(selectedWorkout) }}</span> </p></ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button class="start-training" (click)="startTraining()">Rozpocznij trening</ion-button>
 </ion-content>

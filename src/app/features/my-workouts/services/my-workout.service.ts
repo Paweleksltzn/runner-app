@@ -15,7 +15,11 @@ export class MyWorkoutService {
   constructor(private http: HttpClient, private store: Store<{myWorkouts: MyWorkoutState}>) { }
 
   public saveUserWorkouts(workouts: Workout[]) {
-    return this.http.post(`${environment.srvAddress}/${environment.endpoints.workout}/list`, { workouts });
+    return this.http.post(`${environment.srvAddress}/${environment.endpoints.workout}/list`, { workouts }).subscribe(response => {
+      // brak reakcji -> success
+    }, err => {
+      // todo -> toast z info co jest nie tak
+    });
   }
 
   public loadUserWorkoutsToStore(): void {

@@ -47,12 +47,7 @@ export class MyWorkoutsPage implements OnInit, OnDestroy {
   }
 
   private saveMyWorkoutsStage() {
-    this.myWorkoutService.saveUserWorkouts(this.myWorkouts || []).subscribe(response => {
-        // brak reakcji -> success
-      }, err => {
-        // todo -> toast z info co jest nie tak
-      });
-
+    this.myWorkoutService.saveUserWorkouts(this.myWorkouts || []);
   }
 
   public calcSeriesAmount(myWorkout: Workout) {
@@ -87,17 +82,7 @@ export class MyWorkoutsPage implements OnInit, OnDestroy {
             if (newExerciseName) {
               const newTraining: Workout = {
                 title: newExerciseName,
-                excercises: [
-                  {
-                    name: 'Cwiczenie 1',
-                    series: [
-                      {
-                        repeats: undefined,
-                        weight: undefined
-                      }
-                    ]
-                  }
-                ]
+                excercises: []
               };
               this.store.dispatch(actions.myWorkoutActions.addWorkoutListElement({
                 workoutsListItem: newTraining

@@ -9,6 +9,7 @@ import { actions } from 'src/app/store';
 import { Workout } from '../../interfaces/workout/workout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MyWorkoutState } from '../../interfaces/my-workouts/myWorkoutState';
+import { ActiveWorkoutService } from 'src/app/features/active-workout/services/active-workout.service';
 
 @Component({
   selector: 'app-single-workout',
@@ -24,12 +25,14 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
 
   constructor(public alertController: AlertController, public modalController: ModalController,
               private store: Store<{singleWorkout: WorkoutState, myWorkouts: MyWorkoutState}>, private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router, private activeWorkoutService: ActiveWorkoutService) { }
 
   ngOnInit() {
     this.store.pipe(select('singleWorkout')).subscribe((state: WorkoutState) => {
-      if (state.trainingMode === this.modes.training) {
-        this.currentWorkout = this.currentWorkout ? this.currentWorkout : state.currentWorkout;
+      if (state.trainingMode === this.modes.training ) {
+        if (this.activeWorkoutService.getTrainingType === true) {
+          this.currentWorkout = this.currentWorkout ? this.currentWorkout : {...state.currentWorkout};
+        }
       } else {
         this.currentWorkout = this.currentWorkout ? this.currentWorkout : {...state.workoutToShow};
         this.activeIndex = +this.activatedRoute.snapshot.paramMap.get('workoutIndex');
@@ -39,6 +42,17 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (!this.isItemDeleted) {
+      if (this.workoutMode === this.modes.trainingList) {
+        this.store.dispatch(actions.myWorkoutActions.updateWorkoutListElement({
+          index: this.activeIndex,
+          workoutListItem: this.currentWorkout
+        }));
+      }
+    }
+  }
+
+  ionViewWilLeave() {
     if (!this.isItemDeleted) {
       if (this.workoutMode === this.modes.trainingList) {
         this.store.dispatch(actions.myWorkoutActions.updateWorkoutListElement({
