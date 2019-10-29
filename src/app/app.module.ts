@@ -13,6 +13,8 @@ import { AuthModule } from 'src/app/core/auth/auth.module';
 import { UserModule } from './features/profiles/user/user.module';
 import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IonicImageLoader } from 'ionic-image-loader';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,12 +23,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
      BrowserModule,
      BrowserAnimationsModule,
      IonicModule.forRoot(),
+     IonicImageLoader.forRoot(),
      AppRoutingModule,
      SharedModule, AuthModule, UserModule,
      StoreModule.forRoot({})
   ],
   providers: [
     StatusBar,
+    WebView,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

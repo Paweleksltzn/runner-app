@@ -6,6 +6,7 @@ import { MaterialModule } from './modules/material.module';
 import { FormsModule } from '@angular/forms';
 import { SingleWorkoutModule } from './components/single-workout/singleWorkoutModule';
 
+
 @NgModule({
   declarations: [TabsNavComponent],
   imports: [

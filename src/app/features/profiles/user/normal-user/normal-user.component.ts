@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { ImageLoaderConfigService } from 'ionic-image-loader';
 
 @Component({
   selector: 'app-normal-user',
@@ -13,7 +14,10 @@ export class NormalUserComponent implements OnInit {
   public userSurname: string;
   public selectedProfileTab: number;
   public camera: Camera;
-  constructor(public actionSheetController: ActionSheetController) { }
+
+  constructor(public actionSheetController: ActionSheetController, public imgSetConf: ImageLoaderConfigService) {
+    this.imageConfigure();
+   }
 
   ngOnInit() {
     this.userName = "Jacek";
@@ -39,8 +43,6 @@ export class NormalUserComponent implements OnInit {
             mediaType: this.camera.MediaType.PICTURE
           }
           this.camera.getPicture(options).then((imageData) => {
-            // imageData is either a base64 encoded string or a file URI
-            // If it's base64 (DATA_URL):
             let base64Image = 'data:image/jpeg;base64,' + imageData;
            }, (err) => {
             // Handle error
@@ -54,4 +56,8 @@ export class NormalUserComponent implements OnInit {
     await actionSheet.present();
   }
 
+  imageConfigure() {
+    this.imgSetConf.enableSpinner(true);
+    this.imgSetConf.setHeight('70%');
+  }
 }

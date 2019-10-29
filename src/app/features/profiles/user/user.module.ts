@@ -9,6 +9,7 @@ import { FriendsComponent } from './profile-tab-components/friends/friends.compo
 import { SettingsComponent } from './profile-tab-components/settings/settings.component';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 const routes: Routes = [
   {
@@ -41,7 +42,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     IonicModule,
-    SharedModule
+    SharedModule,
+    IonicImageLoader
   ]
 })
 export class UserModule { }
