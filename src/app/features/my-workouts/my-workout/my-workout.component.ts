@@ -6,6 +6,7 @@ import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
 import { MyWorkoutState } from 'src/app/shared/interfaces/my-workouts/myWorkoutState';
 import { MyWorkoutService } from '../services/my-workout.service';
 import { Subscription } from 'rxjs';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-my-workout',
@@ -14,7 +15,8 @@ import { Subscription } from 'rxjs';
 })
 export class MyWorkoutComponent implements OnInit {
 
-  constructor(private store: Store<{singleWorkout: WorkoutState}>, private myWorkoutsService: MyWorkoutService) { }
+  constructor(private store: Store<{singleWorkout: WorkoutState}>, private myWorkoutsService: MyWorkoutService,
+              private navController: NavController) { }
 
   ngOnInit() {}
 

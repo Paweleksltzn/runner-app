@@ -31,10 +31,15 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
     this.store.pipe(select('singleWorkout')).subscribe((state: WorkoutState) => {
       if (state.trainingMode === this.modes.training ) {
         if (this.activeWorkoutService.getTrainingType === true) {
-          this.currentWorkout = this.currentWorkout ? this.currentWorkout : {...state.currentWorkout};
+          this.currentWorkout = {
+            title: state.currentWorkout.title,
+            excercises: [...state.currentWorkout.excercises],
+            startTime: state.currentWorkout.startTime,
+            author: state.currentWorkout.author
+          };
         }
       } else {
-        this.currentWorkout = this.currentWorkout ? this.currentWorkout : {...state.workoutToShow};
+        this.currentWorkout = state.workoutToShow;
         this.activeIndex = +this.activatedRoute.snapshot.paramMap.get('workoutIndex');
       }
       this.workoutMode = state.trainingMode;
@@ -42,6 +47,14 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.saveWorkoutState();
+  }
+
+  ionViewWilLeave() {
+    this.saveWorkoutState();
+  }
+
+  private saveWorkoutState() {
     if (!this.isItemDeleted) {
       if (this.workoutMode === this.modes.trainingList) {
         this.store.dispatch(actions.myWorkoutActions.updateWorkoutListElement({
@@ -50,16 +63,14 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
         }));
       }
     }
+    this.saveWorkoutInTrainingMode();
   }
 
-  ionViewWilLeave() {
-    if (!this.isItemDeleted) {
-      if (this.workoutMode === this.modes.trainingList) {
-        this.store.dispatch(actions.myWorkoutActions.updateWorkoutListElement({
-          index: this.activeIndex,
-          workoutListItem: this.currentWorkout
-        }));
-      }
+  private saveWorkoutInTrainingMode() {
+    if (this.workoutMode === this.modes.training)  {
+      this.store.dispatch(actions.singleWorkoutActions.startWorkout({
+        workoutStartingTemplate: this.currentWorkout
+      }));
     }
   }
 
@@ -69,11 +80,13 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
     const movedElement = this.currentWorkout.excercises[from];
     this.currentWorkout.excercises.splice(from, 1);
     this.currentWorkout.excercises.splice(to, 0, movedElement);
+    this.saveWorkoutInTrainingMode();
     ev.detail.complete();
   }
 
   public deleteExercise(excerciseIndex: number) {
     this.currentWorkout.excercises.splice(excerciseIndex, 1);
+    this.saveWorkoutInTrainingMode();
   }
 
   public addSingleSet(excercise: Excersise) {
@@ -148,7 +161,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
                 }]
               });
             }
-
+            this.saveWorkoutInTrainingMode();
           }
         }
       ]
@@ -177,8 +190,19 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
           text: 'Tak',
           handler: (data) => {
             const shouldSaveTraining = !!data[0];
-            console.log(this.currentWorkout);
-            // kod który konczy trening, wyslanie requesta itd
+            if (shouldSaveTraining) {
+
+            }
+            this.activeWorkoutService.finishTraining(this.currentWorkout, shouldSaveTraining).subscribe(result => {
+              this.router.navigate(['my-workouts']);
+              console.log(result);
+            }, err => {
+              // toast ze nie zapisane
+              this.router.navigate(['my-workouts']);
+              console.log(err);
+            });
+            this.store.dispatch(actions.singleWorkoutActions.finishWorkout({}));
+            this.currentWorkout = undefined;
             }
 
           }
@@ -193,6 +217,10 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
     }));
     this.isItemDeleted = true;
     this.router.navigate(['/my-workouts']);
+  }
+
+  public titleChanged() {
+    this.saveWorkoutInTrainingMode();
   }
 
 }

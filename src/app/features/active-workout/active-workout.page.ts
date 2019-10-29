@@ -21,15 +21,15 @@ export class ActiveWorkoutPage implements OnInit {
 
   ngOnInit() {
     // zapisywac do store sekunde rozpoczecia treningu, oraz date treningu przy pierwszej inicjacji ( wybranie typu treningu)
-    this.myWorkoutService.loadUserWorkoutsToStore();
     this.store.dispatch(actions.singleWorkoutActions.changeTrainingMode({ newTrainingMode: singleWorkoutModes.training}));
+    this.myWorkoutService.loadUserWorkoutsToStore();
   }
 
   ionViewWillEnter() {
+    this.store.dispatch(actions.singleWorkoutActions.changeTrainingMode({ newTrainingMode: singleWorkoutModes.training}));
     if (!this.activeWorkoutService.getTrainingType) {
       this.showTrainingSelector();
     }
-    this.store.dispatch(actions.singleWorkoutActions.changeTrainingMode({ newTrainingMode: singleWorkoutModes.training}));
   }
 
   public showTrainingSelector() {

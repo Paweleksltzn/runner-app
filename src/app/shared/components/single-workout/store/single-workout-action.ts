@@ -12,5 +12,5 @@ export const singleWorkoutActions = {
     changeTrainingMode: createAction('Training mode has been changed', props<{newTrainingMode: string}>()),
     loadTrainingToShow: createAction('Training to show has been loaded', props<{newTrainingToShow: Workout}>()),
     startWorkout: createAction('Workout has been started', props<{workoutStartingTemplate: Workout}>()),
-    // finishWorkout: createAction('Workout has been finished', props<{workoutStartingTemplate}>()),
+    finishWorkout: createAction('Workout has been finished', props<{}>()),
 };
