@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageLoaderConfigService } from 'ionic-image-loader';
@@ -14,7 +14,6 @@ export class NormalUserComponent implements OnInit {
   public userSurname: string;
   public selectedProfileTab: number;
   public camera: Camera;
-
   constructor(public actionSheetController: ActionSheetController, public imgSetConf: ImageLoaderConfigService) {
     this.imageConfigure();
    }
