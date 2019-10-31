@@ -7,6 +7,8 @@ import { TrainingsComponent  } from './profile-tab-components/trainings/training
 import { AchivmentsComponent } from './profile-tab-components/achivments/achivments.component';
 import { FriendsComponent } from './profile-tab-components/friends/friends.component';
 import { SettingsComponent } from './profile-tab-components/settings/settings.component';
+import { RatingComponent } from './profile-tab-components/rating/rating.component';
+
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { IonicImageLoader } from 'ionic-image-loader';
@@ -24,7 +26,12 @@ const routes: Routes = [
   },
   {
     path: 'coach', 
-    component: CoachUserComponent
+    component: CoachUserComponent,
+    children:  [
+      {path: 'friends', component: FriendsComponent},
+      {path: 'rate' , component: RatingComponent},
+      {path: 'settings', component: SettingsComponent}
+    ]
   },
 
 ];
@@ -37,6 +44,7 @@ const routes: Routes = [
     AchivmentsComponent,
     TrainingsComponent,
     SettingsComponent,
+    RatingComponent,
   ],
   imports: [
     CommonModule,
