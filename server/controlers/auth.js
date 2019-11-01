@@ -33,7 +33,7 @@ exports.registerUser = (req, res, next) => {
     })
     .catch(err => {
         console.log(err)
-        return res.status(500).send('Wystąpił błąd');
+        return res.status(422).send('Wystąpił błąd');
     })
 }
 
@@ -43,20 +43,20 @@ exports.login = (req, res, next) => {
     User.findOne({email}).then(user => {
         if (user) {
             if (!user.isActive) {
-                return res.status(500).send('Email nie został potwierdzony');
+                return res.status(422).send('Email nie został potwierdzony');
             }
             bcrypt.compare(password, user.password).then(doMatch => {
                 if(doMatch) {
                     return res.json(jwtManagment.jwtFactory(user));
                 } else {
-                    return res.status(500).send('Nieprawidłowe dane logowania');
+                    return res.status(422).send('Nieprawidłowe dane logowania');
                 }
             })
         } else {
-            return res.status(500).send('Nieprawidłowe dane logowania');
+            return res.status(422).send('Nieprawidłowe dane logowania');
         }
     }).catch(err => {
-        return res.status(500).send('Nieprawidłowe dane logowania');
+        return res.status(422).send('Nieprawidłowe dane logowania');
     });
 }
 
@@ -71,7 +71,7 @@ exports.emailConfirmed = (req, res, next) => {
             resetUser.save();
             return res.json('Twoje konto zostało aktywowane');
         } else {
-            return res.status(500).send('Wystąpił błąd')
+            return res.status(422).send('Wystąpił błąd')
         }
     }).catch(err => {
         return res.status(500).send('Wystąpił błąd')
@@ -89,7 +89,7 @@ exports.passwordReset = (req, res, next) => {
             resetPasswordUser = user;
             return emailSender(email, emailOptions.passwordReset, confirmationToken);
         } else { 
-            return res.status(500).send('Nieprawidłowy adres email');
+            return res.status(422).send('Nieprawidłowy adres email');
         }
     }).then(result => {
         resetPasswordUser.confirmationToken = confirmationToken;
@@ -113,7 +113,7 @@ exports.passwordResetAttempt = (req, res, next) => {
             resetPasswordUser = user;
             return bcrypt.hash(password, 12)
         } else {
-            return res.status(500).send('Wystąpił błąd')
+            return res.status(422).send('Wystąpił błąd')
         }
     }).then(hashedPassword => {
         resetPasswordUser.password = hashedPassword;

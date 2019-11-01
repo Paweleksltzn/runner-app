@@ -2,7 +2,7 @@ import { TabsNavLink } from '../../interfaces/tabsNavLink';
 
 export const tabNavOptions: TabsNavLink[] = [
     {
-        label: 'Więcej',
+        label: 'Historia treningow',
         iconName: 'menu',
         link: 'more'
     },

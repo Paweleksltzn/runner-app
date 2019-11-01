@@ -46,7 +46,6 @@ const singleWorkoutReducerOptions = createReducer(initialState,
 
       on(actions.singleWorkoutActions.startWorkout, ( state, action ) => {
         const newWorkout = JSON.parse(JSON.stringify(action.workoutStartingTemplate));
-        console.log(newWorkout);
         return {...state, currentWorkout: newWorkout};
       }),
 

@@ -44,10 +44,6 @@ exports.saveWorkoutsList = (req, res, next) => {
     })
 }
 
-exports.addToWorkoutsList = (req, res, next) => {
-
-}
-
 exports.getWorkoutHistory = (req, res, next) => {
 
 }
@@ -64,30 +60,43 @@ exports.addWorkoutToHistory = (req, res, next) => {
         return WorkoutHistory.findOne({owner: userVariable})
     }).then(userWorkoutsHistory => {
         const newWorkoutInHistory = req.body.workout;
-        console.log('test')
         if (userWorkoutsHistory) {
-            console.log('test1')
-            userWorkoutsHistory.workoutsHistory = [...userWorkoutsHistory.workoutsHistory, createNewHistoryWorkout(newWorkoutInHistory, userVariable, author)];
-            console.log(userWorkoutsHistory);
+            userWorkoutsHistory.workoutsHistory = [...userWorkoutsHistory.workoutsHistory, createNewHistoryWorkout(newWorkoutInHistory, userVariable, author).workoutsHistory];
+            
             userWorkoutsHistory.save();
         } else {
-            console.log('test2')
             const newWorkoutsHistory = new WorkoutHistory(createNewHistoryWorkout(newWorkoutInHistory, userVariable, author));
             newWorkoutsHistory.save();
         }
         return WorkoutsList.findOne({owner: userVariable});
     }).then(userWorkoutsList => {
+        const selectedWorkoutId = req.body.selectedWorkoutId;
         if (req.body.shouldSave) {
-            const newUserWorkoutsList = userWorkoutsList;
-            newUserWorkoutsList.workoutsList.push({
-                title: req.body.workout.title,
-                author: author || userVariable,
-                excercises: {
-                    name: req.body.workout.excercises.name,
-                    series: req.body.workout.excercises.series
+            if (!selectedWorkoutId) {
+                if (userWorkoutsList) {
+                    const newUserWorkoutsList = userWorkoutsList;
+                    newUserWorkoutsList.workoutsList.push({
+                        title: req.body.workout.title,
+                        author: author || userVariable,
+                        excercises: req.body.workout.excercises
+                    })
+                    newUserWorkoutsList.save();
+                } else {
+                    const newWorkouts= new WorkoutsList({
+                        owner: author || userVariable,
+                        workoutsList: [req.body.workout]
+                    });
+                    newWorkouts.save();
                 }
-            })
-            newUserWorkoutsList.save();
+            } else {
+                const newUserWorkoutsList = userWorkoutsList;
+                newUserWorkoutsList.workoutsList.forEach(workout => {
+                    if (workout._id === selectedWorkoutId) {
+                        workout = req.body.workout
+                    }
+                })
+                newUserWorkoutsList.save();
+            }
         }
         return res.json('Trening zapisany');
     })
@@ -120,10 +129,7 @@ const createNewHistoryWorkout = (newWorkoutInHistory, userVariable, author) => {
             trainingDate: newWorkoutInHistory.trainingDate,
             durationInMs,
             duration: finalDurationString,
-            excercises: {
-                name: newWorkoutInHistory.excercises.name,
-                series: newWorkoutInHistory.excercises.series
-            }
+            excercises: newWorkoutInHistory.excercises
         }]
     }
 }

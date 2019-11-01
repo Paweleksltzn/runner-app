@@ -15,10 +15,13 @@ export class ActiveWorkoutService {
     this.isTrainingTypeSelected = true;
   }
 
-  public finishTraining(finishedWorkout: Workout, shouldSave: boolean) {
-    this.isTrainingTypeSelected = false;
+  public finishTraining(finishedWorkout: Workout, shouldSave: boolean, selectedWorkoutId: string) {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.workout}/history/add`,
-     { workout: finishedWorkout, shouldSave });
+     { workout: finishedWorkout, shouldSave, selectedWorkoutId });
+  }
+
+  public setIfTrainingSelected(isSelected: boolean) {
+    this.isTrainingTypeSelected = isSelected;
   }
 
   public get getTrainingType() {

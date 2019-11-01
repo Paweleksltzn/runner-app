@@ -3,9 +3,10 @@ import { User } from '../auth/User';
 
 export interface Workout {
     trainingDate?: string;
-    duration?: number; // in seconds
+    duration?: number;
     startTime?: number;
     title: string;
     excercises: Array<Excersise>;
     author?: User;
+    _id?: string;
 }

@@ -22,6 +22,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
   public modes = singleWorkoutModes;
   public activeIndex: number;
   public isItemDeleted: boolean;
+  private selectedWorkoutId: string;
 
   constructor(public alertController: AlertController, public modalController: ModalController,
               private store: Store<{singleWorkout: WorkoutState, myWorkouts: MyWorkoutState}>, private activatedRoute: ActivatedRoute,
@@ -35,8 +36,10 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
             title: state.currentWorkout.title,
             excercises: [...state.currentWorkout.excercises],
             startTime: state.currentWorkout.startTime,
-            author: state.currentWorkout.author
+            author: state.currentWorkout.author,
+            _id: state.currentWorkout._id
           };
+          this.selectedWorkoutId = this.currentWorkout._id;
         }
       } else {
         this.currentWorkout = state.workoutToShow;
@@ -170,14 +173,13 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
   }
 
   public async finishWorkout() {
-    // wyswietlic toasta ze zostal zapisany do listy, zrobic chekboxa czy ma byc dodany do listy treningow czy jaki chuj
     const alert = await this.alertController.create({
       header: 'Czy napewno chcesz zakończyć trening?',
       inputs: [
         {
           name: 'shouldSaveTraining',
           type: 'checkbox',
-          label: 'Dodaj do listy treningów',
+          label: !!this.selectedWorkoutId ? 'Aktualizuj listę treningów' : 'Dodaj do listy treningów',
           value: 'Zapisz trening'
         }
       ],
@@ -190,21 +192,18 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
           text: 'Tak',
           handler: (data) => {
             const shouldSaveTraining = !!data[0];
-            if (shouldSaveTraining) {
-
-            }
-            this.activeWorkoutService.finishTraining(this.currentWorkout, shouldSaveTraining).subscribe(result => {
+            this.activeWorkoutService.finishTraining(this.currentWorkout, shouldSaveTraining, this.selectedWorkoutId).subscribe(result => {
+              if (shouldSaveTraining) {
+                this.store.dispatch(actions.myWorkoutActions.addWorkoutListElement({workoutsListItem: this.currentWorkout,
+                   selectedWorkoutId: this.selectedWorkoutId}));
+              }
+              this.activeWorkoutService.setIfTrainingSelected(false);
               this.router.navigate(['my-workouts']);
-              console.log(result);
-            }, err => {
-              // toast ze nie zapisane
-              this.router.navigate(['my-workouts']);
-              console.log(err);
-            });
-            this.store.dispatch(actions.singleWorkoutActions.finishWorkout({}));
-            this.currentWorkout = undefined;
+              this.store.dispatch(actions.singleWorkoutActions.finishWorkout({}));
+              this.currentWorkout = undefined;
+              }
+            );
             }
-
           }
       ]
     });
