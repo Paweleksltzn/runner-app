@@ -1,4 +1,9 @@
-<ion-list lines="full">
+<div class="give-rate">
+<h3>Oceń trenera</h3>
+<ion-icon name="star" *ngFor="let star of [1,2,3,4,5]" (click)="starRated(star)" [ngClass]="{'star-color': star <= starRate}" >
+</ion-icon>
+</div>
+<ion-list>
 <ion-item>
   <ion-label>
     <h2>Szymon Stawski</h2>
