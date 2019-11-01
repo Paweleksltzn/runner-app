@@ -61,8 +61,7 @@ exports.addWorkoutToHistory = (req, res, next) => {
     }).then(userWorkoutsHistory => {
         const newWorkoutInHistory = req.body.workout;
         if (userWorkoutsHistory) {
-            userWorkoutsHistory.workoutsHistory = [...userWorkoutsHistory.workoutsHistory, createNewHistoryWorkout(newWorkoutInHistory, userVariable, author).workoutsHistory];
-            
+            userWorkoutsHistory.workoutsHistory = [createNewHistoryWorkout(newWorkoutInHistory, userVariable, author).workoutsHistory[0], ...userWorkoutsHistory.workoutsHistory];
             userWorkoutsHistory.save();
         } else {
             const newWorkoutsHistory = new WorkoutHistory(createNewHistoryWorkout(newWorkoutInHistory, userVariable, author));

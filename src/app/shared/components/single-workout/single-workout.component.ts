@@ -37,7 +37,8 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
             excercises: [...state.currentWorkout.excercises],
             startTime: state.currentWorkout.startTime,
             author: state.currentWorkout.author,
-            _id: state.currentWorkout._id
+            _id: state.currentWorkout._id,
+            trainingDate: state.currentWorkout.trainingDate
           };
           this.selectedWorkoutId = this.currentWorkout._id;
         }
@@ -192,6 +193,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
           text: 'Tak',
           handler: (data) => {
             const shouldSaveTraining = !!data[0];
+            console.log(this.currentWorkout)
             this.activeWorkoutService.finishTraining(this.currentWorkout, shouldSaveTraining, this.selectedWorkoutId).subscribe(result => {
               if (shouldSaveTraining) {
                 this.store.dispatch(actions.myWorkoutActions.addWorkoutListElement({workoutsListItem: this.currentWorkout,

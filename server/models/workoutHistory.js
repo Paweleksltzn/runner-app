@@ -6,7 +6,7 @@ const workoutHistorySchema = new Schema({
 
   workoutsHistory: {
     trainingDate: {
-      type: String, //dd-mm-yyyy
+      type: String,
       required: true
     },
     duration: {
