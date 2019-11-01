@@ -8,6 +8,9 @@ import { AchivmentsComponent } from './profile-tab-components/achivments/achivme
 import { FriendsComponent } from './profile-tab-components/friends/friends.component';
 import { SettingsComponent } from './profile-tab-components/settings/settings.component';
 import { RatingComponent } from './profile-tab-components/rating/rating.component';
+import { NormalUserForGuestComponent } from './normal-user/normal-user-for-guest/normal-user-for-guest.component';
+import { CoachUserForGuestComponent } from './coach-user/coach-user-for-guest/coach-user-for-guest.component';
+import { RatingGuestComponent } from './profile-tab-components/rating/rating-guest/rating-guest.component';
 
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -19,7 +22,6 @@ const routes: Routes = [
     component: NormalUserComponent,
     children:  [
       {path: 'friends', component: FriendsComponent},
-      {path: 'trainings', component: TrainingsComponent},
       {path: 'achivment', component: AchivmentsComponent},
       {path: 'settings', component: SettingsComponent}
     ]
@@ -29,9 +31,24 @@ const routes: Routes = [
     component: CoachUserComponent,
     children:  [
       {path: 'friends', component: FriendsComponent},
-      {path: 'rate' , component: RatingComponent},
-      {path: 'settings', component: SettingsComponent}
+      {path: 'settings', component: SettingsComponent},
+      {path: 'rate', component: RatingComponent}
     ]
+  },
+  {path: 'normal-guest',
+  component: NormalUserForGuestComponent,
+  children: [
+    {path: 'friends', component: FriendsComponent},
+    {path: 'trainings', component: TrainingsComponent},
+    {path: 'achivment', component: AchivmentsComponent}
+  ]
+  },
+  {path: 'coach-guest',
+  component: CoachUserForGuestComponent,
+  children: [
+    {path: 'friends', component: FriendsComponent},
+    {path: 'rate-guest' , component: RatingGuestComponent}
+  ]
   },
 
 ];
@@ -45,6 +62,9 @@ const routes: Routes = [
     TrainingsComponent,
     SettingsComponent,
     RatingComponent,
+    NormalUserForGuestComponent,
+    CoachUserForGuestComponent,
+    RatingGuestComponent,
   ],
   imports: [
     CommonModule,

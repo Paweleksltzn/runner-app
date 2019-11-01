@@ -1,0 +1,29 @@
+<ion-content>
+    <div class="main-container">
+      <div class="main-container-profile">
+        <div class="profile-picture">
+          <img (click)="presentActionSheet()" src="../../../../../assets/images/profile-picture.png">
+        </div>
+        <div class="profile-description">
+          <h2>{{userName}} {{userSurname}}</h2>
+          <p>{{profileDescription}}</p>
+        </div>
+      </div>
+      <div class="profile-tab">
+        <div class="trainings" routerLink="/normal-guest/trainings" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
+          <ion-icon name="fitness"></ion-icon>
+          <span>Treningi</span>
+        </div>
+        <div class="friends" routerLink="/normal-guest/friends" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
+          <ion-icon name="contacts"></ion-icon>
+          <!--<ion-badge color="danger" slot="end">99+</ion-badge>-->
+          <span>Znajomi</span>
+        </div>
+        <div class="achivments" routerLink="/normal-guest/achivment" (click)="switchProfileTab(3)" [ngClass]="{'tab-select':selectedProfileTab  === 3}">
+          <ion-icon name="trophy"></ion-icon>
+          <span>Osiągnięcia</span>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </ion-content>

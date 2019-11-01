@@ -1,4 +1,4 @@
-@import '../../../../../styles/variables';
+@import '../../../../../../styles/variables';
 .main-container{
     height: 100vh;
     &-profile{
@@ -29,7 +29,7 @@ img{
     height: 15%;
     display: flex;
 }
-.friends, .achivments, .settings{
+.trainings, .friends, .achivments{
     width: 33%;
     text-align: center;
     display: block;
@@ -50,7 +50,7 @@ span{
     margin: 1rem;
 }
 @media only screen and (max-width: 340px){
-    .friends, .achivments, .settings{
+    .trainings, .friends, .achivments{
         font-size: 12px;
     } 
 }

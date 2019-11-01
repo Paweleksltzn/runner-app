@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-rating',
-  templateUrl: './rating.component.html',
-  styleUrls: ['./rating.component.scss'],
+  selector: 'app-rating-guest',
+  templateUrl: './rating-guest.component.html',
+  styleUrls: ['./rating-guest.component.scss'],
 })
-export class RatingComponent implements OnInit {
+export class RatingGuestComponent implements OnInit {
   public starRate: number;
   constructor() { }
 

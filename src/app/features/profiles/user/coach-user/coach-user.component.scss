@@ -50,3 +50,8 @@ ion-badge{
 span{
     margin: 1rem;
 }
+@media only screen and (max-width: 340px){
+    .ratings, .friends, .settings{
+        font-size: 12px;
+    } 
+}

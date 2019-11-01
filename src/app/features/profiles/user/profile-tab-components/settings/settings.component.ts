@@ -14,5 +14,4 @@ export class SettingsComponent implements OnInit {
   changeProfileTheme(selectedTheme: number) {
     this.selectedGradient = selectedTheme;
   }
-
 }
