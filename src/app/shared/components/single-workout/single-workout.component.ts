@@ -9,7 +9,7 @@ import { actions } from 'src/app/store';
 import { Workout } from '../../interfaces/workout/workout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MyWorkoutState } from '../../interfaces/my-workouts/myWorkoutState';
-import { ActiveWorkoutService } from 'src/app/features/active-workout/services/active-workout.service';
+import { ActiveWorkoutService } from 'src/app/features/workouts/active-workout/services/active-workout.service';
 
 @Component({
   selector: 'app-single-workout',
@@ -193,7 +193,6 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
           text: 'Tak',
           handler: (data) => {
             const shouldSaveTraining = !!data[0];
-            console.log(this.currentWorkout)
             this.activeWorkoutService.finishTraining(this.currentWorkout, shouldSaveTraining, this.selectedWorkoutId).subscribe(result => {
               if (shouldSaveTraining) {
                 this.store.dispatch(actions.myWorkoutActions.addWorkoutListElement({workoutsListItem: this.currentWorkout,
