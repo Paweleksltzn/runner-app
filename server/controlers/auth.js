@@ -37,27 +37,27 @@ exports.registerUser = (req, res, next) => {
     })
 }
 
-exports.login = (req, res, next) => {
+exports.login = async function(req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
-    User.findOne({email}).then(user => {
+    try {
+        const user = await User.findOne({email});
         if (user) {
             if (!user.isActive) {
                 return res.status(422).send('Email nie został potwierdzony');
             }
-            bcrypt.compare(password, user.password).then(doMatch => {
-                if(doMatch) {
-                    return res.json(jwtManagment.jwtFactory(user));
-                } else {
-                    return res.status(422).send('Nieprawidłowe dane logowania');
-                }
-            })
+            const doMatch = await bcrypt.compare(password, user.password);
+            if(doMatch) {
+                return res.json(jwtManagment.jwtFactory(user));
+            } else {
+                return res.status(422).send('Nieprawidłowe dane logowania');
+            }
         } else {
             return res.status(422).send('Nieprawidłowe dane logowania');
         }
-    }).catch(err => {
-        return res.status(422).send('Nieprawidłowe dane logowania');
-    });
+    } catch {
+        return res.status(500).send('Wystąpił błąd');
+    }
 }
 
 exports.emailConfirmed = (req, res, next) => {
