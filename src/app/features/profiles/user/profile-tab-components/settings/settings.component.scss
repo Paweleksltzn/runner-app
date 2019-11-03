@@ -18,6 +18,12 @@
 .gradient-select{
     display: flex;
 }
-.tab-select{
+.tab-selection{
     border: solid 2px black;
+}
+.profile-picture{
+    background-image: $green-teal-gradient;
+}
+.tab-select{
+    border-bottom: solid 2px $mixed-main-colours;
 }
