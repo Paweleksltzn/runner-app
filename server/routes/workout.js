@@ -8,6 +8,6 @@ router.post('/list', workoutController.saveWorkoutsList);
 
 router.get('/history/all', workoutController.getWorkoutHistory);
 router.post('/history/add', workoutController.addWorkoutToHistory);
-router.post('/history/remove', workoutController.removeWorkoutFromHistory);
+router.delete('/history/remove', workoutController.removeWorkoutFromHistory);
 
 module.exports = router;

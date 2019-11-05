@@ -5,8 +5,10 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { singleWorkoutModes } from 'src/app/shared/components/single-workout/singleWorkoutHelper';
 import { actions } from 'src/app/store';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
+import { MyWorkoutState } from 'src/app/shared/interfaces/my-workouts/myWorkoutState';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-history',
@@ -15,16 +17,24 @@ import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
 })
 export class HistoryPage implements OnInit {
   public workoutsHistory: Workout[] = [];
+  public isStoreLoaded = false;
 
   @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
 
   constructor(private historyService: HistoryService, private router: Router,
-              private store: Store<{singleWorkout: WorkoutState}>) { }
+              private store: Store<{singleWorkout: WorkoutState, history: MyWorkoutState}>) { }
 
   ngOnInit() {
-    this.historyService.getUserHistory().subscribe((response: any) => {
-      this.workoutsHistory =  response.workoutsHistory;
+    // tslint:disable-next-line: no-shadowed-variable
+    this.store.pipe(select('history')).subscribe((state: MyWorkoutState) => {
+      this.isStoreLoaded = state.isStateLoaded;
+      this.workoutsHistory = state.workoutsList;
     });
+    if (!this.isStoreLoaded) {
+      this.historyService.getUserHistory().subscribe((response: any) => {
+        this.store.dispatch(actions.historyActions.loadHistory({workoutsHistory: response.workoutsHistory || []}));
+      });
+    }
   }
 
 

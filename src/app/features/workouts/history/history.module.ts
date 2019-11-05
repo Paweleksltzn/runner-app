@@ -8,6 +8,8 @@ import { IonicModule } from '@ionic/angular';
 import { HistoryPage } from './history.page';
 import { SingleHistoryWorkoutComponent } from './single-history-workout/single-history-workout.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { historyReducer } from './store/history-store';
 
 const routes: Routes = [
   {
@@ -26,7 +28,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature('history', historyReducer)
   ],
   declarations: [HistoryPage, SingleHistoryWorkoutComponent]
 })

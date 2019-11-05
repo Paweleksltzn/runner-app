@@ -48,7 +48,7 @@ exports.login = async function(req, res, next) {
                 return res.json(jwtManagment.jwtFactory(user));
             } 
         } 
-    } catch {
+    } catch (err) {
         return res.status(500).send('Wystąpił błąd');
     }
     return res.status(422).send('Nieprawidłowe dane logowania');

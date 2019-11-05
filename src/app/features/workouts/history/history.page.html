@@ -6,7 +6,7 @@
 
 <ion-content>
     <div *ngIf="workoutsHistory.length === 0">
-        <h5 class="empty-trainings">Brak zapisanych treningów</h5>
+        <h5 class="empty-trainings">Historia jest pusta</h5>
       </div>
       <div class="workout__container" *ngFor="let historyWorkout of workoutsHistory;let workoutIndex = index;">
         <ion-grid>

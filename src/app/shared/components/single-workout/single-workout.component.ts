@@ -10,6 +10,7 @@ import { Workout } from '../../interfaces/workout/workout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MyWorkoutState } from '../../interfaces/my-workouts/myWorkoutState';
 import { ActiveWorkoutService } from 'src/app/features/workouts/active-workout/services/active-workout.service';
+import { HistoryService } from 'src/app/features/workouts/history/services/history.service';
 
 @Component({
   selector: 'app-single-workout',
@@ -24,9 +25,13 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
   public isItemDeleted: boolean;
   private selectedWorkoutId: string;
 
-  constructor(public alertController: AlertController, public modalController: ModalController,
-              private store: Store<{singleWorkout: WorkoutState, myWorkouts: MyWorkoutState}>, private activatedRoute: ActivatedRoute,
-              private router: Router, private activeWorkoutService: ActiveWorkoutService) { }
+  constructor(public alertController: AlertController,
+              public modalController: ModalController,
+              private store: Store<{singleWorkout: WorkoutState, myWorkouts: MyWorkoutState, history: MyWorkoutState}>,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private activeWorkoutService: ActiveWorkoutService,
+              private historyService: HistoryService) { }
 
   ngOnInit() {
     this.store.pipe(select('singleWorkout')).subscribe((state: WorkoutState) => {
@@ -209,7 +214,8 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
                    selectedWorkoutId: this.selectedWorkoutId}));
               }
               this.activeWorkoutService.setIfTrainingSelected(false);
-              this.router.navigate(['my-workouts']);
+              this.router.navigate(['workouts-history']);
+              this.store.dispatch(actions.historyActions.addToHistory({workout: this.currentWorkout}));
               this.store.dispatch(actions.singleWorkoutActions.finishWorkout({}));
               this.currentWorkout = undefined;
               }
@@ -230,6 +236,10 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
   }
 
   public removeWorkoutFromHistory() {
+    this.store.dispatch(actions.historyActions.removeWorkout({
+      workoutIndex: this.activeIndex
+    }));
+    this.historyService.removeWorkoutFromHistory(this.currentWorkout).subscribe(res => {});
     this.router.navigate(['workouts-history']);
   }
 

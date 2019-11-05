@@ -95,8 +95,24 @@ exports.addWorkoutToHistory = async function(req, res, next) {
     }
 }
 
-exports.removeWorkoutFromHistory = (req, res, next) => {
-
+exports.removeWorkoutFromHistory = async function(req, res, next) {
+    const title = req.query.title;
+    const duration = req.query.duration;
+    const trainingDate = req.query.trainingDate;
+    try {
+        const owner = await User.findOne({email: req.token.email, surname: req.token.surname});
+        const history = await WorkoutHistory.findOne({
+            owner
+        });
+        const newWorkoutsHistory = history.workoutsHistory.filter(workout =>  {
+            return workout.title !== title || workout.duration !== duration || workout.trainingDate !== trainingDate
+        });
+        history.workoutsHistory = newWorkoutsHistory;
+        history.save();
+        return res.json('Trening usunięty pomyślnie');
+    } catch(err) {
+        return res.status(500).send('Nie udało się usunąć treningu');
+    }
 }
 
 const createNewHistoryWorkout = (newWorkoutInHistory, userVariable, author) => {

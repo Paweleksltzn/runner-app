@@ -3,7 +3,7 @@ import { User } from '../auth/User';
 
 export interface Workout {
     trainingDate?: string;
-    duration?: number;
+    duration?: string | number;
     startTime?: number;
     title: string;
     excercises: Array<Excersise>;
