@@ -55,7 +55,7 @@ export class ActiveWorkoutSelectorComponent implements OnInit {
     this.selectedWorkout.startTime = Date.now();
     this.activeWorkoutService.startTraining();
     this.store.dispatch(actions.singleWorkoutActions.startWorkout({ workoutStartingTemplate: this.selectedWorkout}));
-    this.router.navigate(['/workout']);
+    this.router.navigate(['workout']);
   }
 
   private setDefaultTrainingTemplate() {

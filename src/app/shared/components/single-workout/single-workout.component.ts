@@ -43,7 +43,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
           this.selectedWorkoutId = this.currentWorkout._id;
         }
       } else {
-        this.currentWorkout = state.workoutToShow;
+        this.currentWorkout = state.trainingMode === this.modes.history ? state.historyWorkout : state.workoutToShow;
         this.activeIndex = +this.activatedRoute.snapshot.paramMap.get('workoutIndex');
       }
       this.workoutMode = state.trainingMode;
@@ -193,6 +193,16 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
           text: 'Tak',
           handler: (data) => {
             const shouldSaveTraining = !!data[0];
+            this.currentWorkout.excercises.forEach(exercise => {
+              exercise.series.forEach(singleSeries => {
+                if (!singleSeries.repeats) {
+                  singleSeries.repeats = 0;
+                }
+                if (!singleSeries.weight) {
+                  singleSeries.weight = 0;
+                }
+              });
+            });
             this.activeWorkoutService.finishTraining(this.currentWorkout, shouldSaveTraining, this.selectedWorkoutId).subscribe(result => {
               if (shouldSaveTraining) {
                 this.store.dispatch(actions.myWorkoutActions.addWorkoutListElement({workoutsListItem: this.currentWorkout,
@@ -216,7 +226,11 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
       index: this.activeIndex
     }));
     this.isItemDeleted = true;
-    this.router.navigate(['/my-workouts']);
+    this.router.navigate(['my-workouts']);
+  }
+
+  public removeWorkoutFromHistory() {
+    this.router.navigate(['workouts-history']);
   }
 
   public titleChanged() {

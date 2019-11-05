@@ -53,6 +53,9 @@ ion-reorder-group {
 .series-grid {
     margin-bottom: 1rem;
 }
+.history-series-grid {
+    margin-bottom: 0;
+}
 .series-grid ion-row:not(:last-child) {
     border-bottom: 1px solid lightgrey;
     padding-bottom: .5rem;
@@ -76,11 +79,14 @@ ion-reorder-group {
     width: 50%;
     margin-bottom: 2rem;
 }
+.delete-from-history {
+    margin-top: 2rem;
+}
 .margin-left-auto {
     margin-left: auto;
 }
 ion-content {
-    height: calc(100vh - 112px);
+    height: calc(100vh - 169px);
     padding-bottom: 1rem;
 }
 .title-input {
@@ -98,4 +104,8 @@ ion-content {
 .delete-workout {
     --background: linear-gradient(to right top, #f41919, #f41b25, #f41f2f, #f32338, #f22840, #f32b43, #f32e45, #f43148, #f73346, #fa3543, #fc3741, #ff393e);
     --color: white;
+}
+.input-in-history {
+    border-bottom: none;
+    color: $mixed-main-colours;
 }

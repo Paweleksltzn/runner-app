@@ -17,8 +17,6 @@ export class MyWorkoutService {
   public saveUserWorkouts(workouts: Workout[]) {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.workout}/list`, { workouts }).subscribe(response => {
       // brak reakcji -> success
-    }, err => {
-      // todo -> toast z info co jest nie tak
     });
   }
 
@@ -31,8 +29,6 @@ export class MyWorkoutService {
         }
       });
       storeSubscription.unsubscribe();
-    }, err => {
-      // toast z errorem ze nie udalo sie wczytac
     });
   }
 }

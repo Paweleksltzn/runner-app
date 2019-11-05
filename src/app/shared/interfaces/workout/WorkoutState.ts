@@ -9,4 +9,5 @@ export interface WorkoutState {
     timerSubscription: Subscription;
     trainingMode: string;
     workoutToShow: Workout;
+    historyWorkout: Workout;
 }

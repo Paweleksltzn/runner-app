@@ -8,8 +8,8 @@ const routes: Routes = [
   { path: 'training', loadChildren: './features/training/training.module#TrainingPageModule', canActivate: [FirstLevelGuard] },
   { path: 'auth', loadChildren: './core/auth/auth.module#AuthModule' },
   { path: 'my-workouts', loadChildren: './features/workouts/my-workouts/my-workouts.module#MyWorkoutsPageModule',
-   canActivate: [FirstLevelGuard] }
-
+   canActivate: [FirstLevelGuard] },
+  { path: 'workouts-history', loadChildren: './features/workouts/history/history.module#HistoryPageModule', canActivate: [FirstLevelGuard] }
 ];
 @NgModule({
   imports: [

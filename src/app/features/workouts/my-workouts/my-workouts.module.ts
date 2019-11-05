@@ -18,7 +18,6 @@ const routes: Routes = [
     path: 'singleWorkout/:workoutIndex',
     component: MyWorkoutComponent
   }
-
 ];
 
 @NgModule({

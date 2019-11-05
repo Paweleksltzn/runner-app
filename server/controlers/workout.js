@@ -2,63 +2,56 @@ const User = require('../models/user');
 const WorkoutsList = require('../models/workoutsList');
 const WorkoutHistory = require('../models/workoutHistory');
 
-exports.getWorkoutsList = (req, res, next) => {
-    User.findOne({email: req.token.email, surname: req.token.surname}).then(user=> {
-        userVariable = user;
-        return WorkoutsList.findOne({owner: user})
-    }).then(workouts => {
+exports.getWorkoutsList = async function(req, res, next) {
+    try {
+        const userVariable = await User.findOne({email: req.token.email, surname: req.token.surname});
+        const workouts = await WorkoutsList.findOne({owner: userVariable});
         return res.json(workouts.workoutsList || []);
-    }).catch(err => {
-        return res.status(500).send('Wystąpił błąd podczas zapisywania danych');
-    })
+    } catch(err) {
+        return res.status(500).send('Nie udało się pobrać danych');
+    }
 }
 
-exports.saveWorkoutsList = (req, res, next) => {
-    let userVariable;
-    User.findOne({email: req.token.email, surname: req.token.surname}).then(user=> {
-        userVariable = user;
-        return WorkoutsList.findOne({owner: user})
-    }).then(workouts => {
+exports.saveWorkoutsList = async function(req, res, next) {
+    try {
+        const userVariable = await User.findOne({email: req.token.email, surname: req.token.surname});
+        const newWorkoutList = req.body.workouts;
+        newWorkoutList.forEach(singleWorkout => {
+            if (!singleWorkout.author) singleWorkout.author = userVariable;
+        });
+        const workouts = await WorkoutsList.findOne({owner: userVariable});
         if (workouts) {
-            const newWorkoutList = req.body.workouts;
-            newWorkoutList.forEach(singleWorkout => {
-                if (!singleWorkout.author) singleWorkout.author = userVariable;
-            });
             workouts.workoutsList = newWorkoutList;
             workouts.save();
-            return res.json('Poprawnie zapisane dane');
         } else {
-            const newWorkoutList = req.body.workouts;
-            newWorkoutList.forEach(singleWorkout => {
-                if (!singleWorkout.author) singleWorkout.author = userVariable;
-            });
             const newWorkouts= new WorkoutsList({
                 owner: userVariable,
                 workoutsList: newWorkoutList
             });
-            newWorkouts.save();
-            return res.json('Poprawnie zapisane dane');
+            newWorkouts.save(); 
         }
-    }).catch(err => {
+        return res.json('Poprawnie zapisane dane');
+    } catch(err) {
         return res.status(500).send('Wystąpił błąd podczas zapisywania danych');
-    })
+    }
 }
 
-exports.getWorkoutHistory = (req, res, next) => {
-
+exports.getWorkoutHistory = async function(req, res, next) {
+    try {
+        const user = await User.findOne({email: req.token.email, surname: req.token.surname});
+        const userWorkoutsHistory = await WorkoutHistory.findOne({owner: user});
+        return res.json(userWorkoutsHistory);
+    } catch(err) {
+        return res.status(500).send('Wystąpił błąd podczas zapisywania danych');
+    }
 }
 
-exports.addWorkoutToHistory = (req, res, next) => {
-    let userVariable;
-    let author;
-    User.findOne({email: req.token.email, surname: req.token.surname}).then(user=> {
-        userVariable = user;
+exports.addWorkoutToHistory = async function(req, res, next) {
+    try {
+        const userVariable = await User.findOne({email: req.token.email, surname: req.token.surname});
         const authorId = req.body.workout.author;
-        return User.findById(authorId);
-    }).then(author => {
-        author = author;
-        return WorkoutHistory.findOne({owner: userVariable})
-    }).then(userWorkoutsHistory => {
+        const author = await User.findById(authorId);
+        const userWorkoutsHistory = await WorkoutHistory.findOne({owner: userVariable});
         const newWorkoutInHistory = req.body.workout;
         if (userWorkoutsHistory) {
             userWorkoutsHistory.workoutsHistory = [createNewHistoryWorkout(newWorkoutInHistory, userVariable, author).workoutsHistory[0], ...userWorkoutsHistory.workoutsHistory];
@@ -67,8 +60,7 @@ exports.addWorkoutToHistory = (req, res, next) => {
             const newWorkoutsHistory = new WorkoutHistory(createNewHistoryWorkout(newWorkoutInHistory, userVariable, author));
             newWorkoutsHistory.save();
         }
-        return WorkoutsList.findOne({owner: userVariable});
-    }).then(userWorkoutsList => {
+        const userWorkoutsList = await WorkoutsList.findOne({owner: userVariable});
         const selectedWorkoutId = req.body.selectedWorkoutId;
         if (req.body.shouldSave) {
             if (!selectedWorkoutId) {
@@ -81,7 +73,7 @@ exports.addWorkoutToHistory = (req, res, next) => {
                     })
                     newUserWorkoutsList.save();
                 } else {
-                    const newWorkouts= new WorkoutsList({
+                    const newWorkouts = new WorkoutsList({
                         owner: author || userVariable,
                         workoutsList: [req.body.workout]
                     });
@@ -98,16 +90,14 @@ exports.addWorkoutToHistory = (req, res, next) => {
             }
         }
         return res.json('Trening zapisany');
-    })
-    .catch(err => {
+    } catch(err) {
         return res.status(500).send('Wystąpił błąd podczas zapisywania danych');
-    });
+    }
 }
 
 exports.removeWorkoutFromHistory = (req, res, next) => {
 
 }
-
 
 const createNewHistoryWorkout = (newWorkoutInHistory, userVariable, author) => {
     const durationInMs = Date.now() - newWorkoutInHistory.startTime;
