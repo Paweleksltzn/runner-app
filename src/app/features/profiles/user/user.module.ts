@@ -15,6 +15,8 @@ import { RatingGuestComponent } from './profile-tab-components/rating/rating-gue
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { IonicImageLoader } from 'ionic-image-loader';
+import {StoreModule, ActionReducer} from '@ngrx/store';
+import { themeReducer, themeState } from './profile-tab-components/settings/settings.reducer';
 
 const routes: Routes = [
   {
@@ -53,6 +55,14 @@ const routes: Routes = [
 
 ];
 
+export interface AppState {
+  gradient: themeState;
+}
+
+export const reducers: ActionReducer<AppState> = {
+  gradient: themeReducer
+};  
+
 @NgModule({
   declarations: [
     CoachUserComponent,
@@ -71,7 +81,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     IonicModule,
     SharedModule,
-    IonicImageLoader
+    IonicImageLoader,
+    StoreModule.forRoot(reducers),
   ]
 })
 export class UserModule { }
