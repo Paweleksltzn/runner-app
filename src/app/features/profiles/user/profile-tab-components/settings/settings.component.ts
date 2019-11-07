@@ -16,7 +16,7 @@ export class SettingsComponent implements OnInit {
 
   changeProfileTheme(selectedTheme: number) {
     this.selectedGradient = selectedTheme;
-    this.store.dispatch(new SetTheme({gradient: 'dzialase'}))
+    this.store.dispatch(new SetTheme({gradient: 'kurwa'}))
   }
   
 }

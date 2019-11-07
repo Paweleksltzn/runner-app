@@ -61,7 +61,7 @@ export interface AppState {
 
 export const reducers: ActionReducer<AppState> = {
   gradient: themeReducer
-};  
+};
 
 @NgModule({
   declarations: [
