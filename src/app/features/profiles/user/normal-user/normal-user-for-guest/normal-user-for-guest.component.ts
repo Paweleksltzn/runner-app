@@ -20,8 +20,8 @@ export class NormalUserForGuestComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.userName = "Jacek";
-    this.userSurname = "Soplica";
+    this.userName = 'Jacek';
+    this.userSurname = 'Soplica';
     this.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
   }
 

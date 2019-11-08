@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../user.module';
-import { SetTheme } from './settings.action';
+import { setTheme } from './settings.action';
+import * as fromStore from './settings.reducer';
 
 @Component({
   selector: 'app-settings',
@@ -9,14 +9,13 @@ import { SetTheme } from './settings.action';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  public selectedGradient: number = 1;
-  constructor( private store: Store<AppState>) { }
+  public selectedGradient = 1;
+  constructor( private store: Store<fromStore.State>) { }
 
   ngOnInit() {}
 
-  changeProfileTheme(selectedTheme: number) {
+  changeProfileTheme(selectedTheme: any) {
     this.selectedGradient = selectedTheme;
-    this.store.dispatch(new SetTheme({gradient: 'kurwa'}))
+    this.store.dispatch(setTheme({gradient: selectedTheme}));
   }
-  
 }

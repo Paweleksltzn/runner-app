@@ -1,17 +1,11 @@
 @import '../../../../../../styles/variables';
+@import '../../normal-user/normal-user.component.scss';
 .main-container{
     height: 100vh;
     &-profile{
         height: 60%;
         display: block;     
     }
-}
-.profile-picture{
-    height: 60%;
-    text-align: center;
-    background-image: $green-teal-gradient;
-    background-size: 100% 70%;
-    background-repeat: no-repeat;
 }
 .profile-description{
     height: 40%;

@@ -1,5 +1,4 @@
 @import '../../../../../styles/variables';
-@import '../profile-tab-components/settings/settings.component.scss';
 .main-container{
     height: 100vh;
     &-profile{
@@ -12,6 +11,7 @@
     text-align: center;
     background-size: 100% 70%;
     background-repeat: no-repeat;
+    background-image: $green-teal-gradient;
 }
 .profile-description{
     height: 40%;
@@ -48,6 +48,15 @@ ion-badge{
 }
 span{
     margin: 1rem;
+}
+.gradient-1{
+    background-image: $green-teal-gradient;
+}
+.gradient-2{
+    background-image: $blue-purple-gradient;
+}
+.gradient-3{
+    background-image: $orange-darken-gradient;
 }
 @media only screen and (max-width: 340px){
     .friends, .achivments, .settings{

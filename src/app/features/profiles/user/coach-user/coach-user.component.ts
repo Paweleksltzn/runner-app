@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageLoaderConfigService } from 'ionic-image-loader';
+import { Store } from '@ngrx/store';
+import * as fromStore from '../profile-tab-components/settings/settings.reducer';
 
 @Component({
   selector: 'app-coach-user',
@@ -14,14 +16,20 @@ export class CoachUserComponent implements OnInit {
   public userSurname: string;
   public selectedProfileTab: number;
   public camera: Camera;
-  constructor(public actionSheetController: ActionSheetController, public imgSetConf: ImageLoaderConfigService) {
+  public colorGradient: any;
+  
+  constructor(
+    public actionSheetController: ActionSheetController, 
+    public imgSetConf: ImageLoaderConfigService,
+    public store: Store<fromStore.State>) {
     this.imageConfigure();
    }
 
   ngOnInit() {
-    this.userName = "Jacek";
-    this.userSurname = "Soplica";
+    this.userName = 'Jacek';
+    this.userSurname = 'Soplica';
     this.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
+    this.store.select('gradient').subscribe(state => {this.colorGradient = state.gradient});
   }
 
   switchProfileTab(selectedTab: number){
