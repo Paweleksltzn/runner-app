@@ -1,6 +1,7 @@
-import { Workout } from './workout';
-import { TrainingTime } from '../trainingTime';
+
 import { Subscription } from 'rxjs';
+import { Workout } from '../../workout/workout';
+import { TrainingTime } from '../../trainingTime';
 
 export interface WorkoutState {
     currentWorkout: Workout;

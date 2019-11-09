@@ -1,9 +1,9 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { actions } from 'src/app/store';
-import { MyWorkoutState } from 'src/app/shared/interfaces/my-workouts/myWorkoutState';
 import { Workout } from 'src/app/shared/interfaces/workout/workout';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 
-export const initialState: MyWorkoutState = {
+export const initialState: storeState.MyWorkoutState = {
     workoutsList: [],
     isStateLoaded: false
 };
@@ -41,6 +41,6 @@ const myWorkoutReducerOptions = createReducer(initialState,
      })
 );
 
-export function myWorkoutReducer(state: MyWorkoutState | undefined, action: Action) {
+export function myWorkoutReducer(state: storeState.MyWorkoutState | undefined, action: Action) {
     return myWorkoutReducerOptions(state, action);
 }

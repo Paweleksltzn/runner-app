@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { MyWorkoutState } from 'src/app/shared/interfaces/my-workouts/myWorkoutState';
+import { Store, select, State } from '@ngrx/store';
 import { Workout } from 'src/app/shared/interfaces/workout/workout';
-import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
-import { actions } from 'src/app/store';
+import { actions, Reducers } from 'src/app/store';
 import { Router } from '@angular/router';
 import { ActiveWorkoutService } from '../services/active-workout.service';
 import { singleWorkoutModes } from 'src/app/shared/components/single-workout/singleWorkoutHelper';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({
   selector: 'app-active-workout-selector',
@@ -18,11 +17,11 @@ export class ActiveWorkoutSelectorComponent implements OnInit {
   public selectedWorkout: Workout;
   public workoutTitle = '';
 
-  constructor(private store: Store<{myWorkouts: MyWorkoutState, singleWorkout: WorkoutState}>,
+  constructor(private store: Store<Reducers>,
               private router: Router, private activeWorkoutService: ActiveWorkoutService) { }
 
   ngOnInit() {
-    this.store.pipe(select('myWorkouts')).subscribe((state: MyWorkoutState) => {
+    this.store.pipe(select('myWorkouts')).subscribe((state: storeState.MyWorkoutState) => {
       this.workoutsList = state.workoutsList || [];
     });
   }

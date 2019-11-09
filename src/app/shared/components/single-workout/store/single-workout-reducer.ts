@@ -1,14 +1,13 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 import { actions } from 'src/app/store';
-import { testWorkout } from '../testWorkoutData';
 
 const startingTrainingTime = {
     seconds: '00',
     minutes: '00'
 };
 
-export const initialState: WorkoutState = {
+export const initialState: storeState.WorkoutState = {
     currentWorkout: undefined,
     workoutToShow: undefined,
     historyWorkout: undefined,
@@ -62,6 +61,6 @@ const singleWorkoutReducerOptions = createReducer(initialState,
 
 );
 
-export function singleWorkoutReducer(state: WorkoutState | undefined, action: Action) {
+export function singleWorkoutReducer(state: storeState.WorkoutState | undefined, action: Action) {
     return singleWorkoutReducerOptions(state, action);
 }

@@ -6,9 +6,8 @@ import { UserLoginData } from '../../../shared/interfaces/auth/userLogIn';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Router } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
-import { actions } from '../../../store';
+import { actions, Reducers } from '../../../store';
 import { Store } from '@ngrx/store';
-import { AuthState } from '../../../shared/interfaces/auth/AuthState';
 import { take } from 'rxjs/operators';
 
 @Injectable({
@@ -18,7 +17,7 @@ export class AuthService {
   public token: string;
 
   constructor(private http: HttpClient, private nativeStorage: NativeStorage,
-              private router: Router, private store: Store<{auth: AuthState}>) { }
+              private router: Router, private store: Store<Reducers>) { }
 
   public postSignUp(userData: UserRegistrationData) {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.auth}/signup`, userData);

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
-import { actions } from 'src/app/store';
+import { actions, Reducers } from 'src/app/store';
 import { singleWorkoutModes } from 'src/app/shared/components/single-workout/singleWorkoutHelper';
 
 @Component({
@@ -11,7 +10,7 @@ import { singleWorkoutModes } from 'src/app/shared/components/single-workout/sin
 })
 export class SingleHistoryWorkoutComponent implements OnInit {
 
-  constructor(private store: Store<{singleWorkout: WorkoutState}>) { }
+  constructor(private store: Store<Reducers>) { }
 
   ngOnInit() {}
 

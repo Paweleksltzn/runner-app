@@ -4,11 +4,9 @@ import { Workout } from 'src/app/shared/interfaces/workout/workout';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { singleWorkoutModes } from 'src/app/shared/components/single-workout/singleWorkoutHelper';
-import { actions } from 'src/app/store';
+import { actions, Reducers } from 'src/app/store';
 import { Store, select } from '@ngrx/store';
-import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
-import { MyWorkoutState } from 'src/app/shared/interfaces/my-workouts/myWorkoutState';
-import { state } from '@angular/animations';
+import * as state from 'src/app/shared/interfaces/store/index';
 
 @Component({
   selector: 'app-history',
@@ -22,11 +20,11 @@ export class HistoryPage implements OnInit {
   @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
 
   constructor(private historyService: HistoryService, private router: Router,
-              private store: Store<{singleWorkout: WorkoutState, history: MyWorkoutState}>) { }
+              private store: Store<Reducers>) { }
 
   ngOnInit() {
     // tslint:disable-next-line: no-shadowed-variable
-    this.store.pipe(select('history')).subscribe((state: MyWorkoutState) => {
+    this.store.pipe(select('history')).subscribe((state: state.MyWorkoutState) => {
       this.isStoreLoaded = state.isStateLoaded;
       this.workoutsHistory = state.workoutsList;
     });

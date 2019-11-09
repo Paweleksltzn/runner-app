@@ -4,13 +4,12 @@ import { Excersise } from '../../interfaces/workout/exercise';
 import { emptySingleSet, singleWorkoutModes } from './singleWorkoutHelper';
 import { TimerComponent } from './timer/timer.component';
 import { Store, select } from '@ngrx/store';
-import { WorkoutState } from '../../interfaces/workout/WorkoutState';
-import { actions } from 'src/app/store';
+import { actions, Reducers } from 'src/app/store';
 import { Workout } from '../../interfaces/workout/workout';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MyWorkoutState } from '../../interfaces/my-workouts/myWorkoutState';
 import { ActiveWorkoutService } from 'src/app/features/workouts/active-workout/services/active-workout.service';
 import { HistoryService } from 'src/app/features/workouts/history/services/history.service';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({
   selector: 'app-single-workout',
@@ -27,14 +26,14 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
 
   constructor(public alertController: AlertController,
               public modalController: ModalController,
-              private store: Store<{singleWorkout: WorkoutState, myWorkouts: MyWorkoutState, history: MyWorkoutState}>,
+              private store: Store<Reducers>,
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private activeWorkoutService: ActiveWorkoutService,
               private historyService: HistoryService) { }
 
   ngOnInit() {
-    this.store.pipe(select('singleWorkout')).subscribe((state: WorkoutState) => {
+    this.store.pipe(select('singleWorkout')).subscribe((state: storeState.WorkoutState) => {
       if (state.trainingMode === this.modes.training ) {
         if (this.activeWorkoutService.getTrainingType === true) {
           this.currentWorkout = {

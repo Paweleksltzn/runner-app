@@ -1,4 +1,4 @@
-import { Workout } from '../workout/workout';
+import { Workout } from '../../workout/workout';
 
 export interface MyWorkoutState {
     workoutsList: Workout[];

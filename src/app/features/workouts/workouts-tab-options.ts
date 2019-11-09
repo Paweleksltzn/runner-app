@@ -1,4 +1,4 @@
-import { TabsNavLink } from '../shared/interfaces/tabsNavLink';
+import { TabsNavLink } from 'src/app/shared/interfaces/tabsNavLink';
 
 export const tabNavWorkoutOptions: TabsNavLink[] = [
     {

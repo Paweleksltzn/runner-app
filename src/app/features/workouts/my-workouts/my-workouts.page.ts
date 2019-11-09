@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { actions } from 'src/app/store';
-import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
+import { actions, Reducers } from 'src/app/store';
 import { singleWorkoutModes, emptyWorkoutTemplate } from 'src/app/shared/components/single-workout/singleWorkoutHelper';
 import { Workout } from 'src/app/shared/interfaces/workout/workout';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { MyWorkoutState } from 'src/app/shared/interfaces/my-workouts/myWorkoutState';
 import { MyWorkoutService } from './services/my-workout.service';
 import { interval, Subscription } from 'rxjs';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({
   selector: 'app-my-workouts',
@@ -19,12 +18,12 @@ export class MyWorkoutsPage implements OnInit, OnDestroy {
   public myWorkouts: Workout[] = [];
   private saverSubscription: Subscription;
 
-  constructor(private store: Store<{singleWorkout: WorkoutState, myWorkouts: MyWorkoutState}>, private alertController: AlertController,
+  constructor(private store: Store<Reducers>, private alertController: AlertController,
               private router: Router, private myWorkoutService: MyWorkoutService) { }
 
   ngOnInit() {
     this.myWorkoutService.loadUserWorkoutsToStore();
-    this.store.pipe(select('myWorkouts')).subscribe((state: MyWorkoutState) => {
+    this.store.pipe(select('myWorkouts')).subscribe((state: storeState.MyWorkoutState) => {
       this.myWorkouts = state.workoutsList || [];
     });
   }

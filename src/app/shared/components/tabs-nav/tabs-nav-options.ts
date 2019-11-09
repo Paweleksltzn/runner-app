@@ -1,5 +1,5 @@
 import { TabsNavLink } from '../../interfaces/tabsNavLink';
-import { tabNavWorkoutOptions } from 'src/app/features/workouts-tab-options';
+import { tabNavWorkoutOptions } from 'src/app/features/workouts/workouts-tab-options';
 
 export const tabNavOptions: TabsNavLink[] = [
     {
