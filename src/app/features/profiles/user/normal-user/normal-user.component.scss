@@ -29,11 +29,7 @@
     text-align: center;
     display: block;
     outline: 0;
-    @media only screen and (max-width: 340px){
-        &{
-            font-size: 12px;
-        } 
-    }
+    @media only screen and (max-width: 340px){font-size: 12px;}
     
 }
 ion-icon{
@@ -43,9 +39,6 @@ ion-icon{
 }
 .tab-select{
     border-bottom: solid 2px $mixed-main-colours;
-}
-ion-badge{
-    opacity: 0.8;
 }
 span{
     margin: 1rem;

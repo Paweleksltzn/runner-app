@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageLoaderConfigService , ImageAttribute} from 'ionic-image-loader';
-import { UserData } from '../../interfaces/user-interface';
+import { UserProfile } from '../../interfaces/user-interface';
 
 @Component({
   selector: 'app-coach-user-for-guest',
@@ -11,11 +11,13 @@ import { UserData } from '../../interfaces/user-interface';
 })
 
 export class CoachUserForGuestComponent implements OnInit {
-  public User: UserData = {
+  public user: UserProfile = {
     profileDescription: ' ',
     userName: ' ',
-    userSurname: ' '
+    userSurname: ' ',
+    gradient: 1
   };
+  
   public profileDescription: string;
   public userName: string;
   public userSurname: string;
@@ -29,12 +31,12 @@ export class CoachUserForGuestComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.User.userName = 'Jacek';
-    this.User.userSurname = 'Soplica';
-    this.User.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
+    this.user.userName = 'Jacek';
+    this.user.userSurname = 'Soplica';
+    this.user.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
   }
 
-  switchProfileTab(selectedTab: number){
+  public switchProfileTab(selectedTab: number){
     this.selectedProfileTab = selectedTab;
   }
 
@@ -52,7 +54,7 @@ export class CoachUserForGuestComponent implements OnInit {
             mediaType: this.camera.MediaType.PICTURE
           }
           this.camera.getPicture(options).then((imageData) => {
-            let base64Image = 'data:image/jpeg;base64,' + imageData;
+            const base64Image = 'data:image/jpeg;base64,' + imageData;
            }, (err) => {
             // Handle error
            });
@@ -65,7 +67,7 @@ export class CoachUserForGuestComponent implements OnInit {
     await actionSheet.present();
   }
 
-  imageConfigure() {
+  public imageConfigure() {
     this.imageAttributes.push({
       element: 'class',
       value: 'image',

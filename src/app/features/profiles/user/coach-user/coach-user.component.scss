@@ -7,41 +7,10 @@
         display: block;     
     }
 }
-.profile-description{
-    height: 40%;
-    width: 70%;
-    margin: 0 auto;
-    text-align: center;
-    color: #555;
-}
-.profile-tab{
-    height: 15%;
-    display: flex;
-    text-align: center;
-}
 .ratings, .friends, .settings{
     width: 33%;
     text-align: center;
     display: block;
     outline: 0;
-    @media only screen and (max-width: 340px){
-        &{
-            font-size: 12px;
-        } 
-    }
+    @media only screen and (max-width: 340px){font-size: 12px;}
 }
-ion-icon{
-    font-size: 40px;
-    margin: 0.8rem;
-    color: #555;
-}
-.tab-select{
-    border-bottom: solid 2px $mixed-main-colours;
-}
-ion-badge{
-    opacity: 0.8;
-}
-span{
-    margin: 1rem;
-}
-

@@ -4,7 +4,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageLoaderConfigService, ImageAttribute } from 'ionic-image-loader';
 import { Store, select } from '@ngrx/store';
 import { State } from '../profile-tab-components/settings/settings.reducer';
-import { UserData } from '../interfaces/user-interface';
+import { UserProfile } from '../interfaces/user-interface';
 
 @Component({
   selector: 'app-normal-user',
@@ -13,17 +13,18 @@ import { UserData } from '../interfaces/user-interface';
 })
 
 export class NormalUserComponent implements OnInit {
-  public User: UserData = {
+  public user: UserProfile = {
     profileDescription: ' ',
     userName: ' ',
-    userSurname: ' '
+    userSurname: ' ',
+    gradient: 1
   };
+  
   public profileDescription: string;
   public userName: string;
   public userSurname: string;
   public selectedProfileTab: number;
   public camera: Camera;
-  public colorGradient: any;
   public imageAttributes: ImageAttribute[] = [];
   public profilePicturePath: string;
   
@@ -35,13 +36,13 @@ export class NormalUserComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.User.userName = 'Jacek';
-    this.User.userSurname = 'Soplica';
-    this.User.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
-    this.store.select('settings').subscribe(state => { this.colorGradient = state.gradient; });
+    this.user.userName = 'Jacek';
+    this.user.userSurname = 'Soplica';
+    this.user.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
+    this.store.select('settings').subscribe(state => { this.user.gradient = state.gradient; });
   }
 
-  switchProfileTab(selectedTab: number){
+  public switchProfileTab(selectedTab: number){
     this.selectedProfileTab = selectedTab;  
   }
 
@@ -59,7 +60,7 @@ export class NormalUserComponent implements OnInit {
             mediaType: this.camera.MediaType.PICTURE
           }
           this.camera.getPicture(options).then((imageData) => {
-            let base64Image = 'data:image/jpeg;base64,' + imageData;
+            const base64Image = 'data:image/jpeg;base64,' + imageData;
            }, (err) => {
             // Handle error
            });
@@ -72,7 +73,7 @@ export class NormalUserComponent implements OnInit {
     await actionSheet.present();
   }
 
-  imageConfigure() {
+  public imageConfigure() {
     this.imageAttributes.push({
       element: 'class',
       value: 'image',
