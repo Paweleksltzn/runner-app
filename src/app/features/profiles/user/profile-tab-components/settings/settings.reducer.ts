@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as setTheme from './settings.action';
+import {setTheme} from './settings.action';
 
 export interface State {
   gradient: any;
@@ -7,10 +7,10 @@ export interface State {
 export const initialState: State = {
   gradient: 1,
 };
-const themeReducer = createReducer(
+const colorReducer = createReducer(
   initialState,
-  on(setTheme.setTheme, (state, { gradient }) => ({ ...state, gradient: gradient}))
+  on(setTheme, (state, action) => ({ ...state, gradient: action.gradient}))
 );
-export function reducer(state: State | undefined, action: Action) {
-  return themeReducer(state, action);
+export function themeReducer(state: State | undefined, action: Action) {
+  return colorReducer(state, action);
 }

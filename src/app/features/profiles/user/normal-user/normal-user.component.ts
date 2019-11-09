@@ -1,35 +1,44 @@
 import { Component, OnInit} from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ImageLoaderConfigService } from 'ionic-image-loader';
+import { ImageLoaderConfigService, ImageAttribute } from 'ionic-image-loader';
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '../profile-tab-components/settings/settings.reducer';
+import { State } from '../profile-tab-components/settings/settings.reducer';
+import { UserData } from '../interfaces/user-interface';
 
 @Component({
   selector: 'app-normal-user',
   templateUrl: './normal-user.component.html',
   styleUrls: ['./normal-user.component.scss'],
 })
+
 export class NormalUserComponent implements OnInit {
+  public User: UserData = {
+    profileDescription: ' ',
+    userName: ' ',
+    userSurname: ' '
+  };
   public profileDescription: string;
   public userName: string;
   public userSurname: string;
   public selectedProfileTab: number;
   public camera: Camera;
   public colorGradient: any;
+  public imageAttributes: ImageAttribute[] = [];
+  public profilePicturePath: string;
   
   constructor(
     public actionSheetController: ActionSheetController,
     public imgSetConf: ImageLoaderConfigService,
-    public store: Store<fromStore.State>) {
+    public store: Store<State>) {
     this.imageConfigure();
    }
 
   ngOnInit() {
-    this.userName = 'Jacek';
-    this.userSurname = 'Soplica';
-    this.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
-    this.store.select('gradient').subscribe(state => {this.colorGradient = state.gradient});
+    this.User.userName = 'Jacek';
+    this.User.userSurname = 'Soplica';
+    this.User.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
+    this.store.select('settings').subscribe(state => { this.colorGradient = state.gradient; });
   }
 
   switchProfileTab(selectedTab: number){
@@ -64,7 +73,10 @@ export class NormalUserComponent implements OnInit {
   }
 
   imageConfigure() {
-    this.imgSetConf.enableSpinner(true);
-    this.imgSetConf.setHeight('70%');
+    this.imageAttributes.push({
+      element: 'class',
+      value: 'image',
+      });
+    this.profilePicturePath = 'assets/images/profile-picture.png';
   }
 }

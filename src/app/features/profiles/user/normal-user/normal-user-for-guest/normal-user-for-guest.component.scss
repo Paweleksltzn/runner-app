@@ -14,11 +14,6 @@
     text-align: center;
     color: #555;
 }
-img{
-    height: 70%;
-    z-index: 3;
-    margin-top: 15%;
-}
 .profile-tab{
     height: 15%;
     display: flex;
@@ -28,6 +23,11 @@ img{
     text-align: center;
     display: block;
     outline: 0;
+    @media only screen and (max-width: 340px){
+        &{
+            font-size: 12px;
+        } 
+    }
 }
 ion-icon{
     font-size: 40px;
@@ -42,9 +42,4 @@ ion-badge{
 }
 span{
     margin: 1rem;
-}
-@media only screen and (max-width: 340px){
-    .trainings, .friends, .achivments{
-        font-size: 12px;
-    } 
 }

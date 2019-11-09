@@ -14,6 +14,7 @@ import { UserModule } from './features/profiles/user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { StoreModule } from '@ngrx/store';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
      IonicImageLoader.forRoot(),
      AppRoutingModule,
      SharedModule, AuthModule, UserModule,
+     StoreModule.forRoot({})
   ],
   providers: [
     StatusBar,

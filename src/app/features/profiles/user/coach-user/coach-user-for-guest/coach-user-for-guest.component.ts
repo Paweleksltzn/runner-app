@@ -1,28 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ImageLoaderConfigService } from 'ionic-image-loader';
+import { ImageLoaderConfigService , ImageAttribute} from 'ionic-image-loader';
+import { UserData } from '../../interfaces/user-interface';
 
 @Component({
   selector: 'app-coach-user-for-guest',
   templateUrl: './coach-user-for-guest.component.html',
   styleUrls: ['./coach-user-for-guest.component.scss'],
 })
+
 export class CoachUserForGuestComponent implements OnInit {
+  public User: UserData = {
+    profileDescription: ' ',
+    userName: ' ',
+    userSurname: ' '
+  };
   public profileDescription: string;
   public userName: string;
   public userSurname: string;
   public selectedProfileTab: number;
   public camera: Camera;
+  public imageAttributes: ImageAttribute[] = [];
+  public profilePicturePath: string;
   
   constructor(public actionSheetController: ActionSheetController, public imgSetConf: ImageLoaderConfigService) {
     this.imageConfigure();
    }
 
   ngOnInit() {
-    this.userName = 'Jacek';
-    this.userSurname = 'Soplica';
-    this.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
+    this.User.userName = 'Jacek';
+    this.User.userSurname = 'Soplica';
+    this.User.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
   }
 
   switchProfileTab(selectedTab: number){
@@ -57,8 +66,11 @@ export class CoachUserForGuestComponent implements OnInit {
   }
 
   imageConfigure() {
-    this.imgSetConf.enableSpinner(true);
-    this.imgSetConf.setHeight('70%');
+    this.imageAttributes.push({
+      element: 'class',
+      value: 'image',
+      });
+    this.profilePicturePath = 'assets/images/profile-picture.png';
   }
 
 }

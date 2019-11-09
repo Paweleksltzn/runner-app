@@ -15,8 +15,8 @@ import { RatingGuestComponent } from './profile-tab-components/rating/rating-gue
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { IonicImageLoader } from 'ionic-image-loader';
-import {StoreModule} from '@ngrx/store';
-import * as fromStore from './profile-tab-components/settings/settings.reducer';
+import { StoreModule } from '@ngrx/store';
+import { themeReducer } from './profile-tab-components/settings/settings.reducer';
 
 const routes: Routes = [
   {
@@ -76,7 +76,7 @@ const routes: Routes = [
     IonicModule,
     SharedModule,
     IonicImageLoader,
-    StoreModule.forRoot({gradient: fromStore.reducer })
+    StoreModule.forFeature('settings',  themeReducer )
   ]
 })
 export class UserModule { }
