@@ -1,3 +1,5 @@
 import { createAction, props} from '@ngrx/store';
 
-export const setTheme = createAction('[Gradient Page] Set Gradients', props<{gradient: any}>());
+export const setThemeAction = {
+    setTheme: createAction('[Gradient Page] Set Gradients', props<{gradient: number}>())
+};

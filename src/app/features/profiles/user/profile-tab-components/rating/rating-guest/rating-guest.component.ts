@@ -13,7 +13,7 @@ export class RatingGuestComponent implements OnInit {
 
   ngOnInit() {}
 
-  starRated(star: number) {
+  public starRated(star: number) {
     this.starRate = star;
   }
 }

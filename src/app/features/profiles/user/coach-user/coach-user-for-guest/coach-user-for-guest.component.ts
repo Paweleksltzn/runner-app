@@ -36,13 +36,16 @@ export class CoachUserForGuestComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.user.userName = 'Jacek';
-    this.user.userSurname = 'Soplica';
-    this.user.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
-    this.store.pipe(select('profile')).subscribe(state => { this.user.imgUrl = state.profImgUrl; });
+    this.store.pipe(select('profile')).subscribe(state => { 
+      this.user.imgUrl = state.profImgUrl;
+      this.user.gradient = state.gradient;
+      this.user.userName = state.userName;
+      this.user.userSurname = state.userSurname;
+      this.user.profileDescription = state.profileDesc;
+     });
   }
 
-  public switchProfileTab(selectedTab: number){
+  public switchProfileTab(selectedTab: number) {
     this.selectedProfileTab = selectedTab;
   }
 

@@ -11,13 +11,12 @@
       </div>
       <div class="profile-tab">
         <div class="two-holder">
-        <div class="ratings" routerLink="/coach-guest/rate-guest" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
+        <div class="ratings" routerLink="/user/coach-guest/rate-guest" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
           <ion-icon name="star-outline"></ion-icon>
           <span>Opinie</span>
         </div>
-        <div class="friends" routerLink="/coach-guest/friends" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
+        <div class="friends" routerLink="/user/coach-guest/friends" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
           <ion-icon name="contacts"></ion-icon>
-          <!--<ion-badge color="danger" slot="end">99+</ion-badge>-->
           <span>Znajomi</span>
         </div>
         </div>

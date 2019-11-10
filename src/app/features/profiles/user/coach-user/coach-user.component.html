@@ -10,16 +10,16 @@
       </div>
     </div>
     <div class="profile-tab">
-      <div class="ratings" routerLink="/coach/rate" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
+      <div class="ratings" routerLink="/user/coach/rate" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
         <ion-icon name="star-outline"></ion-icon>
         <span>Opinie</span>
       </div>
-      <div class="friends" routerLink="/coach/friends" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
+      <div class="friends" routerLink="/user/coach/friends" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
         <ion-icon name="contacts"></ion-icon>
         <!--<ion-badge color="danger" slot="end">99+</ion-badge>-->
         <span>Znajomi</span>
       </div>
-      <div class="settings" routerLink="/coach/settings" (click)="switchProfileTab(4)" [ngClass]="{'tab-select':selectedProfileTab  === 4}">
+      <div class="settings" routerLink="/user/coach/settings" (click)="switchProfileTab(4)" [ngClass]="{'tab-select':selectedProfileTab  === 4}">
         <ion-icon name="settings"></ion-icon>
         <span>Ustawienia</span>
       </div>

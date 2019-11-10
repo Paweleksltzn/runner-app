@@ -1,7 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setTheme } from './settings.action';
 import {ProfileState} from './settings.reducer';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { actions } from 'src/app/store';
 
 @Component({
   selector: 'app-settings',
@@ -10,12 +11,12 @@ import {ProfileState} from './settings.reducer';
 })
 export class SettingsComponent implements OnInit {
   public selectedGradient = 1;
-  constructor( private store: Store<ProfileState>) { }
+  constructor( private store: Store<ProfileState>, private nativeStorage: NativeStorage) { }
 
   ngOnInit() {}
 
   changeProfileTheme(selectedTheme: any) {
     this.selectedGradient = selectedTheme;
-    this.store.dispatch(setTheme({gradient: selectedTheme}));
+    this.store.dispatch(actions.setThemeAction.setTheme({gradient: selectedTheme}));
   }
 }
