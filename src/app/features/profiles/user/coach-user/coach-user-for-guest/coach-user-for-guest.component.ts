@@ -3,6 +3,8 @@ import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageLoaderConfigService , ImageAttribute} from 'ionic-image-loader';
 import { UserProfile } from '../../interfaces/user-interface';
+import { Store, select } from '@ngrx/store';
+import { ProfileState } from '../../profile-tab-components/settings/settings.reducer';
 
 @Component({
   selector: 'app-coach-user-for-guest',
@@ -15,7 +17,8 @@ export class CoachUserForGuestComponent implements OnInit {
     profileDescription: ' ',
     userName: ' ',
     userSurname: ' ',
-    gradient: 1
+    gradient: 1,
+    imgUrl: ' ',
   };
   
   public profileDescription: string;
@@ -24,9 +27,11 @@ export class CoachUserForGuestComponent implements OnInit {
   public selectedProfileTab: number;
   public camera: Camera;
   public imageAttributes: ImageAttribute[] = [];
-  public profilePicturePath: string;
   
-  constructor(public actionSheetController: ActionSheetController, public imgSetConf: ImageLoaderConfigService) {
+  constructor(
+    public actionSheetController: ActionSheetController, 
+    public imgSetConf: ImageLoaderConfigService,
+    public store: Store<ProfileState>) {
     this.imageConfigure();
    }
 
@@ -34,6 +39,7 @@ export class CoachUserForGuestComponent implements OnInit {
     this.user.userName = 'Jacek';
     this.user.userSurname = 'Soplica';
     this.user.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
+    this.store.pipe(select('profile')).subscribe(state => { this.user.imgUrl = state.profImgUrl; });
   }
 
   public switchProfileTab(selectedTab: number){
@@ -72,7 +78,6 @@ export class CoachUserForGuestComponent implements OnInit {
       element: 'class',
       value: 'image',
       });
-    this.profilePicturePath = 'assets/images/profile-picture.png';
   }
 
 }

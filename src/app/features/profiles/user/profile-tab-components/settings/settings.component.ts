@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { setTheme } from './settings.action';
-import {State} from './settings.reducer';
+import {ProfileState} from './settings.reducer';
 
 @Component({
   selector: 'app-settings',
@@ -10,7 +10,7 @@ import {State} from './settings.reducer';
 })
 export class SettingsComponent implements OnInit {
   public selectedGradient = 1;
-  constructor( private store: Store<State>) { }
+  constructor( private store: Store<ProfileState>) { }
 
   ngOnInit() {}
 

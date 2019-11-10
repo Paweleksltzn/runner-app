@@ -16,7 +16,7 @@ import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { StoreModule } from '@ngrx/store';
-import { themeReducer } from './profile-tab-components/settings/settings.reducer';
+import { profileReducer } from './profile-tab-components/settings/settings.reducer';
 
 const routes: Routes = [
   {
@@ -76,7 +76,7 @@ const routes: Routes = [
     IonicModule,
     SharedModule,
     IonicImageLoader,
-    StoreModule.forFeature('settings',  themeReducer )
+    StoreModule.forFeature('profile',  profileReducer )
   ]
 })
 export class UserModule { }

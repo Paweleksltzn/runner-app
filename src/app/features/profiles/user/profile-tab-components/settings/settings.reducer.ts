@@ -1,16 +1,18 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {setTheme} from './settings.action';
 
-export interface State {
+export interface ProfileState {
   gradient: any;
+  profImgUrl: string;
 }
-export const initialState: State = {
+export const initialState: ProfileState = {
   gradient: 1,
+  profImgUrl: 'assets/images/profile-picture.png'
 };
-const colorReducer = createReducer(
+const profReducer = createReducer(
   initialState,
   on(setTheme, (state, action) => ({ ...state, gradient: action.gradient}))
 );
-export function themeReducer(state: State | undefined, action: Action) {
-  return colorReducer(state, action);
+export function profileReducer(state: ProfileState | undefined, action: Action) {
+  return profReducer(state, action);
 }

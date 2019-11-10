@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageLoaderConfigService , ImageAttribute} from 'ionic-image-loader';
-import { Store } from '@ngrx/store';
-import { State } from '../profile-tab-components/settings/settings.reducer';
+import { Store, select } from '@ngrx/store';
+import { ProfileState } from '../profile-tab-components/settings/settings.reducer';
 import { UserProfile } from '../interfaces/user-interface';
 
 
@@ -17,18 +17,18 @@ export class CoachUserComponent implements OnInit {
     profileDescription: ' ',
     userName: ' ',
     userSurname: ' ',
-    gradient: 1
+    gradient: 1,
+    imgUrl: ' ',
   };
 
   public selectedProfileTab: number;
   public camera: Camera;
   public imageAttributes: ImageAttribute[] = [];
-  public profilePicturePath: string;
   
   constructor(
     public actionSheetController: ActionSheetController, 
     public imgSetConf: ImageLoaderConfigService,
-    public store: Store<State>) {
+    public store: Store<ProfileState>) {
     this.imageConfigure();
    }
 
@@ -36,7 +36,8 @@ export class CoachUserComponent implements OnInit {
     this.user.userName = 'Jacek';
     this.user.userSurname = 'Soplica';
     this.user.profileDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.';
-    this.store.select('settings').subscribe(state => { this.user.gradient = state.gradient; });
+    this.store.pipe(select('profile')).subscribe(state => { this.user.gradient = state.gradient; });
+    this.store.pipe(select('profile')).subscribe(state => { this.user.imgUrl = state.profImgUrl; });
   }
 
   public switchProfileTab(selectedTab: number){
@@ -75,6 +76,5 @@ export class CoachUserComponent implements OnInit {
       element: 'class',
       value: 'image',
       });
-    this.profilePicturePath = 'assets/images/profile-picture.png';
   }
 }

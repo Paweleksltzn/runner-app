@@ -29,7 +29,7 @@
     text-align: center;
     display: block;
     outline: 0;
-    @media only screen and (max-width: 340px){font-size: 12px;}
+    
     
 }
 ion-icon{
@@ -51,4 +51,9 @@ span{
 }
 .gradient-3{
     background-image: $orange-darken-gradient;
+}
+@media only screen and (max-width: 340px){
+    .ratings, .friends, .achivments, .settings, .trainings{
+        font-size: 12px;
+    }
 }
