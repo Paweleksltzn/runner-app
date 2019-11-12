@@ -49,33 +49,6 @@ export class CoachUserForGuestComponent implements OnInit {
     this.selectedProfileTab = selectedTab;
   }
 
-  async presentActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Zdjęcie profilowe',
-      buttons: [{
-        text: 'Wybierz z galerii',
-        icon: 'photos',
-        handler: () => {
-          const options: CameraOptions = {
-            quality: 100,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
-          }
-          this.camera.getPicture(options).then((imageData) => {
-            const base64Image = 'data:image/jpeg;base64,' + imageData;
-           }, (err) => {
-            // Handle error
-           });
-        }
-      }, {
-        text: 'Zrób zdjęcie',
-        icon: 'videocam',
-      }]
-    });
-    await actionSheet.present();
-  }
-
   public imageConfigure() {
     this.imageAttributes.push({
       element: 'class',
