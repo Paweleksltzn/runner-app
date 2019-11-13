@@ -11,7 +11,8 @@ import { RatingComponent } from './profile-tab-components/rating/rating.componen
 import { NormalUserForGuestComponent } from './normal-user/normal-user-for-guest/normal-user-for-guest.component';
 import { CoachUserForGuestComponent } from './coach-user/coach-user-for-guest/coach-user-for-guest.component';
 import { RatingGuestComponent } from './profile-tab-components/rating/rating-guest/rating-guest.component';
-
+import { ProfileComponent } from '../user_param/profile/profile.component';
+ 
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { IonicImageLoader } from 'ionic-image-loader';
@@ -52,6 +53,16 @@ const routes: Routes = [
     {path: 'rate-guest' , component: RatingGuestComponent}
   ]
   },
+  {path: 'profile', component: ProfileComponent,
+  children: [
+    {path: 'friends', component: FriendsComponent},
+    {path: 'trainings', component: TrainingsComponent},
+    {path: 'achivment', component: AchivmentsComponent},
+    {path: 'rate-guest' , component: RatingGuestComponent},
+    {path: 'settings', component: SettingsComponent},
+    {path: 'rate', component: RatingComponent}
+  ]
+  }
 
 ];
 
@@ -69,6 +80,7 @@ const routes: Routes = [
     NormalUserForGuestComponent,
     CoachUserForGuestComponent,
     RatingGuestComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
