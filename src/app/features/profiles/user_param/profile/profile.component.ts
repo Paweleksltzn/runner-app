@@ -3,7 +3,7 @@ import { UserProfile } from '../../user/interfaces/user-interface';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
 import { ActionSheetController } from '@ionic/angular';
-import { ProfileState } from '../../user/profile-tab-components/settings/settings.reducer';
+import { ProfileState } from '../../user/store/settings.reducer';
 import { Store, select } from '@ngrx/store';
 
 @Component({
@@ -18,9 +18,9 @@ export class ProfileComponent implements OnInit {
     userSurname: ' ',
     gradient: 1,
     imgUrl: ' ',
+    userType: 0,
   };
 
-  public userType = 1;
   public selectedProfileTab: number;
   public camera: Camera;
   public imageAttributes: ImageAttribute[] = [];
@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
       this.user.userName = state.userName;
       this.user.userSurname = state.userSurname;
       this.user.profileDescription = state.profileDesc;
+      this.user.userType = state.userType;
     });
   }
 
@@ -47,7 +48,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async presentActionSheet() {
-    if (this.userType === 1 || this.userType === 2) {
+    if (this.user.userType === 1 || this.user.userType === 2) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Zdjęcie profilowe',
       buttons: [{

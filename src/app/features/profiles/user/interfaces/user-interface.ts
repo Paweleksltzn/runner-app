@@ -5,5 +5,6 @@ export interface UserProfile {
     userSurname: string;
     gradient: number;
     imgUrl: string;
+    userType: number;
   }
   

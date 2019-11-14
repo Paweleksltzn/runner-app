@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import {ProfileState} from './settings.reducer';
+import {ProfileState} from '../../store/settings.reducer';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { actions } from 'src/app/store';
 

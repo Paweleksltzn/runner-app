@@ -7,13 +7,15 @@ export interface ProfileState {
   userName: string;
   userSurname: string;
   profileDesc: string;
+  userType: number;
 }
 export const initialState: ProfileState = {
   gradient: 1,
   profImgUrl: 'assets/images/profile-picture.png',
   userName: 'Jacek',
   userSurname: 'Soplica',
-  profileDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.'
+  profileDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.',
+  userType: 1
 };
 const profReducer = createReducer(
   initialState,

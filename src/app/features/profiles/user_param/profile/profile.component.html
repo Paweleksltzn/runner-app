@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="profile-tab">
-    <ng-container *ngIf="userType === 1">
+    <ng-container *ngIf="user.userType === 1">
         <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
           <ion-icon name="contacts"></ion-icon>
           <span>Znajomi</span>
@@ -25,7 +25,7 @@
         </div>
     </ng-container>
 
-    <ng-container *ngIf="userType === 2">
+    <ng-container *ngIf="user.userType === 2">
         <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
           <ion-icon name="contacts"></ion-icon>
           <span>Znajomi</span>
@@ -40,7 +40,7 @@
         </div>
     </ng-container>
 
-    <ng-container *ngIf="userType === 3">
+    <ng-container *ngIf="user.userType === 3">
         <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
           <ion-icon name="contacts"></ion-icon>
           <span>Znajomi</span>
@@ -55,7 +55,7 @@
         </div>
     </ng-container>
 
-    <ng-container *ngIf="userType === 4">
+    <ng-container *ngIf="user.userType === 4">
         <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
           <ion-icon name="contacts"></ion-icon>
           <span>Znajomi</span>
