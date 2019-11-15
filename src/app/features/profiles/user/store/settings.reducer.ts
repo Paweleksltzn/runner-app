@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { setThemeAction } from './settings.action';
+import { profileAction } from './settings.action';
 
 export interface ProfileState {
   gradient: number;
@@ -19,7 +19,7 @@ export const initialState: ProfileState = {
 };
 const profReducer = createReducer(
   initialState,
-  on(setThemeAction.setTheme, (state, action) => ({ ...state, gradient: action.gradient}))
+  on(profileAction.setTheme, (state, action) => ({ ...state, gradient: action.gradient}))
 );
 export function profileReducer(state: ProfileState | undefined, action: Action) {
   return profReducer(state, action);

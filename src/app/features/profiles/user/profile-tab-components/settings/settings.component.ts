@@ -15,8 +15,8 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {}
 
-  changeProfileTheme(selectedTheme: any) {
+  public changeProfileTheme(selectedTheme: any) {
     this.selectedGradient = selectedTheme;
-    this.store.dispatch(actions.setThemeAction.setTheme({gradient: selectedTheme}));
+    this.store.dispatch(actions.profileAction.setTheme({gradient: selectedTheme}));
   }
 }
