@@ -1,6 +1,6 @@
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import {EmailService} from './email.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EmailConfirmComponent implements OnInit {
   public confirmToken: string;
-  constructor(private emailService: EmailService, private activatedRoute: ActivatedRoute) { }
+  constructor(private emailService: EmailService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
 
@@ -18,6 +18,11 @@ export class EmailConfirmComponent implements OnInit {
 
       this.emailService.confirmMail(this.confirmToken).subscribe( (res: string) => {
 
+    },
+    err =>{
+      if (err.status === 0){
+        this.router.navigateByUrl('/error');
+      }
     });
   }
 
