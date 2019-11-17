@@ -1,14 +1,14 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { actions } from '../../../store';
-import { AuthState } from 'src/app/shared/interfaces/auth/AuthState';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 
-export const initialState: AuthState = {
+export const initialState: storeState.AuthState = {
     email: '',
     name: '',
     surname: '',
     isMale: undefined,
     accessLevel: undefined
-}
+};
 
 const authReducerOptions = createReducer(initialState,
      on(actions.authActions.signIn, ( state, action ) => ({
@@ -29,7 +29,7 @@ const authReducerOptions = createReducer(initialState,
     })),
 
 );
-  
-export function authReducer(state: AuthState | undefined, action: Action) {
+
+export function authReducer(state: storeState.AuthState | undefined, action: Action) {
     return authReducerOptions(state, action);
 }

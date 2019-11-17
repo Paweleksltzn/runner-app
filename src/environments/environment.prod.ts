@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   srvAddress: 'http://localhost:3000',
   endpoints: {
-    auth: 'api/auth'
+    auth: 'api/auth',
+    workout: 'api/workout'
   }
 };

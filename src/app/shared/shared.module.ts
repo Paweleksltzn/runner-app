@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, AlertController } from '@ionic/angular';
+import { IonicModule, AlertController, ToastController } from '@ionic/angular';
 import { TabsNavComponent } from './components/tabs-nav/tabs-nav.component';
 import { MaterialModule } from './modules/material.module';
 import { FormsModule } from '@angular/forms';
 import { SingleWorkoutModule } from './components/single-workout/singleWorkoutModule';
+import { ToastGeneratorService } from './services/toast-generator.service';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { SingleWorkoutModule } from './components/single-workout/singleWorkoutMo
     SingleWorkoutModule
   ],
   providers: [
-    AlertController
+    AlertController,
+    ToastGeneratorService,
+    ToastController
   ]
 })
 export class SharedModule { }

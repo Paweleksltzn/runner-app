@@ -11,3 +11,9 @@
     background-color: $mixed-main-colours;
     border-color: $mixed-main-colours;
 }
+.alert-radio-inner.sc-ion-alert-md {
+    background-color: $mixed-main-colours;
+}
+[aria-checked="true"].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
+    border-color: $mixed-main-colours;
+}

@@ -10,7 +10,7 @@ exports.jwtFactory = (user) => {
             name: user.name,
             isMale: user.isMale,
             surname: user.surname,
-            accessLevel: user.accessLevel,
+            accessLevel: user.accessLevel
         }
       }, secret);
 }
@@ -24,13 +24,12 @@ exports.jwtVerivier = (req, res, next) => {
         const token = bearerHeader.split(' ')[1] || '';
             return jwt.verify(token, secret, function(err, decoded) {
                 if (err) {
-                    console.log(err)
-                    return res.status(500).send('wystapil blad');
+                    return res.status(504).send('Brak autoryzacji');
                 }
                 req.token = decoded.data
                 return next();
             });
     } else {
-        return res.status(500).send('wystapil blad');
+        return res.status(504).send('Brak autoryzacji');
     }
 }
