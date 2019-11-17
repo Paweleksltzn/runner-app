@@ -3,26 +3,28 @@
     <ion-title>Stoper</ion-title>
   </ion-toolbar>
 </ion-header>
-<div class="timer-container">
-  <div class="timer-container--time">
-    {{trainingTime.minutes}}:{{trainingTime.seconds}}
+<ion-content>
+  <div class="timer-container">
+    <div class="timer-container--time">
+      {{trainingTime.minutes}}:{{trainingTime.seconds}}
+    </div>
+    <ion-grid class="mt-3">
+      <ion-row>
+        <ion-col *ngIf="!shouldStartTimer">
+          <ion-button class="row-button start" (click)="runTimer()" [disabled]="timerSubscription">Start</ion-button>
+        </ion-col>
+        <ion-col *ngIf="shouldStartTimer">
+          <ion-button class="row-button stop" (click)="pause()" [disabled]="!timerSubscription">Stop</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button class="row-button stop" (click)="reset()">Reset</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button class="end-timer" (click)="cancel()">Powrót</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
-  <ion-grid class="mt-3">
-    <ion-row>
-      <ion-col *ngIf="!shouldStartTimer">
-        <ion-button class="row-button start" (click)="runTimer()" [disabled]="timerSubscription">Start</ion-button>
-      </ion-col>
-      <ion-col *ngIf="shouldStartTimer">
-        <ion-button class="row-button stop" (click)="pause()" [disabled]="!timerSubscription">Stop</ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button class="row-button stop" (click)="reset()">Reset</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button class="end-timer" (click)="cancel()">Powrót</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</div>
+</ion-content>

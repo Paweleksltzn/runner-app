@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   srvAddress: 'http://localhost:3000',
   endpoints: {
-    auth: 'api/auth'
+    auth: 'api/auth',
+    workout: 'api/workout'
   }
 };
 

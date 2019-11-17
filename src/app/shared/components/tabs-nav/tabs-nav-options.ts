@@ -1,14 +1,16 @@
 import { TabsNavLink } from '../../interfaces/tabsNavLink';
+import { tabNavWorkoutOptions } from 'src/app/features/workouts/workouts-tab-options';
 
 export const tabNavOptions: TabsNavLink[] = [
     {
-        label: 'Więcej',
-        iconName: 'menu',
-        link: 'more'
+        label: 'Treningi',
+        iconName: 'flash',
+        link: 'my-workouts',
+        children: tabNavWorkoutOptions
     },
     {
-        label: 'Mój trening',
+        label: 'Test',
         iconName: 'flash',
-        link: 'workout'
+        link: 'training'
     }
 ];
