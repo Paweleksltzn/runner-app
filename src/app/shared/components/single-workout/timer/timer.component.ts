@@ -3,9 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { TrainingTime } from 'src/app/shared/interfaces/trainingTime';
 import { Subscription, interval } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { actions } from 'src/app/store';
-import { WorkoutState } from 'src/app/shared/interfaces/workout/WorkoutState';
-import { TouchSequence } from 'selenium-webdriver';
+import { actions, Reducers } from 'src/app/store';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({
   selector: 'app-timer',
@@ -17,10 +16,10 @@ export class TimerComponent implements OnInit {
   public shouldStartTimer: boolean;
   public timerSubscription: Subscription;
 
-  constructor(private modalCtrl: ModalController, private store: Store<{singleWorkout: WorkoutState}>) { }
+  constructor(private modalCtrl: ModalController, private store: Store<Reducers>) { }
 
   ngOnInit() {
-    this.store.pipe(select('singleWorkout')).subscribe((state: WorkoutState) => {
+    this.store.pipe(select('singleWorkout')).subscribe((state: storeState.WorkoutState) => {
       this.timerSubscription = state.timerSubscription;
       this.trainingTime = state.trainingTime;
       this.shouldStartTimer = state.isTimerOn;

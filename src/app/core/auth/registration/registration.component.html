@@ -1,63 +1,65 @@
-<div class="main-container">
-  <div class="main-container--logo">
-    <ion-img src="assets/images/logo.png"></ion-img>
-    <p class="logo-text">Train with professionals and make yourself a professional.</p>
-  </div>
-  <div class="main-container--form">
-    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
-      <div class="name-surname-cont">
-        <div class="group-reg-2">      
-            <input class ="reg-input-2" type="text" required formControlName="name">
+<ion-content>
+  <div class="main-container">
+    <div class="main-container--logo">
+      <ion-img src="assets/images/logo.png"></ion-img>
+      <p class="logo-text">Train with professionals and make yourself a professional.</p>
+    </div>
+    <div class="main-container--form">
+      <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+        <div class="name-surname-cont">
+          <div class="group-reg-2">      
+              <input class ="reg-input-2" type="text" required formControlName="name">
+              <span class="highlight"></span>
+              <span class="bar-name"></span>
+              <label>Imie</label>
+          </div>
+          <div class="group-reg-2-right">      
+            <input class ="reg-input-2" type="text" required formControlName="surname">
             <span class="highlight"></span>
             <span class="bar-name"></span>
-            <label>Imie</label>
-        </div>
-        <div class="group-reg-2-right">      
-          <input class ="reg-input-2" type="text" required formControlName="surname">
-          <span class="highlight"></span>
-          <span class="bar-name"></span>
-          <label>Nazwisko</label>
-        </div>
-      </div>
-        <div class="group-reg">      
-          <input class ="reg-input" type="text" required formControlName="email">
-          <ion-icon name="mail" class="main-container--form-icon"></ion-icon>
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Email</label>
-        </div>  
-        <div class="group-reg">      
-          <input class ="reg-input" type="password" required formControlName="password">
-          <ion-icon name="lock" class="main-container--form-icon"></ion-icon>
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Hasło</label>
-        </div>
-        <div  class="group-reg">      
-          <input class ="reg-input" type="password" required formControlName="confirmedPassword">
-          <ion-icon name="lock" class="main-container--form-icon"></ion-icon>
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Powtórz hasło</label>
-        </div>
-          <div class="sex-check">
-            <div class="sex-m" (click)="switchSex(true)" [ngClass]="{'sex-checker':isMale === true}" >
-              <ion-icon name="man"></ion-icon>
-            </div>
-            <div class="sex-w" (click)="switchSex(false)" [ngClass]="{'sex-checker':isMale === false}" >
-              <ion-icon name="woman"></ion-icon>
-            </div>
+            <label>Nazwisko</label>
           </div>
-          <ion-button expand="block" class="reg-submit" type="submit">Zarejstruj się</ion-button>
-          <p class="response" *ngIf="validationMessage" [ngClass]="messageClass"> {{validationMessage}} </p>    
-        <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w 
-          <span class="policy">umowie</span>
         </div>
-      </form>
-      <div class="has-account">
-          <span class="has-account-message">Masz już konto?  
-            <span class="has-account-login" routerLink="../login" routerLinkActive="active"> Zaloguj się </span> 
-          </span>
-      </div>
+          <div class="group-reg">      
+            <input class ="reg-input" type="text" required formControlName="email">
+            <ion-icon name="mail" class="main-container--form-icon"></ion-icon>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Email</label>
+          </div>  
+          <div class="group-reg">      
+            <input class ="reg-input" type="password" required formControlName="password">
+            <ion-icon name="lock" class="main-container--form-icon"></ion-icon>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Hasło</label>
+          </div>
+          <div  class="group-reg">      
+            <input class ="reg-input" type="password" required formControlName="confirmedPassword">
+            <ion-icon name="lock" class="main-container--form-icon"></ion-icon>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Powtórz hasło</label>
+          </div>
+            <div class="sex-check">
+              <div class="sex-m" (click)="switchSex(true)" [ngClass]="{'sex-checker':isMale === true}" >
+                <ion-icon name="man"></ion-icon>
+              </div>
+              <div class="sex-w" (click)="switchSex(false)" [ngClass]="{'sex-checker':isMale === false}" >
+                <ion-icon name="woman"></ion-icon>
+              </div>
+            </div>
+            <ion-button expand="block" class="reg-submit" type="submit">Zarejstruj się</ion-button>
+            <p class="response" *ngIf="validationMessage" [ngClass]="messageClass"> {{validationMessage}} </p>    
+          <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w 
+            <span class="policy">umowie</span>
+          </div>
+        </form>
+        <div class="has-account">
+            <span class="has-account-message">Masz już konto?  
+              <span class="has-account-login" routerLink="../login" routerLinkActive="active"> Zaloguj się </span> 
+            </span>
+        </div>
+    </div>
   </div>
-</div>
+</ion-content>

@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit {
     const userData = {
       ...this.authForm.value,
       isMale: this.isMale
-    }
+    };
     this.authService.postSignUp(userData).subscribe(
       (res: string) => {
         this.validationMessage = res;
@@ -47,7 +47,6 @@ export class RegistrationComponent implements OnInit {
         this.authForm.reset();
       },
       err => {
-        console.log(err)
         this.authForm.patchValue({
           password: '',
           confirmedPassword: ''
@@ -58,7 +57,7 @@ export class RegistrationComponent implements OnInit {
           this.router.navigateByUrl('/error');
         }
       }
-    )
+    );
   }
 
 }

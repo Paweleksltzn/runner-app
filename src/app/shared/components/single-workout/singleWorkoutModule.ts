@@ -7,6 +7,7 @@ import { SingleWorkoutComponent } from './single-workout.component';
 import { TimerComponent } from './timer/timer.component';
 import { StoreModule } from '@ngrx/store';
 import { singleWorkoutReducer } from './store/single-workout-reducer';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [SingleWorkoutComponent, TimerComponent],

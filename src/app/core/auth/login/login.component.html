@@ -1,32 +1,35 @@
-<div class="container">
-  <div class="container--logo">
-      <ion-img src="assets/images/logo.png"></ion-img>
-  </div>
-  <div class="container--form">
-    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
-        <div class="group">      
-          <input type="text" required formControlName="email">
-          <ion-icon name="mail" class="container--form-icon"></ion-icon>
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Email</label>
+
+<ion-content>
+  <div class="container">
+    <div class="container--logo">
+        <ion-img src="assets/images/logo.png"></ion-img>
+    </div>
+    <div class="container--form">
+      <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+          <div class="group">      
+            <input type="text" required formControlName="email">
+            <ion-icon name="mail" class="container--form-icon"></ion-icon>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Email</label>
+          </div>
+          <div class="group">      
+            <input type="password" required formControlName="password">
+            <ion-icon name="lock" class="container--form-icon"></ion-icon>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Hasło</label>
+          </div>
+          <ion-button expand="block" class="auth-submit" type="submit">Zaloguj</ion-button>
+          <p class="invalid-response" *ngIf="validationMessage">{{ validationMessage }}</p>
+          <p class="container--form-reminder">Nie pamiętasz hasła ?</p>
+        </form>
+        <div class="has-no-account">
+            <span class="has-no-account-message">Nie masz jeszcze konta?  
+              <span class="has-no-account-registration" routerLink="../registration" routerLinkActive="active">Zarejestruj się</span> 
+            </span>
         </div>
-        <div class="group">      
-          <input type="password" required formControlName="password">
-          <ion-icon name="lock" class="container--form-icon"></ion-icon>
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Hasło</label>
-        </div>
-        <ion-button expand="block" class="auth-submit" type="submit">Zaloguj</ion-button>
-        <p class="invalid-response" *ngIf="validationMessage">{{ validationMessage }}</p>
-        <p class="container--form-reminder">Nie pamiętasz hasła ?</p>
-      </form>
-      <div class="has-no-account">
-          <span class="has-no-account-message">Nie masz jeszcze konta?  
-            <span class="has-no-account-registration" routerLink="../registration" routerLinkActive="active">Zarejestruj się</span> 
-          </span>
-      </div>
-      
-  </div>
-</div>
+        
+    </div>
+  </div>  
+</ion-content>

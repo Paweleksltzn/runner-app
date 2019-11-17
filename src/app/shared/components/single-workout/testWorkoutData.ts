@@ -1,7 +1,6 @@
 import { Workout } from '../../interfaces/workout/workout';
 
 export const testWorkout: Workout = {
-    trainingDate: new Date(),
     title: 'Trening testowy',
     excercises: [
         {

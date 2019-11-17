@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
         this.authService.signIn(token);
       },
       err => {
-        console.log(err)
         this.authForm.patchValue({
           password: '',
           confirmedPassword: ''
@@ -48,7 +47,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/error');
         }
       }
-    )
+    );
   }
 
 }

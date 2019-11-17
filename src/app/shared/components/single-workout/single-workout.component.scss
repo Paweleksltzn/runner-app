@@ -16,7 +16,7 @@ ion-reorder-group {
 .result-counter {
     margin-right: .7rem;
 }
-.result-input {
+.exercise-name, .result-input {
     border: none;
     border-bottom: 1px solid black;
     width: 2.5rem;
@@ -28,12 +28,21 @@ ion-reorder-group {
         color: $mixed-main-colours;
     }
 }
+.exercise-name {
+    width: 100%;
+    margin-left: .5rem;
+    text-align: left;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+} 
 .result-description {
     font-size: .75rem;
 }
 .short-button {
     width: 2rem;
     height: 2rem;
+    background: transparent;
 }
 .exercise-name {
     margin-left: .5rem;
@@ -43,6 +52,9 @@ ion-reorder-group {
 }
 .series-grid {
     margin-bottom: 1rem;
+}
+.history-series-grid {
+    margin-bottom: 0;
 }
 .series-grid ion-row:not(:last-child) {
     border-bottom: 1px solid lightgrey;
@@ -65,4 +77,35 @@ ion-reorder-group {
     margin-right: auto;
     display: block;
     width: 50%;
+    margin-bottom: 2rem;
+}
+.delete-from-history {
+    margin-top: 2rem;
+}
+.margin-left-auto {
+    margin-left: auto;
+}
+ion-content {
+    height: calc(100vh - 169px);
+    padding-bottom: 1rem;
+}
+.title-input {
+    background-color: transparent;
+    width: 90%;
+    border: none;
+    font-size: 1.1rem;
+    margin-left: .7rem;
+    font-weight: bold;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.delete-workout {
+    --background: linear-gradient(to right top, #f41919, #f41b25, #f41f2f, #f32338, #f22840, #f32b43, #f32e45, #f43148, #f73346, #fa3543, #fc3741, #ff393e);
+    --color: white;
+}
+.input-in-history {
+    border-bottom: none;
+    color: $mixed-main-colours;
 }

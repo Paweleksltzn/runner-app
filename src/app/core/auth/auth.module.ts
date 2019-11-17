@@ -11,12 +11,14 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './store/auth.reducer';
 import { JwtInterceptor } from 'src/app/core/auth/interceptors/tokenInterceptor';
 import { ErrorStatementComponent } from './error-statement/error-statement.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     AuthRoutingModule,
     ReactiveFormsModule,
     FormsModule,
