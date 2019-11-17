@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PasswordService } from './password.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl , Validators , FormBuilder } from '@angular/forms';
 
 
@@ -15,7 +15,11 @@ export class PassChangeComponent implements OnInit {
   public passForm: FormGroup;
   public isFormValid: boolean;
   public tokenString;
-  constructor(private passwordService: PasswordService, private activatedRoute: ActivatedRoute, private fb: FormBuilder) { }
+  constructor(
+    private passwordService: PasswordService,
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
     this.createForm();
@@ -32,6 +36,11 @@ export class PassChangeComponent implements OnInit {
     console.log(this.isFormValid);
     if (this.isFormValid && this.passForm.value.pass === this.passForm.value.passChk ) {
       this.passwordService.changedPassword(password).subscribe((res: any) => {
+      },
+      err =>{
+        if (err.status === 0){
+          this.router.navigateByUrl('/error');
+        }
       });
     } else{
       this.isFormValid = false;

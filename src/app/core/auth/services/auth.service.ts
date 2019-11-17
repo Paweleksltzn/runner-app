@@ -9,6 +9,7 @@ import * as jwt_decode from 'jwt-decode';
 import { actions, Reducers } from '../../../store';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

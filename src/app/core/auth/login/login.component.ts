@@ -43,6 +43,9 @@ export class LoginComponent implements OnInit {
           confirmedPassword: ''
         });
         this.validationMessage = err.error;
+        if (err.status === 0){
+          this.router.navigateByUrl('/error');
+        }
       }
     );
   }

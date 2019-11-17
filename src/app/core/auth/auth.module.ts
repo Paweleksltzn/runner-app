@@ -10,6 +10,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { StoreModule } from '@ngrx/store';
 import { authReducer } from './store/auth.reducer';
 import { JwtInterceptor } from 'src/app/core/auth/interceptors/tokenInterceptor';
+import { ErrorStatementComponent } from './error-statement/error-statement.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   declarations: [
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ErrorStatementComponent
   ],
   providers: [
     NativeStorage,

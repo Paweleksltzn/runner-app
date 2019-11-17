@@ -11,12 +11,14 @@ import { Routes , RouterModule, Router} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import {EmailService} from '../components/email-confirm/email.service';
+import {ErrorComponent} from '../components/error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmailConfirmComponent,
-    PassChangeComponent
+    PassChangeComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    
     this.createForm();
   }
 
@@ -52,6 +53,9 @@ export class RegistrationComponent implements OnInit {
         });
         this.validationMessage = err.error;
         this.messageClass = 'invalid-response';
+        if (err.status === 0){
+          this.router.navigateByUrl('/error');
+        }
       }
     );
   }
