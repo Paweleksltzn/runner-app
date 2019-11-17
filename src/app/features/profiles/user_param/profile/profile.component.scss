@@ -1,0 +1,59 @@
+@import '../../../../../styles/variables';
+.main-container{
+    height: 100vh;
+    &-profile{
+        height: 60%;
+        display: block;     
+    }
+}
+.profile-picture{
+    height: 60%;
+    text-align: center;
+    background-size: 100% 70%;
+    background-repeat: no-repeat;
+    background-image: $green-teal-gradient;
+}
+.profile-description{
+    height: 40%;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    color: #555;
+}
+.profile-tab{
+    height: 15%;
+    display: flex;
+}
+.ratings, .friends, .achivments, .settings, .trainings{
+    width: 33%;
+    text-align: center;
+    display: block;
+    outline: 0;
+    
+    
+}
+ion-icon{
+    font-size: 40px;
+    margin: 0.8rem;
+    color: #555;
+}
+.tab-select{
+    border-bottom: solid 2px $mixed-main-colours;
+}
+span{
+    margin: 1rem;
+}
+.gradient-1{
+    background-image: $green-teal-gradient;
+}
+.gradient-2{
+    background-image: $blue-purple-gradient;
+}
+.gradient-3{
+    background-image: $orange-darken-gradient;
+}
+@media only screen and (max-width: 340px){
+    .ratings, .friends, .achivments, .settings, .trainings{
+        font-size: 12px;
+    }
+}

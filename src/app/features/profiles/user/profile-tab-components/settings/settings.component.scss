@@ -1,0 +1,26 @@
+@import '../../../../../../styles/variables';
+.green-theme, .blue-theme, .orange-theme{
+    border-radius: 25%;
+    border: solid 2px #555;
+    width: 25px;
+    height: 25px;
+    margin: .25rem;
+}
+.green-theme{
+    background-image: $green-teal-gradient;
+}
+.blue-theme{
+    background-image: $blue-purple-gradient;
+}
+.orange-theme{
+    background-image: $orange-darken-gradient;
+}
+.gradient-select{
+    display: flex;
+}
+.tab-selection{
+    border: solid 2px black;
+}
+.tab-select{
+    border-bottom: solid 2px $mixed-main-colours;
+}
