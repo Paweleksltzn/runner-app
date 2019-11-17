@@ -9,8 +9,8 @@ export const tabNavOptions: TabsNavLink[] = [
         children: tabNavWorkoutOptions
     },
     {
-        label: 'Test',
-        iconName: 'flash',
-        link: 'training'
+        label: 'Profil',
+        iconName: 'person',
+        link: 'user/profile'
     }
 ];

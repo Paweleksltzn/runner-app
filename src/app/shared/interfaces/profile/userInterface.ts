@@ -1,4 +1,3 @@
-
 export interface UserProfile {
     profileDescription: string;
     userName: string;
@@ -6,5 +5,4 @@ export interface UserProfile {
     gradient: number;
     imgUrl: string;
     userType: number;
-  }
-  
+}

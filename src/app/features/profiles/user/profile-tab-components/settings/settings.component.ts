@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import {ProfileState} from '../../store/settings.reducer';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-import { actions } from 'src/app/store';
+import { actions, Reducers } from 'src/app/store';
 
 @Component({
   selector: 'app-settings',
@@ -11,7 +11,7 @@ import { actions } from 'src/app/store';
 })
 export class SettingsComponent implements OnInit {
   public selectedGradient = 1;
-  constructor( private store: Store<ProfileState>, private nativeStorage: NativeStorage) { }
+  constructor( private store: Store<Reducers>, private nativeStorage: NativeStorage) { }
 
   ngOnInit() {}
 

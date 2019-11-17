@@ -10,7 +10,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { ProfileComponent } from '../../user_param/profile/profile.component';
 
 const routes: Routes = [
-  {path: 'profile', component: ProfileComponent,
+  {path: '', component: ProfileComponent,
   children: [
     {path: 'friends', component: FriendsComponent},
     {path: 'trainings', component: TrainingsComponent},
