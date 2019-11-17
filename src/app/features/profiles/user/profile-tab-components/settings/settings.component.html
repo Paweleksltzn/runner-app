@@ -1,0 +1,26 @@
+<ion-list>
+  <ion-item>
+    <ion-label>
+      <h3>Zmiena hasła</h3>
+      <ion-button fill="outline" color="danger">Zmień hasło</ion-button>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <h3>Zmień kolorystyke profilu</h3>
+      <div class="gradient-select">
+        <div (click)="changeProfileTheme(1)" [ngClass]="{'tab-selection':selectedGradient  === 1}" class="green-theme"></div>
+        <div (click)="changeProfileTheme(2)" [ngClass]="{'tab-selection':selectedGradient  === 2}" class="blue-theme"></div>
+        <div (click)="changeProfileTheme(3)" [ngClass]="{'tab-selection':selectedGradient  === 3}" class="orange-theme"></div>
+      </div>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <h3>Edycja opisu profilu</h3>
+      <ion-button fill="outline" color="danger">Edytuj</ion-button>
+    </ion-label>
+  </ion-item>
+</ion-list>

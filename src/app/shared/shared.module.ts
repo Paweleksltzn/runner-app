@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { SingleWorkoutModule } from './components/single-workout/singleWorkoutModule';
 import { ToastGeneratorService } from './services/toast-generator.service';
 
+
 @NgModule({
   declarations: [TabsNavComponent],
   imports: [
