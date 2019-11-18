@@ -18,4 +18,5 @@ export interface Reducers {
     myWorkouts: state.MyWorkoutState;
     singleWorkout: state.WorkoutState;
     history: state.MyWorkoutState;
+    profile: state.ProfileState;
 }

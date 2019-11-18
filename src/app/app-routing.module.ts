@@ -4,7 +4,7 @@ import { FirstLevelGuard } from 'src/app/core/auth/authGuards/firstLevelGuard';
 
 const routes: Routes = [
   { path: 'auth', loadChildren: './core/auth/auth.module#AuthModule' },
-  { path: 'user', loadChildren: './features/profiles/user/user.module#UserModule'},
+  { path: 'user/profile', loadChildren: './features/profiles/user/user.module#UserModule', canActivate: [FirstLevelGuard]},
   { path: 'workout', loadChildren: './features/workouts/active-workout/active-workout.module#ActiveWorkoutPageModule',
    canActivate: [FirstLevelGuard] },
   { path: 'my-workouts', loadChildren: './features/workouts/my-workouts/my-workouts.module#MyWorkoutsPageModule',

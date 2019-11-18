@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfile } from '../../user/interfaces/user-interface';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
 import { ActionSheetController } from '@ionic/angular';
-import { ProfileState } from '../../user/store/settings.reducer';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Store, select } from '@ngrx/store';
+import { Reducers } from 'src/app/store';
+import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 
 @Component({
   selector: 'app-profile',
@@ -24,16 +25,16 @@ export class ProfileComponent implements OnInit {
   public selectedProfileTab: number;
   public camera: Camera;
   public imageAttributes: ImageAttribute[] = [];
-  
+
   constructor(
     public actionSheetController: ActionSheetController,
     public imgSetConf: ImageLoaderConfigService,
-    public store: Store<ProfileState>) {
+    public store: Store<Reducers>) {
     this.imageConfigure();
    }
 
   ngOnInit() {
-    this.store.pipe(select('profile')).subscribe(state => { 
+    this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.user.imgUrl = state.profImgUrl;
       this.user.gradient = state.gradient;
       this.user.userName = state.userName;
@@ -43,8 +44,8 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  public switchProfileTab(selectedTab: number){
-    this.selectedProfileTab = selectedTab;  
+  public switchProfileTab(selectedTab: number) {
+    this.selectedProfileTab = selectedTab;
   }
 
   async presentActionSheet() {
@@ -60,7 +61,7 @@ export class ProfileComponent implements OnInit {
             destinationType: this.camera.DestinationType.FILE_URI,
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE
-          }
+          };
           this.camera.getPicture(options).then((imageData) => {
             const base64Image = 'data:image/jpeg;base64,' + imageData;
            }, (err) => {
@@ -73,8 +74,8 @@ export class ProfileComponent implements OnInit {
       }]
     });
     await actionSheet.present();
-    } else{
-      //Nothing happens
+    } else {
+      // Nothing happens
     }
   }
 
