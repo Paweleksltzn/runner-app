@@ -52,6 +52,11 @@ span{
 .gradient-3{
     background-image: $orange-darken-gradient;
 }
+.chatbox{
+    position: fixed;
+    left: 0px;
+    width: 20%;
+}
 @media only screen and (max-width: 340px){
     .ratings, .friends, .achivments, .settings, .trainings{
         font-size: 12px;

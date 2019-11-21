@@ -13,6 +13,7 @@ import { SettingsComponent } from './profile-tab-components/settings/settings.co
 import { RatingComponent } from './profile-tab-components/rating/rating.component';
 import { RatingGuestComponent } from './profile-tab-components/rating/rating-guest/rating-guest.component';
 import { ProfileComponent } from '../user_param/profile/profile.component';
+import { ChatComponent } from '../user_param/chat/chat.component';
 
 
 
@@ -26,6 +27,7 @@ import { ProfileComponent } from '../user_param/profile/profile.component';
     RatingComponent,
     RatingGuestComponent,
     ProfileComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,

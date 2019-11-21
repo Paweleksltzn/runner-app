@@ -8,6 +8,7 @@ import { RatingComponent } from '../profile-tab-components/rating/rating.compone
 import { RatingGuestComponent } from '../profile-tab-components/rating/rating-guest/rating-guest.component';
 import { Routes, RouterModule} from '@angular/router';
 import { ProfileComponent } from '../../user_param/profile/profile.component';
+import { ChatComponent } from '../../user_param/chat/chat.component';
 
 const routes: Routes = [
   {path: '', component: ProfileComponent,
@@ -17,9 +18,10 @@ const routes: Routes = [
     {path: 'achivment', component: AchivmentsComponent},
     {path: 'rate-guest' , component: RatingGuestComponent},
     {path: 'settings', component: SettingsComponent},
-    {path: 'rate', component: RatingComponent}
+    {path: 'rate', component: RatingComponent},
+    {path: 'chat', component: ChatComponent}
   ]
-  }
+  },
 
 ];
 
