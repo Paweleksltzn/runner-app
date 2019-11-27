@@ -2,19 +2,24 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TabsNavLink } from '../../interfaces/tabsNavLink';
 import { Store, select } from '@ngrx/store';
 import { Reducers } from 'src/app/store';
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { zoomIn } from 'ng-animate';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({
   selector: 'app-tabs-nav',
   templateUrl: './tabs-nav.component.html',
   styleUrls: ['./tabs-nav.component.scss'],
+  animations: [
+    trigger('tada', [transition('* => *', useAnimation(zoomIn))])
+  ],
 })
 export class TabsNavComponent implements OnInit {
   @Input() public navLinks: TabsNavLink[];
   public accessLevel: number;
   public childrenTab: TabsNavLink[] = [];
   public activeNavLinkLabel = '';
-
+  public zoomIn: any;
   constructor(private store: Store<Reducers>) { }
 
   ngOnInit() {
@@ -23,11 +28,22 @@ export class TabsNavComponent implements OnInit {
     this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
       this.accessLevel = state.accessLevel;
     });
+    // wprowadzic animacje jak zmieni sie liczba powiadomien, najprawdopodobniej przez jakis subject w socket service
+
+    // setInterval(fn => {
+    //   this.tada = Math.random().toString();
+    // }, 2000);
   }
 
-  public checkIfSecondaryTabVisible(clickedLink: TabsNavLink) {
-    this.childrenTab = clickedLink.children || [];
-    this.activeNavLinkLabel = clickedLink.label;
+  public checkIfSecondaryTabVisible(clickedLink: any) {
+    // tabNavLink | string
+    if (clickedLink.label !== undefined) {
+      this.childrenTab = clickedLink.children || [];
+      this.activeNavLinkLabel = clickedLink.label;
+    } else {
+      this.activeNavLinkLabel = clickedLink;
+    }
+
   }
 
 }

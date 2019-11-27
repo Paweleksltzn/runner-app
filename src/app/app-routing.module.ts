@@ -9,7 +9,10 @@ const routes: Routes = [
    canActivate: [FirstLevelGuard] },
   { path: 'my-workouts', loadChildren: './features/workouts/my-workouts/my-workouts.module#MyWorkoutsPageModule',
    canActivate: [FirstLevelGuard] },
-  { path: 'workouts-history', loadChildren: './features/workouts/history/history.module#HistoryPageModule', canActivate: [FirstLevelGuard] }
+  { path: 'workouts-history', loadChildren: './features/workouts/history/history.module#HistoryPageModule',
+   canActivate: [FirstLevelGuard] },
+  { path: 'notifications', loadChildren: './features/notifications/notifications.module#NotificationsPageModule' }
+
 ];
 @NgModule({
   imports: [
