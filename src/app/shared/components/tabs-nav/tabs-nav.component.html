@@ -18,7 +18,7 @@
     <ion-tab-button tab="notifications" class="ion-tab-bar-button" (click)="checkIfSecondaryTabVisible('')"
     [selected]="activeNavLinkLabel === ''">
         <ion-icon name="notifications"></ion-icon>
-        <span class="notifications__amount" [@zoomIn]="zoomIn">5</span>
+        <span class="notifications__amount" [@zoomIn]="zoomIn" *ngIf="notDisplayedNotificationsAmount > 0">{{ notDisplayedNotificationsAmount }}</span>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

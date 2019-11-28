@@ -7,10 +7,13 @@ import { IonicModule } from '@ionic/angular';
 
 import { NotificationsPage } from './notifications.page';
 import { NotificationsService } from './services/notifications.service';
+import { SingleNotificationComponent } from './components/single-notification/single-notification.component';
+import { StoreModule } from '@ngrx/store';
+import { notificationsReducer } from './store/notifications.reducer';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'notifications',
     component: NotificationsPage
   }
 ];
@@ -20,9 +23,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    StoreModule.forFeature('notifications', notificationsReducer)
   ],
-  declarations: [NotificationsPage],
+  declarations: [NotificationsPage, SingleNotificationComponent],
+  entryComponents: [SingleNotificationComponent],
   providers: [NotificationsService]
 })
 export class NotificationsPageModule {}

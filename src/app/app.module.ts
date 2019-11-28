@@ -15,6 +15,7 @@ import { IonicImageLoader } from 'ionic-image-loader';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { StoreModule } from '@ngrx/store';
 import { SocketModule } from './core/socket/socket.module';
+import { NotificationsPageModule } from './features/notifications/notifications.module';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SocketModule } from './core/socket/socket.module';
      AppRoutingModule,
      SharedModule, AuthModule,
      StoreModule.forRoot({}),
-     SocketModule
+     SocketModule,
+     NotificationsPageModule
   ],
   providers: [
     StatusBar,

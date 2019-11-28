@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .single-notification {
     background: #fafafa;
     &:nth-child(2n) {
@@ -18,6 +20,9 @@
         margin-bottom: .5rem;
         margin-top: .5rem;
     }
+}
+.empty-notifications {
+    margin: 1rem;
 }
 ion-grid {
     padding-left: 0;

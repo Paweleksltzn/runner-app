@@ -20,6 +20,8 @@ export class TabsNavComponent implements OnInit {
   public childrenTab: TabsNavLink[] = [];
   public activeNavLinkLabel = '';
   public zoomIn: any;
+  public notDisplayedNotificationsAmount: number;
+
   constructor(private store: Store<Reducers>) { }
 
   ngOnInit() {
@@ -28,7 +30,13 @@ export class TabsNavComponent implements OnInit {
     this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
       this.accessLevel = state.accessLevel;
     });
-    // wprowadzic animacje jak zmieni sie liczba powiadomien, najprawdopodobniej przez jakis subject w socket service
+    this.store.pipe(select('notifications')).subscribe((state: storeState.NotificationsState) => {
+      const newNotDisplayedNotificationsAmount = state.notifications.filter(notification => !notification.isDisplayed).length;
+      if (this.notDisplayedNotificationsAmount < newNotDisplayedNotificationsAmount) {
+        this.zoomIn = Math.random().toString(); // sprawdzic czy ta animacja dziala jak juz bedzie pobieranie z bazy i sockety
+      }
+      this.notDisplayedNotificationsAmount = newNotDisplayedNotificationsAmount;
+    });
 
     // setInterval(fn => {
     //   this.tada = Math.random().toString();

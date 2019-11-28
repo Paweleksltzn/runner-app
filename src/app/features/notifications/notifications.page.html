@@ -3,17 +3,18 @@
     <ion-title>Powiadomienia</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <h6 *ngIf="notifications.length <= 0" class="empty-notifications">Brak dostępnych powiadomień</h6>
   <ion-grid>
-    <ion-row class="single-notification">
+    <ion-row class="single-notification" *ngFor="let notification of notifications; let i = index" (click)="presentModal(notification, i)">
       <ion-col>
           <ion-row class="ion-align-items-end">
               <ion-col>
-                <h5>Tytuł powiadomienia</h5>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit... </p>
+                <h5>{{ notification.title }}</h5>
+                <p>{{ notification.message.substr(0, 60) }}... </p>
               </ion-col>
               <ion-col size="auto">
+                  <h6 class="single-notification__date">{{ notification.dateString }}</h6>
                   <ion-button class="unframed-primary-button" fill="clear">
                       Więcej
                       <ion-icon name="arrow-dropright"></ion-icon>
@@ -22,52 +23,10 @@
           </ion-row>
           <ion-row>
               <ion-col>
-                <h6>-Autor powiadomienia</h6>
+                <h6>-{{ notification.author }}</h6>
               </ion-col>
           </ion-row>
       </ion-col>
     </ion-row>
-    <ion-row class="single-notification">
-        <ion-col>
-            <ion-row class="ion-align-items-end">
-                <ion-col>
-                  <h5>Tytuł powiadomienia</h5>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit... </p>
-                </ion-col>
-                <ion-col size="auto">
-                    <ion-button class="unframed-primary-button" fill="clear">
-                        Więcej
-                        <ion-icon name="arrow-dropright"></ion-icon>
-                    </ion-button>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                  <h6>-Autor powiadomienia</h6>
-                </ion-col>
-            </ion-row>
-        </ion-col>
-      </ion-row>
-      <ion-row class="single-notification">
-          <ion-col>
-              <ion-row class="ion-align-items-end">
-                  <ion-col>
-                    <h5>Tytuł powiadomienia</h5>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit... </p>
-                  </ion-col>
-                  <ion-col size="auto">
-                      <ion-button class="unframed-primary-button" fill="clear">
-                          Więcej
-                          <ion-icon name="arrow-dropright"></ion-icon>
-                      </ion-button>
-                  </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col>
-                    <h6>-Autor powiadomienia</h6>
-                  </ion-col>
-              </ion-row>
-          </ion-col>
-        </ion-row>
   </ion-grid>
 </ion-content>
