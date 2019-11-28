@@ -6,47 +6,22 @@
   <ion-list-header>
     Ostatnie rozmowy
   </ion-list-header>
+  <div *ngFor="let conversation of privateConversations; let i = index;">
   <ion-item routerLink="/chat/conversation">
-      <ion-badge color="danger">+</ion-badge>
     <ion-avatar>
       <img src="../../../../../assets/images/profile-picture.png">
     </ion-avatar>
-    <ion-label>
-      <b>
-      <h2>Jacek</h2>
-      <p>Trenujesz dzisiaj?</p>
-      </b>
+    <ion-label *ngIf="conversation.isReaded === true; else Marked">
+      <h2>{{conversation.whoTexted}}</h2>
+      <p>{{conversation.lastMessage}}</p>
     </ion-label>
   </ion-item>
-
-  <ion-item>
-    <ion-avatar>
-      <img src="../../../../../assets/images/profile-picture.png">
-    </ion-avatar>
-    <ion-label>
-      <h2>Mietek</h2>
-      <p>Trenujesz dzisiaj?</p>
-    </ion-label>
-  </ion-item>
-
-  <ion-item>
-    <ion-avatar>
-      <img src="../../../../../assets/images/profile-picture.png">
-    </ion-avatar>
-    <ion-label>
-      <h2>Anna</h2>
-      <p>Trenujesz dzisiaj?</p>
-    </ion-label>
-  </ion-item>
-
-  <ion-item>
-    <ion-avatar>
-      <img src="../../../../../assets/images/profile-picture.png">
-    </ion-avatar>
-    <ion-label>
-      <h2>Łukasz</h2>
-      <p>Trenujesz dzisiaj?</p>
-    </ion-label>
-  </ion-item>
+</div>
 </ion-list>
+<ng-template #Marked>
+    <b>
+      <h2>{{privateConversations[0].whoTexted}}</h2>
+      <p>{{privateConversations[0].lastMessage}}</p>
+    </b>
+  </ng-template>
 </ion-content>
