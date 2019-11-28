@@ -1,0 +1,15 @@
+@import '../chat.component.scss';
+@import '../../../../../../styles/variables';
+.chat-form{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 6vh;
+}
+input{
+    border: solid 3px $mixed-main-colours;
+    border-radius: .5rem;
+    height: 100%;
+    width: 80%;
+    background-color: rgb(200, 200, 200);
+}
