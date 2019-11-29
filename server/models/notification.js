@@ -15,7 +15,7 @@ const notificationSchema = new Schema({
     type: String,
     required: true
   },
-  isDisplated: {
+  isDisplayed: {
       type: Boolean,
       required: true
   },
