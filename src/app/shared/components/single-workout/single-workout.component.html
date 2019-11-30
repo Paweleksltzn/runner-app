@@ -3,7 +3,7 @@
       <ion-buttons slot="start" *ngIf="workoutMode !== modes.training">
           <ion-back-button defaultHref="my-workouts"></ion-back-button>
       </ion-buttons>
-      <input type="text" [(ngModel)]="currentWorkout.title" class="title-input" name="repeats" (blur)="titleChanged($event)">
+      <input type="text" [(ngModel)]="currentWorkout.title" class="title-input" name="repeats" (blur)="titleChanged()">
   </ion-toolbar>
 </ion-header>
 <ion-content>

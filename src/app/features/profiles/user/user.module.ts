@@ -13,9 +13,7 @@ import { SettingsComponent } from './profile-tab-components/settings/settings.co
 import { RatingComponent } from './profile-tab-components/rating/rating.component';
 import { RatingGuestComponent } from './profile-tab-components/rating/rating-guest/rating-guest.component';
 import { ProfileComponent } from '../user_param/profile/profile.component';
-
-
-
+import { FriendsGuestComponent } from './profile-tab-components/friends/friends-guest/friends-guest.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +24,7 @@ import { ProfileComponent } from '../user_param/profile/profile.component';
     RatingComponent,
     RatingGuestComponent,
     ProfileComponent,
+    FriendsGuestComponent
   ],
   imports: [
     CommonModule,
@@ -36,4 +35,5 @@ import { ProfileComponent } from '../user_param/profile/profile.component';
     UserRoutingModule
   ]
 })
+
 export class UserModule { }
