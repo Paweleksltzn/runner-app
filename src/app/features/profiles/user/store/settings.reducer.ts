@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { profileAction } from './settings.action';
 import * as storeState from 'src/app/shared/interfaces/store/index';
+import { actions } from 'src/app/store';
 
 export const initialState: storeState.ProfileState = {
   gradient: 1,
@@ -10,10 +10,11 @@ export const initialState: storeState.ProfileState = {
   profileDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.',
   userType: 1
 };
-const profReducer = createReducer(
+
+const profileReducerOptions = createReducer(
   initialState,
-  on(profileAction.setTheme, (state, action) => ({ ...state, gradient: action.gradient}))
+  on(actions.profileAction.setTheme, (state, action) => ({ ...state, gradient: action.gradient}))
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {
-  return profReducer(state, action);
+  return profileReducerOptions(state, action);
 }

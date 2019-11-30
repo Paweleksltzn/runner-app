@@ -54,12 +54,11 @@ exports.login = async function(req, res, next) {
     return res.status(422).send('Nieprawidłowe dane logowania');
 }
 
-exports.emailConfirmed = (req, res, next) => {
-    const token = req.body.confirmToken;
-    let resetUser;
-    User.findOne({ confirmationToken: token }).then(user => {
-        if (user) {
-            resetUser = user;
+exports.emailConfirmed = async function(req, res, next) {
+    try {
+        const token = req.body.confirmToken;
+        const resetUser = await User.findOne({ confirmationToken: token });
+        if (resetUser) {
             resetUser.isActive = true;
             resetUser.confirmationToken = '';
             resetUser.save();
@@ -67,9 +66,10 @@ exports.emailConfirmed = (req, res, next) => {
         } else {
             return res.status(422).send('Wystąpił błąd')
         }
-    }).catch(err => {
-        return res.status(500).send('Wystąpił błąd')
-    });
+    } catch {
+        return res.status(500).send('Wystąpił błąd');
+    }
+    
 }
 
 exports.passwordReset = async function(req, res, next) {
