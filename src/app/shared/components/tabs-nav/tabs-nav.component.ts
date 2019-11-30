@@ -11,7 +11,7 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
   templateUrl: './tabs-nav.component.html',
   styleUrls: ['./tabs-nav.component.scss'],
   animations: [
-    trigger('tada', [transition('* => *', useAnimation(zoomIn))])
+    trigger('zoomIn', [transition('* => *', useAnimation(zoomIn))])
   ],
 })
 export class TabsNavComponent implements OnInit {

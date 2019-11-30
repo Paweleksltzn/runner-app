@@ -28,9 +28,10 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit() {
+    this.authForm.value.email = this.authForm.value.email.trim();
     this.authService.postLogIn(this.authForm.value).pipe(take(1)).subscribe(
       (token: string) => {
-        this.nativeStorage.setItem('credentials', { email: this.authForm.value.email, password: this.authForm.value.password })
+        this.nativeStorage.setItem('credentials', { email: this.authForm.value.email.trim(), password: this.authForm.value.password })
         .then(
           () => {}
         );
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
           confirmedPassword: ''
         });
         this.validationMessage = err.error;
-        if (err.status === 0){
+        if (err.status === 0) {
           this.router.navigateByUrl('/error');
         }
       }
