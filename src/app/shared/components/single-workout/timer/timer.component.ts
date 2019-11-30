@@ -30,7 +30,7 @@ export class TimerComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  private runTimer(): void {
+  public runTimer(): void {
     if (!this.shouldStartTimer) {
       this.store.dispatch(actions.singleWorkoutActions.toggleTimer({}));
     }

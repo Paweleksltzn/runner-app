@@ -105,7 +105,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
     excercise.series.splice(singleSetIndex, 1);
   }
 
-  public async changeExerciseName(exercise: Excersise, accordion: any) {
+  public async changeExerciseName(exercise: Excersise) {
     const alert = await this.alertController.create({
       header: 'Podaj nazwę ćwiczenia',
       inputs: [
