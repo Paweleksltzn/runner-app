@@ -7,17 +7,17 @@
     Ostatnie rozmowy
   </ion-list-header>
   <div *ngFor="let conversation of privateConversations; let i = index;">
-  <ion-item routerLink="/chat/conversation">
-    <ion-avatar>
-      <img src="../../../../../assets/images/profile-picture.png">
-    </ion-avatar>
-    <div [ngClass]="{'unreaded':conversation.isReaded === false}">
-      <ion-label>
-        <h2>{{conversation.whoTexted}}</h2>
-        <p>{{conversation.lastMessage}}</p>
-      </ion-label>
-    </div>
-  </ion-item>
-</div>
+    <ion-item routerLink="/chat/conversation">
+      <ion-avatar>
+        <img src="../../../../../assets/images/profile-picture.png">
+      </ion-avatar>
+      <div [ngClass]="{'unreaded':conversation.isReaded === false}">
+        <ion-label>
+          <h2>{{conversation.whoTexted}}</h2>
+          <p>{{conversation.lastMessage}}</p>
+        </ion-label>
+      </div>
+    </ion-item>
+  </div>
 </ion-list>
 </ion-content>
