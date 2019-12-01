@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
 import { ActionSheetController } from '@ionic/angular';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Store, select } from '@ngrx/store';
 import { Reducers } from 'src/app/store';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
+import {Plugins, CameraResultType, CameraSource} from '@capacitor/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -22,13 +23,14 @@ export class ProfileComponent implements OnInit {
     userType: 0,
   };
 
+  public image: SafeResourceUrl;
   public selectedProfileTab: number;
-  public camera: Camera;
   public imageAttributes: ImageAttribute[] = [];
 
   constructor(
     public actionSheetController: ActionSheetController,
     public imgSetConf: ImageLoaderConfigService,
+    private domSanitizer: DomSanitizer,
     public store: Store<Reducers>) {
     this.imageConfigure();
    }
@@ -55,22 +57,13 @@ export class ProfileComponent implements OnInit {
       buttons: [{
         text: 'Wybierz z galerii',
         icon: 'photos',
-        handler: () => {
-          const options: CameraOptions = {
-            quality: 100,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
-          };
-          this.camera.getPicture(options).then((imageData) => {
-            const base64Image = 'data:image/jpeg;base64,' + imageData;
-           }, (err) => {
-            // Handle error
-           });
-        }
+        handler: () => {}
       }, {
         text: 'Zrób zdjęcie',
         icon: 'videocam',
+        handler: () => {
+          this.takePhoto();
+        }
       }]
     });
     await actionSheet.present();
@@ -84,6 +77,17 @@ export class ProfileComponent implements OnInit {
       element: 'class',
       value: 'image',
       });
+  }
+
+  public async takePhoto(){
+    const { Camera } = Plugins;
+    const result = await Camera.getPhoto({
+      quality: 75,
+      allowEditing: true,
+      source: CameraSource.Camera,
+      resultType: CameraResultType.Base64,
+    });
+    this.image = this.domSanitizer.bypassSecurityTrustResourceUrl(result && result.base64String);
   }
 
 }
