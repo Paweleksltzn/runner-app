@@ -11,17 +11,13 @@
     <ion-avatar>
       <img src="../../../../../assets/images/profile-picture.png">
     </ion-avatar>
-    <ion-label *ngIf="conversation.isReaded === true; else Marked">
-      <h2>{{conversation.whoTexted}}</h2>
-      <p>{{conversation.lastMessage}}</p>
-    </ion-label>
+    <div [ngClass]="{'unreaded':conversation.isReaded === false}">
+      <ion-label>
+        <h2>{{conversation.whoTexted}}</h2>
+        <p>{{conversation.lastMessage}}</p>
+      </ion-label>
+    </div>
   </ion-item>
 </div>
 </ion-list>
-<ng-template #Marked>
-    <b>
-      <h2>{{privateConversations[0].whoTexted}}</h2>
-      <p>{{privateConversations[0].lastMessage}}</p>
-    </b>
-  </ng-template>
 </ion-content>
