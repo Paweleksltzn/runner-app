@@ -5,8 +5,7 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Store, select } from '@ngrx/store';
 import { Reducers } from 'src/app/store';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
-import {Plugins, CameraResultType, CameraSource} from '@capacitor/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {Plugins, CameraResultType} from '@capacitor/core';
 
 @Component({
   selector: 'app-profile',
@@ -23,14 +22,13 @@ export class ProfileComponent implements OnInit {
     userType: 0,
   };
 
-  public image: SafeResourceUrl;
+  public image = '../../../../../assets/images/profile-picture.png';
   public selectedProfileTab: number;
   public imageAttributes: ImageAttribute[] = [];
 
   constructor(
     public actionSheetController: ActionSheetController,
     public imgSetConf: ImageLoaderConfigService,
-    private domSanitizer: DomSanitizer,
     public store: Store<Reducers>) {
     this.imageConfigure();
    }
@@ -55,12 +53,8 @@ export class ProfileComponent implements OnInit {
     const actionSheet = await this.actionSheetController.create({
       header: 'Zdjęcie profilowe',
       buttons: [{
-        text: 'Wybierz z galerii',
+        text: 'Dodaj zdjęcie',
         icon: 'photos',
-        handler: () => {}
-      }, {
-        text: 'Zrób zdjęcie',
-        icon: 'videocam',
         handler: () => {
           this.takePhoto();
         }
@@ -79,15 +73,14 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  public async takePhoto(){
+  public async takePhoto() {
     const { Camera } = Plugins;
     const result = await Camera.getPhoto({
-      quality: 75,
+      quality: 90,
       allowEditing: true,
-      source: CameraSource.Camera,
-      resultType: CameraResultType.Base64,
+      resultType: CameraResultType.Uri,
     });
-    this.image = this.domSanitizer.bypassSecurityTrustResourceUrl(result && result.base64String);
+    this.image =  result.webPath;
   }
 
 }
