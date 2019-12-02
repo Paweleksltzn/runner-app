@@ -57,7 +57,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
     });
   }
 
-   private async loadViewHeight() {
+   private loadViewHeight() {
     this.platform.ready().then((readySource) => {
       this.deviceHeight = this.platform.height() - 169;
     });
