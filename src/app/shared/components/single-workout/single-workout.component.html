@@ -6,7 +6,7 @@
       <input type="text" [(ngModel)]="currentWorkout.title" class="title-input" name="repeats" (blur)="titleChanged()">
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content [ngStyle]="{'height': deviceHeight + 'px'}">
   <mat-accordion *ngIf="currentWorkout">
     <ion-reorder-group [disabled]="workoutMode === modes.history" (ionItemReorder)="doReorder($event)">
       <ion-item lines="none" *ngFor="let excercise of currentWorkout.excercises;let excerciseIndex = index;">
@@ -23,11 +23,11 @@
                     <span class="result-counter">Seria {{ i + 1 }}.</span>
                   </ion-col>
                   <ion-col>
-                    <input type="text" [(ngModel)]="singleSet.repeats" class="result-input" name="repeats" [disabled]="workoutMode === modes.history"
+                    <input type="number" [(ngModel)]="singleSet.repeats" class="result-input" name="repeats" [disabled]="workoutMode === modes.history"
                     [ngClass]="{'input-in-history': workoutMode === modes.history}"> <span class="result-description">razy</span>
                   </ion-col>
                   <ion-col>
-                    <input type="text" [(ngModel)]="singleSet.weight" class="result-input" name="weight" [disabled]="workoutMode === modes.history"
+                    <input type="number" [(ngModel)]="singleSet.weight" class="result-input" name="weight" [disabled]="workoutMode === modes.history"
                     [ngClass]="{'input-in-history': workoutMode === modes.history}"> <span class="result-description">kg</span>
                   </ion-col>
                   <ion-col size="auto" *ngIf="workoutMode !== modes.history">

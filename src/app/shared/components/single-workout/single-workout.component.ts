@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {  AlertController, ModalController } from '@ionic/angular';
+import {  AlertController, ModalController, Platform } from '@ionic/angular';
 import { Excersise } from '../../interfaces/workout/exercise';
 import { emptySingleSet, singleWorkoutModes } from './singleWorkoutHelper';
 import { TimerComponent } from './timer/timer.component';
@@ -22,6 +22,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
   public modes = singleWorkoutModes;
   public activeIndex: number;
   public isItemDeleted: boolean;
+  public deviceHeight = 0;
   private selectedWorkoutId: string;
 
   constructor(public alertController: AlertController,
@@ -30,9 +31,11 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private activeWorkoutService: ActiveWorkoutService,
-              private historyService: HistoryService) { }
+              private historyService: HistoryService,
+              private platform: Platform) { }
 
   ngOnInit() {
+    this.loadViewHeight();
     this.store.pipe(select('singleWorkout')).subscribe((state: storeState.WorkoutState) => {
       if (state.trainingMode === this.modes.training ) {
         if (this.activeWorkoutService.getTrainingType === true) {
@@ -51,6 +54,12 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
         this.activeIndex = +this.activatedRoute.snapshot.paramMap.get('workoutIndex');
       }
       this.workoutMode = state.trainingMode;
+    });
+  }
+
+   private async loadViewHeight() {
+    this.platform.ready().then((readySource) => {
+      this.deviceHeight = this.platform.height() - 169;
     });
   }
 
