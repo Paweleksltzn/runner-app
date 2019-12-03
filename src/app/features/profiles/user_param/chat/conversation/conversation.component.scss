@@ -2,14 +2,22 @@
 @import '../../../../../../styles/variables';
 .chat-form{
     position: fixed;
-    bottom: 0;
+    bottom: .25rem;
     width: 100vw;
     height: 6vh;
+    display: flex;
 }
-input{
-    border: solid 3px $mixed-main-colours;
-    border-radius: .5rem;
-    height: 100%;
-    width: 80%;
-    background-color: rgb(200, 200, 200);
+.msg-input{
+    background-color: transparent;
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    width:80%;
+    border:none;
+    border-bottom: 2px solid #a9a9a9;
+    color: #555;
+    padding-right: 4rem;
+}
+ion-button{
+    --background: linear-gradient(to left bottom, #15e6b5, #39e9b1, #4fecad, #61efaa,#71f2a6, #6ff19e, #6eef95, #6eee8c, #5ce87b, #49e268, #32dc55, #09d63f); 
+    font-size: 1rem;
 }
