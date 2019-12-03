@@ -6,6 +6,7 @@ import { MaterialModule } from './modules/material.module';
 import { FormsModule } from '@angular/forms';
 import { SingleWorkoutModule } from './components/single-workout/singleWorkoutModule';
 import { ToastGeneratorService } from './services/toast-generator.service';
+import { StorageService } from './services/storage.service';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ToastGeneratorService } from './services/toast-generator.service';
   providers: [
     AlertController,
     ToastGeneratorService,
-    ToastController
+    ToastController,
+    StorageService
   ]
 })
 export class SharedModule { }

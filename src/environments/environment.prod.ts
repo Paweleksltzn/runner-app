@@ -1,8 +1,9 @@
 export const environment = {
   production: true,
-  srvAddress: 'http://localhost:3000',
+  srvAddress: 'https://fitup3.szymonpawel123.usermd.net',
   endpoints: {
     auth: 'api/auth',
-    workout: 'api/workout'
+    workout: 'api/workout',
+    notification: 'api/notification'
   }
 };

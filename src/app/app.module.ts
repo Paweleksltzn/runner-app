@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { StoreModule } from '@ngrx/store';
+import { SocketModule } from './core/socket/socket.module';
+import { NotificationsPageModule } from './features/notifications/notifications.module';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { StoreModule } from '@ngrx/store';
      IonicImageLoader.forRoot(),
      AppRoutingModule,
      SharedModule, AuthModule,
-     StoreModule.forRoot({})
+     StoreModule.forRoot({}),
+     SocketModule,
+     NotificationsPageModule
   ],
   providers: [
     StatusBar,

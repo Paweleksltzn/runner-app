@@ -14,9 +14,8 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
   templateUrl: './my-workouts.page.html',
   styleUrls: ['./my-workouts.page.scss'],
 })
-export class MyWorkoutsPage implements OnInit, OnDestroy {
+export class MyWorkoutsPage implements OnInit {
   public myWorkouts: Workout[] = [];
-  private saverSubscription: Subscription;
 
   constructor(private store: Store<Reducers>, private alertController: AlertController,
               private router: Router, private myWorkoutService: MyWorkoutService) { }
@@ -25,24 +24,12 @@ export class MyWorkoutsPage implements OnInit, OnDestroy {
     this.myWorkoutService.loadUserWorkoutsToStore();
     this.store.pipe(select('myWorkouts')).subscribe((state: storeState.MyWorkoutState) => {
       this.myWorkouts = state.workoutsList || [];
+      this.saveMyWorkoutsStage();
     });
   }
 
   ionViewWillEnter() {
     this.store.dispatch(actions.singleWorkoutActions.changeTrainingMode({ newTrainingMode: singleWorkoutModes.trainingList}));
-    this.saverSubscription = interval(1000 * 60 * 3).subscribe((data) => {
-      this.saveMyWorkoutsStage();
-    });
-  }
-
-  ionViewWillLeave() {
-    this.saveMyWorkoutsStage();
-    this.saverSubscription.unsubscribe();
-  }
-
-  ngOnDestroy() {
-    this.saveMyWorkoutsStage();
-    this.saverSubscription.unsubscribe();
   }
 
   private saveMyWorkoutsStage() {

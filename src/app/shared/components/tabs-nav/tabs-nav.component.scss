@@ -8,3 +8,15 @@
         color: $mixed-main-colours;
     }
 }
+.notifications__amount {
+    position: absolute;
+    left: 1rem;
+}
+.notifications__amount {
+    position: absolute;
+    left: 57%;
+    font-size: 1.3rem;
+    color: $mixed-main-colours;
+    z-index: 20;
+    bottom: .5rem;
+}
