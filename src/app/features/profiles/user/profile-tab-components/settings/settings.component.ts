@@ -20,7 +20,7 @@ export class SettingsComponent implements OnInit {
     this.store.dispatch(actions.profileAction.setTheme({gradient: selectedTheme}));
   }
 
-  public logOff() {
-    this.store.dispatch(actions.authActions.signOut({}));
+  public logOut() {
+    //this.store.dispatch(actions.authActions.signOut({}));
   }
 }
