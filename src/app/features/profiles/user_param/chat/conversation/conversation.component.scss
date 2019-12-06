@@ -26,3 +26,18 @@ ion-icon{
     color: $mixed-main-colours;
     font-size: 2rem;
 }
+.message-received{
+    background-color: #c8c8c8;
+    display: inline-block;
+    padding: .5rem;
+    border-radius: 1rem;
+    max-width: 50%;
+}
+.message-sended{
+    background-color: lighten($mixed-main-colours, 20);
+    display: inline-block;
+    padding: .5rem;
+    border-radius: 1rem;
+    float: right;
+    max-width: 50%;
+}

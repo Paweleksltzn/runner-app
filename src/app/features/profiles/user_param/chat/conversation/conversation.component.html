@@ -2,9 +2,15 @@
   <ion-toolbar class="header__bar">
     <ion-icon routerLink="/chat" class="back-button" name="arrow-round-back"></ion-icon>
   </ion-toolbar>
+  <div *ngFor="let messages of conversationMessges;">
   <ion-grid>
-    
+    <ion-row>
+      <ion-col size="12"> 
+        <div class="message-received" [ngClass]="{'message-sended': messages.isSended}">{{messages.message}}</div>
+      </ion-col>
+    </ion-row>
   </ion-grid>
+  </div>
   <div class="chat-form">
     <input class="msg-input" placeholder="Wpisz wiadomość..." type="text">
     <div class="send">
