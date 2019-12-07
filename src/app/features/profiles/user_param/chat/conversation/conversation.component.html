@@ -5,7 +5,7 @@
   <div *ngFor="let messages of conversationMessges;">
   <ion-grid>
     <ion-row>
-      <ion-col size="12"> 
+      <ion-col size="12" [ngClass]="{'col-sended': messages.isSended}"> 
         <div class="message-received" [ngClass]="{'message-sended': messages.isSended}">{{messages.message}}</div>
       </ion-col>
     </ion-row>
