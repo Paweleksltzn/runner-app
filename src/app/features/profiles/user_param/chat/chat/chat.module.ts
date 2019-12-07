@@ -8,8 +8,7 @@ import { ConversationComponent } from '../conversation/conversation.component';
 
 
 const routes: Routes = [
-  {path: '', component: ChatComponent},
-  {path: 'conversation', component: ConversationComponent}
+  {path: '', component: ChatComponent}
 ];
 
 @NgModule({
@@ -22,6 +21,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     IonicModule,
     SharedModule,
-  ]
+  ],
+  entryComponents: [ConversationComponent]
 })
 export class ChatModule { }

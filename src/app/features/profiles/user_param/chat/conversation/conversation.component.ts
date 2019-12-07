@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NavParams, ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-conversation',
   templateUrl: './conversation.component.html',
@@ -12,8 +12,11 @@ export class ConversationComponent implements OnInit {
     {isSended: true, message: 'Potrzebuje nowy trening.'},
     {isSended: false, message: 'Okej, rozumiem jakieś nowe cele?'}
   ];
-  constructor() { }
+  constructor(public modalController: ModalController) { }
 
   ngOnInit() {}
 
+  public dismissModal() {
+    this.modalController.dismiss({});
+  }
 }

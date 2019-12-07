@@ -1,6 +1,6 @@
 <ion-content>
   <ion-toolbar class="header__bar">
-    <ion-icon routerLink="/chat" class="back-button" name="arrow-round-back"></ion-icon>
+    <ion-icon (click)="dismissModal()" class="back-button" name="arrow-round-back"></ion-icon>
   </ion-toolbar>
   <div *ngFor="let messages of conversationMessges;">
   <ion-grid>

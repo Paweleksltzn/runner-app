@@ -7,7 +7,7 @@
     Ostatnie rozmowy
   </ion-list-header>
   <div *ngFor="let conversation of privateConversations;">
-    <ion-item routerLink="/chat/conversation">
+    <ion-item (click)="displayConversation()">
       <ion-avatar>
         <img src="assets/images/profile-picture.png">
       </ion-avatar>
