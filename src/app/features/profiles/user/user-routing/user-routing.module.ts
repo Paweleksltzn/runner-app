@@ -17,9 +17,10 @@ const routes: Routes = [
     {path: 'achivment', component: AchivmentsComponent},
     {path: 'rate-guest' , component: RatingGuestComponent},
     {path: 'settings', component: SettingsComponent},
-    {path: 'rate', component: RatingComponent}
+    {path: 'rate', component: RatingComponent},
+    
   ]
-  }
+  },
 
 ];
 

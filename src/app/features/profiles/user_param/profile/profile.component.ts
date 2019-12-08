@@ -6,6 +6,7 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Store, select } from '@ngrx/store';
 import { Reducers } from 'src/app/store';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     public actionSheetController: ActionSheetController,
     public imgSetConf: ImageLoaderConfigService,
-    public store: Store<Reducers>) {
+    public store: Store<Reducers>,
+    public router: Router) {
     this.imageConfigure();
    }
 
@@ -85,5 +87,4 @@ export class ProfileComponent implements OnInit {
       value: 'image',
       });
   }
-
 }
