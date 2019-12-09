@@ -19,4 +19,8 @@ export class SettingsComponent implements OnInit {
     this.selectedGradient = selectedTheme;
     this.store.dispatch(actions.profileAction.setTheme({gradient: selectedTheme}));
   }
+
+  public logOut() {
+    //this.store.dispatch(actions.authActions.signOut({}));
+  }
 }

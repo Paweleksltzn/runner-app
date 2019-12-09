@@ -1,0 +1,21 @@
+<ion-content>
+<ion-toolbar class="header__bar">
+    <ion-icon routerLink="/user/profile" class="back-button" name="arrow-round-back"></ion-icon>
+</ion-toolbar>
+<ion-list>
+  <ion-list-header>
+    Ostatnie rozmowy
+  </ion-list-header>
+  <div *ngFor="let conversation of privateConversations;">
+    <ion-item (click)="displayConversation()">
+      <ion-avatar>
+        <img src="assets/images/profile-picture.png">
+      </ion-avatar>
+      <ion-label  [ngClass]="{'unreaded': !conversation.isReaded}">
+        <h2>{{conversation.whoTexted}}</h2>
+        <p>{{conversation.lastMessage}}</p>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-list>
+</ion-content>

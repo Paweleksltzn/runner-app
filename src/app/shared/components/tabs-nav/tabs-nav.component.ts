@@ -11,7 +11,7 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
   templateUrl: './tabs-nav.component.html',
   styleUrls: ['./tabs-nav.component.scss'],
   animations: [
-    trigger('tada', [transition('* => *', useAnimation(zoomIn))])
+    trigger('zoomIn', [transition('* => *', useAnimation(zoomIn))])
   ],
 })
 export class TabsNavComponent implements OnInit {
@@ -37,10 +37,6 @@ export class TabsNavComponent implements OnInit {
       }
       this.notDisplayedNotificationsAmount = newNotDisplayedNotificationsAmount;
     });
-
-    // setInterval(fn => {
-    //   this.tada = Math.random().toString();
-    // }, 2000);
   }
 
   public checkIfSecondaryTabVisible(clickedLink: any) {
@@ -50,6 +46,7 @@ export class TabsNavComponent implements OnInit {
       this.activeNavLinkLabel = clickedLink.label;
     } else {
       this.activeNavLinkLabel = clickedLink;
+      this.childrenTab = [];
     }
 
   }
