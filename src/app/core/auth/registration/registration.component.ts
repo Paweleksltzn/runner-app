@@ -17,7 +17,6 @@ export class RegistrationComponent implements OnInit {
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    
     this.createForm();
   }
 
@@ -36,6 +35,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   public onSubmit() {
+    this.authForm.value.email = this.authForm.value.email.trim();
     const userData = {
       ...this.authForm.value,
       isMale: this.isMale
@@ -53,7 +53,7 @@ export class RegistrationComponent implements OnInit {
         });
         this.validationMessage = err.error;
         this.messageClass = 'invalid-response';
-        if (err.status === 0){
+        if (err.status === 0) {
           this.router.navigateByUrl('/error');
         }
       }

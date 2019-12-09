@@ -1,0 +1,45 @@
+@import '../chat.component.scss';
+@import '../../../../../../styles/variables';
+.chat-form{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 6vh;
+    display: flex;
+    background-color: rgb(210, 210, 210);
+}
+.msg-input{
+    background-color: transparent;
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    width:90%;
+    border:none;
+    border-bottom: 2px solid #a9a9a9;
+    color: #555;
+    outline: 0;
+}
+.msg-input:focus{
+    border-bottom: 2px solid $mixed-main-colours;
+}
+ion-icon{
+    color: $mixed-main-colours;
+    font-size: 2rem;
+}
+.message-received{
+    background-color: #c8c8c8;
+    display: inline-block;
+    padding: .5rem;
+    border-radius: 1rem;
+    max-width: 50%;
+}
+.message-sended{
+    background-color: lighten($mixed-main-colours, 20);
+    display: inline-block;
+    padding: .5rem;
+    border-radius: 1rem;
+    max-width: 50%;
+}
+.col-sended{
+    display: flex;
+    justify-content: flex-end;
+}

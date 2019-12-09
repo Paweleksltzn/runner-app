@@ -2,7 +2,11 @@
   <div class="main-container">
     <div class="main-container-profile">
       <div class="profile-picture"  [ngClass]="{'gradient-1':user.gradient  === 1, 'gradient-2':user.gradient  === 2, 'gradient-3':user.gradient  === 3}">
+
         <img-loader (click)="presentActionSheet()" [src]="imagePath" [imgAttributes]="imageAttributes" useImg></img-loader>
+        <div class="chatbox" routerLink="/chat"> 
+          <ion-icon  name="chatboxes"></ion-icon>
+        </div> 
       </div>
       <div class="profile-description">
         <h2>{{user.userName}} {{user.userSurname}}</h2>
