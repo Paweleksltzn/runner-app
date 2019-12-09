@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
     userType: 0,
   };
 
-  public image = '../../../../../assets/images/profile-picture.png';
+  public imagePath = 'assets/images/profile-picture.png';
   public selectedProfileTab: number;
   public imageAttributes: ImageAttribute[] = [];
 
@@ -80,7 +80,7 @@ export class ProfileComponent implements OnInit {
       allowEditing: true,
       resultType: CameraResultType.Uri,
     });
-    this.image =  profilePhoto.webPath;
+    this.imagePath =  profilePhoto.webPath;
   }
 
 }
