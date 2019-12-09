@@ -75,12 +75,12 @@ export class ProfileComponent implements OnInit {
 
   public async takePhoto() {
     const { Camera } = Plugins;
-    const result = await Camera.getPhoto({
+    const profilePhoto = await Camera.getPhoto({
       quality: 90,
       allowEditing: true,
       resultType: CameraResultType.Uri,
     });
-    this.image =  result.webPath;
+    this.image =  profilePhoto.webPath;
   }
 
 }
