@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
 import { ActionSheetController } from '@ionic/angular';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Store, select } from '@ngrx/store';
 import { Reducers } from 'src/app/store';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
+import {Plugins, CameraResultType} from '@capacitor/core';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-profile',
@@ -23,8 +24,8 @@ export class ProfileComponent implements OnInit {
     userType: 0,
   };
 
+  public imagePath = 'assets/images/profile-picture.png';
   public selectedProfileTab: number;
-  public camera: Camera;
   public imageAttributes: ImageAttribute[] = [];
 
   constructor(
@@ -55,24 +56,11 @@ export class ProfileComponent implements OnInit {
     const actionSheet = await this.actionSheetController.create({
       header: 'Zdjęcie profilowe',
       buttons: [{
-        text: 'Wybierz z galerii',
+        text: 'Dodaj zdjęcie',
         icon: 'photos',
         handler: () => {
-          const options: CameraOptions = {
-            quality: 100,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
-          };
-          this.camera.getPicture(options).then((imageData) => {
-            const base64Image = 'data:image/jpeg;base64,' + imageData;
-           }, (err) => {
-            // Handle error
-           });
+          this.takePhoto();
         }
-      }, {
-        text: 'Zrób zdjęcie',
-        icon: 'videocam',
       }]
     });
     await actionSheet.present();
@@ -86,5 +74,14 @@ export class ProfileComponent implements OnInit {
       element: 'class',
       value: 'image',
       });
+  }
+  public async takePhoto() {
+    const { Camera } = Plugins;
+    const profilePhoto = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Uri,
+    });
+    this.imagePath =  profilePhoto.webPath;
   }
 }
