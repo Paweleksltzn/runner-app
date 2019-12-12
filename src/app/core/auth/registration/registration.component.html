@@ -79,10 +79,14 @@
                 <ion-button expand="block" class="reg-submit" type="submit">Zarejstruj się</ion-button>
               </ion-col>
             </ion-row>
-            <p class="response" *ngIf="validationMessage" [ngClass]="messageClass"> {{validationMessage}} </p>    
-            <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w 
-              <span class="policy">umowie</span>
-            </div>
+            <ion-row>
+              <ion-col> 
+                <p class="response" *ngIf="validationMessage" [ngClass]="messageClass"> {{validationMessage}} </p>    
+                <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w 
+                  <span class="policy">umowie</span>
+                </div>
+              </ion-col>
+            </ion-row>
         </form>
         <div class="has-account">
             <span class="has-account-message">Masz już konto?  
