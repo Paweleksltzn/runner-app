@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-conversation',
   templateUrl: './conversation.component.html',

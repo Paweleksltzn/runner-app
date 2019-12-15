@@ -8,7 +8,8 @@ export const initialState: storeState.ProfileState = {
   userName: 'Jacek',
   userSurname: 'Soplica',
   profileDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.',
-  userType: 1
+  userType: 1,
+  numberOfFriends: 1
 };
 
 const profileReducerOptions = createReducer(
