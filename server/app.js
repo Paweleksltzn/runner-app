@@ -13,6 +13,7 @@ const jwtManager = require('./auth-guards/jwt-managment');
 const authRouter = require('./routes/auth');
 const workoutRouter = require('./routes/workout');
 const notificationRouter = require('./routes/notification');
+const searchersRouter = require('./routes/searcher');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRouter); 
 app.use('/api/workout', jwtManager.jwtVerivier, workoutRouter); 
 app.use('/api/notification', jwtManager.jwtVerivier, notificationRouter); 
+app.use('/api/searchers', searchersRouter);
 
 mongoose
   .connect(credentials.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
