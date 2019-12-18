@@ -7,10 +7,15 @@ exports.searchUsers = async function(req, res, next) {
         if (searchString.split(' ').length === 2) {
             const name = searchString.split(' ')[0];
             const surname = searchString.split(' ')[1];
-            users =  await User.find({
+            const usersFirstArr =  await User.find({
                 name: new RegExp(name, 'i'),
                 surname: new RegExp(surname, 'i')
-            })
+            });
+            const usersSecondArr = await User.find({
+                name: new RegExp(surname, 'i'),
+                surname: new RegExp(name, 'i')
+            });
+            users = [...usersFirstArr, ...usersSecondArr];
         } else {
             searchString = searchString.split(' ').join('');
             users = await User.find({ nameAndSurname: new RegExp(searchString, 'i') })
