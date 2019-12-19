@@ -5,4 +5,5 @@ export interface ProfileState {
     userSurname: string;
     profileDesc: string;
     userType: number;
+    numberOfFriends: number;
 }

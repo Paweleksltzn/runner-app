@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FriendsGuestComponent } from './friends-guest.component';
+import { AddFriendsComponent } from './add-friends.component';
 
-describe('FriendsGuestComponent', () => {
-  let component: FriendsGuestComponent;
-  let fixture: ComponentFixture<FriendsGuestComponent>;
+describe('AddFriendsComponent', () => {
+  let component: AddFriendsComponent;
+  let fixture: ComponentFixture<AddFriendsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FriendsGuestComponent ],
+      declarations: [ AddFriendsComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FriendsGuestComponent);
+    fixture = TestBed.createComponent(AddFriendsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

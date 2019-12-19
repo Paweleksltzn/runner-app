@@ -40,10 +40,12 @@ export class ProfileComponent implements OnInit {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.user.imgUrl = state.profImgUrl;
       this.user.gradient = state.gradient;
-      this.user.userName = state.userName;
-      this.user.userSurname = state.userSurname;
       this.user.profileDescription = state.profileDesc;
       this.user.userType = state.userType;
+    });
+    this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
+      this.user.userName = state.name;
+      this.user.userSurname = state.surname;
     });
   }
 
