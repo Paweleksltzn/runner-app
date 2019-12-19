@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { FirstLevelGuard } from 'src/app/core/auth/authGuards/firstLevelGuard';
+import { NotLoggedGuard } from './core/auth/authGuards/notLoggedGuard';
 
 const routes: Routes = [
-  { path: 'auth', loadChildren: './core/auth/auth.module#AuthModule' },
+  { path: 'auth', loadChildren: './core/auth/auth.module#AuthModule', canActivate: [NotLoggedGuard] },
   { path: 'user/profile', loadChildren: './features/profiles/user/user.module#UserModule', canActivate: [FirstLevelGuard]},
   { path: 'chat', loadChildren: './features/profiles/user_param/chat/chat/chat.module#ChatModule', canActivate: [FirstLevelGuard]},
   { path: 'workout', loadChildren: './features/workouts/active-workout/active-workout.module#ActiveWorkoutPageModule',

@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { StorageService } from 'src/app/shared/services/storage.service';
+import * as storageNames from 'src/app/shared/entitys/storageNames';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
     this.authForm.value.email = this.authForm.value.email.trim();
     this.authService.postLogIn(this.authForm.value).pipe(take(1)).subscribe(
       (token: string) => {
-        this.storageService.setObject('credentials', { email: this.authForm.value.email, password: this.authForm.value.password });
+        this.storageService.setObject(storageNames.credentials,
+         { email: this.authForm.value.email, password: this.authForm.value.password });
         this.authForm.reset();
         this.authService.signIn(token);
       },
