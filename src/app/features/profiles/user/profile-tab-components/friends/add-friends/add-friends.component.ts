@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { PlayerSearcherResponse } from '../../../../../../shared/interfaces/searcher/playerSearcherResponse';
+import { AddFriendService } from './add-friend.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-friends',
@@ -7,12 +10,36 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./add-friends.component.scss'],
 })
 export class AddFriendsComponent implements OnInit {
+  public searchString: string;
+  public player: PlayerSearcherResponse = {
+    email: '',
+    name: '',
+    surname: '',
+    isMale: undefined
+  };
+  public players: Array<PlayerSearcherResponse> = [];
+  constructor(
+    private modalController: ModalController, 
+    private addFriendService: AddFriendService,
+    private activatedRoute: ActivatedRoute) { }
 
-  constructor(public modalController: ModalController) { }
-
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   public dismissModal() {
     this.modalController.dismiss({});
+  }
+
+  public showPlayers() {
+    this.addFriendService.getPalyerSearcherResponse(this.searchString).subscribe(response => {
+      this.player = response[0];
+      this.players.push(this.player);
+      console.log(this.player.name);
+    });
+  }
+
+  public addSearchString(event) {
+    this.searchString = event.target.value;
+    this.showPlayers();
   }
 }
