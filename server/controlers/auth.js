@@ -23,6 +23,7 @@ exports.registerUser = async function(req, res, next) {
             name: req.body.name,
             surname: req.body.surname,
             isMale: req.body.isMale,
+            nameAndSurname: req.body.name + req.body.surname,
             accessLevel: 1,
             confirmationToken,
             isActive: false
