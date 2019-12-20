@@ -30,16 +30,20 @@ export class AddFriendsComponent implements OnInit {
     this.modalController.dismiss({});
   }
 
-  public showPlayers() {
-    this.addFriendService.getPalyerSearcherResponse(this.searchString).subscribe(response => {
-      this.player = response[0];
-      this.players.push(this.player);
-      console.log(this.player.name);
-    });
-  }
-
   public addSearchString(event) {
     this.searchString = event.target.value;
     this.showPlayers();
   }
+
+  public showPlayers() {
+    this.addFriendService.getPalyerSearcherResponse(this.searchString).subscribe(response => {
+      for(let index in response){
+        this.player = response[index];
+        this.players.push(this.player);
+      } 
+      console.log(this.player.name);
+    });
+    this.players = [];
+  }
+
 }

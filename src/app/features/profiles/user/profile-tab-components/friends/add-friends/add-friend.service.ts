@@ -16,7 +16,7 @@ export class AddFriendService {
     const queryParams = {
         params: {
           searchString
-        }
+        } 
     };
     return this.http.get<PlayerSearcherResponse>(`${environment.srvAddress}/${environment.endpoints.searcher}/players`, queryParams);
   }
