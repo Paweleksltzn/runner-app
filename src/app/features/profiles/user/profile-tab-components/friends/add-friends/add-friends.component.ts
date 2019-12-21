@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { PlayerSearcherResponse } from '../../../../../../shared/interfaces/searcher/playerSearcherResponse';
 import { AddFriendService } from './add-friend.service';
 import { ActivatedRoute } from '@angular/router';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-friends',
@@ -36,12 +37,13 @@ export class AddFriendsComponent implements OnInit {
   }
 
   public showPlayers() {
-    this.addFriendService.getPalyerSearcherResponse(this.searchString).subscribe(response => {
+    this.addFriendService.getPalyerSearcherResponse(this.searchString).pipe(delay(3000)).subscribe(response => {
       for(let index in response){
         this.player = response[index];
         this.players.push(this.player);
       } 
       console.log(this.player.name);
+      console.log(this.players.length);
     });
     this.players = [];
   }
