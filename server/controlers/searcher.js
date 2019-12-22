@@ -9,16 +9,18 @@ exports.searchUsers = async function(req, res, next) {
             const surname = searchString.split(' ')[1];
             const usersFirstArr =  await User.find({
                 name: new RegExp(name, 'i'),
-                surname: new RegExp(surname, 'i')
+                surname: new RegExp(surname, 'i'),
+                isActive: true
             });
             const usersSecondArr = await User.find({
                 name: new RegExp(surname, 'i'),
-                surname: new RegExp(name, 'i')
+                surname: new RegExp(name, 'i'),
+                isActive: true
             });
             users = [...usersFirstArr, ...usersSecondArr];
         } else {
             searchString = searchString.split(' ').join('');
-            users = await User.find({ nameAndSurname: new RegExp(searchString, 'i') })
+            users = await User.find({ nameAndSurname: new RegExp(searchString, 'i'), isActive: true });
         }
         const usersToReturn = users.map(user => {
             return {
