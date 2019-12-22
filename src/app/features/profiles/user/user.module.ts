@@ -13,7 +13,7 @@ import { SettingsComponent } from './profile-tab-components/settings/settings.co
 import { RatingComponent } from './profile-tab-components/rating/rating.component';
 import { RatingGuestComponent } from './profile-tab-components/rating/rating-guest/rating-guest.component';
 import { ProfileComponent } from '../user_param/profile/profile.component';
-import { FriendsGuestComponent } from './profile-tab-components/friends/friends-guest/friends-guest.component';
+import { AddFriendsComponent } from './profile-tab-components/friends/add-friends/add-friends.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { FriendsGuestComponent } from './profile-tab-components/friends/friends-
     RatingComponent,
     RatingGuestComponent,
     ProfileComponent,
-    FriendsGuestComponent
+    AddFriendsComponent
   ],
   imports: [
     CommonModule,
@@ -32,8 +32,9 @@ import { FriendsGuestComponent } from './profile-tab-components/friends/friends-
     SharedModule,
     IonicImageLoader,
     StoreModule.forFeature('profile',  profileReducer ),
-    UserRoutingModule
-  ]
+    UserRoutingModule,
+  ],
+  entryComponents: [AddFriendsComponent]
 })
 
 export class UserModule { }
