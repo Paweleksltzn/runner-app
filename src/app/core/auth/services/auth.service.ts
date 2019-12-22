@@ -9,6 +9,7 @@ import { actions, Reducers } from '../../../store';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { StorageService } from 'src/app/shared/services/storage.service';
+import * as storageNames from 'src/app/shared/entitys/storageNames';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,7 @@ export class AuthService {
   }
 
   public async autoLogin() {
-    const credentials = await this.storageService.getObject('credentials');
+    const credentials = await this.storageService.getObject(storageNames.credentials);
     if (credentials.email && credentials.password) {
       this.postLogIn(credentials).pipe(take(1)).subscribe((userToken: string) => {
         this.signIn(userToken);
