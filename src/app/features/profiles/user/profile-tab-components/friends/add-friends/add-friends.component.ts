@@ -12,6 +12,7 @@ import { delay } from 'rxjs/operators';
 })
 export class AddFriendsComponent implements OnInit {
   public searchString: string;
+  public isLoaded =  true;
   public player: PlayerSearcherResponse = {
     email: '',
     name: '',
@@ -33,17 +34,17 @@ export class AddFriendsComponent implements OnInit {
 
   public addSearchString(event) {
     this.searchString = event.target.value;
+    this.isLoaded = false;
     this.showPlayers();
   }
 
   public showPlayers() {
     this.addFriendService.getPalyerSearcherResponse(this.searchString).pipe(delay(3000)).subscribe(response => {
+      this.isLoaded = true;
       for(let index in response){
         this.player = response[index];
         this.players.push(this.player);
       } 
-      console.log(this.player.name);
-      console.log(this.players.length);
     });
     this.players = [];
   }

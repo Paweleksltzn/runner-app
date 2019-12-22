@@ -8,6 +8,7 @@
     <ion-list-header>
       Osoby:
     </ion-list-header>
+    <div [ngClass]="{'loader': !isLoaded}"></div>
     <div *ngFor="let pl of players;">
       <ion-item>
         <ion-label>
