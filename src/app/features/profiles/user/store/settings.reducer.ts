@@ -14,7 +14,8 @@ export const initialState: storeState.ProfileState = {
 
 const profileReducerOptions = createReducer(
   initialState,
-  on(actions.profileAction.setTheme, (state, action) => ({ ...state, gradient: action.gradient}))
+  on(actions.profileAction.setTheme, (state, action) => ({ ...state, gradient: action.gradient})),
+  on(actions.profileAction.setUserType, (state, action) => ({ ...state, userType: action.userType}))
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {
   return profileReducerOptions(state, action);

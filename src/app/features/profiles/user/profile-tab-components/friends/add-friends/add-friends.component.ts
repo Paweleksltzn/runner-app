@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { PlayerSearcherResponse } from '../../../../../../shared/interfaces/searcher/playerSearcherResponse';
 import { AddFriendService } from './add-friend.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
+import { Reducers, actions } from 'src/app/store';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({
   selector: 'app-add-friends',
@@ -23,7 +26,9 @@ export class AddFriendsComponent implements OnInit {
   constructor(
     private modalController: ModalController, 
     private addFriendService: AddFriendService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    public store: Store<Reducers>) { }
 
   ngOnInit() {
   }
@@ -49,6 +54,12 @@ export class AddFriendsComponent implements OnInit {
         this.players.push(this.player);
       } 
     });
+  }
+
+  public goToProfile() {
+    this.store.dispatch(actions.profileAction.setUserType({userType: 4}));
+    this.router.navigateByUrl('/user/profile');
+    this.dismissModal();
   }
 
 }

@@ -1,6 +1,8 @@
 <div class="summary">
   <p>Liczba znajomych: {{numberOfFriends}}</p>
-  <ion-icon class="add-friend" (click)="displayAddFriends()" name="person-add"></ion-icon>
+  <ng-container *ngIf="userType === 1 || userType === 2">
+    <ion-icon class="add-friend" (click)="displayAddFriends()" name="person-add"></ion-icon>
+  </ng-container>
 </div>
 <ion-item>
     <ion-avatar slot="start">
