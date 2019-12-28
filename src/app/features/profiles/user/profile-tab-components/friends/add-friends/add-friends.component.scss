@@ -1,4 +1,5 @@
 @import '../../../../../../../styles/variables';
+@import '../../../../../../../styles/animations';
 .search-bar{
     border-radius: .5rem;
     outline: 0;
@@ -31,23 +32,4 @@
     left: .25rem;
     color: #555;
 }
-.loader {
-    border: 6px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 6px solid $mixed-main-colours;
-    width: 3rem;
-    height: 3rem;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-    margin: auto;
-  }
 
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }

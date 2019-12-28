@@ -35,18 +35,20 @@ export class AddFriendsComponent implements OnInit {
   public addSearchString(event) {
     this.searchString = event.target.value;
     this.isLoaded = false;
+    this.players = [];
     this.showPlayers();
   }
 
   public showPlayers() {
-    this.addFriendService.getPalyerSearcherResponse(this.searchString).pipe(delay(3000)).subscribe(response => {
+    this.addFriendService.getPalyerSearcherResponse(this.searchString).pipe(delay(800)).subscribe(response => {
       this.isLoaded = true;
+      this.players = [];
+      console.log(response);
       for(let index in response){
         this.player = response[index];
         this.players.push(this.player);
       } 
     });
-    this.players = [];
   }
 
 }
