@@ -20,7 +20,8 @@ export class AddFriendsComponent implements OnInit {
     email: '',
     name: '',
     surname: '',
-    isMale: undefined
+    isMale: undefined,
+    accessLevel: undefined
   };
   public players: Array<PlayerSearcherResponse> = [];
   constructor(
@@ -56,8 +57,9 @@ export class AddFriendsComponent implements OnInit {
     });
   }
 
-  public goToProfile() {
-    this.store.dispatch(actions.profileDisplayAction.profileData({}));
+  public goToProfile(firstName, secondName, profileEmail ) {
+    this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: false}));
+    this.store.dispatch(actions.profileDisplayAction.profileData({email: profileEmail,name: firstName, surname: secondName, isMale: true, accessLevel: 1}));
     this.store.dispatch(actions.profileAction.setUserType({userType: 3}));
     this.router.navigateByUrl('/user/profile');
     this.dismissModal();

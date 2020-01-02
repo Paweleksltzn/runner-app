@@ -9,13 +9,15 @@ export const initialState: storeState.ProfileState = {
   userSurname: 'Soplica',
   profileDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.',
   userType: 1,
-  numberOfFriends: 1
+  numberOfFriends: 1,
+  isMyProfile: true,
 };
 
 const profileReducerOptions = createReducer(
   initialState,
   on(actions.profileAction.setTheme, (state, action) => ({ ...state, gradient: action.gradient})),
-  on(actions.profileAction.setUserType, (state, action) => ({ ...state, userType: action.userType}))
+  on(actions.profileAction.setUserType, (state, action) => ({ ...state, userType: action.userType})),
+  on(actions.profileAction.setIsMyProfile, (state, action) =>({ ...state, isMyProfile: action.isMyProfile}))
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {
   return profileReducerOptions(state, action);

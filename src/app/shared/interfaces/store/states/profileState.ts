@@ -6,4 +6,5 @@ export interface ProfileState {
     profileDesc: string;
     userType: number;
     numberOfFriends: number;
+    isMyProfile: boolean;
 }

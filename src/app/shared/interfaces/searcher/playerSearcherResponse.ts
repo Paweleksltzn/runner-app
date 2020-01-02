@@ -3,4 +3,5 @@ export interface PlayerSearcherResponse<> {
     name: string;
     surname: string;
     isMale: boolean;
+    accessLevel: number;
 }

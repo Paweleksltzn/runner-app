@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  public isMyProfile: boolean;
   public user: UserProfile = {
     profileDescription: ' ',
     userName: ' ',
@@ -38,15 +39,30 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+      this.isMyProfile = state.isMyProfile;
+    });
+    console.log('XD');
+    this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.user.imgUrl = state.profImgUrl;
       this.user.gradient = state.gradient;
       this.user.profileDescription = state.profileDesc;
       this.user.userType = state.userType;
     });
-    this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
-      this.user.userName = state.name;
-      this.user.userSurname = state.surname;
-    });
+    this.checkIfMyProfile();
+  }
+
+  public checkIfMyProfile() {
+    if(this.isMyProfile){
+      this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
+        this.user.userName = state.name;
+        this.user.userSurname = state.surname;
+      });
+    }else {
+      this.store.pipe(select('displayedUser')).subscribe((state: storeState.DisplayedUserState) => {
+        this.user.userName = state.name;
+        this.user.userSurname = state.surname;
+      });
+    }
   }
 
   public switchProfileTab(selectedTab: number) {
