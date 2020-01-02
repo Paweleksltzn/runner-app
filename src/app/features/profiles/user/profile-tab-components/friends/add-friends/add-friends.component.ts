@@ -57,7 +57,8 @@ export class AddFriendsComponent implements OnInit {
   }
 
   public goToProfile() {
-    this.store.dispatch(actions.profileAction.setUserType({userType: 4}));
+    this.store.dispatch(actions.profileDisplayAction.profileData({}));
+    this.store.dispatch(actions.profileAction.setUserType({userType: 3}));
     this.router.navigateByUrl('/user/profile');
     this.dismissModal();
   }

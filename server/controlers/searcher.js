@@ -25,7 +25,8 @@ exports.searchUsers = async function(req, res, next) {
                 email: user.email,
                 name: user.name,
                 surname: user.surname,
-                isMale: user.isMale
+                isMale: user.isMale,
+                accessLevel: user.accessLevel
             }
         });
         return res.json(usersToReturn);
