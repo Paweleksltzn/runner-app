@@ -16,6 +16,7 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 export class AddFriendsComponent implements OnInit {
   public searchString: string;
   public isLoaded =  true;
+  public accessLevel: number;
   public player: PlayerSearcherResponse = {
     email: '',
     name: '',
@@ -57,12 +58,21 @@ export class AddFriendsComponent implements OnInit {
     });
   }
 
-  public goToProfile(firstName, secondName, profileEmail ) {
+  public goToProfile(firstName, secondName, profileEmail, isMale , accessLevel) {
     this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: false}));
-    this.store.dispatch(actions.profileDisplayAction.profileData({email: profileEmail,name: firstName, surname: secondName, isMale: true, accessLevel: 1}));
-    this.store.dispatch(actions.profileAction.setUserType({userType: 3}));
+    this.store.dispatch(actions.profileDisplayAction.profileData({email: profileEmail,name: firstName, surname: secondName, isMale: isMale, accessLevel: accessLevel}));
+    this.accessLevel = accessLevel;
+    this.checkIfNormalUser();
     this.router.navigateByUrl('/user/profile');
     this.dismissModal();
+  }
+
+  public checkIfNormalUser(){
+    if(this.accessLevel === 1){
+      this.store.dispatch(actions.profileAction.setUserType({userType: 3}));
+    }else {
+      this.store.dispatch(actions.profileAction.setUserType({userType: 4}));
+    }
   }
 
 }

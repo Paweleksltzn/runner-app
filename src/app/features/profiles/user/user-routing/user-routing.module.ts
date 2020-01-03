@@ -18,7 +18,6 @@ const routes: Routes = [
     {path: 'rate-guest' , component: RatingGuestComponent},
     {path: 'settings', component: SettingsComponent},
     {path: 'rate', component: RatingComponent},
-    
   ]
   },
 

@@ -15,6 +15,7 @@ import { RatingComponent } from './profile-tab-components/rating/rating.componen
 import { RatingGuestComponent } from './profile-tab-components/rating/rating-guest/rating-guest.component';
 import { ProfileComponent } from '../user_param/profile/profile.component';
 import { AddFriendsComponent } from './profile-tab-components/friends/add-friends/add-friends.component';
+import { ChatModule } from '../user_param/chat/chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { AddFriendsComponent } from './profile-tab-components/friends/add-friend
     RatingComponent,
     RatingGuestComponent,
     ProfileComponent,
-    AddFriendsComponent
+    AddFriendsComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +36,7 @@ import { AddFriendsComponent } from './profile-tab-components/friends/add-friend
     StoreModule.forFeature('profile',  profileReducer ),
     StoreModule.forFeature('displayedUser',  displayUserReducer ),
     UserRoutingModule,
+    ChatModule,
   ],
   entryComponents: [AddFriendsComponent]
 })

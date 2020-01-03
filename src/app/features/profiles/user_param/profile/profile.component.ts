@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Store, select } from '@ngrx/store';
-import { Reducers } from 'src/app/store';
+import { Reducers, actions } from 'src/app/store';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 import {Plugins, CameraResultType} from '@capacitor/core';
 import { Router } from '@angular/router';
+import { ConversationComponent } from '../chat/conversation/conversation.component';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   public isMyProfile: boolean;
+  public currentModal;
   public user: UserProfile = {
     profileDescription: ' ',
     userName: ' ',
@@ -33,7 +35,8 @@ export class ProfileComponent implements OnInit {
     public actionSheetController: ActionSheetController,
     public imgSetConf: ImageLoaderConfigService,
     public store: Store<Reducers>,
-    public router: Router) {
+    public router: Router,
+    public modalController: ModalController) {
     this.imageConfigure();
    }
 
@@ -41,13 +44,17 @@ export class ProfileComponent implements OnInit {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.isMyProfile = state.isMyProfile;
     });
-    console.log('XD');
+    //narazie to zostawiam tutaj w przyszłości będzie zaciągane tak jak imie i nazwisko w checkIfMyProfile()
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.user.imgUrl = state.profImgUrl;
       this.user.gradient = state.gradient;
       this.user.profileDescription = state.profileDesc;
       this.user.userType = state.userType;
     });
+    this.checkIfMyProfile();
+  }
+
+  ngDoCheck(){
     this.checkIfMyProfile();
   }
 
@@ -102,4 +109,18 @@ export class ProfileComponent implements OnInit {
     });
     this.imagePath =  profilePhoto.webPath;
   }
+
+  public exitDisplayOtherProfileMode(){
+    this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: true}));
+    this.store.dispatch(actions.profileAction.setUserType({userType: 1}));
+  }
+  
+  public async displayConversation() {
+    const conversationModal = await this.modalController.create({
+      component: ConversationComponent
+    });
+    this.currentModal = conversationModal;
+    return await conversationModal.present(); 
+  }
 }
+

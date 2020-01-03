@@ -2,8 +2,14 @@
   <div class="main-container">
     <div class="main-container-profile">
       <div class="profile-picture"  [ngClass]="{'gradient-1':user.gradient  === 1, 'gradient-2':user.gradient  === 2, 'gradient-3':user.gradient  === 3}">
+        <ng-container *ngIf="!isMyProfile">
+          <div class="iconbox" > 
+            <ion-icon  name="arrow-round-back" (click)="exitDisplayOtherProfileMode()"></ion-icon>
+            <ion-icon  name="chatboxes" (click)="displayConversation()"></ion-icon>
+          </div> 
+        </ng-container>
         <ng-container *ngIf="user.userType === 1 || user.userType === 2">
-          <div class="chatbox" routerLink="/chat"> 
+          <div class="iconbox" routerLink="/chat"> 
             <ion-icon  name="chatboxes"></ion-icon>
           </div> 
         </ng-container>

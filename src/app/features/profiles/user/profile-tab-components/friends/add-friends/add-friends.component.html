@@ -10,7 +10,7 @@
     </ion-list-header>
     <div [ngClass]="{'loader': !isLoaded}"></div>
     <div *ngFor="let pl of players;">
-      <ion-item (click)="goToProfile(pl.name,pl.surname,pl.emial)">
+      <ion-item (click)="goToProfile(pl.name, pl.surname, pl.emial, pl.isMale, pl.accessLevel)">
         <ion-label>
           <h2>{{pl.name}} {{pl.surname}}</h2>
           <p>{{pl.email}}</p>
