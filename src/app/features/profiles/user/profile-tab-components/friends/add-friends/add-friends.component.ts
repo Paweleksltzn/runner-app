@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
+import { ChatService } from '../../../../../../shared/services/chat.service'; 
 import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({
@@ -30,7 +31,8 @@ export class AddFriendsComponent implements OnInit {
     private addFriendService: AddFriendService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public store: Store<Reducers>) { }
+    public store: Store<Reducers>,
+    private chatService: ChatService) { }
 
   ngOnInit() {
   }
@@ -47,10 +49,10 @@ export class AddFriendsComponent implements OnInit {
   }
 
   public showPlayers() {
+    //tutaj potrzeba lepszego rozwiązania musze dwa razy czyscic tablice bo inaczej animacja sie gryzie z wyswietlanym contentem
     this.addFriendService.getPalyerSearcherResponse(this.searchString).pipe(delay(800)).subscribe(response => {
       this.isLoaded = true;
       this.players = [];
-      console.log(response);
       for(let index in response){
         this.player = response[index];
         this.players.push(this.player);
