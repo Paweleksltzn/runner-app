@@ -16,15 +16,16 @@ import { ConversationComponent } from '../chat/conversation/conversation.compone
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  public isMyProfile: boolean;
-  public currentModal;
+  public currentModal: HTMLIonModalElement;
   public user: UserProfile = {
-    profileDescription: ' ',
-    userName: ' ',
-    userSurname: ' ',
-    gradient: 1,
-    imgUrl: ' ',
-    userType: 0,
+    profileDescription: undefined,
+    name: undefined,
+    surname: undefined,
+    gradient: undefined,
+    imgUrl: undefined,
+    userType: undefined,
+    numberOfFriends: undefined,
+    isMyProfile: true
   };
 
   public imagePath = 'assets/images/profile-picture.png';
@@ -42,9 +43,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-      this.isMyProfile = state.isMyProfile;
+      this.user.isMyProfile = state.isMyProfile;
     });
-    //narazie to zostawiam tutaj w przyszłości będzie zaciągane tak jak imie i nazwisko w checkIfMyProfile()
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.user.imgUrl = state.profImgUrl;
       this.user.gradient = state.gradient;
@@ -59,15 +59,15 @@ export class ProfileComponent implements OnInit {
   }
 
   public checkIfMyProfile() {
-    if(this.isMyProfile){
+    if(this.user.isMyProfile){
       this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
-        this.user.userName = state.name;
-        this.user.userSurname = state.surname;
+        this.user.name = state.name;
+        this.user.surname = state.surname;
       });
     }else {
-      this.store.pipe(select('displayedUser')).subscribe((state: storeState.DisplayedUserState) => {
-        this.user.userName = state.name;
-        this.user.userSurname = state.surname;
+      this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+        this.user.name = state.name;
+        this.user.surname = state.surname;
       });
     }
   }

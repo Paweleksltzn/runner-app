@@ -5,19 +5,30 @@ import { actions } from 'src/app/store';
 export const initialState: storeState.ProfileState = {
   gradient: 1,
   profImgUrl: 'assets/images/profile-picture.png',
-  userName: 'Jacek',
-  userSurname: 'Soplica',
+  email: undefined,
+  name: undefined,
+  surname: undefined,
   profileDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.',
   userType: 1,
   numberOfFriends: 1,
   isMyProfile: true,
+  isMale: undefined,
+  accessLevel: undefined, 
 };
 
 const profileReducerOptions = createReducer(
   initialState,
   on(actions.profileAction.setTheme, (state, action) => ({ ...state, gradient: action.gradient})),
   on(actions.profileAction.setUserType, (state, action) => ({ ...state, userType: action.userType})),
-  on(actions.profileAction.setIsMyProfile, (state, action) =>({ ...state, isMyProfile: action.isMyProfile}))
+  on(actions.profileAction.setIsMyProfile, (state, action) =>({ ...state, isMyProfile: action.isMyProfile})),
+  on(actions.profileAction.profileData, (state, action) =>({ 
+    ...state, 
+    email: action.email,
+    name: action.name,
+    surname: action.surname,
+    isMale: action.isMale,
+    accessLevel: action.accessLevel
+  }))
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {
   return profileReducerOptions(state, action);

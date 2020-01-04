@@ -1,4 +1,4 @@
-export interface PlayerSearcherResponse<> {
+export interface UserSearcherResponse<> {
     email: string;
     name: string;
     surname: string;

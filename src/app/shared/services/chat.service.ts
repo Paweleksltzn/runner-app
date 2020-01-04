@@ -7,13 +7,13 @@ import { Reducers, actions } from 'src/app/store';
   providedIn: 'root'
 })
 export class ChatService {
-  public profileEmail: string;
+  public email: string;
   constructor(public store: Store<Reducers>) { }
 
   public chattedUserEmail(){ 
-    this.store.pipe(select('displayedUser')).subscribe((state: storeState.DisplayedUserState) => {
-      this.profileEmail = state.email;
+    this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+      this.email = state.email;
     });
-    return this.profileEmail;
+    return this.email;
   }
 }

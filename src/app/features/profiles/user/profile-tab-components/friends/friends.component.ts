@@ -12,8 +12,8 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 })
 export class FriendsComponent implements OnInit {
   public numberOfFriends: number;
-  public currentModal;
-  public userType;
+  public currentModal: HTMLIonModalElement;
+  public userType: number;
   constructor(public modalController: ModalController, public store: Store<Reducers>) { }
 
   ngOnInit() {

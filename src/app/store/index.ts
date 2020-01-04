@@ -4,7 +4,6 @@ import { profileAction } from 'src/app/features/profiles/user/store/settings.act
 import { myWorkoutActions } from 'src/app/features/workouts/my-workouts/store/my-workout-action';
 import { historyActions } from 'src/app/features/workouts/history/store/history-action';
 import { notificationActions } from 'src/app/features/notifications/store/notifications.action';
-import { profileDisplayAction } from 'src/app/features/profiles/user/store/displayedUser/displayedUser.action';
 import * as state from '../shared/interfaces/store/index';
 
 export const actions = {
@@ -14,7 +13,6 @@ export const actions = {
     myWorkoutActions,
     historyActions,
     notificationActions,
-    profileDisplayAction
 };
 
 export interface Reducers {
@@ -24,5 +22,4 @@ export interface Reducers {
     history: state.MyWorkoutState;
     profile: state.ProfileState;
     notifications: state.NotificationsState;
-    displayedUser: state.DisplayedUserState;
 }

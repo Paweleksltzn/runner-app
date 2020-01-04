@@ -5,7 +5,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { StoreModule } from '@ngrx/store';
 import { profileReducer } from './store/settings.reducer';
-import { displayUserReducer } from './store/displayedUser/displayedUser.reducer';
 import { UserRoutingModule } from './user-routing/user-routing.module';
 import { FriendsComponent } from './profile-tab-components/friends/friends.component';
 import { AchivmentsComponent } from './profile-tab-components/achivments/achivments.component';
@@ -34,7 +33,6 @@ import { ChatModule } from '../user_param/chat/chat/chat.module';
     SharedModule,
     IonicImageLoader,
     StoreModule.forFeature('profile',  profileReducer ),
-    StoreModule.forFeature('displayedUser',  displayUserReducer ),
     UserRoutingModule,
     ChatModule,
   ],

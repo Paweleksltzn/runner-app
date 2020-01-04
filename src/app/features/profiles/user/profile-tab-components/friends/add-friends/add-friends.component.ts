@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { PlayerSearcherResponse } from '../../../../../../shared/interfaces/searcher/playerSearcherResponse';
+import { UserSearcherResponse } from '../../../../../../shared/interfaces/searcher/playerSearcherResponse';
 import { AddFriendService } from './add-friend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
@@ -18,14 +18,15 @@ export class AddFriendsComponent implements OnInit {
   public searchString: string;
   public isLoaded =  true;
   public accessLevel: number;
-  public player: PlayerSearcherResponse = {
+  public searchSubscription;
+  public player: UserSearcherResponse = {
     email: '',
     name: '',
     surname: '',
     isMale: undefined,
     accessLevel: undefined
   };
-  public players: Array<PlayerSearcherResponse> = [];
+  public players: Array<UserSearcherResponse> = [];
   constructor(
     private modalController: ModalController, 
     private addFriendService: AddFriendService,
@@ -44,25 +45,26 @@ export class AddFriendsComponent implements OnInit {
   public addSearchString(event) {
     this.searchString = event.target.value;
     this.isLoaded = false;
-    this.players = [];
     this.showPlayers();
   }
 
   public showPlayers() {
-    //tutaj potrzeba lepszego rozwiązania musze dwa razy czyscic tablice bo inaczej animacja sie gryzie z wyswietlanym contentem
-    this.addFriendService.getPalyerSearcherResponse(this.searchString).pipe(delay(800)).subscribe(response => {
+    this.players = [];
+    if(this.searchSubscription){
+      this.searchSubscription.unsubscribe();
+      this.searchSubscription = undefined;
+    }
+    
+    this.searchSubscription=this.addFriendService.getPalyerSearcherResponse(this.searchString).pipe(delay(800)).subscribe(response => {
       this.isLoaded = true;
-      this.players = [];
-      for(let index in response){
-        this.player = response[index];
-        this.players.push(this.player);
-      } 
+      this.players = response 
     });
+  
   }
 
-  public goToProfile(firstName, secondName, profileEmail, isMale , accessLevel) {
+  public goToProfile(name: string, surname: string, email: string, isMale: boolean , accessLevel: number) {
     this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: false}));
-    this.store.dispatch(actions.profileDisplayAction.profileData({email: profileEmail,name: firstName, surname: secondName, isMale: isMale, accessLevel: accessLevel}));
+    this.store.dispatch(actions.profileAction.profileData({email: email,name: name, surname: surname, isMale: isMale, accessLevel: accessLevel}));
     this.accessLevel = accessLevel;
     this.checkIfNormalUser();
     this.router.navigateByUrl('/user/profile');

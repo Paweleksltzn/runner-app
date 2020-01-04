@@ -2,7 +2,7 @@
   <div class="main-container">
     <div class="main-container-profile">
       <div class="profile-picture"  [ngClass]="{'gradient-1':user.gradient  === 1, 'gradient-2':user.gradient  === 2, 'gradient-3':user.gradient  === 3}">
-        <ng-container *ngIf="!isMyProfile">
+        <ng-container *ngIf="!user.isMyProfile">
           <div class="iconbox" > 
             <ion-icon  name="arrow-round-back" (click)="exitDisplayOtherProfileMode()"></ion-icon>
             <ion-icon  name="chatboxes" (click)="displayConversation()"></ion-icon>
@@ -16,7 +16,7 @@
         <img-loader (click)="presentActionSheet()" [src]="imagePath" [imgAttributes]="imageAttributes" useImg></img-loader>
       </div>
       <div class="profile-description">
-        <h2>{{user.userName}} {{user.userSurname}}</h2>
+        <h2>{{user.name}} {{user.surname}}</h2>
         <p>{{user.profileDescription}}</p>
       </div>
     </div>
