@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
     gradient: undefined,
     imgUrl: undefined,
     userType: undefined,
-    numberOfFriends: undefined,
+    friends: undefined,
     isMyProfile: true
   };
 

@@ -10,7 +10,7 @@ export const initialState: storeState.ProfileState = {
   surname: undefined,
   profileDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum congue facilisis.',
   userType: 1,
-  numberOfFriends: 1,
+  friends: [],
   isMyProfile: true,
   isMale: undefined,
   accessLevel: undefined, 

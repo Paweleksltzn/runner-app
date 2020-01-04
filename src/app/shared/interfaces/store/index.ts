@@ -4,4 +4,4 @@ import { AuthState } from './states/authState';
 import { ProfileState } from './states/profileState';
 import { NotificationsState } from './states/notificationsState';
 
-export { WorkoutState, MyWorkoutState, AuthState, ProfileState, NotificationsState};
+export { WorkoutState, MyWorkoutState, AuthState, ProfileState, NotificationsState };

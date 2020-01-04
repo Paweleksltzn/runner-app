@@ -5,6 +5,6 @@ export interface UserProfile {
     gradient: number;
     imgUrl: string;
     userType: number;
-    numberOfFriends: number,
+    friends: number,
     isMyProfile: boolean,
 }

@@ -1,3 +1,5 @@
+import { User } from '../../auth/User';
+
 export interface ProfileState {
     gradient: number;
     profImgUrl: string;
@@ -6,7 +8,7 @@ export interface ProfileState {
     surname: string;
     profileDesc: string;
     userType: number;
-    numberOfFriends: number;
+    friends: User[];
     isMyProfile: boolean;
     isMale: boolean;
     accessLevel: number;

@@ -12,7 +12,7 @@ export const actions = {
     profileAction,
     myWorkoutActions,
     historyActions,
-    notificationActions,
+    notificationActions
 };
 
 export interface Reducers {
