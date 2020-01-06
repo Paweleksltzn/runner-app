@@ -4,10 +4,9 @@ import { UserSearcherResponse } from '../../../../../../shared/interfaces/search
 import { AddFriendService } from './add-friend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
 import { ChatService } from '../../../../../../shared/services/chat.service'; 
-import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({
   selector: 'app-add-friends',
@@ -62,10 +61,10 @@ export class AddFriendsComponent implements OnInit {
   
   }
 
-  public goToProfile(name: string, surname: string, email: string, isMale: boolean , accessLevel: number) {
+  public goToProfile(user: UserSearcherResponse) {
     this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: false}));
-    this.store.dispatch(actions.profileAction.profileData({email: email,name: name, surname: surname, isMale: isMale, accessLevel: accessLevel}));
-    this.accessLevel = accessLevel;
+    this.store.dispatch(actions.profileAction.profileData({email: user.email,name: user.name, surname: user.surname, isMale: user.isMale, accessLevel: user.accessLevel}));
+    this.accessLevel = user.accessLevel;
     this.checkIfNormalUser();
     this.router.navigateByUrl('/user/profile');
     this.dismissModal();

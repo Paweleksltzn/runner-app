@@ -21,11 +21,13 @@ export class ProfileComponent implements OnInit {
     profileDescription: undefined,
     name: undefined,
     surname: undefined,
+    email: undefined,
     gradient: undefined,
     imgUrl: undefined,
     userType: undefined,
     friends: undefined,
-    isMyProfile: true
+    isMyProfile: true,
+    isMale: undefined
   };
 
   public imagePath = 'assets/images/profile-picture.png';
