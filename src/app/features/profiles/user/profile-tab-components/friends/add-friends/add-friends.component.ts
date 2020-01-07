@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
-import { ChatService } from '../../../../../../shared/services/chat.service'; 
 
 @Component({
   selector: 'app-add-friends',
@@ -31,8 +30,7 @@ export class AddFriendsComponent implements OnInit {
     private addFriendService: AddFriendService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public store: Store<Reducers>,
-    private chatService: ChatService) { }
+    public store: Store<Reducers>) { }
 
   ngOnInit() {
   }

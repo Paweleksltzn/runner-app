@@ -21,13 +21,11 @@ export class ProfileComponent implements OnInit {
     profileDescription: undefined,
     name: undefined,
     surname: undefined,
-    email: undefined,
     gradient: undefined,
     imgUrl: undefined,
     userType: undefined,
     friends: undefined,
-    isMyProfile: true,
-    isMale: undefined
+    isMyProfile: true
   };
 
   public imagePath = 'assets/images/profile-picture.png';
@@ -46,8 +44,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.user.isMyProfile = state.isMyProfile;
-    });
-    this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.user.imgUrl = state.profImgUrl;
       this.user.gradient = state.gradient;
       this.user.profileDescription = state.profileDesc;
@@ -58,6 +54,7 @@ export class ProfileComponent implements OnInit {
 
   ngDoCheck(){
     this.checkIfMyProfile();
+    console.log("XD");
   }
 
   public checkIfMyProfile() {

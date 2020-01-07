@@ -1,7 +1,7 @@
-import { User } from '../auth/User';
-
-export interface UserProfile extends User {
+export interface UserProfile{
     profileDescription: string;
+    name: string;
+    surname: string;
     gradient: number;
     imgUrl: string;
     userType: number;

@@ -20,7 +20,6 @@ export class FriendsComponent implements OnInit {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.numberOfFriends = state.friends.length;
       this.userType = state.userType;
-      console.log(this.userType);
     });
   }
 

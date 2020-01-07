@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ChatService } from '../../../../../shared/services/chat.service';
+import * as storeState from 'src/app/shared/interfaces/store/index';
+import { Store, select } from '@ngrx/store';
+import { Reducers, actions } from 'src/app/store';
 @Component({
   selector: 'app-conversation',
   templateUrl: './conversation.component.html',
@@ -14,13 +16,15 @@ export class ConversationComponent implements OnInit {
     {isSended: true, message: 'Potrzebuje nowy trening.'},
     {isSended: false, message: 'Okej, rozumiem jakieś nowe cele?'}
   ];
-  constructor(public modalController: ModalController, private chatService: ChatService) { }
+  constructor(public modalController: ModalController, public store: Store<Reducers>) { }
 
   ngOnInit() {
-    this.email=this.chatService.chattedUserEmail();
+    this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+      this.email = state.email;
+    });
   }
 
-  public dismissModal() {
+  public dismissModal() { 
     this.modalController.dismiss({});
   }
 }
