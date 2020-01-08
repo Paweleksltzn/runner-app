@@ -12,12 +12,14 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 })
 export class FriendsComponent implements OnInit {
   public numberOfFriends: number;
-  public currentModal;
+  public currentModal: HTMLIonModalElement;
+  public userType: number;
   constructor(public modalController: ModalController, public store: Store<Reducers>) { }
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-      this.numberOfFriends = state.numberOfFriends;
+      this.numberOfFriends = state.friends.length;
+      this.userType = state.userType;
     });
   }
 

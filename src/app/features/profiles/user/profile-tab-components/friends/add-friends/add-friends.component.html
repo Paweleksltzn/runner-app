@@ -1,7 +1,21 @@
 <ion-content>
   <div class="search-container">
     <ion-icon (click)="dismissModal()" class="back" name="arrow-round-back"></ion-icon>
-    <input placeholder="Wyszukaj..." class="search-bar" type="search">
+    <input (keyup)="addSearchString($event)" placeholder="Wyszukaj..." class="search-bar" type="search">
     <ion-icon class="search-button" name="search"></ion-icon>
   </div>
+  <ion-list>
+    <ion-list-header>
+      Osoby:
+    </ion-list-header>
+    <div [ngClass]="{'loader': !isLoaded}"></div>
+    <div *ngFor="let pl of players;">
+      <ion-item (click)="goToProfile(pl)">
+        <ion-label>
+          <h2>{{pl.name}} {{pl.surname}}</h2>
+          <p>{{pl.email}}</p>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
 </ion-content>

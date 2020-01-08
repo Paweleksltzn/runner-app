@@ -1,9 +1,11 @@
-export interface ProfileState {
+import { User } from '../../auth/User';
+
+export interface ProfileState extends User{
     gradient: number;
     profImgUrl: string;
-    userName: string;
-    userSurname: string;
     profileDesc: string;
     userType: number;
-    numberOfFriends: number;
+    friends: User[];
+    isMyProfile: boolean;
+    accessLevel: number;
 }

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Store, select } from '@ngrx/store';
-import { Reducers } from 'src/app/store';
+import { Reducers, actions } from 'src/app/store';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 import {Plugins, CameraResultType} from '@capacitor/core';
 import { Router } from '@angular/router';
+import { ConversationComponent } from '../chat/conversation/conversation.component';
 
 
 @Component({
@@ -15,13 +16,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  public currentModal: HTMLIonModalElement;
   public user: UserProfile = {
-    profileDescription: ' ',
-    userName: ' ',
-    userSurname: ' ',
-    gradient: 1,
-    imgUrl: ' ',
-    userType: 0,
+    profileDescription: undefined,
+    name: undefined,
+    surname: undefined,
+    gradient: undefined,
+    imgUrl: undefined,
+    userType: undefined,
+    friends: undefined,
+    isMyProfile: true
   };
 
   public imagePath = 'assets/images/profile-picture.png';
@@ -32,21 +36,39 @@ export class ProfileComponent implements OnInit {
     public actionSheetController: ActionSheetController,
     public imgSetConf: ImageLoaderConfigService,
     public store: Store<Reducers>,
-    public router: Router) {
+    public router: Router,
+    public modalController: ModalController) {
     this.imageConfigure();
    }
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+      this.user.isMyProfile = state.isMyProfile;
       this.user.imgUrl = state.profImgUrl;
       this.user.gradient = state.gradient;
       this.user.profileDescription = state.profileDesc;
       this.user.userType = state.userType;
     });
-    this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
-      this.user.userName = state.name;
-      this.user.userSurname = state.surname;
-    });
+    this.checkIfMyProfile();
+  }
+
+  ngDoCheck(){
+    this.checkIfMyProfile();
+    console.log("XD");
+  }
+
+  public checkIfMyProfile() {
+    if(this.user.isMyProfile){
+      this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
+        this.user.name = state.name;
+        this.user.surname = state.surname;
+      });
+    }else {
+      this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+        this.user.name = state.name;
+        this.user.surname = state.surname;
+      });
+    }
   }
 
   public switchProfileTab(selectedTab: number) {
@@ -86,4 +108,18 @@ export class ProfileComponent implements OnInit {
     });
     this.imagePath =  profilePhoto.webPath;
   }
+
+  public exitDisplayOtherProfileMode(){
+    this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: true}));
+    this.store.dispatch(actions.profileAction.setUserType({userType: 1}));
+  }
+  
+  public async displayConversation() {
+    const conversationModal = await this.modalController.create({
+      component: ConversationComponent
+    });
+    this.currentModal = conversationModal;
+    return await conversationModal.present(); 
+  }
 }
+
