@@ -23,6 +23,7 @@ export class SettingsComponent implements OnInit {
 
   public logOut() {
     this.authService.signOut();
+    window.location.reload();
   }
 
 }
