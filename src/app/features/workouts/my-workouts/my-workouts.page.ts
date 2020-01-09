@@ -1,12 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { actions, Reducers } from 'src/app/store';
-import { singleWorkoutModes, emptyWorkoutTemplate } from 'src/app/shared/components/single-workout/singleWorkoutHelper';
+import { singleWorkoutModes } from 'src/app/shared/components/single-workout/singleWorkoutHelper';
 import { Workout } from 'src/app/shared/interfaces/workout/workout';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { MyWorkoutService } from './services/my-workout.service';
-import { interval, Subscription } from 'rxjs';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({

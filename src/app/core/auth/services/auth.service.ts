@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import * as storageNames from 'src/app/shared/entitys/storageNames';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,12 +35,11 @@ export class AuthService {
     this.store.dispatch(actions.authActions.signIn({
       ...decodedToken.data
     }));
-    this.router.navigate(['my-workouts']);
   }
 
   public signOut() {
     this.store.dispatch(actions.authActions.signOut({}));
-    this.navigateToLoginPage();
+    this.storageService.setObject(storageNames.credentials, {});
   }
 
   public async autoLogin() {

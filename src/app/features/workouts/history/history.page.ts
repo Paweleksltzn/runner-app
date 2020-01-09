@@ -23,10 +23,9 @@ export class HistoryPage implements OnInit {
               private store: Store<Reducers>) { }
 
   ngOnInit() {
-    // tslint:disable-next-line: no-shadowed-variable
-    this.store.pipe(select('history')).subscribe((state: state.MyWorkoutState) => {
-      this.isStoreLoaded = state.isStateLoaded;
-      this.workoutsHistory = state.workoutsList;
+    this.store.pipe(select('history')).subscribe((historyState: state.MyWorkoutState) => {
+      this.isStoreLoaded = historyState.isStateLoaded;
+      this.workoutsHistory = historyState.workoutsList;
     });
     if (!this.isStoreLoaded) {
       this.historyService.getUserHistory().subscribe((response: any) => {
