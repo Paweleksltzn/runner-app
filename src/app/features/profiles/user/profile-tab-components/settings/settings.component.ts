@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
   public logOut() {
     this.store.dispatch(actions.authActions.signOut({}));
     this.storageService.setObject(storageNames.credentials, {});
-    this.router.navigateByUrl('auth/login');
+    this.router.navigate(['auth', 'login']);
   }
 
 }
