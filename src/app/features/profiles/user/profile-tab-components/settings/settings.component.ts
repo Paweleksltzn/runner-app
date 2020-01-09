@@ -1,11 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as storeState from 'src/app/shared/interfaces/store/index';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { actions, Reducers } from 'src/app/store';
-import { StorageService } from 'src/app/shared/services/storage.service';
-import * as storageNames from 'src/app/shared/entitys/storageNames';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -15,9 +11,7 @@ import { Router } from '@angular/router';
 export class SettingsComponent implements OnInit {
   public selectedGradient = 1;
   constructor( private store: Store<Reducers>,
-               private nativeStorage: NativeStorage,
-               private storageService: StorageService,
-               private router: Router,
+               private authService: AuthService
                ) { }
 
   ngOnInit() {}
@@ -28,9 +22,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public logOut() {
-    this.store.dispatch(actions.authActions.signOut({}));
-    this.storageService.setObject(storageNames.credentials, {});
-    this.router.navigateByUrl('auth/login');
+    this.authService.signOut();
   }
 
 }

@@ -17,7 +17,7 @@ export class NotLoggedGuard implements CanActivate {
       this.store.pipe(select('auth')).subscribe(result => {
         isUserNotLoggedIn = !!result.accessLevel;
         if (isUserNotLoggedIn) {
-          this.router.navigate(['/my-workouts']);
+          this.router.navigate(['my-workouts']);
         }
       });
       return !isUserNotLoggedIn;

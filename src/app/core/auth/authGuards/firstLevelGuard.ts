@@ -17,7 +17,7 @@ export class FirstLevelGuard implements CanActivate {
       this.store.pipe(select('auth')).subscribe(result => {
         isUserLoggedIn = !!result.accessLevel;
         if (!isUserLoggedIn) {
-          this.router.navigate(['/auth/login']);
+          this.router.navigate(['auth', 'login']);
         }
       });
       return isUserLoggedIn;

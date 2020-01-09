@@ -5,6 +5,7 @@ import { Reducers } from 'src/app/store';
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { zoomIn } from 'ng-animate';
 import * as storeState from 'src/app/shared/interfaces/store/index';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
   selector: 'app-tabs-nav',
