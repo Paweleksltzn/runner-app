@@ -35,6 +35,7 @@ export class AuthService {
     this.store.dispatch(actions.authActions.signIn({
       ...decodedToken.data
     }));
+    this.router.navigate(['my-workouts']);
   }
 
   public signOut() {
