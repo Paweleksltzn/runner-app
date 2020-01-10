@@ -20,8 +20,13 @@ exports.registerUser = async function(req, res, next) {
         await emailSender(req.body.email, emailOptions.emailConfirmation, confirmationToken);
         const hashedPassword = await bcrypt.hash(req.body.password, 12);
         const userProfile = new UserProfile({
+            email: req.body.email,
+            name: req.body.name,
+            surname: req.body.surname,
+            isMale: req.body.isMale,
+            accessLevel: 1,
             gradient: 1,
-            imgUrl: 'test',
+            imgUrl: 'assets/images/profile-picture.png',
             profileDescription: 'Wprowadź opis ...',
             invitedToFriends: [],
             friendsInvitations: [],
@@ -51,14 +56,15 @@ exports.login = async function(req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
     try {
-        const user = await User.findOne({email});
+        const user = await User.findOne({email}).populate('userProfile');
         if (user) {
             if (!user.isActive) {
                 return res.status(422).send('Email nie został potwierdzony');
             }
             const doMatch = await bcrypt.compare(password, user.password);
             if(doMatch) {
-                return res.json(jwtManagment.jwtFactory(user));
+                const token = jwtManagment.jwtFactory(user)
+                return res.json({token, userProfile: user.userProfile});
             } 
         } 
     } catch (err) {

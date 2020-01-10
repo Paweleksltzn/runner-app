@@ -8,16 +8,27 @@ import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 import {Plugins, CameraResultType} from '@capacitor/core';
 import { Router } from '@angular/router';
 import { ConversationComponent } from '../chat/conversation/conversation.component';
-
+import { UserService } from '../../user/services/user.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit, DoCheck {
+export class ProfileComponent implements OnInit {
   public currentModal: HTMLIonModalElement;
-  public user: UserProfile;
+  public user: UserProfile = {
+    gradient: 1,
+    profileDescription: '',
+    email: '',
+    name: '',
+    surname: '',
+    isMale: true,
+    accessLevel: 1,
+    imgUrl: '',
+    isMyProfile: undefined,
+    userType: undefined
+  };
 
   public imagePath = 'assets/images/profile-picture.png';
   public selectedProfileTab: number;
@@ -28,33 +39,19 @@ export class ProfileComponent implements OnInit, DoCheck {
     public imgSetConf: ImageLoaderConfigService,
     public store: Store<Reducers>,
     public router: Router,
-    public modalController: ModalController) {
+    public modalController: ModalController,
+    private userService: UserService) {
     this.imageConfigure();
    }
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-      this.user = state;
+      if (state.isMyProfile) {
+        this.loadOwnerProperties(state);
+      } else {
+        this.loadOtherUserProperties(state);
+      }
     });
-    this.checkIfMyProfile();
-  }
-
-  ngDoCheck() {
-    this.checkIfMyProfile();
-  }
-
-  public checkIfMyProfile() {
-    if (this.user.isMyProfile) {
-      this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
-        this.user.name = state.name;
-        this.user.surname = state.surname;
-      });
-    } else {
-      this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-        this.user.name = state.name;
-        this.user.surname = state.surname;
-      });
-    }
   }
 
   public switchProfileTab(selectedTab: number) {
@@ -107,5 +104,38 @@ export class ProfileComponent implements OnInit, DoCheck {
     this.currentModal = conversationModal;
     return await conversationModal.present();
   }
+
+  private loadOwnerProperties(user: storeState.ProfileState) {
+    this.user.gradient = user.ownerGradient;
+    this.user.imgUrl = user.ownerImgUrl;
+    this.user.email = user.ownerEmail;
+    this.user.name = user.ownerName;
+    this.user.surname = user.ownerSurname;
+    this.user.profileDescription = user.ownerProfileDescription;
+    this.user.userType = user.ownerUserType;
+    this.user.isMyProfile = user.isMyProfile;
+    this.user.isMale = user.ownerIsMale;
+    this.user.accessLevel = user.ownerAccessLevel;
+    this.user.friends = user.ownerFriends;
+    this.user.invitedToFriends = user.ownerInvitedToFriends;
+    this.user.friendsInvitations = user.ownerFriendsInvitations;
+  }
+
+  private loadOtherUserProperties(user: storeState.ProfileState) {
+    this.user.gradient = user.gradient;
+    this.user.imgUrl = user.imgUrl;
+    this.user.email = user.email;
+    this.user.name = user.name;
+    this.user.surname = user.surname;
+    this.user.profileDescription = user.profileDescription;
+    this.user.userType = user.userType;
+    this.user.isMyProfile = user.isMyProfile;
+    this.user.isMale = user.isMale;
+    this.user.accessLevel = user.accessLevel;
+    this.user.friends = user.friends;
+    this.user.invitedToFriends = user.invitedToFriends;
+    this.user.friendsInvitations = user.friendsInvitations;
+  }
+
 }
 

@@ -1,3 +1,5 @@
+import { UserProfile } from '../profile/userInterface';
+
 export interface UserSearcherResponse {
     email: string;
     name: string;
@@ -6,4 +8,5 @@ export interface UserSearcherResponse {
     accessLevel: number;
     isInvitedToFriends?: boolean;
     isFriend?: boolean;
+    userProfile: UserProfile;
 }

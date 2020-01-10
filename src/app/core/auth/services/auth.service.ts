@@ -11,6 +11,7 @@ import { take } from 'rxjs/operators';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import * as storageNames from 'src/app/shared/entitys/storageNames';
 import { Subject } from 'rxjs';
+import { LoginResponse } from 'src/app/shared/interfaces/auth/loginResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -46,8 +47,9 @@ export class AuthService {
   public async autoLogin() {
     const credentials = await this.storageService.getObject(storageNames.credentials);
     if (credentials.email && credentials.password) {
-      this.postLogIn(credentials).pipe(take(1)).subscribe((userToken: string) => {
-        this.signIn(userToken);
+      this.postLogIn(credentials).pipe(take(1)).subscribe((res: LoginResponse) => {
+        this.signIn(res.token);
+        this.store.dispatch(actions.profileAction.loadOwnerProfile({userProfile: res.userProfile}));
       },
       err => {
         this.navigateToLoginPage();

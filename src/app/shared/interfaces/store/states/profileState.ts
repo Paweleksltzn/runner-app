@@ -11,4 +11,16 @@ export interface ProfileState extends User {
     invitedToFriends?: UserProfile[];
     friendsInvitations?: UserProfile[];
     friends?: UserProfile[];
+    ownerGradient: number;
+    ownerImgUrl: string;
+    ownerEmail: string;
+    ownerName: string;
+    ownerSurname: string;
+    ownerProfileDescription: string;
+    ownerUserType: number;
+    ownerIsMale: boolean;
+    ownerAccessLevel: number;
+    ownerFriends: UserProfile[];
+    ownerInvitedToFriends: UserProfile[];
+    ownerFriendsInvitations: UserProfile[];
 }

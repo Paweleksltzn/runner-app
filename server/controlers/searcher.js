@@ -11,16 +11,16 @@ exports.searchUsers = async function(req, res, next) {
                 name: new RegExp(name, 'i'),
                 surname: new RegExp(surname, 'i'),
                 isActive: true
-            });
+            }).populate('userProfile');
             const usersSecondArr = await User.find({
                 name: new RegExp(surname, 'i'),
                 surname: new RegExp(name, 'i'),
                 isActive: true
-            });
+            }).populate('userProfile');
             users = [...usersFirstArr, ...usersSecondArr];
         } else {
             searchString = searchString.split(' ').join('');
-            users = await User.find({ nameAndSurname: new RegExp(searchString, 'i'), isActive: true });
+            users = await User.find({ nameAndSurname: new RegExp(searchString, 'i'), isActive: true }).populate('userProfile');
         }
         const usersToReturn = users.map(user => {
             return {
@@ -28,7 +28,8 @@ exports.searchUsers = async function(req, res, next) {
                 name: user.name,
                 surname: user.surname,
                 isMale: user.isMale,
-                accessLevel: user.accessLevel
+                accessLevel: user.accessLevel,
+                userProfile: user.userProfile
             }
         });
         return res.json(usersToReturn);

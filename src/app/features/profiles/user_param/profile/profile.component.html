@@ -5,7 +5,7 @@
         <ng-container *ngIf="!user.isMyProfile">
           <div class="iconbox" > 
             <ion-icon  name="arrow-round-back" (click)="exitDisplayOtherProfileMode()"></ion-icon>
-            <ion-icon  name="chatboxes" (click)="displayConversation()"></ion-icon>
+            <ion-icon  name="chatboxes" (click)="displayConversation()" *ngIf="user.isMyProfile"></ion-icon>
           </div> 
         </ng-container>
         <ng-container *ngIf="user.userType === 1 || user.userType === 2">

@@ -65,8 +65,7 @@ export class AddFriendsComponent implements OnInit {
 
   public goToProfile(user: UserSearcherResponse) {
     this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: false}));
-    this.store.dispatch(actions.profileAction.profileData
-      ({email: user.email, name: user.name, surname: user.surname, isMale: user.isMale, accessLevel: user.accessLevel}));
+    this.store.dispatch(actions.profileAction.loadProfile({userProfile: user.userProfile}));
     this.accessLevel = user.accessLevel;
     this.checkIfNormalUser();
     this.router.navigateByUrl('/user/profile');

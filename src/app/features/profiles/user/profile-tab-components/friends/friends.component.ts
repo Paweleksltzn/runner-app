@@ -18,7 +18,7 @@ export class FriendsComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-      this.numberOfFriends = state.friends.length;
+      this.numberOfFriends = !!state.friends ? state.friends.length : 0;
       this.userType = state.userType;
     });
   }

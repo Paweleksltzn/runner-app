@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const UserProfile = require('../models/userProfile');
+
 exports.addFriend = async function(req, res, next) {
     try {
         const user = await User.findOne({

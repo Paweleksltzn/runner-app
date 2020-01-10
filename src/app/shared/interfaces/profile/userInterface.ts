@@ -4,6 +4,8 @@ export interface UserProfile {
     email: string;
     name: string;
     surname: string;
+    isMale: boolean;
+    accessLevel: number;
     gradient: number;
     imgUrl: string;
     userType: number;
