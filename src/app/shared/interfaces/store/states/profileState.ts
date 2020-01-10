@@ -1,11 +1,14 @@
 import { User } from '../../auth/User';
+import { UserProfile } from '../../profile/userInterface';
 
 export interface ProfileState extends User {
     gradient: number;
-    profImgUrl: string;
-    profileDesc: string;
+    imgUrl: string;
+    profileDescription: string;
     userType: number;
-    friends: User[];
     isMyProfile: boolean;
     accessLevel: number;
+    invitedToFriends?: UserProfile[];
+    friendsInvitations?: UserProfile[];
+    friends?: UserProfile[];
 }

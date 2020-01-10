@@ -28,7 +28,7 @@ export class FriendsComponent implements OnInit {
       component: AddFriendsComponent
     });
     this.currentModal = addFriendsModal;
-    return await addFriendsModal.present(); 
+    return await addFriendsModal.present();
   }
 
 }

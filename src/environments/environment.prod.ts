@@ -5,6 +5,7 @@ export const environment = {
     auth: 'api/auth',
     workout: 'api/workout',
     notification: 'api/notification',
-    searcher: 'api/searchers'
+    searcher: 'api/searchers',
+    user: 'api/user'
   }
 };

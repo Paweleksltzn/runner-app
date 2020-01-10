@@ -17,16 +17,7 @@ import { ConversationComponent } from '../chat/conversation/conversation.compone
 })
 export class ProfileComponent implements OnInit, DoCheck {
   public currentModal: HTMLIonModalElement;
-  public user: UserProfile = {
-    profileDescription: undefined,
-    name: undefined,
-    surname: undefined,
-    gradient: undefined,
-    imgUrl: undefined,
-    userType: undefined,
-    friends: undefined,
-    isMyProfile: true
-  };
+  public user: UserProfile;
 
   public imagePath = 'assets/images/profile-picture.png';
   public selectedProfileTab: number;
@@ -43,11 +34,7 @@ export class ProfileComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-      this.user.isMyProfile = state.isMyProfile;
-      this.user.imgUrl = state.profImgUrl;
-      this.user.gradient = state.gradient;
-      this.user.profileDescription = state.profileDesc;
-      this.user.userType = state.userType;
+      this.user = state;
     });
     this.checkIfMyProfile();
   }

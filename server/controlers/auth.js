@@ -3,6 +3,8 @@ const { validationResult } = require('express-validator');
 const crypto = require('crypto');
 
 const User = require('../models/user');
+const UserProfile = require('../models/userProfile');
+
 const emailSender = require('../util/emailSender');
 const emailOptions = require('../enums/emailOptions');
 const jwtManagment = require('../auth-guards/jwt-managment');
@@ -17,6 +19,14 @@ exports.registerUser = async function(req, res, next) {
     try {
         await emailSender(req.body.email, emailOptions.emailConfirmation, confirmationToken);
         const hashedPassword = await bcrypt.hash(req.body.password, 12);
+        const userProfile = new UserProfile({
+            gradient: 1,
+            imgUrl: 'test',
+            profileDescription: 'Wprowadź opis ...',
+            invitedToFriends: [],
+            friendsInvitations: [],
+            friends: []
+        });
         const user = new User({
             email: req.body.email,
             password: hashedPassword,
@@ -26,8 +36,10 @@ exports.registerUser = async function(req, res, next) {
             nameAndSurname: req.body.name + req.body.surname,
             accessLevel: 1,
             confirmationToken,
-            isActive: false
+            isActive: false,
+            userProfile
         });
+        userProfile.save();
         user.save()
         return res.json('Link aktywacyjny został wysłany');
     } catch (err) {

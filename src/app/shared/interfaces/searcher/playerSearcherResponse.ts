@@ -4,4 +4,6 @@ export interface UserSearcherResponse {
     surname: string;
     isMale: boolean;
     accessLevel: number;
+    isInvitedToFriends?: boolean;
+    isFriend?: boolean;
 }

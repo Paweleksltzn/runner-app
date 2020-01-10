@@ -29,7 +29,11 @@ const userSchema = new Schema({
   },
   confirmationToken:  String,
   isActive: Boolean,
-
+  userProfile: [{
+    type: Schema.Types.ObjectId,
+    ref: 'UserProfile',
+    required: true
+}],
 });
 
 module.exports = mongoose.model('User', userSchema);
