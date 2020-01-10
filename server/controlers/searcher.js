@@ -22,7 +22,8 @@ exports.searchUsers = async function(req, res, next) {
             searchString = searchString.split(' ').join('');
             users = await User.find({ nameAndSurname: new RegExp(searchString, 'i'), isActive: true }).populate('userProfile');
         }
-        const usersToReturn = users.map(user => {
+        const usersToMap = users.filter(user => user.email !== req.token.email);
+        const usersToReturn = usersToMap.map(user => {
             return {
                 email: user.email,
                 name: user.name,

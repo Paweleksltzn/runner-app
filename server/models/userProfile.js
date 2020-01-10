@@ -42,6 +42,7 @@ const userProfileSchema = new Schema({
     friendsInvitations: [{
         type: Schema.Types.ObjectId,
         ref: 'User'
+        
     }],
     friends: [{
         type: Schema.Types.ObjectId,

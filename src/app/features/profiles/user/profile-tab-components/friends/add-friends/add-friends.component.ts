@@ -56,8 +56,9 @@ export class AddFriendsComponent implements OnInit {
       this.isLoaded = true;
       this.players = response;
       this.players.forEach(player => {
-        player.isInvitedToFriends = !!this.playerData.invitedToFriends.find(invitedPlayer => invitedPlayer.email === player.email);
-        player.isFriend = !!this.playerData.friends.find(invitedPlayer => invitedPlayer.email === player.email);
+        player.isInvitedToFriends = !!this.playerData.ownerInvitedToFriends.find(invitedPlayer => invitedPlayer._id === player._id);
+        player.isFriend = !!this.playerData.ownerFriends.find(invitedPlayer => invitedPlayer._id === player._id);
+        player.didInvite = !!this.playerData.ownerFriendsInvitations.find(invitatingPlayer => invitatingPlayer._id === player._id);
       });
     });
 
@@ -81,10 +82,14 @@ export class AddFriendsComponent implements OnInit {
   }
 
   public addToFriends(user: UserSearcherResponse) {
-    // this.userService.addFriend(user).subscribe((res: UserProfile) => {
-    //   user.isInvitedToFriends = true;
-    //   this.store.dispatch(actions.profileAction.addFriend({newFriend: res}));
-    // });
+    this.userService.addFriend(user).subscribe((res: UserProfile) => {
+      user.isInvitedToFriends = true;
+      this.store.dispatch(actions.profileAction.inviteFriend({invitedFriend: res}));
+    });
+  }
+
+  public confirmFriendInvitation(user: UserSearcherResponse) {
+    user.isFriend = true;
   }
 
 }

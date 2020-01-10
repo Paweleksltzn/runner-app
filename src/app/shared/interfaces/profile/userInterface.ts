@@ -13,4 +13,5 @@ export interface UserProfile {
     invitedToFriends?: UserProfile[];
     friendsInvitations?: UserProfile[];
     isMyProfile: boolean;
+    _id?: string;
 }

@@ -38,7 +38,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/workout', jwtManager.jwtVerivier, workoutRouter); 
 app.use('/api/notification', jwtManager.jwtVerivier, notificationRouter); 
 app.use('/api/user', jwtManager.jwtVerivier, userRouter);
-app.use('/api/searchers', /*jwtManager.jwtVerivier,*/ searchersRouter);
+app.use('/api/searchers',jwtManager.jwtVerivier, searchersRouter);
 
 mongoose
   .connect(credentials.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})

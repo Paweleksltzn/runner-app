@@ -15,7 +15,7 @@ exports.addFriend = async function(req, res, next) {
         userProfile.invitedToFriends.push(newFriendProfile);
         newFriendProfile.save();
         userProfile.save();
-
+        return res.json(newFriendProfile);
     } catch (err) {
         return res.status(500).send('Wystąpił błąd podczas wyszukiwania użytkownika');
     }

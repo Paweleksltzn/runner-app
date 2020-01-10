@@ -4,6 +4,6 @@ const userController = require('../controlers/user');
 
 const router = express.Router();
 
-router.get('/addFriend', userController.addFriend);
+router.post('/addFriend', userController.addFriend);
 
 module.exports = router;

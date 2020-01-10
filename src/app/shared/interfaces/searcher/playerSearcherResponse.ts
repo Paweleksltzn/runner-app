@@ -8,5 +8,7 @@ export interface UserSearcherResponse {
     accessLevel: number;
     isInvitedToFriends?: boolean;
     isFriend?: boolean;
+    _id?: string;
     userProfile: UserProfile;
+    didInvite?: boolean;
 }

@@ -60,10 +60,12 @@ const profileReducerOptions = createReducer(
     friendsInvitations: action.userProfile.friendsInvitations || []
     }
   )),
-  on(actions.profileAction.setTheme, (state, action) => ({ ...state, gradient: action.gradient})),
+  on(actions.profileAction.setTheme, (state, action) => ({ ...state, ownerGradient: action.gradient})),
   on(actions.profileAction.setUserType, (state, action) => ({ ...state, userType: action.userType})),
   on(actions.profileAction.setIsMyProfile, (state, action) => ({ ...state, isMyProfile: action.isMyProfile})),
-  on(actions.profileAction.addFriend, (state, action) => ({ ...state, friends: [...state.friends, action.newFriend]})),
+  on(actions.profileAction.addFriend, (state, action) => ({ ...state, ownerFriends: [...state.ownerFriends, action.newFriend]})),
+  on(actions.profileAction.inviteFriend, (state, action) =>
+   ({ ...state, ownerInvitedToFriends: [...state.ownerInvitedToFriends, action.invitedFriend]}))
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {
   return profileReducerOptions(state, action);
