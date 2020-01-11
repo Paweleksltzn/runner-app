@@ -1,0 +1,26 @@
+<ion-content>
+  <ion-toolbar class="header__bar">
+    <ion-icon (click)="dismissModal()" class="back-button" name="arrow-round-back"></ion-icon>
+  </ion-toolbar>
+  <ng-container *ngIf="areTermsOfUseAccepted; else TermsOfUse">
+  <div class="approval">
+    <ion-icon class="approval-icon" name="fitness"></ion-icon>
+    <ion-icon class="approval-icon-back" name="star"></ion-icon>
+    <p class="congrat-text"><span class="congrats">Gratujacje!!!</span><br> Twoje konto trenera zostało aktywowane.</p>
+  </div>
+  <div class="info">
+    <p>Teraz możesz:</p>
+    <ul>
+      <li>Tworzyć i sprzedawać własne treningi.</li>
+      <li>Otrzymywać oceny i recenzje od innych użytkowników.</li>
+      <li>Poszerzać swoją sieć klientów.</li>
+    </ul>
+  </div>
+  </ng-container>
+  <ng-template #TermsOfUse>
+    <div class="terms">
+    Tutaj będzie regulamin.
+    </div>
+      <ion-button (click)="activateCoachAccount()" class="terms-submit" type="submit">Akceptuję regulamin</ion-button>
+  </ng-template>
+</ion-content>

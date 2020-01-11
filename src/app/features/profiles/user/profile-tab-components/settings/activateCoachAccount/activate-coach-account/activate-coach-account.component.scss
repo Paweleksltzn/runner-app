@@ -1,0 +1,45 @@
+@import '../../../../../user_param/chat/chat.component.scss';
+@import '../../../../../../../../styles/variables';
+.approval-icon{
+    font-size: 6rem;
+    color: #555;
+    position: absolute;
+    left: 50%;
+    top: 3.5rem;
+    margin-left: -50px;
+    z-index: 10;
+    &-back{
+        color: $mixed-main-colours;
+        font-size: 12rem;
+    }
+}
+.approval{
+    text-align: center;
+    position: relative;
+}
+.congrat-text{
+    font-weight: bold;
+    color: #555;
+    font-size: 1.25rem;
+}
+.congrats{
+    color: darken($mixed-main-colours, 10%); 
+}
+.info{
+    color: #555;
+    padding: .75rem;
+}
+li{
+    margin-top: .5rem;
+}
+.logout{
+    font-size: 0.75rem;
+    text-align: center;
+}
+.terms-submit{
+    --background: linear-gradient(to left bottom, #15e6b5, #39e9b1, #4fecad, #61efaa,#71f2a6, #6ff19e, #6eef95, #6eee8c, #5ce87b, #49e268, #32dc55, #09d63f); 
+    --color: #555;
+}
+.terms{
+    margin: 1rem;
+}

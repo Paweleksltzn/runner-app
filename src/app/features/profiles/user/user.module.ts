@@ -15,6 +15,7 @@ import { RatingGuestComponent } from './profile-tab-components/rating/rating-gue
 import { ProfileComponent } from '../user_param/profile/profile.component';
 import { AddFriendsComponent } from './profile-tab-components/friends/add-friends/add-friends.component';
 import { ChatModule } from '../user_param/chat/chat/chat.module';
+import { ActivateCoachAccountComponent } from '../user/profile-tab-components/settings/activateCoachAccount/activate-coach-account/activate-coach-account.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ChatModule } from '../user_param/chat/chat/chat.module';
     RatingGuestComponent,
     ProfileComponent,
     AddFriendsComponent,
+    ActivateCoachAccountComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,10 @@ import { ChatModule } from '../user_param/chat/chat/chat.module';
     UserRoutingModule,
     ChatModule,
   ],
-  entryComponents: [AddFriendsComponent]
+  entryComponents: [
+    AddFriendsComponent,
+    ActivateCoachAccountComponent
+  ]
 })
 
 export class UserModule { }
