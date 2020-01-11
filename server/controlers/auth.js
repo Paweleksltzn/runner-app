@@ -48,6 +48,7 @@ exports.registerUser = async function(req, res, next) {
         user.save()
         return res.json('Link aktywacyjny został wysłany');
     } catch (err) {
+        console.log(err);
         return res.status(422).send('Wystąpił błąd');
     }
 }
@@ -68,6 +69,7 @@ exports.login = async function(req, res, next) {
             } 
         } 
     } catch (err) {
+        console.log(err);
         return res.status(500).send('Wystąpił błąd');
     }
     return res.status(422).send('Nieprawidłowe dane logowania');
@@ -86,6 +88,7 @@ exports.emailConfirmed = async function(req, res, next) {
             return res.status(422).send('Wystąpił błąd')
         }
     } catch {
+        console.log(err);
         return res.status(500).send('Wystąpił błąd');
     }
     
@@ -106,6 +109,7 @@ exports.passwordReset = async function(req, res, next) {
         resetPasswordUser.save();
         return res.json('Link resetujący hasło został wysłany');
     } catch (err) {
+        console.log(err);
         return res.status(500).send('Wystąpił błąd');
     }
 }
@@ -129,6 +133,7 @@ exports.passwordResetAttempt = async function(req, res, next) {
             return res.status(422).send('Wystąpił błąd');
         }
     } catch(err) {
+        v
         return res.status(500).send('Wystąpił błąd');
     }
 }

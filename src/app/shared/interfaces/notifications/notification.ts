@@ -9,4 +9,5 @@ export interface Notification {
     type: string;
     newFriendId?: string;
     creationDate?: Date;
+    _id?: string;
 }

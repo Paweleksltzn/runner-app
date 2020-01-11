@@ -23,4 +23,8 @@ export class UserService {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.user}/confirmFriendInvitation`, { newFriendAcc });
   }
 
+  public rejectFriendInvitation(rejectedFriendAcc: User): Observable<any> {
+    return this.http.post(`${environment.srvAddress}/${environment.endpoints.user}/rejectFriendInvitation`, { rejectedFriendAcc });
+  }
+
 }

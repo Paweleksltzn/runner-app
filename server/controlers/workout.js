@@ -8,6 +8,7 @@ exports.getWorkoutsList = async function(req, res, next) {
         const workouts = await WorkoutsList.findOne({owner: userVariable});
         return res.json(workouts.workoutsList || []);
     } catch(err) {
+        console.log(err);
         return res.status(500).send('Nie udało się pobrać danych');
     }
 }
@@ -32,6 +33,7 @@ exports.saveWorkoutsList = async function(req, res, next) {
         }
         return res.json('Poprawnie zapisane dane');
     } catch(err) {
+        console.log(err);
         return res.status(500).send('Wystąpił błąd podczas zapisywania danych');
     }
 }
@@ -42,6 +44,7 @@ exports.getWorkoutHistory = async function(req, res, next) {
         const userWorkoutsHistory = await WorkoutHistory.findOne({owner: user});
         return res.json(userWorkoutsHistory);
     } catch(err) {
+        console.log(err);
         return res.status(500).send('Wystąpił błąd podczas zapisywania danych');
     }
 }
@@ -91,6 +94,7 @@ exports.addWorkoutToHistory = async function(req, res, next) {
         }
         return res.json('Trening zapisany');
     } catch(err) {
+        console.log(err);
         return res.status(500).send('Wystąpił błąd podczas zapisywania danych');
     }
 }
@@ -111,6 +115,7 @@ exports.removeWorkoutFromHistory = async function(req, res, next) {
         history.save();
         return res.json('Trening usunięty pomyślnie');
     } catch(err) {
+        console.log(err);
         return res.status(500).send('Nie udało się usunąć treningu');
     }
 }

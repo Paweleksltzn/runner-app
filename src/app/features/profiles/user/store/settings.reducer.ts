@@ -68,6 +68,11 @@ const profileReducerOptions = createReducer(
     state.ownerFriendsInvitations.splice(index, 1);
     return ({ ...state, ownerFriends: [...state.ownerFriends, action.newFriend]});
   }),
+  on(actions.profileAction.rejectFriend, (state, action) => {
+    const index = state.ownerFriendsInvitations.indexOf(action.rejectedFriend);
+    state.ownerFriendsInvitations.splice(index, 1);
+    return ({ ...state });
+  }),
   on(actions.profileAction.inviteFriend, (state, action) =>
    ({ ...state, ownerInvitedToFriends: [...state.ownerInvitedToFriends, action.invitedFriend]}))
 );

@@ -35,6 +35,7 @@ exports.searchUsers = async function(req, res, next) {
         });
         return res.json(usersToReturn);
     } catch {
+        console.log(err);
         return res.status(500).send('Wystąpił błąd podczas wyszukiwania użytkownika');
     }
     

@@ -18,4 +18,13 @@ export class NotificationsService {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.notification}/displayAll`, {});
   }
 
+  public removeNotification(notificationId: string): Observable<any> {
+    const queryParams = {
+      params: {
+        notificationId
+      }
+    };
+    return this.http.delete(`${environment.srvAddress}/${environment.endpoints.notification}/deleteNotification`, queryParams);
+  }
+
 }

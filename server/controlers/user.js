@@ -65,3 +65,27 @@ exports.confirmFriendInvitation = async function(req, res, next) {
         return res.status(500).send('Wystąpił błąd podczas dodawania uzytkownika do znajomych');
     }
 }
+
+exports.rejectFriendInvitation = async function(req, res, next) {
+    try {
+        const rejectedFriendProfile = await UserProfile.findById(req.body.rejectedFriendAcc.userProfile);
+        const user = await User.findOne({
+            email: req.token.email
+        });
+        const userProfile = await UserProfile.findById(user.userProfile);
+        const index = userProfile.friendsInvitations.indexOf(rejectedFriendProfile._id);
+        userProfile.friendsInvitations.splice(index, 1);
+        const otherIndex = rejectedFriendProfile.invitedToFriends.indexOf(userProfile._id);
+        rejectedFriendProfile.invitedToFriends.splice(otherIndex, 1);
+        const newNotification = notificationsFactory.createNotification(notificationsOptions.friendInvitationResponse, user, [req.body.rejectedFriendAcc], 
+            `Użytkownik ${user.name} ${user.surname} odrzucił twoje zaproszenie do grona znajomych`
+        );
+        newNotification.save();
+        userProfile.save();
+        rejectedFriendProfile.save();
+        return res.json(rejectedFriendProfile);
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send('Wystąpił błąd podczas usuwania zaproszenia ze znajomych');
+    }
+}
