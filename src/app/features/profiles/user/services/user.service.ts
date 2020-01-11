@@ -27,4 +27,17 @@ export class UserService {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.user}/rejectFriendInvitation`, { rejectedFriendAcc });
   }
 
+  public changeGradient(newGradient: number): Observable<any> {
+    return this.http.post(`${environment.srvAddress}/${environment.endpoints.user}/changeGradient`, { newGradient });
+  }
+
+  public getFriendsForUserProfile(userProfile: UserProfile): Observable<any> {
+    const queryParams = {
+      params: {
+        userProfileId: userProfile._id
+      }
+    };
+    return this.http.get(`${environment.srvAddress}/${environment.endpoints.user}/getFriendsForUserProfile`, queryParams);
+  }
+
 }

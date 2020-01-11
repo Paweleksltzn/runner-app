@@ -2,7 +2,7 @@ import { createAction, props} from '@ngrx/store';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 
 export const profileAction = {
-    loadOwnerProfile: createAction('Load profile for owner', props<{userProfile: UserProfile}>()),
+    loadOwnerProfile: createAction('Load profile for owner', props<{userProfile: UserProfile, friends: UserProfile[]}>()),
     loadProfile: createAction('Load profile for user', props<{userProfile: UserProfile}>()),
     setTheme: createAction('[Gradient Page] Set Gradients', props<{gradient: number}>()),
     setUserType: createAction('[User Page] Set Users', props<{userType: number}>()),

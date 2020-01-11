@@ -7,13 +7,9 @@ const notificationsOptions = require('../enums/notificationsOptions');
 
 exports.addFriend = async function(req, res, next) {
     try {
-        const user = await User.findOne({
-            email: req.token.email
-        });
+        const user = await User.findById(req.token._id);
         const userProfile = await UserProfile.findById(user.userProfile);
-        const newFriend = await User.findOne({
-            email: req.body.email
-        });
+        const newFriend = await User.findById(req.token._id);
         const newFriendProfile = await UserProfile.findById(newFriend.userProfile);
         newFriendProfile.friendsInvitations.push(userProfile);
         userProfile.invitedToFriends.push(newFriendProfile);
@@ -31,9 +27,7 @@ exports.addFriend = async function(req, res, next) {
 exports.confirmFriendInvitation = async function(req, res, next) {
     try {
         const newFriendProfile = await UserProfile.findById(req.body.newFriendAcc.userProfile);
-        const user = await User.findOne({
-            email: req.token.email
-        });
+        const user = await User.findById(req.token._id);
         const userProfile = await UserProfile.findById(user.userProfile);
         userProfile.friends.push(newFriendProfile);
         const index = userProfile.friendsInvitations.indexOf(newFriendProfile._id);
@@ -69,9 +63,7 @@ exports.confirmFriendInvitation = async function(req, res, next) {
 exports.rejectFriendInvitation = async function(req, res, next) {
     try {
         const rejectedFriendProfile = await UserProfile.findById(req.body.rejectedFriendAcc.userProfile);
-        const user = await User.findOne({
-            email: req.token.email
-        });
+        const user = await User.findById(req.token._id);
         const userProfile = await UserProfile.findById(user.userProfile);
         const index = userProfile.friendsInvitations.indexOf(rejectedFriendProfile._id);
         userProfile.friendsInvitations.splice(index, 1);
@@ -87,5 +79,33 @@ exports.rejectFriendInvitation = async function(req, res, next) {
     } catch (err) {
         console.log(err)
         return res.status(500).send('Wystąpił błąd podczas usuwania zaproszenia ze znajomych');
+    }
+}
+
+exports.getFriendsForUserProfile = async function(req, res, next) {
+    try {
+        const userProfile = await UserProfile.findById(req.query.userProfileId);
+        const friends = await UserProfile.find({
+            '_id': {
+                '$in': userProfile.friends
+            }
+        });
+        return res.json(friends);
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send('Wystąpił błąd podczas usuwania zaproszenia ze znajomych');
+    }
+}
+
+exports.changeGradient = async function (req, res, next) {
+    try {
+        const user = await User.findById(req.token._id);
+        const userProfile = await UserProfile.findById(user.userProfile);
+        userProfile.gradient = req.body.newGradient;
+        userProfile.save();
+        return res.json({});
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send('Wystąpił błąd podczas zmieniania gradientu');
     }
 }

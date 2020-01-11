@@ -41,7 +41,8 @@ const profileReducerOptions = createReducer(
     ownerAccessLevel: action.userProfile.accessLevel,
     ownerImgUrl: action.userProfile.imgUrl,
     ownerProfileDescription: action.userProfile.profileDescription,
-    ownerFriends: action.userProfile.friends || [],
+    ownerFriends: action.friends || [],
+    ownerGradient: action.userProfile.gradient,
     ownerInvitedToFriends: action.userProfile.invitedToFriends || [],
     ownerFriendsInvitations: action.userProfile.friendsInvitations || []
     }
@@ -54,6 +55,7 @@ const profileReducerOptions = createReducer(
     isMale: action.userProfile.isMale,
     accessLevel: action.userProfile.accessLevel,
     imgUrl: action.userProfile.imgUrl,
+    gradient: action.userProfile.gradient,
     profileDescription: action.userProfile.profileDescription,
     friends: action.userProfile.friends || [],
     invitedToFriends: action.userProfile.invitedToFriends || [],

@@ -4,7 +4,7 @@ const WorkoutHistory = require('../models/workoutHistory');
 
 exports.getWorkoutsList = async function(req, res, next) {
     try {
-        const userVariable = await User.findOne({email: req.token.email, surname: req.token.surname});
+        const userVariable = await User.findById(req.token._id);
         const workouts = await WorkoutsList.findOne({owner: userVariable});
         return res.json(workouts.workoutsList || []);
     } catch(err) {
@@ -15,7 +15,7 @@ exports.getWorkoutsList = async function(req, res, next) {
 
 exports.saveWorkoutsList = async function(req, res, next) {
     try {
-        const userVariable = await User.findOne({email: req.token.email, surname: req.token.surname});
+        const userVariable = await User.findOne({email: req.token.email, _id: req.token._id});
         const newWorkoutList = req.body.workouts;
         newWorkoutList.forEach(singleWorkout => {
             if (!singleWorkout.author) singleWorkout.author = userVariable;
@@ -23,9 +23,9 @@ exports.saveWorkoutsList = async function(req, res, next) {
         const workouts = await WorkoutsList.findOne({owner: userVariable});
         if (workouts) {
             workouts.workoutsList = newWorkoutList;
-            workouts.save();
+            workouts.save().then(res=>{}).catch(err=>{});
         } else {
-            const newWorkouts= new WorkoutsList({
+            const newWorkouts = new WorkoutsList({
                 owner: userVariable,
                 workoutsList: newWorkoutList
             });
@@ -40,7 +40,7 @@ exports.saveWorkoutsList = async function(req, res, next) {
 
 exports.getWorkoutHistory = async function(req, res, next) {
     try {
-        const user = await User.findOne({email: req.token.email, surname: req.token.surname});
+        const user = await User.findById(req.token._id);
         const userWorkoutsHistory = await WorkoutHistory.findOne({owner: user});
         return res.json(userWorkoutsHistory);
     } catch(err) {
@@ -51,7 +51,7 @@ exports.getWorkoutHistory = async function(req, res, next) {
 
 exports.addWorkoutToHistory = async function(req, res, next) {
     try {
-        const userVariable = await User.findOne({email: req.token.email, surname: req.token.surname});
+        const userVariable = await User.findById(req.token._id);
         const authorId = req.body.workout.author;
         const author = await User.findById(authorId);
         const userWorkoutsHistory = await WorkoutHistory.findOne({owner: userVariable});
@@ -104,7 +104,7 @@ exports.removeWorkoutFromHistory = async function(req, res, next) {
     const duration = req.query.duration;
     const trainingDate = req.query.trainingDate;
     try {
-        const owner = await User.findOne({email: req.token.email, surname: req.token.surname});
+        const owner = await User.findById(req.token._id);
         const history = await WorkoutHistory.findOne({
             owner
         });

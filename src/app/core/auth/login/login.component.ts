@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
          { email: this.authForm.value.email, password: this.authForm.value.password });
         this.authForm.reset();
         this.authService.signIn(res.token);
-        this.store.dispatch(actions.profileAction.loadOwnerProfile({userProfile: res.userProfile}));
+        this.store.dispatch(actions.profileAction.loadOwnerProfile({userProfile: res.userProfile, friends: res.friends}));
       },
       err => {
         this.authForm.patchValue({

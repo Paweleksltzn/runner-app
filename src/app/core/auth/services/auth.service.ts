@@ -54,7 +54,7 @@ export class AuthService {
     if (credentials.email && credentials.password) {
       this.postLogIn(credentials).pipe(take(1)).subscribe((res: LoginResponse) => {
         this.signIn(res.token);
-        this.store.dispatch(actions.profileAction.loadOwnerProfile({userProfile: res.userProfile}));
+        this.store.dispatch(actions.profileAction.loadOwnerProfile({userProfile: res.userProfile, friends: res.friends}));
       },
       err => {
         this.navigateToLoginPage();

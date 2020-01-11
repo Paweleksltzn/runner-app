@@ -3,7 +3,7 @@ const Notification = require('../models/notification');
 
 exports.getNotifications = async function(req, res, next) {
     try {
-        const user = await User.findOne({email: req.token.email})
+        const user = await User.findById(req.token._id);
         const userNotifications = await Notification.find({
             receivers: { $all: [user] }
         }).sort({'creationDate': -1}).populate('author');
@@ -21,7 +21,7 @@ exports.getNotifications = async function(req, res, next) {
 
 exports.displayAll = async function(req, res, next) {
     try {
-        const user = await User.findOne({email: req.token.email})
+        const user = await User.findById(req.token._id);
         const userNotifications = await Notification.find({
             receivers: { $all: [user] }
         }).populate('author');
@@ -41,7 +41,7 @@ exports.displayAll = async function(req, res, next) {
 exports.deleteNotification = async function(req, res, next) {
     try {
         const notification = await Notification.findById(req.query.notificationId);
-        const user = await User.findOne({email: req.token.email})
+        const user = await User.findById(req.token._id);
         const index = notification.receivers.indexOf(user._id);
         notification.receivers.splice(index , 1);
         if (notification.receivers.length < 1) {

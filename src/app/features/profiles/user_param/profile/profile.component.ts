@@ -54,6 +54,11 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  ionViewWillEnter() {
+    this.router.navigate(['user', 'profile', 'friends']);
+    this.selectedProfileTab = 1;
+  }
+
   public switchProfileTab(selectedTab: number) {
     this.selectedProfileTab = selectedTab;
   }

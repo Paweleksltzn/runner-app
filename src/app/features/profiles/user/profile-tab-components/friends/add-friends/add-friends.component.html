@@ -10,23 +10,26 @@
     </ion-list-header>
     <div [ngClass]="{'loader': !isLoaded}"></div>
     <div *ngFor="let pl of players;">
-      <ion-item>
-        <ion-grid>
-          <ion-row align-items-center>
-            <ion-col size="10" (click)="goToProfile(pl)">
+      <ion-grid>
+        <ion-row align-items-center>
+          <ion-col size="10" (click)="goToProfile(pl)">
+            <ion-item>
+              <ion-avatar slot="start">
+                <img [src]="pl.userProfile.imgUrl">
+              </ion-avatar>
               <ion-label>
                 <h2>{{pl.name}} {{pl.surname}}</h2>
-                <p>{{pl.email}}</p>
+                <p>{{ pl.userProfile.profileDescription.substr(0, 60) }}<ng-container *ngIf="pl.userProfile.profileDescription.substr(0, 60).length === 60">...</ng-container></p>
               </ion-label>
-            </ion-col>
-            <ion-col size="2">
-              <ion-icon name="person-add" (click)="addToFriends(pl)" class="friend-adder" [ngClass]="{'invited': pl.isInvitedToFriends}" *ngIf="!pl.didInvite && !pl.isFriend"></ion-icon>
-              <ion-icon name="stopwatch" class="friend-adder invited" *ngIf="pl.didInvite"></ion-icon>
-              <ion-icon name="contacts" *ngIf="pl.isFriend" class="friend-adder invited"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-icon name="person-add" (click)="addToFriends(pl)" class="friend-adder" [ngClass]="{'invited': pl.isInvitedToFriends}" *ngIf="!pl.didInvite && !pl.isFriend"></ion-icon>
+            <ion-icon name="stopwatch" class="friend-adder invited" *ngIf="pl.didInvite"></ion-icon>
+            <ion-icon name="contacts" *ngIf="pl.isFriend" class="friend-adder invited"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </ion-list>
 </ion-content>

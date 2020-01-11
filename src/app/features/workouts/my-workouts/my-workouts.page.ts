@@ -23,7 +23,9 @@ export class MyWorkoutsPage implements OnInit {
     this.myWorkoutService.loadUserWorkoutsToStore();
     this.store.pipe(select('myWorkouts')).subscribe((state: storeState.MyWorkoutState) => {
       this.myWorkouts = state.workoutsList || [];
-      this.saveMyWorkoutsStage();
+      if (state.isStateLoaded) {
+        this.saveMyWorkoutsStage();
+      }
     });
   }
 

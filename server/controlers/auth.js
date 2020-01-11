@@ -58,6 +58,12 @@ exports.login = async function(req, res, next) {
     const password = req.body.password;
     try {
         const user = await User.findOne({email}).populate('userProfile');
+        const friends = await UserProfile.find({
+            '_id': {
+                '$in': user.userProfile.friends
+            }
+        });
+
         if (user) {
             if (!user.isActive) {
                 return res.status(422).send('Email nie został potwierdzony');
@@ -65,7 +71,7 @@ exports.login = async function(req, res, next) {
             const doMatch = await bcrypt.compare(password, user.password);
             if(doMatch) {
                 const token = jwtManagment.jwtFactory(user);
-                return res.json({token, userProfile: user.userProfile});
+                return res.json({token, userProfile: user.userProfile, friends});
             } 
         } 
     } catch (err) {

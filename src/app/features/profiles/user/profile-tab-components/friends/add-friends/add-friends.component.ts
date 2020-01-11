@@ -58,20 +58,23 @@ export class AddFriendsComponent implements OnInit {
       this.players = response;
       this.players.forEach(player => {
         player.isInvitedToFriends = !!this.playerData.ownerInvitedToFriends.find(invitedPlayer => invitedPlayer.email === player.email);
-        player.isFriend = !!this.playerData.ownerFriends.find(invitedPlayer => invitedPlayer._id === player._id);
-        player.didInvite = !!this.playerData.ownerFriendsInvitations.find(invitatingPlayer => invitatingPlayer._id === player._id);
+        player.isFriend = !!this.playerData.ownerFriends.find(invitedPlayer => invitedPlayer.email === player.email);
+        player.didInvite = !!this.playerData.ownerFriendsInvitations.find(invitatingPlayer => invitatingPlayer.email === player.email);
       });
     });
 
   }
 
   public goToProfile(user: UserSearcherResponse) {
-    this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: false}));
-    this.store.dispatch(actions.profileAction.loadProfile({userProfile: user.userProfile}));
-    this.accessLevel = user.accessLevel;
-    this.checkIfNormalUser();
-    this.router.navigateByUrl('/user/profile');
-    this.dismissModal();
+    this.userService.getFriendsForUserProfile(user.userProfile).subscribe((friends: UserProfile[]) => {
+      user.userProfile.friends = friends;
+      this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: false}));
+      this.store.dispatch(actions.profileAction.loadProfile({userProfile: user.userProfile}));
+      this.accessLevel = user.accessLevel;
+      this.checkIfNormalUser();
+      this.router.navigateByUrl('/user/profile/friends');
+      this.dismissModal();
+    });
   }
 
   public checkIfNormalUser() {
