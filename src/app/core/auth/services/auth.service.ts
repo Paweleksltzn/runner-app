@@ -12,6 +12,8 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import * as storageNames from 'src/app/shared/entitys/storageNames';
 import { Subject } from 'rxjs';
 import { LoginResponse } from 'src/app/shared/interfaces/auth/loginResponse';
+import { NotificationsService } from 'src/app/features/notifications/services/notifications.service';
+import { Notification } from 'src/app/shared/interfaces/notifications/notification';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,7 @@ export class AuthService {
   public token: string;
 
   constructor(private http: HttpClient, private storageService: StorageService,
-              private router: Router, private store: Store<Reducers>) { }
+              private router: Router, private store: Store<Reducers>, private notificationsService: NotificationsService) { }
 
   public postSignUp(userData: UserRegistrationData) {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.auth}/signup`, userData);
@@ -36,7 +38,10 @@ export class AuthService {
     this.store.dispatch(actions.authActions.signIn({
       ...decodedToken.data
     }));
-    this.router.navigate(['my-workouts']);
+    this.notificationsService.getNotifications().subscribe((notifications: Notification[]) => {
+      this.store.dispatch(actions.notificationActions.loadNotifications({ notifications }));
+      this.router.navigate(['my-workouts']);
+    });
   }
 
   public signOut() {

@@ -3,6 +3,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 import { Notification } from 'src/app/shared/interfaces/notifications/notification';
 import { Store } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
+import { notificationsTypes } from '../../enums/notifications-type';
 
 @Component({
   selector: 'app-single-notification',
@@ -11,7 +12,9 @@ import { Reducers, actions } from 'src/app/store';
 })
 export class SingleNotificationComponent implements OnInit {
   public notification: Notification;
-  private currentIndex: number;
+  public notificationTypes = notificationsTypes;
+  public currentIndex: number;
+
   constructor(private navParams: NavParams, private modalController: ModalController, public store: Store<Reducers>) { }
 
   ngOnInit() {

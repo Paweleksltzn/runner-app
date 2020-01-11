@@ -1,34 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { actions } from 'src/app/store';
+import { notificationsTypes } from '../enums/notifications-type';
 
 export const initialState: storeState.NotificationsState = {
-  notifications: [
-      {
-        title: 'Pierwsze powiadomionko',
-        message: `orem ipsum dolor sit amet consectetur adipisicing elit. Laborum rerum commodi unde totam ducimus. Seq
-        ui quos ut eaque at atque, quas veritatis vero architecto voluptate nesciunt? Voluptas ab deleniti corrupti.`,
-        author: 'Autor jeden',
-        dateString: '11.10.2019',
-        isDisplayed: false
-      },
-      {
-        title: 'Drugie powiadomionko',
-        message: `orem ipsum dolor sit amet consectetur adipisicing elit. Laborum rerum commodi unde totam ducimus. Seq
-        ui quos ut eaque at atque, quas veritatis vero architecto voluptate nesciunt? Voluptas ab deleniti corrupti.`,
-        author: 'Autor drugi',
-        dateString: '09.10.2019',
-        isDisplayed: false
-      },
-      {
-        title: 'Trzecie powiadomionko',
-        message: `orem ipsum dolor sit amet consectetur adipisicing elit. Laborum rerum commodi unde totam ducimus. Seq
-        ui quos ut eaque at atque, quas veritatis vero architecto voluptate nesciunt? Voluptas ab deleniti corrupti.`,
-        author: 'Autor trzeci',
-        dateString: '08.10.2019',
-        isDisplayed: true
-      },
-  ]
+  notifications: []
 };
 const notificationsReducerOptions = createReducer(
   initialState,

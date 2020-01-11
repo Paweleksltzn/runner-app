@@ -63,7 +63,7 @@ exports.login = async function(req, res, next) {
             }
             const doMatch = await bcrypt.compare(password, user.password);
             if(doMatch) {
-                const token = jwtManagment.jwtFactory(user)
+                const token = jwtManagment.jwtFactory(user);
                 return res.json({token, userProfile: user.userProfile});
             } 
         } 

@@ -4,35 +4,23 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h3>{{ notification.author }}</h3>
-      </ion-col>
-      <ion-col size="auto">
-        <h3>{{ notification.dateString }}</h3>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <p>
-          {{ notification.message }}
-        </p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-          <ion-button class="unframed-primary-button" fill="clear" (click)="closeModal()">
-              <ion-icon name="arrow-dropleft"></ion-icon>
-              Powrót
-          </ion-button>
-      </ion-col>
-      <ion-col size="auto">
-          <button class="short-button short-button-tertiary" (click)="removeNotification()">
-              <ion-icon name="trash" class="trash-icon"></ion-icon>
-          </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  
+  <ng-container [ngSwitch]="notification.type">
+    <ion-grid>
+      <app-friends-invitation *ngSwitchCase="notificationTypes.friendInvitation" [notification]="notification" [index]="currentIndex"></app-friends-invitation>
+      <app-friends-invitation-response *ngSwitchCase="notificationTypes.friendInvitationResponse" [notification]="notification"></app-friends-invitation-response>
+      <ion-row>
+        <ion-col>
+            <ion-button class="unframed-primary-button" fill="clear" (click)="closeModal()">
+                <ion-icon name="arrow-dropleft"></ion-icon>
+                Powrót
+            </ion-button>
+        </ion-col>
+        <ion-col size="auto">
+            <button class="short-button short-button-tertiary" (click)="removeNotification()">
+                <ion-icon name="trash" class="trash-icon"></ion-icon>
+            </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>  
 </ion-content>

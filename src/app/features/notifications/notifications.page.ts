@@ -5,6 +5,7 @@ import { SingleNotificationComponent } from './components/single-notification/si
 import { Store, select } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
 import * as storeState from 'src/app/shared/interfaces/store/index';
+import { NotificationsService } from './services/notifications.service';
 
 @Component({
   selector: 'app-notifications',
@@ -14,7 +15,10 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 export class NotificationsPage implements OnInit {
   public notifications: Notification[] = [];
 
-  constructor(public modalController: ModalController, public store: Store<Reducers>) { }
+  constructor(public modalController: ModalController,
+              public store: Store<Reducers>,
+              private notificationsService: NotificationsService
+              ) { }
 
   ngOnInit() {
     this.store.pipe(select('notifications')).subscribe((state: storeState.NotificationsState) => {
@@ -23,6 +27,9 @@ export class NotificationsPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    if (this.notifications.find(notification => !notification.isDisplayed)) {
+      this.notificationsService.displayAllNotifications().subscribe(res => {});
+    }
     this.store.dispatch(actions.notificationActions.displayAllNotifications({  }));
   }
 

@@ -9,6 +9,7 @@ import { Reducers, actions } from 'src/app/store';
 import { UserService } from '../../../services/user.service';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
+import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
 @Component({
   selector: 'app-add-friends',
   templateUrl: './add-friends.component.html',
@@ -26,8 +27,9 @@ export class AddFriendsComponent implements OnInit {
     private modalController: ModalController,
     private addFriendService: AddFriendService,
     private router: Router,
-    public store: Store<Reducers>,
-    private userService: UserService) { }
+    private store: Store<Reducers>,
+    private userService: UserService,
+    private toastGenerator: ToastGeneratorService) { }
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
@@ -51,12 +53,11 @@ export class AddFriendsComponent implements OnInit {
       this.searchSubscription.unsubscribe();
       this.searchSubscription = undefined;
     }
-
     this.searchSubscription = this.addFriendService.getPalyerSearcherResponse(this.searchString).pipe(delay(800)).subscribe(response => {
       this.isLoaded = true;
       this.players = response;
       this.players.forEach(player => {
-        player.isInvitedToFriends = !!this.playerData.ownerInvitedToFriends.find(invitedPlayer => invitedPlayer._id === player._id);
+        player.isInvitedToFriends = !!this.playerData.ownerInvitedToFriends.find(invitedPlayer => invitedPlayer.email === player.email);
         player.isFriend = !!this.playerData.ownerFriends.find(invitedPlayer => invitedPlayer._id === player._id);
         player.didInvite = !!this.playerData.ownerFriendsInvitations.find(invitatingPlayer => invitatingPlayer._id === player._id);
       });
@@ -82,14 +83,13 @@ export class AddFriendsComponent implements OnInit {
   }
 
   public addToFriends(user: UserSearcherResponse) {
-    this.userService.addFriend(user).subscribe((res: UserProfile) => {
-      user.isInvitedToFriends = true;
-      this.store.dispatch(actions.profileAction.inviteFriend({invitedFriend: res}));
-    });
-  }
-
-  public confirmFriendInvitation(user: UserSearcherResponse) {
-    user.isFriend = true;
+    if (!user.isInvitedToFriends) {
+      this.userService.addFriend(user).subscribe((res: UserProfile) => {
+        user.isInvitedToFriends = true;
+        this.toastGenerator.presentToast('Zaproszenie zostało wysłane', 'success');
+        this.store.dispatch(actions.profileAction.inviteFriend({invitedFriend: res}));
+      });
+    }
   }
 
 }
