@@ -15,6 +15,7 @@ import { RatingGuestComponent } from './profile-tab-components/rating/rating-gue
 import { ProfileComponent } from '../user_param/profile/profile.component';
 import { AddFriendsComponent } from './profile-tab-components/friends/add-friends/add-friends.component';
 import { ChatModule } from '../user_param/chat/chat/chat.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ChatModule } from '../user_param/chat/chat/chat.module';
     StoreModule.forFeature('profile',  profileReducer ),
     UserRoutingModule,
     ChatModule,
+    FormsModule
   ],
   entryComponents: [AddFriendsComponent]
 })

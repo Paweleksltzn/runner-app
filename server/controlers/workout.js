@@ -15,7 +15,7 @@ exports.getWorkoutsList = async function(req, res, next) {
 
 exports.saveWorkoutsList = async function(req, res, next) {
     try {
-        const userVariable = await User.findOne({email: req.token.email, _id: req.token._id});
+        const userVariable = await User.findById(req.token._id);
         const newWorkoutList = req.body.workouts;
         newWorkoutList.forEach(singleWorkout => {
             if (!singleWorkout.author) singleWorkout.author = userVariable;

@@ -109,3 +109,16 @@ exports.changeGradient = async function (req, res, next) {
         return res.status(500).send('Wystąpił błąd podczas zmieniania gradientu');
     }
 }
+
+exports.changeDescription = async function (req, res, next) {
+    try {
+        const user = await User.findById(req.token._id);
+        const userProfile = await UserProfile.findById(user.userProfile);
+        userProfile.profileDescription = req.body.newDescription;
+        userProfile.save();
+        return res.json({});
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send('Wystąpił błąd podczas zmieniania gradientu');
+    }
+}

@@ -64,6 +64,7 @@ const profileReducerOptions = createReducer(
   )),
   on(actions.profileAction.setTheme, (state, action) => ({ ...state, ownerGradient: action.gradient})),
   on(actions.profileAction.setUserType, (state, action) => ({ ...state, userType: action.userType})),
+  on(actions.profileAction.updateDescription, (state, action) => ({ ...state, ownerProfileDescription: action.newDescription})),
   on(actions.profileAction.setIsMyProfile, (state, action) => ({ ...state, isMyProfile: action.isMyProfile})),
   on(actions.profileAction.addFriend, (state, action) => {
     const index = state.ownerFriendsInvitations.indexOf(action.newFriend);

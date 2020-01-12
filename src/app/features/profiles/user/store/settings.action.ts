@@ -6,6 +6,7 @@ export const profileAction = {
     loadProfile: createAction('Load profile for user', props<{userProfile: UserProfile}>()),
     setTheme: createAction('[Gradient Page] Set Gradients', props<{gradient: number}>()),
     setUserType: createAction('[User Page] Set Users', props<{userType: number}>()),
+    updateDescription: createAction('Update user profile', props<{newDescription: string}>()),
     setIsMyProfile: createAction('Profile is mein', props<{isMyProfile: boolean}>()),
     addFriend: createAction('Adding friend', props<{newFriend: UserProfile}>()),
     inviteFriend: createAction('Invite friend', props<{invitedFriend: UserProfile}>()),

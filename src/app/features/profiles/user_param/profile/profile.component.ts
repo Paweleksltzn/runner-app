@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import * as storeState from 'src/app/shared/interfaces/store/index';
@@ -29,8 +29,7 @@ export class ProfileComponent implements OnInit {
     isMyProfile: undefined,
     userType: undefined
   };
-
-  public imagePath = 'assets/images/profile-picture.png';
+  public editMode = false;
   public selectedProfileTab: number;
   public imageAttributes: ImageAttribute[] = [];
 
@@ -94,7 +93,7 @@ export class ProfileComponent implements OnInit {
       allowEditing: true,
       resultType: CameraResultType.Uri,
     });
-    this.imagePath =  profilePhoto.webPath;
+    this.user.imgUrl =  profilePhoto.webPath;
   }
 
   public exitDisplayOtherProfileMode() {
@@ -108,6 +107,16 @@ export class ProfileComponent implements OnInit {
     });
     this.currentModal = conversationModal;
     return await conversationModal.present();
+  }
+
+  public changeEditMode() {
+    this.editMode = true;
+  }
+
+  public saveDescription() {
+    this.editMode = false;
+    this.store.dispatch(actions.profileAction.updateDescription({newDescription: this.user.profileDescription}));
+    this.userService.changeDescription(this.user.profileDescription).subscribe(res => {});
   }
 
   private loadOwnerProperties(user: storeState.ProfileState) {
