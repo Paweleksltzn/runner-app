@@ -14,6 +14,9 @@
         <ion-label>
           <h2>{{pl.name}} {{pl.surname}}</h2>
           <p>{{pl.email}}</p>
+          <ng-container *ngIf="pl.accessLevel === 2">
+            <ion-badge color="success">Trener<ion-icon name="done-all"></ion-icon></ion-badge>
+          </ng-container>
         </ion-label>
       </ion-item>
     </div>
