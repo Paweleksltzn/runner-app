@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, HostListener, ViewChild } from '@angular/core';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import * as storeState from 'src/app/shared/interfaces/store/index';
@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit, DoCheck {
   public imagePath = 'assets/images/profile-picture.png';
   public selectedProfileTab: number;
   public imageAttributes: ImageAttribute[] = [];
+  public scrollYPos: number;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -119,6 +120,11 @@ export class ProfileComponent implements OnInit, DoCheck {
     });
     this.currentModal = conversationModal;
     return await conversationModal.present();
+  }
+
+  public scrollHandler(event) {
+    this.scrollYPos=event.detail.currentY;
+    console.log(this.scrollYPos);
   }
 }
 
