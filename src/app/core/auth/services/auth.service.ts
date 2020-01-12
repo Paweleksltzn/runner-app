@@ -10,19 +10,29 @@ import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import * as storageNames from 'src/app/shared/entitys/storageNames';
-import { Subject } from 'rxjs';
 import { LoginResponse } from 'src/app/shared/interfaces/auth/loginResponse';
 import { NotificationsService } from 'src/app/features/notifications/services/notifications.service';
 import { Notification } from 'src/app/shared/interfaces/notifications/notification';
+import { Socket } from 'ngx-socket-io';
+import { socketEvents } from 'src/app/shared/entitys/sockets-events';
+import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   public token: string;
+  public socketId = '';
 
-  constructor(private http: HttpClient, private storageService: StorageService,
-              private router: Router, private store: Store<Reducers>, private notificationsService: NotificationsService) { }
+  constructor(private http: HttpClient,
+              private storageService: StorageService,
+              private router: Router,
+              private store: Store<Reducers>,
+              private notificationsService: NotificationsService,
+              private socket: Socket
+              ) {
+                this.subscribeUserSocketId();
+              }
 
   public postSignUp(userData: UserRegistrationData) {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.auth}/signup`, userData);
@@ -38,10 +48,12 @@ export class AuthService {
     this.store.dispatch(actions.authActions.signIn({
       ...decodedToken.data
     }));
+    this.subscribeNewFriend();
     this.notificationsService.getNotifications().subscribe((notifications: Notification[]) => {
       this.store.dispatch(actions.notificationActions.loadNotifications({ notifications }));
       this.router.navigate(['my-workouts']);
-    });
+      this.subscribeNotifications();
+  });
   }
 
   public signOut() {
@@ -70,6 +82,31 @@ export class AuthService {
 
   private navigateToLoginPage() {
     this.router.navigate(['auth', 'login']);
+  }
+
+  private subscribeNotifications() {
+    this.socket.fromEvent(socketEvents.newNotification).subscribe((newNotification: Notification) => {
+      this.store.dispatch(actions.notificationActions.addNotification({ newNotification }));
+    });
+  }
+
+  private subscribeNewFriend() {
+    this.socket.fromEvent(socketEvents.newFriend).subscribe((newFriend: UserProfile) => {
+      console.log(newFriend);
+      // this.store.dispatch(actions.profileAction.addFriend({ newFriend }));
+    });
+  }
+
+  private subscribeUserSocketId() {
+    this.socket.fromEvent('test').subscribe((res: any) => {
+      if (!this.socketId) {
+        this.socketId = res.socket;
+      }
+    });
+  }
+
+  public getSocketId() {
+    return this.socketId;
   }
 
 }

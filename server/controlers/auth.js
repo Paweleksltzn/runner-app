@@ -73,7 +73,7 @@ exports.login = async function(req, res, next) {
                 const token = jwtManagment.jwtFactory(user);
                 return res.json({token, userProfile: user.userProfile, friends});
             } 
-        } 
+        }
     } catch (err) {
         console.log(err);
         return res.status(500).send('Wystąpił błąd');
@@ -139,7 +139,6 @@ exports.passwordResetAttempt = async function(req, res, next) {
             return res.status(422).send('Wystąpił błąd');
         }
     } catch(err) {
-        v
         return res.status(500).send('Wystąpił błąd');
     }
 }

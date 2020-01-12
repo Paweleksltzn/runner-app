@@ -1,9 +1,11 @@
 const User = require('../models/user');
+const io = require('../util/socket');
 
 exports.searchUsers = async function(req, res, next) {
     try {
         let searchString = req.query.searchString;
         let users;
+        io.getIO().to(req.token._id).emit('new-friend', {test: 'd'});
         if (searchString.split(' ').length === 2) {
             const name = searchString.split(' ')[0];
             const surname = searchString.split(' ')[1];
@@ -34,7 +36,7 @@ exports.searchUsers = async function(req, res, next) {
             }
         });
         return res.json(usersToReturn);
-    } catch {
+    } catch (err) {
         console.log(err);
         return res.status(500).send('Wystąpił błąd podczas wyszukiwania użytkownika');
     }

@@ -4,6 +4,13 @@ const Notification = require('../models/notification');
 exports.getNotifications = async function(req, res, next) {
     try {
         const user = await User.findById(req.token._id);
+        const io = require('../util/socket').getIO();
+        const socket = io.sockets.connected[req.socketId];
+        if (socket) {
+            socket.join(user._id);
+        } else {
+            console.log('socket error');
+        }
         const userNotifications = await Notification.find({
             receivers: { $all: [user] }
         }).sort({'creationDate': -1}).populate('author');

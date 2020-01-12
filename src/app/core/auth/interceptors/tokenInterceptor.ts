@@ -13,8 +13,10 @@ export class JwtInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = this.authService.getToken() || '';
+        const socketId = this.authService.getSocketId() || '';
+
         request = request.clone({
-            headers: request.headers.set('Authorization', `Bearer ${token}`)
+            headers: request.headers.set('Authorization', `Bearer ${token}`).set('socketId', socketId)
         });
         return next.handle(request).pipe(
             tap((event: HttpEvent<any>) => {

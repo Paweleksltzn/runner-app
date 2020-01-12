@@ -9,6 +9,8 @@ export const initialState: storeState.NotificationsState = {
 const notificationsReducerOptions = createReducer(
   initialState,
   on(actions.notificationActions.loadNotifications, (state, action) => ({ ...state, notifications: action.notifications})),
+  on(actions.notificationActions.addNotification, (state, action) =>
+   ({ ...state, notifications: [...state.notifications, action.newNotification]})),
   on(actions.notificationActions.removeNotification, (state, action) => {
       const newNotifications = state.notifications;
       newNotifications.splice(action.index, 1);
