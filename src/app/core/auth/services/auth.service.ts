@@ -22,7 +22,6 @@ import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 })
 export class AuthService {
   public token: string;
-  public socketId = '';
 
   constructor(private http: HttpClient,
               private storageService: StorageService,
@@ -31,7 +30,14 @@ export class AuthService {
               private notificationsService: NotificationsService,
               private socket: Socket
               ) {
-                this.subscribeUserSocketId();
+                this.socket.fromEvent(socketEvents.connect).subscribe((newFriend: UserProfile) => {
+                  if (this.token) {
+                    this.postSocketId(this.socket.ioSocket.id).subscribe(res => {});
+                  }
+                  this.subscribeNewFriend();
+                  this.subscribeNewFriendInvitation();
+                  this.subscribeNewFriendRejection();
+                });
               }
 
   public postSignUp(userData: UserRegistrationData) {
@@ -42,13 +48,17 @@ export class AuthService {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.auth}/login`, loginData);
   }
 
+  public postSocketId(socketId: string) {
+    return this.http.post(`${environment.srvAddress}/${environment.endpoints.socket}/socketRoom`, {socketId});
+  }
+
   public signIn(token: string) {
     const decodedToken =  jwt_decode(token);
     this.token = token;
     this.store.dispatch(actions.authActions.signIn({
       ...decodedToken.data
     }));
-    this.subscribeNewFriend();
+    this.postSocketId(this.socket.ioSocket.id).subscribe(res => {});
     this.notificationsService.getNotifications().subscribe((notifications: Notification[]) => {
       this.store.dispatch(actions.notificationActions.loadNotifications({ notifications }));
       this.router.navigate(['my-workouts']);
@@ -92,21 +102,20 @@ export class AuthService {
 
   private subscribeNewFriend() {
     this.socket.fromEvent(socketEvents.newFriend).subscribe((newFriend: UserProfile) => {
-      console.log(newFriend);
-      // this.store.dispatch(actions.profileAction.addFriend({ newFriend }));
+      this.store.dispatch(actions.profileAction.addFriend({ newFriend }));
     });
   }
 
-  private subscribeUserSocketId() {
-    this.socket.fromEvent('test').subscribe((res: any) => {
-      if (!this.socketId) {
-        this.socketId = res.socket;
-      }
+  private subscribeNewFriendInvitation() {
+    this.socket.fromEvent(socketEvents.newFriendInvitation).subscribe((invitatingFriend: UserProfile) => {
+      this.store.dispatch(actions.profileAction.newInvitation({ invitatingFriend }));
     });
   }
 
-  public getSocketId() {
-    return this.socketId;
+  private subscribeNewFriendRejection() {
+    this.socket.fromEvent(socketEvents.newFriendRejection).subscribe((rejectingProfile: UserProfile) => {
+      this.store.dispatch(actions.profileAction.invitationRejected({ rejectingProfile }));
+    });
   }
 
 }

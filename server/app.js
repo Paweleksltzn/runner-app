@@ -9,13 +9,14 @@ const credentials = require('./util/credentials');
 const app = express();
 
 const jwtManager = require('./auth-guards/jwt-managment');
+const socketEvents = require('./util/socketEvents');
 
 const authRouter = require('./routes/auth');
 const workoutRouter = require('./routes/workout');
 const notificationRouter = require('./routes/notification');
 const searchersRouter = require('./routes/searcher');
-const userRouter = require('./routes/user')
-const socketEvents = require('./util/socketEvents');
+const userRouter = require('./routes/user');
+const socketRouter = require('./routes/socket');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,6 +41,7 @@ app.use('/api/workout', jwtManager.jwtVerivier, workoutRouter);
 app.use('/api/notification', jwtManager.jwtVerivier, notificationRouter); 
 app.use('/api/user', jwtManager.jwtVerivier, userRouter);
 app.use('/api/searchers',jwtManager.jwtVerivier, searchersRouter);
+app.use('/api/socket',jwtManager.jwtVerivier, socketRouter);
 
 let server;
 

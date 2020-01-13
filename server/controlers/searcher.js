@@ -1,11 +1,9 @@
 const User = require('../models/user');
-const io = require('../util/socket');
 
 exports.searchUsers = async function(req, res, next) {
     try {
         let searchString = req.query.searchString;
         let users;
-        io.getIO().to(req.token._id).emit('new-friend', {test: 'd'});
         if (searchString.split(' ').length === 2) {
             const name = searchString.split(' ')[0];
             const surname = searchString.split(' ')[1];
@@ -24,7 +22,10 @@ exports.searchUsers = async function(req, res, next) {
             searchString = searchString.split(' ').join('');
             users = await User.find({ nameAndSurname: new RegExp(searchString, 'i'), isActive: true }).populate('userProfile');
         }
-        const usersToMap = users.filter(user => user._id !== req.token._id);
+        const usersToMap = users.filter(user => {
+            return user.email !== req.token.email;
+        });
+        // console.log(usersToMap);
         const usersToReturn = usersToMap.map(user => {
             return {
                 email: user.email,

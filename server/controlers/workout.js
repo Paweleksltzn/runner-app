@@ -5,7 +5,10 @@ const WorkoutHistory = require('../models/workoutHistory');
 exports.getWorkoutsList = async function(req, res, next) {
     try {
         const userVariable = await User.findById(req.token._id);
-        const workouts = await WorkoutsList.findOne({owner: userVariable});
+        let workouts = await WorkoutsList.findOne({owner: userVariable});
+        if (!workouts) {
+            workouts = [];
+        }
         return res.json(workouts.workoutsList || []);
     } catch(err) {
         console.log(err);

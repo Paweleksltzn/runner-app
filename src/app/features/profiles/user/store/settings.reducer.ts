@@ -69,8 +69,18 @@ const profileReducerOptions = createReducer(
   on(actions.profileAction.addFriend, (state, action) => {
     const index = state.ownerFriendsInvitations.indexOf(action.newFriend);
     state.ownerFriendsInvitations.splice(index, 1);
+    const otherIndex = state.ownerInvitedToFriends.indexOf(action.newFriend);
+    state.ownerInvitedToFriends.splice(otherIndex, 1);
     return ({ ...state, ownerFriends: [...state.ownerFriends, action.newFriend]});
   }),
+  on(actions.profileAction.invitationRejected, (state, action) => {
+    const index = state.ownerInvitedToFriends.indexOf(action.rejectingProfile);
+    state.ownerInvitedToFriends.splice(index, 1);
+    return ({ ...state });
+  }),
+  on(actions.profileAction.newInvitation, (state, action) =>
+   ({ ...state, ownerFriendsInvitations: [...state.ownerFriendsInvitations, action.invitatingFriend]})
+  ),
   on(actions.profileAction.rejectFriend, (state, action) => {
     const index = state.ownerFriendsInvitations.indexOf(action.rejectedFriend);
     state.ownerFriendsInvitations.splice(index, 1);

@@ -27,8 +27,6 @@ exports.jwtVerivier = (req, res, next) => {
                 if (err) {
                     return res.status(504).send('Brak autoryzacji');
                 }
-                const socketId = req.headers.socketid;
-                req.socketId = socketId;
                 req.token = decoded.data
                 return next();
             });

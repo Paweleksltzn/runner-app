@@ -4,18 +4,26 @@ const Notification = require('../models/notification');
 
 const notificationsFactory = require('../util/notifications-factory');
 const notificationsOptions = require('../enums/notificationsOptions');
+const socketEvents = require('../util/socketEvents');
 
 exports.addFriend = async function(req, res, next) {
     try {
         const user = await User.findById(req.token._id);
         const userProfile = await UserProfile.findById(user.userProfile);
-        const newFriend = await User.findById(req.token._id);
+        const newFriend = await User.findOne({
+            email: req.body.email,
+            name: req.body.name,
+            surname: req.body.surname
+        });
         const newFriendProfile = await UserProfile.findById(newFriend.userProfile);
         newFriendProfile.friendsInvitations.push(userProfile);
         userProfile.invitedToFriends.push(newFriendProfile);
         const newNotification = notificationsFactory.createNotification(notificationsOptions.friendInvitation, user, [newFriend]);
+        const io = require('../util/socket').getIO();
+        io.to(newFriend._id).emit(socketEvents.newNotification, newNotification);
+        io.to(newFriend._id).emit(socketEvents.newFriendInvitation, userProfile);
         newFriendProfile.save();
-        userProfile.save();
+        userProfile.save().then(res=>{}).catch(err=>{});;
         newNotification.save();
         return res.json(newFriendProfile);
     } catch (err) {
@@ -49,10 +57,12 @@ exports.confirmFriendInvitation = async function(req, res, next) {
         const newNotification = notificationsFactory.createNotification(notificationsOptions.friendInvitationResponse, user, [req.body.newFriendAcc], 
             `Użytkownik ${user.name} ${user.surname} przyjął twoje zaproszenie do grona znajomych, możesz się z nim kontaktować`
         );
+        const io = require('../util/socket').getIO();
+        io.to(req.body.newFriendAcc._id).emit(socketEvents.newNotification, newNotification);
+        io.to(req.body.newFriendAcc._id).emit(socketEvents.newFriend, userProfile);
         newNotification.save();
         userProfile.save();
         newFriendProfile.save();
-
         return res.json(newFriendProfile);
     } catch (err) {
         console.log(err)
@@ -72,9 +82,12 @@ exports.rejectFriendInvitation = async function(req, res, next) {
         const newNotification = notificationsFactory.createNotification(notificationsOptions.friendInvitationResponse, user, [req.body.rejectedFriendAcc], 
             `Użytkownik ${user.name} ${user.surname} odrzucił twoje zaproszenie do grona znajomych`
         );
+        const io = require('../util/socket').getIO();
+        io.to(req.body.rejectedFriendAcc._id).emit(socketEvents.newNotification, newNotification);
+        io.to(req.body.rejectedFriendAcc._id).emit(socketEvents.newFriendRejection, userProfile);
         newNotification.save();
         userProfile.save();
-        rejectedFriendProfile.save();
+        rejectedFriendProfile.save().then(res=>{}).catch(err=>{});
         return res.json(rejectedFriendProfile);
     } catch (err) {
         console.log(err)

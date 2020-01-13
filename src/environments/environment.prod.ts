@@ -6,6 +6,7 @@ export const environment = {
     workout: 'api/workout',
     notification: 'api/notification',
     searcher: 'api/searchers',
-    user: 'api/user'
+    user: 'api/user',
+    socket: 'api/socket'
   }
 };

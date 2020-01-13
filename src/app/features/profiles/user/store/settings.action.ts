@@ -10,5 +10,7 @@ export const profileAction = {
     setIsMyProfile: createAction('Profile is mein', props<{isMyProfile: boolean}>()),
     addFriend: createAction('Adding friend', props<{newFriend: UserProfile}>()),
     inviteFriend: createAction('Invite friend', props<{invitedFriend: UserProfile}>()),
-    rejectFriend: createAction('Friend invitation rejected', props<{rejectedFriend: UserProfile}>())
+    rejectFriend: createAction('Friend invitation rejected', props<{rejectedFriend: UserProfile}>()),
+    invitationRejected: createAction('Invitation rejected', props<{rejectingProfile: UserProfile}>()),
+    newInvitation: createAction('Received new invitation', props<{invitatingFriend: UserProfile}>())
 };
