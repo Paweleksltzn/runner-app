@@ -10,7 +10,8 @@ exports.jwtFactory = (user) => {
             name: user.name,
             isMale: user.isMale,
             surname: user.surname,
-            accessLevel: user.accessLevel
+            accessLevel: user.accessLevel,
+            _id: user._id
         }
       }, secret);
 }

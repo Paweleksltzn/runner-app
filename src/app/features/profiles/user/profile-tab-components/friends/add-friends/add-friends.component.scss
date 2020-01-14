@@ -32,4 +32,6 @@
     left: .25rem;
     color: #555;
 }
-
+ion-item {
+    --inner-padding-start: 0;
+}

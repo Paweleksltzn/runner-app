@@ -10,6 +10,10 @@ import { NotificationsService } from './services/notifications.service';
 import { SingleNotificationComponent } from './components/single-notification/single-notification.component';
 import { StoreModule } from '@ngrx/store';
 import { notificationsReducer } from './store/notifications.reducer';
+// tslint:disable-next-line: max-line-length
+import { FriendsInvitationComponent } from './components/single-notification/notifications-components/friends-invitation/friends-invitation.component';
+// tslint:disable-next-line: max-line-length
+import { FriendsInvitationResponseComponent } from './components/single-notification/notifications-components/friends-invitation-response/friends-invitation-response.component';
 
 const routes: Routes = [
   {
@@ -26,7 +30,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     StoreModule.forFeature('notifications', notificationsReducer)
   ],
-  declarations: [NotificationsPage, SingleNotificationComponent],
+  declarations: [NotificationsPage, SingleNotificationComponent, FriendsInvitationComponent, FriendsInvitationResponseComponent],
   entryComponents: [SingleNotificationComponent],
   providers: [NotificationsService]
 })

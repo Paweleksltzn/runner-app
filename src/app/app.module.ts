@@ -16,7 +16,10 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { StoreModule } from '@ngrx/store';
 import { SocketModule } from './core/socket/socket.module';
 import { NotificationsPageModule } from './features/notifications/notifications.module';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
 
+const config: SocketIoConfig = { url: environment.srvAddress, options: {} };
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +33,8 @@ import { NotificationsPageModule } from './features/notifications/notifications.
      SharedModule, AuthModule,
      StoreModule.forRoot({}),
      SocketModule,
-     NotificationsPageModule
+     NotificationsPageModule,
+     SocketIoModule.forRoot(config)
   ],
   providers: [
     StatusBar,
