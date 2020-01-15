@@ -16,15 +16,18 @@
         <img-loader (click)="presentActionSheet()" [src]="user.imgUrl" [imgAttributes]="imageAttributes" useImg></img-loader>
       </div>
       <div class="profile-description">
-        <h2>{{user.name}} {{user.surname}}</h2>
+        <div class="profile-description__title">
+          <h2>{{user.name}} {{user.surname}}</h2>
+          <ion-icon name="chatboxes" *ngIf="user.email !== ownerEmail"></ion-icon>
+        </div>
         <ion-grid>
-          <ion-row *ngIf="!editMode && user.isMyProfile" align-items-start justify-content-end>
-            <ion-col size="auto">
-              <ion-icon name="create" (click)="changeEditMode()" class="description-edit"></ion-icon>
+          <ion-row align-items-start justify-content-end>
+            <ion-col size="2">
+              <ion-icon name="create" *ngIf="!editMode && user.isMyProfile" (click)="changeEditMode()" class="description-edit"></ion-icon>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>
+            <ion-col >
               <textarea [(ngModel)]="user.profileDescription" maxlength="150" class="w-100" cols="30" rows="10" class="profile-description-field" *ngIf="editMode && user.isMyProfile"></textarea>
               <p *ngIf="!editMode">{{user.profileDescription}} </p>
             </ion-col>

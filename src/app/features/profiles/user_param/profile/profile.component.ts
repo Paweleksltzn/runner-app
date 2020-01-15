@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
   public editMode = false;
   public selectedProfileTab: number;
   public imageAttributes: ImageAttribute[] = [];
+  public ownerEmail: string;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+      this.ownerEmail = state.ownerEmail;
       if (state.isMyProfile) {
         this.loadOwnerProperties(state);
       } else {

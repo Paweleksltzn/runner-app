@@ -17,6 +17,17 @@
     margin: 0 auto;
     text-align: center;
     color: #555;
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        ion-icon {
+            position: absolute;
+            right: 0;
+            top: -1rem;
+        }
+    }
     p {
         margin-top: 0;
     }
@@ -29,7 +40,9 @@
     }
 }
 .description-edit {
-    margin-top: -2rem;
+    position: absolute;
+    right: 0;
+    top: -2rem;
 }
 .profile-tab{
     height: 15%;

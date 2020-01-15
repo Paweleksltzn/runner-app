@@ -11,7 +11,7 @@ import { Reducers, actions } from 'src/app/store';
 export class ConversationComponent implements OnInit {
   public email: string;
   public conversationMessges = [
-    {isSended: true, message: 'Cześć.'}, 
+    {isSended: true, message: 'Cześć.'},
     {isSended: false, message: 'No siema.'},
     {isSended: true, message: 'Potrzebuje nowy trening.'},
     {isSended: false, message: 'Okej, rozumiem jakieś nowe cele?'}
@@ -24,7 +24,7 @@ export class ConversationComponent implements OnInit {
     });
   }
 
-  public dismissModal() { 
+  public dismissModal() {
     this.modalController.dismiss({});
   }
 }
