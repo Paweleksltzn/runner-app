@@ -14,6 +14,7 @@ export const initialState: storeState.ProfileState = {
   isMyProfile: true,
   isMale: undefined,
   accessLevel: undefined, 
+  croppedImageUrl: 'assets/images/profile-picture.png' 
 };
 
 const profileReducerOptions = createReducer(
@@ -28,7 +29,8 @@ const profileReducerOptions = createReducer(
     surname: action.surname,
     isMale: action.isMale,
     accessLevel: action.accessLevel
-  }))
+  })),
+  on(actions.profileAction.setImg, (state, action) => ({ ...state, croppedImageUrl: action.croppedImageUrl})),
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {
   return profileReducerOptions(state, action);

@@ -7,4 +7,5 @@ export interface UserProfile{
     userType: number;
     friends: number,
     isMyProfile: boolean,
+    croppedImage: string
 }

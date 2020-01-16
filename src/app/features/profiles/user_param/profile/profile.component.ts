@@ -8,6 +8,7 @@ import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 import {Plugins, CameraResultType} from '@capacitor/core';
 import { Router } from '@angular/router';
 import { ConversationComponent } from '../chat/conversation/conversation.component';
+import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class ProfileComponent implements OnInit, DoCheck {
     imgUrl: undefined,
     userType: undefined,
     friends: undefined,
-    isMyProfile: true
+    isMyProfile: true,
+    croppedImage: undefined
   };
 
   public imagePath = 'assets/images/profile-picture.jpg';
@@ -52,7 +54,7 @@ export class ProfileComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.user.isMyProfile = state.isMyProfile;
-      this.user.imgUrl = state.profImgUrl;
+      this.imagePath = state.profImgUrl;
       this.user.gradient = state.gradient;
       this.user.profileDescription = state.profileDesc;
       this.user.userType = state.userType;
@@ -69,6 +71,9 @@ export class ProfileComponent implements OnInit, DoCheck {
       this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
         this.user.name = state.name;
         this.user.surname = state.surname;
+        this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+          this.imagePath=state.croppedImageUrl;
+        });
       });
     } else {
       this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
@@ -115,6 +120,8 @@ export class ProfileComponent implements OnInit, DoCheck {
       resultType: CameraResultType.Uri,
     });
     this.imagePath =  profilePhoto.webPath;
+    this.store.dispatch(actions.profileAction.setImg({croppedImageUrl: this.imagePath}));
+    this.displayCropper();
   }
 
   public exitDisplayOtherProfileMode() {
@@ -134,6 +141,13 @@ export class ProfileComponent implements OnInit, DoCheck {
     this.scrollYPos=event.detail.currentY;
   }
 
+  public async displayCropper() {
+    const cropperModal = await this.modalController.create({
+      component: ImageCropperComponent
+    });
+    this.currentModal = cropperModal;
+    return await cropperModal.present();
+  }
 
 }
 
