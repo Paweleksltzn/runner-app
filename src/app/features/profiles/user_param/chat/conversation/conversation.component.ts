@@ -71,7 +71,6 @@ export class ConversationComponent implements OnInit {
       });
       loading.present();
       this.conversationService.createConversation(this.currentMessage, this.targetProfile.email).subscribe((conversation: Conversation) => {
-        console.log(conversation);
         this.store.dispatch(actions.conversationActions.addConversation({ conversation }));
         loading.dismiss();
       });

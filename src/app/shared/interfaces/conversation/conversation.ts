@@ -12,4 +12,5 @@ export interface Conversation {
         content: string
     }[];
     userIndex?: number;
+    lastEditionStringDate?: string;
 }

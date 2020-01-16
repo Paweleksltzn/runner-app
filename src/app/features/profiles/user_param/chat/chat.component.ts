@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Conversation } from 'src/app/shared/interfaces/conversation/conversation';
+import { DateService } from 'src/app/shared/services/date.service';
 
 @Component({
   selector: 'app-chat',
@@ -16,8 +17,9 @@ export class ChatComponent implements OnInit {
   public conversations: Conversation[];
   public ownerEmail: string;
 
-  constructor(public modalController: ModalController,
-              public store: Store<Reducers>
+  constructor(private modalController: ModalController,
+              private store: Store<Reducers>,
+              private dateService: DateService
               ) { }
 
   ngOnInit() {
@@ -32,6 +34,7 @@ export class ChatComponent implements OnInit {
         } else {
           conversation.userIndex = 0;
         }
+        conversation.lastEditionStringDate = this.dateService.createDateString(new Date(conversation.lastEditionDate));
        });
     });
   }
