@@ -58,3 +58,14 @@ exports.newMessage = async function (req, res, next) {
     }
 }
 
+exports.displayConversation = async function (req, res, next) {
+    try {
+        const conversation = await Conversation.findById(req.body.conversationId);
+        conversation.members.forEach(member => member.isReaded = true);
+        conversation.save();
+        return res.json({});
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send('Wystąpił błąd podczas szukania powiadomien');
+    }
+}

@@ -26,4 +26,8 @@ export class ConversationService {
      { targetProfileEmail, newMessage });
   }
 
+  public displayConversation(conversationId: string): Observable<any> {
+    return this.http.put(`${environment.srvAddress}/${environment.endpoints.conversation}/displayConversation`, { conversationId });
+  }
+
 }

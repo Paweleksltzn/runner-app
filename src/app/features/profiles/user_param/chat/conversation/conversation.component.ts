@@ -83,6 +83,7 @@ export class ConversationComponent implements OnInit {
     if (!this.conversation.members[this.userProfileIndex].isReaded) {
       this.store.dispatch(actions.conversationActions.displayConversation
         ({ displayedIndex: this.userProfileIndex, conversationId: this.conversation._id}));
+      this.conversationService.displayConversation(this.conversation._id).subscribe(res => {});
     }
   }
 
