@@ -15,7 +15,7 @@
       <ion-label  [ngClass]="{'unreaded': !conversation.members[1 - conversation.userIndex].isReaded && !currentModal}">
         <h2 class="conversation__title">
           {{conversation.members[conversation.userIndex].userProfile.name + ' ' + conversation.members[conversation.userIndex].userProfile.surname}}
-          <span class="conversation__date">{{conversation.lastEditionStringDate}}</span>
+          <span class="conversation__date">{{conversation.lastEditionDate | date: 'dd.MM.yyyy'}}</span>
         </h2>
         <p>
           {{conversation.messages[conversation.messages.length - 1].content }}

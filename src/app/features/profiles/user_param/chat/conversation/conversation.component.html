@@ -5,14 +5,21 @@
     </ion-buttons>
     <ion-title>{{ targetProfile.name }} {{ targetProfile.surname }}</ion-title>
   </ion-toolbar>
-  <div *ngFor="let message of conversation.messages;">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" [ngClass]="{'col-sended': message.isSended}"> 
-        <div class="message-received" [ngClass]="{'message-sended': message.author !== targetProfile._id}">{{message.content}}</div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="messages__container">
+    <div *ngFor="let message of conversation.messages;">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12"
+          [ngClass]="{'col-sended': !(message.author === targetProfile._id || (message.author && message.author._id === targetProfile._id))}"> 
+            <div class="message-received" 
+            [ngClass]="{'message-sended': !(message.author === targetProfile._id || (message.author && message.author._id === targetProfile._id))}"
+            >
+              {{message.content}}
+            </div>
+          </ion-col>
+      </ion-row>
+     </ion-grid>
+    </div>
   </div>
   <div class="chat-form">
     <textarea class="msg-input" placeholder="Wpisz wiadomość..." type="text" [(ngModel)]="currentMessage"></textarea>

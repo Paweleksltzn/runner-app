@@ -18,8 +18,7 @@ export class ChatComponent implements OnInit {
   public ownerEmail: string;
 
   constructor(private modalController: ModalController,
-              private store: Store<Reducers>,
-              private dateService: DateService
+              private store: Store<Reducers>
               ) { }
 
   ngOnInit() {
@@ -34,7 +33,6 @@ export class ChatComponent implements OnInit {
         } else {
           conversation.userIndex = 0;
         }
-        conversation.lastEditionStringDate = this.dateService.createDateString(new Date(conversation.lastEditionDate));
        });
     });
   }

@@ -13,7 +13,30 @@ const conversationReducerOptions = createReducer(
   const newConversations = [action.conversation, ...state.conversations];
   const newOrderedConversations = orderConversations(newConversations);
   return ({ ...state, conversations: newOrderedConversations});
-}),
+  }),
+  on(actions.conversationActions.addMessage, (state, action) => {
+    const conversations = state.conversations;
+    conversations.forEach(conversation => {
+      if (conversation._id === action.conversationId) {
+        conversation.messages.push(action.newMessage);
+        conversation.lastEditionDate = new Date();
+      }
+    });
+    const newOrderedConversations = orderConversations(conversations);
+    return ({ ...state, conversations: newOrderedConversations});
+  }),
+  on(actions.conversationActions.getMessage, (state, action) => {
+      const conversations = state.conversations;
+      let indexToSwap;
+      conversations.forEach((conversation, index) => {
+        if (conversation._id === action.conversation._id) {
+          indexToSwap = index;
+        }
+      });
+      conversations[indexToSwap] = action.conversation;
+      const newOrderedConversations = orderConversations(conversations);
+      return ({ ...state, conversations: newOrderedConversations});
+  }),
   on(actions.conversationActions.displayConversation, (state, action) => {
     const newConversations = state.conversations;
     newConversations.forEach(conversation => {

@@ -1,16 +1,10 @@
-import { UserProfile } from '../profile/userInterface';
+import { Message } from './message';
+import { Member } from './member';
 
 export interface Conversation {
     _id?: string;
     lastEditionDate: Date;
-    members: {
-        userProfile: UserProfile,
-        isReaded: boolean
-    }[];
-    messages: {
-        author: UserProfile,
-        content: string
-    }[];
+    members: Member[];
+    messages: Message[];
     userIndex?: number;
-    lastEditionStringDate?: string;
 }

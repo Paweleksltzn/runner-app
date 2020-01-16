@@ -53,7 +53,26 @@ exports.createConversation = async function (req, res, next) {
 
 exports.newMessage = async function (req, res, next) {
     try {
-
+        const conversation = await Conversation.findById(req.body.conversationId).populate('members.userProfile');;
+        const user = await User.findById(req.token._id).populate('userProfile');
+        const newMessage = {
+            author: user.userProfile,
+            content: req.body.newMessage
+        }
+        conversation.messages.push(newMessage);
+        conversation.lastEditionDate = new Date();
+        conversation.members.forEach(async function (member) {
+            if (member.userProfile.email !== req.token.email) {
+                member.isReaded = false;
+                const targetUser = await User.findOne({
+                    email: member.userProfile.email
+                });
+                const io = require('../util/socket').getIO();
+                io.to(targetUser._id).emit(socketEvents.newMessage, conversation);
+            }
+        });
+        
+        conversation.save();
         return res.json({});
     } catch (err) {
         console.log(err);

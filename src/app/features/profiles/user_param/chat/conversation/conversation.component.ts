@@ -31,10 +31,11 @@ export class ConversationComponent implements OnInit {
     });
     this.store.pipe(select('conversations')).subscribe((state: storeState.ConversationState) => {
       this.getCorrectConversation(state.conversations);
+      if (this.conversation.lastEditionDate) {
+        this.displayConversation();
+      }
     });
-    if (this.conversation.lastEditionDate) {
-      this.displayConversation();
-    }
+
   }
 
   public dismissModal() {
@@ -61,9 +62,12 @@ export class ConversationComponent implements OnInit {
 
   public async sendMessage() {
     if (this.conversation.lastEditionDate) {
-    // this.conversationService.sendMessage(this.currentMessage).subscribe((res: any) => {
-
-    // });
+      const newMessage = {
+        author: this.conversation.members[this.userProfileIndex].userProfile,
+        content: this.currentMessage
+      };
+      this.store.dispatch(actions.conversationActions.addMessage({ newMessage, conversationId: this.conversation._id }));
+      this.conversationService.sendMessage(this.currentMessage, this.conversation._id).subscribe((res: any) => {});
     } else {
       const loading = await this.loadingController.create({
         message: 'Trwa wysyłanie',
