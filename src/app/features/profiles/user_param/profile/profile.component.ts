@@ -1,6 +1,6 @@
-import { Component, OnInit, DoCheck, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, DoCheck} from '@angular/core';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController, Platform } from '@ionic/angular';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Store, select } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
@@ -28,17 +28,24 @@ export class ProfileComponent implements OnInit, DoCheck {
     isMyProfile: true
   };
 
-  public imagePath = 'assets/images/profile-picture.png';
+  public imagePath = 'assets/images/profile-picture.jpg';
   public selectedProfileTab: number;
   public imageAttributes: ImageAttribute[] = [];
   public scrollYPos: number;
+
+  
+  
+  
 
   constructor(
     public actionSheetController: ActionSheetController,
     public imgSetConf: ImageLoaderConfigService,
     public store: Store<Reducers>,
     public router: Router,
-    public modalController: ModalController) {
+    public modalController: ModalController,
+    public platform: Platform
+    ) {
+    
     this.imageConfigure();
    }
 
@@ -99,11 +106,12 @@ export class ProfileComponent implements OnInit, DoCheck {
       value: 'image',
       });
   }
+
   public async takePhoto() {
     const { Camera } = Plugins;
     const profilePhoto = await Camera.getPhoto({
       quality: 90,
-      allowEditing: true,
+      allowEditing: false,
       resultType: CameraResultType.Uri,
     });
     this.imagePath =  profilePhoto.webPath;
@@ -124,7 +132,8 @@ export class ProfileComponent implements OnInit, DoCheck {
 
   public scrollHandler(event) {
     this.scrollYPos=event.detail.currentY;
-    console.log(this.scrollYPos);
   }
+
+
 }
 
