@@ -16,6 +16,8 @@ export const initialState: storeState.ProfileState = {
   friends: [],
   invitedToFriends: [],
   friendsInvitations: [],
+  profileId: '',
+  ownerProfileId: '',
   ownerGradient: 2,
   ownerImgUrl: 'assets/images/profile-picture.png',
   ownerEmail: undefined,
@@ -34,6 +36,7 @@ const profileReducerOptions = createReducer(
   initialState,
   on(actions.profileAction.loadOwnerProfile, (state, action) => ({
     ...state,
+    ownerProfileId: action.userProfile._id,
     ownerEmail: action.userProfile.email,
     ownerName: action.userProfile.name,
     ownerSurname: action.userProfile.surname,
@@ -49,6 +52,7 @@ const profileReducerOptions = createReducer(
   )),
   on(actions.profileAction.loadProfile, (state, action) => ({
     ...state,
+    profileId: action.userProfile._id,
     email: action.userProfile.email,
     name: action.userProfile.name,
     surname: action.userProfile.surname,

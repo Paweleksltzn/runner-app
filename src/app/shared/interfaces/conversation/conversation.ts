@@ -1,6 +1,7 @@
 import { UserProfile } from '../profile/userInterface';
 
 export interface Conversation {
+    _id?: string;
     lastEditionDate: Date;
     members: {
         userProfile: UserProfile,
@@ -10,4 +11,5 @@ export interface Conversation {
         author: UserProfile,
         content: string
     }[];
+    userIndex?: number;
 }
