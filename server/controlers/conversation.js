@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const UserProfile = require('../models/userProfile');
 const Conversation = require('../models/conversation');
+const socketEvents = require('../util/socketEvents');
 
 exports.getConversations = async function (req, res, next) {
     try {
@@ -39,6 +40,8 @@ exports.createConversation = async function (req, res, next) {
                 content: req.body.newMessage
             }]
         });
+        const io = require('../util/socket').getIO();
+        io.to(targetUser._id).emit(socketEvents.newConversation, conversation);
         conversation.save();
         return res.json(conversation);
     } catch (err) {

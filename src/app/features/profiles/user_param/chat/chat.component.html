@@ -4,7 +4,8 @@
 </ion-toolbar>
 <ion-list>
   <ion-list-header>
-    Ostatnie rozmowy
+    <h5 *ngIf="conversations.length > 0">Ostatnie rozmowy</h5>
+    <h5 *ngIf="conversations.length === 0">Brak odbytych rozmów</h5>
   </ion-list-header>
   <div *ngFor="let conversation of conversations;">
     <ion-item (click)="displayConversation(conversation)">

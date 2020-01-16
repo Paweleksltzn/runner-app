@@ -15,7 +15,7 @@
   </ion-grid>
   </div>
   <div class="chat-form">
-    <input class="msg-input" placeholder="Wpisz wiadomość..." type="text" [(ngModel)]="currentMessage">
+    <textarea class="msg-input" placeholder="Wpisz wiadomość..." type="text" [(ngModel)]="currentMessage"></textarea>
     <div class="send">
       <ion-icon name="send" (click)="sendMessage()"></ion-icon>
     </div>

@@ -3,5 +3,7 @@ export const socketEvents = {
     newFriend: 'new-friend',
     newFriendInvitation: 'new-friend-invitation',
     newFriendRejection: 'new-friend-rejection',
-    connect: 'connect'
+    connect: 'connect',
+    newConversation: 'new-conversation',
+    newMessage: 'new-message'
 };
