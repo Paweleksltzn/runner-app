@@ -14,6 +14,7 @@ const authRouter = require('./routes/auth');
 const workoutRouter = require('./routes/workout');
 const notificationRouter = require('./routes/notification');
 const searchersRouter = require('./routes/searcher');
+const trainerRouter = require('./routes/trainer');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRouter); 
 app.use('/api/workout', jwtManager.jwtVerivier, workoutRouter); 
 app.use('/api/notification', jwtManager.jwtVerivier, notificationRouter); 
+app.use('/api/trainer', jwtManager.jwtVerivier, trainerRouter); 
 app.use('/api/searchers', /*jwtManager.jwtVerivier,*/ searchersRouter);
 
 mongoose
