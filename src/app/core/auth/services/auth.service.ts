@@ -16,6 +16,8 @@ import { Notification } from 'src/app/shared/interfaces/notifications/notificati
 import { Socket } from 'ngx-socket-io';
 import { socketEvents } from 'src/app/shared/entitys/sockets-events';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
+import { ConversationService } from 'src/app/features/profiles/user_param/chat/services/conversation.service';
+import { Conversation } from 'src/app/shared/interfaces/conversation/conversation';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +30,8 @@ export class AuthService {
               private router: Router,
               private store: Store<Reducers>,
               private notificationsService: NotificationsService,
-              private socket: Socket
+              private socket: Socket,
+              private conversationsService: ConversationService
               ) {
                 this.socket.fromEvent(socketEvents.connect).subscribe((newFriend: UserProfile) => {
                   if (this.token) {
@@ -62,6 +65,7 @@ export class AuthService {
     this.notificationsService.getNotifications().subscribe((notifications: Notification[]) => {
       this.store.dispatch(actions.notificationActions.loadNotifications({ notifications }));
       this.router.navigate(['my-workouts']);
+      this.getConversations();
       this.subscribeNotifications();
   });
   }
@@ -92,6 +96,12 @@ export class AuthService {
 
   private navigateToLoginPage() {
     this.router.navigate(['auth', 'login']);
+  }
+
+  private getConversations() {
+    this.conversationsService.getConversations().subscribe((conversations: Conversation[]) => {
+      this.store.dispatch(actions.conversationActions.loadConversations({ conversations }));
+    });
   }
 
   private subscribeNotifications() {

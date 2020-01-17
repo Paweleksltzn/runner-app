@@ -17,21 +17,12 @@ import { UserService } from '../../user/services/user.service';
 })
 export class ProfileComponent implements OnInit {
   public currentModal: HTMLIonModalElement;
-  public user: UserProfile = {
-    gradient: 1,
-    profileDescription: '',
-    email: '',
-    name: '',
-    surname: '',
-    isMale: true,
-    accessLevel: 1,
-    imgUrl: '',
-    isMyProfile: undefined,
-    userType: undefined
-  };
+  public user: UserProfile = {} as any;
   public editMode = false;
   public selectedProfileTab: number;
   public imageAttributes: ImageAttribute[] = [];
+  public ownerEmail: string;
+  public unreadedMessagesAmount = 0;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -45,12 +36,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+      this.ownerEmail = state.ownerEmail;
       if (state.isMyProfile) {
         this.loadOwnerProperties(state);
       } else {
         this.loadOtherUserProperties(state);
       }
     });
+    this.getUnreadedMessagesAmount();
   }
 
   ionViewWillEnter() {
@@ -101,14 +94,6 @@ export class ProfileComponent implements OnInit {
     this.store.dispatch(actions.profileAction.setUserType({userType: 1}));
   }
 
-  public async displayConversation() {
-    const conversationModal = await this.modalController.create({
-      component: ConversationComponent
-    });
-    this.currentModal = conversationModal;
-    return await conversationModal.present();
-  }
-
   public changeEditMode() {
     this.editMode = true;
   }
@@ -117,6 +102,31 @@ export class ProfileComponent implements OnInit {
     this.editMode = false;
     this.store.dispatch(actions.profileAction.updateDescription({newDescription: this.user.profileDescription}));
     this.userService.changeDescription(this.user.profileDescription).subscribe(res => {});
+  }
+
+  public async openChat() {
+    const conversationModal = await this.modalController.create({
+      component: ConversationComponent,
+      componentProps: {
+        targetProfile: this.user
+      }
+    });
+    this.currentModal = conversationModal;
+    return await conversationModal.present();
+  }
+
+  private getUnreadedMessagesAmount() {
+    this.store.pipe(select('conversations')).subscribe((state: storeState.ConversationState) => {
+      this.unreadedMessagesAmount = 0;
+      const conversations = state.conversations;
+      conversations.forEach(conversation => {
+        conversation.members.forEach(member => {
+          if (member.userProfile.email === this.ownerEmail && !member.isReaded) {
+            this.unreadedMessagesAmount++;
+          }
+        });
+      });
+    });
   }
 
   private loadOwnerProperties(user: storeState.ProfileState) {
@@ -133,6 +143,7 @@ export class ProfileComponent implements OnInit {
     this.user.friends = user.ownerFriends;
     this.user.invitedToFriends = user.ownerInvitedToFriends;
     this.user.friendsInvitations = user.ownerFriendsInvitations;
+    this.user._id = user.ownerProfileId;
   }
 
   private loadOtherUserProperties(user: storeState.ProfileState) {
@@ -149,6 +160,7 @@ export class ProfileComponent implements OnInit {
     this.user.friends = user.friends;
     this.user.invitedToFriends = user.invitedToFriends;
     this.user.friendsInvitations = user.friendsInvitations;
+    this.user._id = user.profileId;
   }
 
 }

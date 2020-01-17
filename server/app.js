@@ -17,6 +17,7 @@ const notificationRouter = require('./routes/notification');
 const searchersRouter = require('./routes/searcher');
 const userRouter = require('./routes/user');
 const socketRouter = require('./routes/socket');
+const conversationRouter = require('./routes/conversation');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,6 +43,7 @@ app.use('/api/notification', jwtManager.jwtVerivier, notificationRouter);
 app.use('/api/user', jwtManager.jwtVerivier, userRouter);
 app.use('/api/searchers',jwtManager.jwtVerivier, searchersRouter);
 app.use('/api/socket',jwtManager.jwtVerivier, socketRouter);
+app.use('/api/conversation',jwtManager.jwtVerivier, conversationRouter);
 
 let server;
 

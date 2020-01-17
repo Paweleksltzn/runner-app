@@ -11,7 +11,8 @@ export const environment = {
     notification: 'api/notification',
     searcher: 'api/searchers',
     user: 'api/user',
-    socket: 'api/socket'
+    socket: 'api/socket',
+    conversation: 'api/conversation'
   }
 };
 

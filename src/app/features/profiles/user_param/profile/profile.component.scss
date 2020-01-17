@@ -17,6 +17,17 @@
     margin: 0 auto;
     text-align: center;
     color: #555;
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        ion-icon {
+            position: absolute;
+            right: 0;
+            top: -1rem;
+        }
+    }
     p {
         margin-top: 0;
     }
@@ -29,7 +40,9 @@
     }
 }
 .description-edit {
-    margin-top: -2rem;
+    position: absolute;
+    right: 0;
+    top: -2rem;
 }
 .profile-tab{
     height: 15%;
@@ -66,6 +79,13 @@ span{
     position: fixed;
     left: 0px;
     width: 50%;
+}
+.unreaded-messages__amount {
+    position: absolute;
+    left: 2.25rem;
+    top: 1rem;
+    font-size: 1.25rem;
+    color: red;
 }
 .description__changer {
     --background: linear-gradient(to right top, #15e6b5, #39e9b1, #4fecad, #61efaa, #71f2a6, #6af2ae, #63f3b6, #5cf3be, #3ef0d1, #22ede2, #1ce8f0, #34e3fa);
