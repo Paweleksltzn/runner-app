@@ -3,8 +3,8 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 import { actions } from 'src/app/store';
 
 export const initialState: storeState.ProfileState = {
-  gradient: 2,
-  imgUrl: 'assets/images/profile-picture.png',
+  gradient: 1,
+  imgUrl: undefined,
   email: undefined,
   name: undefined,
   surname: undefined,
@@ -12,6 +12,7 @@ export const initialState: storeState.ProfileState = {
   userType: 1,
   isMyProfile: true,
   isMale: undefined,
+  croppedImageUrl: undefined, 
   accessLevel: undefined,
   friends: [],
   invitedToFriends: [],
@@ -68,6 +69,16 @@ const profileReducerOptions = createReducer(
   )),
   on(actions.profileAction.setTheme, (state, action) => ({ ...state, ownerGradient: action.gradient})),
   on(actions.profileAction.setUserType, (state, action) => ({ ...state, userType: action.userType})),
+  on(actions.profileAction.setIsMyProfile, (state, action) =>({ ...state, isMyProfile: action.isMyProfile})),
+  on(actions.profileAction.profileData, (state, action) =>({ 
+    ...state, 
+    email: action.email,
+    name: action.name,
+    surname: action.surname,
+    isMale: action.isMale,
+    accessLevel: action.accessLevel
+  })),
+  on(actions.profileAction.setImg, (state, action) => ({ ...state, croppedImageUrl: action.croppedImageUrl})),
   on(actions.profileAction.updateDescription, (state, action) => ({ ...state, ownerProfileDescription: action.newDescription})),
   on(actions.profileAction.setIsMyProfile, (state, action) => ({ ...state, isMyProfile: action.isMyProfile})),
   on(actions.profileAction.addFriend, (state, action) => {

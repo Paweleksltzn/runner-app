@@ -8,6 +8,7 @@ import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 import {Plugins, CameraResultType} from '@capacitor/core';
 import { Router } from '@angular/router';
 import { ConversationComponent } from '../chat/conversation/conversation.component';
+import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
 import { UserService } from '../../user/services/user.service';
 
 @Component({
@@ -17,6 +18,7 @@ import { UserService } from '../../user/services/user.service';
 })
 export class ProfileComponent implements OnInit {
   public currentModal: HTMLIonModalElement;
+  public imagePath = 'assets/images/profile-picture.jpg';
   public user: UserProfile = {} as any;
   public editMode = false;
   public selectedProfileTab: number;
@@ -38,11 +40,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-      this.ownerEmail = state.ownerEmail;
+      this.user.isMyProfile = state.isMyProfile;
       if (state.isMyProfile) {
         this.loadOwnerProperties(state);
       } else {
         this.loadOtherUserProperties(state);
+      }
+      if (state.croppedImageUrl){ 
+        this.user.imgUrl = state.croppedImageUrl
       }
     });
     this.getUnreadedMessagesAmount();
@@ -89,7 +94,9 @@ export class ProfileComponent implements OnInit {
       allowEditing: false,
       resultType: CameraResultType.Uri,
     });
-    this.user.imgUrl =  profilePhoto.webPath;
+    this.imagePath =  profilePhoto.webPath;
+    this.store.dispatch(actions.profileAction.setImg({croppedImageUrl: this.imagePath}));
+    this.displayCropper();
   }
 
   public exitDisplayOtherProfileMode() {
@@ -120,6 +127,15 @@ export class ProfileComponent implements OnInit {
 
   public scrollHandler(event) {
     this.scrollYPos=event.detail.currentY;
+  }
+
+
+  public async displayCropper() {
+    const cropperModal = await this.modalController.create({
+      component: ImageCropperComponent
+    });
+    this.currentModal = cropperModal;
+    return await cropperModal.present();
   }
 
   private getUnreadedMessagesAmount() {

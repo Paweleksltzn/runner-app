@@ -9,6 +9,7 @@ export interface UserProfile {
     gradient: number;
     imgUrl: string;
     userType: number;
+    croppedImage: string;
     friends?: UserProfile[];
     invitedToFriends?: UserProfile[];
     friendsInvitations?: UserProfile[];
