@@ -5,7 +5,9 @@ import { ChatComponent } from '../chat.component';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ConversationComponent } from '../conversation/conversation.component';
-
+import { StoreModule } from '@ngrx/store';
+import { conversationReducer } from '../store/conversation.reducer';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: '', component: ChatComponent}
@@ -21,6 +23,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     IonicModule,
     SharedModule,
+    FormsModule,
+    StoreModule.forFeature('conversations', conversationReducer)
   ],
   entryComponents: [ConversationComponent]
 })

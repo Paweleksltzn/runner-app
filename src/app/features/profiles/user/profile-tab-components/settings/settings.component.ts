@@ -4,6 +4,7 @@ import { actions, Reducers } from 'src/app/store';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ModalController } from '@ionic/angular';
 import { ActivateCoachAccountComponent } from './activateCoachAccount/activate-coach-account/activate-coach-account.component';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -15,7 +16,8 @@ export class SettingsComponent implements OnInit {
   public currentModal: HTMLIonModalElement;
   constructor( private store: Store<Reducers>,
                private authService: AuthService,
-               private modalController: ModalController
+               private modalController: ModalController,
+               private userService: UserService
                ) { }
 
   ngOnInit() {}
@@ -23,6 +25,7 @@ export class SettingsComponent implements OnInit {
   public changeProfileTheme(selectedTheme: any) {
     this.selectedGradient = selectedTheme;
     this.store.dispatch(actions.profileAction.setTheme({gradient: selectedTheme}));
+    this.userService.changeGradient(selectedTheme).subscribe(res => {});
   }
 
   public logOut() {

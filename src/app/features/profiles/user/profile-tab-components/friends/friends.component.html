@@ -1,16 +1,15 @@
 <div class="summary">
-  <p>Liczba znajomych: {{numberOfFriends}}</p>
+  <p>Liczba znajomych: {{ friends.length }}</p>
   <ng-container *ngIf="userType === 1 || userType === 2 ">
     <ion-icon class="add-friend" (click)="displayAddFriends()" name="person-add"></ion-icon>
   </ng-container>
 </div>
-<ion-item>
+<ion-item *ngFor="let friend of friends" (click)="visitFriend(friend)">
     <ion-avatar slot="start">
-      <img src="assets/images/profile-picture.png">
+      <img [src]="friend.imgUrl">
     </ion-avatar>
     <ion-label>
-      <h3>Lorem ipsum</h3>
-      <p>dolor sit amet</p>
-      <p>consectetur adipiscing elit. Duis ut urna neque.</p>
+      <h3>{{friend.name}} {{friend.surname}}</h3>
+      <p>{{ friend.profileDescription.substr(0, 60) }}<ng-container *ngIf="friend.profileDescription.substr(0, 60).length === 60">...</ng-container></p>
     </ion-label>
-  </ion-item>
+</ion-item>

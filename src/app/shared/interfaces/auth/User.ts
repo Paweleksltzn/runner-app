@@ -3,5 +3,6 @@ export interface User {
     name: string;
     surname: string;
     isMale: boolean;
+    accessLevel?: number;
     _id?: string;
 }

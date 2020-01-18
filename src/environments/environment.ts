@@ -4,13 +4,16 @@
 
 export const environment = {
   production: false,
-  srvAddress: 'https://fitup3.szymonpawel123.usermd.net',
+  srvAddress: 'http://localhost:3000',
   endpoints: {
     auth: 'api/auth',
     workout: 'api/workout',
     notification: 'api/notification',
     searcher: 'api/searchers',
-    trainer: 'api/trainer'
+    trainer: 'api/trainer',
+    user: 'api/user',
+    socket: 'api/socket',
+    conversation: 'api/conversation'
   }
 };
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
 import { ActionSheetController, ModalController, Platform } from '@ionic/angular';
 import * as storeState from 'src/app/shared/interfaces/store/index';
@@ -9,35 +9,22 @@ import {Plugins, CameraResultType} from '@capacitor/core';
 import { Router } from '@angular/router';
 import { ConversationComponent } from '../chat/conversation/conversation.component';
 import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
-
+import { UserService } from '../../user/services/user.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit, DoCheck {
+export class ProfileComponent implements OnInit {
   public currentModal: HTMLIonModalElement;
-  public user: UserProfile = {
-    profileDescription: undefined,
-    name: undefined,
-    surname: undefined,
-    gradient: undefined,
-    imgUrl: undefined,
-    userType: undefined,
-    friends: undefined,
-    isMyProfile: true,
-    croppedImage: undefined
-  };
-
   public imagePath = 'assets/images/profile-picture.jpg';
+  public user: UserProfile = {} as any;
+  public editMode = false;
   public selectedProfileTab: number;
   public imageAttributes: ImageAttribute[] = [];
-  public scrollYPos: number;
-
-  
-  
-  
+  public ownerEmail: string;
+  public unreadedMessagesAmount = 0;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -45,9 +32,8 @@ export class ProfileComponent implements OnInit, DoCheck {
     public store: Store<Reducers>,
     public router: Router,
     public modalController: ModalController,
-    public platform: Platform
-    ) {
-    
+    public platform: Platform,
+    private userService: UserService) {
     this.imageConfigure();
    }
 
@@ -62,26 +48,19 @@ export class ProfileComponent implements OnInit, DoCheck {
       this.user.gradient = state.gradient;
       this.user.profileDescription = state.profileDesc;
       this.user.userType = state.userType;
+      this.ownerEmail = state.ownerEmail;
+      if (state.isMyProfile) {
+        this.loadOwnerProperties(state);
+      } else {
+        this.loadOtherUserProperties(state);
+      }
     });
-    this.checkIfMyProfile();
+    this.getUnreadedMessagesAmount();
   }
 
-  ngDoCheck() {
-    this.checkIfMyProfile();
-  }
-
-  public checkIfMyProfile() {
-    if (this.user.isMyProfile) {
-      this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
-        this.user.name = state.name;
-        this.user.surname = state.surname;
-      });
-    } else {
-      this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-        this.user.name = state.name;
-        this.user.surname = state.surname;
-      });
-    }
+  ionViewWillEnter() {
+    this.router.navigate(['user', 'profile', 'friends']);
+    this.selectedProfileTab = 1;
   }
 
   public switchProfileTab(selectedTab: number) {
@@ -130,9 +109,22 @@ export class ProfileComponent implements OnInit, DoCheck {
     this.store.dispatch(actions.profileAction.setUserType({userType: 1}));
   }
 
-  public async displayConversation() {
+  public changeEditMode() {
+    this.editMode = true;
+  }
+
+  public saveDescription() {
+    this.editMode = false;
+    this.store.dispatch(actions.profileAction.updateDescription({newDescription: this.user.profileDescription}));
+    this.userService.changeDescription(this.user.profileDescription).subscribe(res => {});
+  }
+
+  public async openChat() {
     const conversationModal = await this.modalController.create({
-      component: ConversationComponent
+      component: ConversationComponent,
+      componentProps: {
+        targetProfile: this.user
+      }
     });
     this.currentModal = conversationModal;
     return await conversationModal.present();
@@ -142,12 +134,61 @@ export class ProfileComponent implements OnInit, DoCheck {
     this.scrollYPos=event.detail.currentY;
   }
 
+
   public async displayCropper() {
     const cropperModal = await this.modalController.create({
       component: ImageCropperComponent
     });
     this.currentModal = cropperModal;
     return await cropperModal.present();
+  }
+
+  private getUnreadedMessagesAmount() {
+    this.store.pipe(select('conversations')).subscribe((state: storeState.ConversationState) => {
+      this.unreadedMessagesAmount = 0;
+      const conversations = state.conversations;
+      conversations.forEach(conversation => {
+        conversation.members.forEach(member => {
+          if (member.userProfile.email === this.ownerEmail && !member.isReaded) {
+            this.unreadedMessagesAmount++;
+          }
+        });
+      });
+    });
+  }
+
+  private loadOwnerProperties(user: storeState.ProfileState) {
+    this.user.gradient = user.ownerGradient;
+    this.user.imgUrl = user.ownerImgUrl;
+    this.user.email = user.ownerEmail;
+    this.user.name = user.ownerName;
+    this.user.surname = user.ownerSurname;
+    this.user.profileDescription = user.ownerProfileDescription;
+    this.user.userType = user.ownerUserType;
+    this.user.isMyProfile = user.isMyProfile;
+    this.user.isMale = user.ownerIsMale;
+    this.user.accessLevel = user.ownerAccessLevel;
+    this.user.friends = user.ownerFriends;
+    this.user.invitedToFriends = user.ownerInvitedToFriends;
+    this.user.friendsInvitations = user.ownerFriendsInvitations;
+    this.user._id = user.ownerProfileId;
+  }
+
+  private loadOtherUserProperties(user: storeState.ProfileState) {
+    this.user.gradient = user.gradient;
+    this.user.imgUrl = user.imgUrl;
+    this.user.email = user.email;
+    this.user.name = user.name;
+    this.user.surname = user.surname;
+    this.user.profileDescription = user.profileDescription;
+    this.user.userType = user.userType;
+    this.user.isMyProfile = user.isMyProfile;
+    this.user.isMale = user.isMale;
+    this.user.accessLevel = user.accessLevel;
+    this.user.friends = user.friends;
+    this.user.invitedToFriends = user.invitedToFriends;
+    this.user.friendsInvitations = user.friendsInvitations;
+    this.user._id = user.profileId;
   }
 
 }

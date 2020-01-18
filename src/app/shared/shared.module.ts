@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { SingleWorkoutModule } from './components/single-workout/singleWorkoutModule';
 import { ToastGeneratorService } from './services/toast-generator.service';
 import { StorageService } from './services/storage.service';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { StorageService } from './services/storage.service';
     AlertController,
     ToastGeneratorService,
     ToastController,
-    StorageService
+    StorageService,
+    LocalNotifications
   ]
 })
 export class SharedModule { }

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ActiveWorkoutService } from '../services/active-workout.service';
 import { singleWorkoutModes } from 'src/app/shared/components/single-workout/singleWorkoutHelper';
 import * as storeState from 'src/app/shared/interfaces/store/index';
+import { DateService } from 'src/app/shared/services/date.service';
 
 @Component({
   selector: 'app-active-workout-selector',
@@ -18,7 +19,10 @@ export class ActiveWorkoutSelectorComponent implements OnInit {
   public workoutTitle = '';
 
   constructor(private store: Store<Reducers>,
-              private router: Router, private activeWorkoutService: ActiveWorkoutService) { }
+              private router: Router,
+              private activeWorkoutService: ActiveWorkoutService,
+              private dateService: DateService
+               ) { }
 
   ngOnInit() {
     this.store.pipe(select('myWorkouts')).subscribe((state: storeState.MyWorkoutState) => {
@@ -50,7 +54,7 @@ export class ActiveWorkoutSelectorComponent implements OnInit {
       this.setDefaultTrainingTemplate();
     }
     this.selectedWorkout.title = this.workoutTitle || 'Nowy trening';
-    this.selectedWorkout.trainingDate = this.createTrainingDate();
+    this.selectedWorkout.trainingDate = this.dateService.createDateString(new Date());
     this.selectedWorkout.startTime = Date.now();
     this.activeWorkoutService.startTraining();
     this.store.dispatch(actions.singleWorkoutActions.startWorkout({ workoutStartingTemplate: this.selectedWorkout}));
@@ -62,14 +66,6 @@ export class ActiveWorkoutSelectorComponent implements OnInit {
       title: 'nowy trening',
       excercises: []
     };
-  }
-
-  private createTrainingDate() {
-    const currentDate = new Date();
-    const days = currentDate.getDate() < 10 ? `0${currentDate.getDate()}` : currentDate.getDate();
-    const month =  currentDate.getMonth() + 1 < 10 ? `0${currentDate.getMonth() + 1}` : currentDate.getMonth() + 1;
-    const year = currentDate.getFullYear();
-    return `${days}.${month}.${year}`;
   }
 
 }
