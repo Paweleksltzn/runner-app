@@ -4,7 +4,7 @@ import { actions } from 'src/app/store';
 
 export const initialState: storeState.ProfileState = {
   gradient: 1,
-  profImgUrl: 'assets/images/profile-picture.jpg',
+  imgUrl: undefined,
   email: undefined,
   name: undefined,
   surname: undefined,
