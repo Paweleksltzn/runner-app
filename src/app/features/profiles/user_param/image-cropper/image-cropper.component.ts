@@ -56,7 +56,7 @@ export class ImageCropperComponent implements OnInit {
 
   public dismissModalAndSendCroppedIamge() {
     this.store.dispatch(actions.profileAction.setImg({croppedImageUrl: this.croppedImg}));
-    this.modalController.dismiss({});
+    this.modalController.dismiss();
   }
 
 }
