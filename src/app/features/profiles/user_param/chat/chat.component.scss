@@ -10,3 +10,8 @@ ion-avatar{
     font-weight: bold;
     color: black;
 }
+.conversation__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

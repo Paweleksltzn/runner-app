@@ -18,6 +18,7 @@ import { ChatModule } from '../user_param/chat/chat/chat.module';
 import { ActivateCoachAccountComponent } from '../user/profile-tab-components/settings/activateCoachAccount/activate-coach-account/activate-coach-account.component';
 import { ImageCropperComponent } from '../user_param/image-cropper/image-cropper.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     StoreModule.forFeature('profile',  profileReducer ),
     UserRoutingModule,
     ChatModule,
-    ImageCropperModule
+    ImageCropperModule,
+    FormsModule
   ],
   entryComponents: [
     AddFriendsComponent,

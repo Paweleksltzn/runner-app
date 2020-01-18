@@ -1,0 +1,9 @@
+@import "../_variables.scss";
+
+.friend-adder {
+    font-size: 2.5rem;
+    color: $mixed-main-colours;
+    &.invited {
+        color: lightgrey;
+    }
+}

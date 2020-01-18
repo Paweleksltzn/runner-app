@@ -1,0 +1,23 @@
+<ion-row>
+  <ion-col>
+    <h3>{{ notification.author.name }} {{ notification.author.surname }}</h3>
+  </ion-col>
+  <ion-col size="auto">
+    <h3>{{ notification.dateString }}</h3>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <p>
+      {{ notification.message }}
+    </p>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <ion-button expand="block" class="friend-add-button" (click)="acceptInvitation()">
+      Dodaj znajomego
+      <ion-icon slot="end" name="add"></ion-icon>
+  </ion-button>
+  </ion-col>
+</ion-row>
