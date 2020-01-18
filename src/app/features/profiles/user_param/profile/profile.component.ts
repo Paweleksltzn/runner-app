@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   public imageAttributes: ImageAttribute[] = [];
   public ownerEmail: string;
   public unreadedMessagesAmount = 0;
+  public scrollYPos: number;
 
   constructor(
     public actionSheetController: ActionSheetController,
