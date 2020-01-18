@@ -7,3 +7,4 @@ const router = express.Router();
 router.put('/setTrainer', trainerController.setTrainer);
 
 module.exports = router;
+
