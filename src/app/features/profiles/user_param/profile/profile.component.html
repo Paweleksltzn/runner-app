@@ -1,15 +1,16 @@
-<ion-content>
+<ion-content [scrollEvents]="true" (ionScroll)="scrollHandler($event)">
   <div class="main-container">
-    <div class="main-container-profile">
+    <div class="main-container-profile" >
       <div class="profile-picture"  [ngClass]="{'gradient-1':user.gradient  === 1, 'gradient-2':user.gradient  === 2, 'gradient-3':user.gradient  === 3}">
         <ng-container *ngIf="!user.isMyProfile">
           <div class="iconbox" > 
-            <ion-icon  name="arrow-round-back" (click)="exitDisplayOtherProfileMode()"></ion-icon>
+            <ion-icon  name="arrow-round-back" (click)="exitDisplayOtherProfileMode()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
+            <ion-icon  name="chatboxes" (click)="displayConversation()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
           </div> 
         </ng-container>
         <ng-container *ngIf="user.userType === 1 || user.userType === 2">
           <div class="iconbox" routerLink="/chat"> 
-            <ion-icon  name="chatboxes"></ion-icon>
+            <ion-icon  name="chatboxes" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
             <span class="unreaded-messages__amount" *ngIf="unreadedMessagesAmount > 0">{{unreadedMessagesAmount}}</span>
           </div> 
         </ng-container>

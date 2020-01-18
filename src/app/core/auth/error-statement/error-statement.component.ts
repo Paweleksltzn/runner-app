@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-error-statement',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorStatementComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
+
+  public goBackToLogin(){
+    this.router.navigate(['login']);
+  }
 
 }

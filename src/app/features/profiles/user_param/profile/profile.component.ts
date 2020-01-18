@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController, Platform } from '@ionic/angular';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Store, select } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
     public store: Store<Reducers>,
     public router: Router,
     public modalController: ModalController,
+    public platform: Platform,
     private userService: UserService) {
     this.imageConfigure();
    }
@@ -79,11 +80,12 @@ export class ProfileComponent implements OnInit {
       value: 'image',
       });
   }
+
   public async takePhoto() {
     const { Camera } = Plugins;
     const profilePhoto = await Camera.getPhoto({
       quality: 90,
-      allowEditing: true,
+      allowEditing: false,
       resultType: CameraResultType.Uri,
     });
     this.user.imgUrl =  profilePhoto.webPath;
@@ -113,6 +115,10 @@ export class ProfileComponent implements OnInit {
     });
     this.currentModal = conversationModal;
     return await conversationModal.present();
+  }
+
+  public scrollHandler(event) {
+    this.scrollYPos=event.detail.currentY;
   }
 
   private getUnreadedMessagesAmount() {
