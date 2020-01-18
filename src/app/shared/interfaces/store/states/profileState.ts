@@ -8,6 +8,7 @@ export interface ProfileState extends User {
     userType: number;
     isMyProfile: boolean;
     accessLevel: number;
+    croppedImageUrl?: string;
     invitedToFriends?: UserProfile[];
     friendsInvitations?: UserProfile[];
     friends?: UserProfile[];
