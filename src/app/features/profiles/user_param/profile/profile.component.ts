@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   public imageAttributes: ImageAttribute[] = [];
   public ownerEmail: string;
   public unreadedMessagesAmount = 0;
+  public scrollYPos: number;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -40,19 +41,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.user.isMyProfile = state.isMyProfile;
-      if (state.croppedImageUrl){ 
-        this.imagePath = state.croppedImageUrl
-      } else{
-        this.imagePath = state.profImgUrl;
-      }
-      this.user.gradient = state.gradient;
-      this.user.profileDescription = state.profileDesc;
-      this.user.userType = state.userType;
-      this.ownerEmail = state.ownerEmail;
       if (state.isMyProfile) {
         this.loadOwnerProperties(state);
       } else {
         this.loadOtherUserProperties(state);
+      }
+      if (state.croppedImageUrl){ 
+        this.user.imgUrl = state.croppedImageUrl
       }
     });
     this.getUnreadedMessagesAmount();
