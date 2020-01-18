@@ -11,28 +11,34 @@ exports.searchUsers = async function(req, res, next) {
                 name: new RegExp(name, 'i'),
                 surname: new RegExp(surname, 'i'),
                 isActive: true
-            });
+            }).populate('userProfile');
             const usersSecondArr = await User.find({
                 name: new RegExp(surname, 'i'),
                 surname: new RegExp(name, 'i'),
                 isActive: true
-            });
+            }).populate('userProfile');
             users = [...usersFirstArr, ...usersSecondArr];
         } else {
             searchString = searchString.split(' ').join('');
-            users = await User.find({ nameAndSurname: new RegExp(searchString, 'i'), isActive: true });
+            users = await User.find({ nameAndSurname: new RegExp(searchString, 'i'), isActive: true }).populate('userProfile');
         }
-        const usersToReturn = users.map(user => {
+        const usersToMap = users.filter(user => {
+            return user.email !== req.token.email;
+        });
+        // console.log(usersToMap);
+        const usersToReturn = usersToMap.map(user => {
             return {
                 email: user.email,
                 name: user.name,
                 surname: user.surname,
                 isMale: user.isMale,
-                accessLevel: user.accessLevel
+                accessLevel: user.accessLevel,
+                userProfile: user.userProfile
             }
         });
         return res.json(usersToReturn);
-    } catch {
+    } catch (err) {
+        console.log(err);
         return res.status(500).send('Wystąpił błąd podczas wyszukiwania użytkownika');
     }
     

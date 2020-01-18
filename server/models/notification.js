@@ -15,10 +15,19 @@ const notificationSchema = new Schema({
     type: String,
     required: true
   },
+  type: {
+    type: String,
+    required: true
+  },
   isDisplayed: {
       type: Boolean,
       required: true
   },
+  creationDate: {
+    type: Date,
+    required: true
+  },
+  newFriendId: String,
   receivers: [ {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -32,4 +41,4 @@ const notificationSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('NotificationSchema', notificationSchema);
+module.exports = mongoose.model('Notification', notificationSchema);

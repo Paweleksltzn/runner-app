@@ -9,12 +9,16 @@ const credentials = require('./util/credentials');
 const app = express();
 
 const jwtManager = require('./auth-guards/jwt-managment');
+const socketEvents = require('./util/socketEvents');
 
 const authRouter = require('./routes/auth');
 const workoutRouter = require('./routes/workout');
 const notificationRouter = require('./routes/notification');
 const searchersRouter = require('./routes/searcher');
 const trainerRouter = require('./routes/trainer');
+const userRouter = require('./routes/user');
+const socketRouter = require('./routes/socket');
+const conversationRouter = require('./routes/conversation');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,14 +42,22 @@ app.use('/api/auth', authRouter);
 app.use('/api/workout', jwtManager.jwtVerivier, workoutRouter); 
 app.use('/api/notification', jwtManager.jwtVerivier, notificationRouter); 
 app.use('/api/trainer', jwtManager.jwtVerivier, trainerRouter); 
-app.use('/api/searchers', /*jwtManager.jwtVerivier,*/ searchersRouter);
+app.use('/api/user', jwtManager.jwtVerivier, userRouter);
+app.use('/api/searchers',jwtManager.jwtVerivier, searchersRouter);
+app.use('/api/socket',jwtManager.jwtVerivier, socketRouter);
+app.use('/api/conversation',jwtManager.jwtVerivier, conversationRouter);
+
+let server;
 
 mongoose
   .connect(credentials.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(result => {
-    app.listen(process.env.PORT || 3000);
+    server = app.listen(process.env.PORT || 3000);
+    const io = require('./util/socket').init(server);
+    io.on(socketEvents.connection, function (socket) {
+        io.emit('test', { socket: socket.id });
+    });
   })
   .catch(err => {
     console.log(err);
 });
-

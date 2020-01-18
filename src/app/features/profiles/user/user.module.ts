@@ -16,6 +16,7 @@ import { ProfileComponent } from '../user_param/profile/profile.component';
 import { AddFriendsComponent } from './profile-tab-components/friends/add-friends/add-friends.component';
 import { ChatModule } from '../user_param/chat/chat/chat.module';
 import { ActivateCoachAccountComponent } from '../user/profile-tab-components/settings/activateCoachAccount/activate-coach-account/activate-coach-account.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ActivateCoachAccountComponent } from '../user/profile-tab-components/se
     StoreModule.forFeature('profile',  profileReducer ),
     UserRoutingModule,
     ChatModule,
+    FormsModule
   ],
   entryComponents: [
     AddFriendsComponent,

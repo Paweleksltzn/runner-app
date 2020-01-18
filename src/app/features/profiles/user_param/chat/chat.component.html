@@ -4,16 +4,22 @@
 </ion-toolbar>
 <ion-list>
   <ion-list-header>
-    Ostatnie rozmowy
+    <h5 *ngIf="conversations.length > 0">Ostatnie rozmowy</h5>
+    <h5 *ngIf="conversations.length === 0">Brak odbytych rozmów</h5>
   </ion-list-header>
-  <div *ngFor="let conversation of privateConversations;">
-    <ion-item (click)="displayConversation()">
+  <div *ngFor="let conversation of conversations;">
+    <ion-item (click)="displayConversation(conversation)">
       <ion-avatar>
-        <img src="assets/images/profile-picture.png">
+        <img [src]="conversation.members[conversation.userIndex].userProfile.imgUrl">
       </ion-avatar>
-      <ion-label  [ngClass]="{'unreaded': !conversation.isReaded}">
-        <h2>{{conversation.whoTexted}}</h2>
-        <p>{{conversation.lastMessage}}</p>
+      <ion-label  [ngClass]="{'unreaded': !conversation.members[1 - conversation.userIndex].isReaded && !currentModal}">
+        <h2 class="conversation__title">
+          {{conversation.members[conversation.userIndex].userProfile.name + ' ' + conversation.members[conversation.userIndex].userProfile.surname}}
+          <span class="conversation__date">{{conversation.lastEditionDate | date: 'dd.MM.yyyy'}}</span>
+        </h2>
+        <p>
+          {{conversation.messages[conversation.messages.length - 1].content }}
+        </p>
       </ion-label>
     </ion-item>
   </div>
