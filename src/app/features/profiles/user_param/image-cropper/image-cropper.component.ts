@@ -12,7 +12,6 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./image-cropper.component.scss'],
 })
 export class ImageCropperComponent implements OnInit {
-  public img = null
   public defaultImg = null;
   public croppedImg = null;
 
@@ -25,9 +24,9 @@ export class ImageCropperComponent implements OnInit {
 
   public captureImage(){
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-      this.img= state.croppedImageUrl;
+      this.defaultImg = state.croppedImageUrl;
     });
-    this.convertFile(this.img).subscribe(
+    this.convertFile(this.defaultImg).subscribe(
       base64 => {
         this.defaultImg = base64;
       }

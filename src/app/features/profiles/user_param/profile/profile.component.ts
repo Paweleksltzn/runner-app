@@ -54,7 +54,11 @@ export class ProfileComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.user.isMyProfile = state.isMyProfile;
-      this.imagePath = state.profImgUrl;
+      if (state.croppedImageUrl){ 
+        this.imagePath = state.croppedImageUrl
+      } else{
+        this.imagePath = state.profImgUrl;
+      }
       this.user.gradient = state.gradient;
       this.user.profileDescription = state.profileDesc;
       this.user.userType = state.userType;
@@ -71,9 +75,6 @@ export class ProfileComponent implements OnInit, DoCheck {
       this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
         this.user.name = state.name;
         this.user.surname = state.surname;
-        this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-          this.imagePath=state.croppedImageUrl;
-        });
       });
     } else {
       this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {

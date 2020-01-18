@@ -4,7 +4,7 @@ import { actions } from 'src/app/store';
 
 export const initialState: storeState.ProfileState = {
   gradient: 1,
-  profImgUrl: 'assets/images/profile-picture.png',
+  profImgUrl: 'assets/images/profile-picture.jpg',
   email: undefined,
   name: undefined,
   surname: undefined,
@@ -14,7 +14,7 @@ export const initialState: storeState.ProfileState = {
   isMyProfile: true,
   isMale: undefined,
   accessLevel: undefined, 
-  croppedImageUrl: 'assets/images/profile-picture.png' 
+  croppedImageUrl: 'assets/images/profile-picture.jpg' 
 };
 
 const profileReducerOptions = createReducer(

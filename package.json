@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start-server": "nodemon server/app.js",
-    "build-android": "ng build && npx cap copy android && npx cap open android"
+    "build-android": "ng build --prod && npx cap copy android && npx cap open android"
   },
   "private": true,
   "dependencies": {
