@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Store, select } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { ModalController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-image-cropper',
@@ -16,38 +17,40 @@ export class ImageCropperComponent implements OnInit {
   public croppedImg = null;
 
   constructor(private store: Store<Reducers>,
-    private modalController: ModalController) { }
+    private modalController: ModalController,
+    public http: HttpClient) { }
 
   ngOnInit() {
     this.captureImage();
   }
 
   public captureImage(){
+    
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.defaultImg = state.croppedImageUrl;
     });
-    this.convertFile(this.defaultImg).subscribe(
-      base64 => {
-        this.defaultImg = base64;
-      }
+    this.getBase64ImageFromUrl(this.defaultImg).subscribe(
+      res => {
+        alert(res);
+        alert(res.data);
+        alert(res.value);
+        alert(res[0]);
+      },
+      err => alert(err)
     );
   }
 
-  public convertFile(url: string){
+  public getBase64ImageFromUrl(url: string){
+    const file = new Blob([url]);
     return Observable.create(observer =>{
-      let xhr: XMLHttpRequest = new XMLHttpRequest();
-      xhr.onload = function() {
         let reader: FileReader = new FileReader();
         reader.onloadend = function() {
           observer.next(reader.result);
           observer.complete();
         };
-        reader.readAsDataURL(xhr.response);
-      };
-      xhr.open('GET',url);
-      xhr.responseType = 'blob';
-      xhr.send();
-    });
+        reader.readAsDataURL(file);
+      this.http.get(url);
+    })
   }
 
   public imageCropped(event: ImageCroppedEvent){
