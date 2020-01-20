@@ -64,7 +64,7 @@ export class ConversationService {
     let author = '';
     conversation.members.forEach(member => {
       if (member.userProfile.email !== ownerEmail) {
-        author = `${member.userProfile.name} ${member.userProfile.name}`;
+        author = `${member.userProfile.name} ${member.userProfile.surname}`;
       }
     });
     this.localNotificationsGeneratorService.

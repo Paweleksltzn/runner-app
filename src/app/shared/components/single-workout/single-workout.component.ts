@@ -10,13 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ActiveWorkoutService } from 'src/app/features/workouts/active-workout/services/active-workout.service';
 import { HistoryService } from 'src/app/features/workouts/history/services/history.service';
 import * as storeState from 'src/app/shared/interfaces/store/index';
+import { MyWorkoutService } from 'src/app/features/workouts/my-workouts/services/my-workout.service';
 
 @Component({
   selector: 'app-single-workout',
   templateUrl: './single-workout.component.html',
   styleUrls: ['./single-workout.component.scss'],
 })
-export class SingleWorkoutComponent implements OnInit, OnDestroy {
+export class SingleWorkoutComponent implements OnInit {
   public currentWorkout: Workout;
   public workoutMode: string;
   public modes = singleWorkoutModes;
@@ -32,7 +33,8 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
               private router: Router,
               private activeWorkoutService: ActiveWorkoutService,
               private historyService: HistoryService,
-              private platform: Platform) { }
+              private platform: Platform,
+              private myWorkoutService: MyWorkoutService) { }
 
   ngOnInit() {
     this.loadViewHeight();
@@ -63,14 +65,6 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.saveWorkoutState();
-  }
-
-  ionViewWilLeave() {
-    this.saveWorkoutState();
-  }
-
   private saveWorkoutState() {
     if (!this.isItemDeleted) {
       if (this.workoutMode === this.modes.trainingList) {
@@ -80,6 +74,10 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
         }));
       }
     }
+    const subscription = this.store.pipe(select('myWorkouts')).subscribe((state: storeState.MyWorkoutState) => {
+      this.myWorkoutService.saveUserWorkouts(state.workoutsList || []);
+    });
+    subscription.unsubscribe();
     this.saveWorkoutInTrainingMode();
   }
 
@@ -173,6 +171,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
             if (newExerciseTitle) {
               this.currentWorkout.excercises.push({
                 name: newExerciseTitle,
+                breakTime: 45,
                 series: [{
                   ...emptySingleSet
                 }]
@@ -220,6 +219,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
               if (shouldSaveTraining) {
                 this.store.dispatch(actions.myWorkoutActions.addWorkoutListElement({workoutsListItem: this.currentWorkout,
                    selectedWorkoutId: this.selectedWorkoutId}));
+                this.saveWorkoutState();
               }
               this.activeWorkoutService.setIfTrainingSelected(false);
               this.router.navigate(['workouts-history']);
@@ -240,6 +240,7 @@ export class SingleWorkoutComponent implements OnInit, OnDestroy {
       index: this.activeIndex
     }));
     this.isItemDeleted = true;
+    this.saveWorkoutState();
     this.router.navigate(['my-workouts']);
   }
 

@@ -1,6 +1,7 @@
 export const emptySingleSet = {
     weight: undefined,
-    repeats: undefined
+    repeats: undefined,
+    breakTime: 45
 };
 
 export const singleWorkoutModes = {

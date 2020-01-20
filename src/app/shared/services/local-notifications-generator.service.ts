@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-
+import { Plugins } from '@capacitor/core';
+const { LocalNotifications } = Plugins;
 @Injectable({
   providedIn: 'root'
 })
 export class LocalNotificationsGeneratorService {
 
-  constructor(private localNotifications: LocalNotifications) { }
+  constructor() { }
 
-  public createSimpleNotification(title: string, text: string, sound = '', icon = '') {
-    this.localNotifications.schedule({
+  public async createSimpleNotification(title: string, body: string, sound = '', icon = '') {
+    await LocalNotifications.schedule({
+      notifications: [{
       id: 1,
       title,
-      text,
-      sound
-    });
+      body,
+      sound,
+      schedule: {
+        at: new Date(Date.now() + 1000 * 0.5)
+      },
+      }]
+  });
   }
 
 }
