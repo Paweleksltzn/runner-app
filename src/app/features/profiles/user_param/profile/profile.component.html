@@ -5,7 +5,7 @@
         <ng-container *ngIf="!user.isMyProfile">
           <div class="iconbox" > 
             <ion-icon  name="arrow-round-back" (click)="exitDisplayOtherProfileMode()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
-            <ion-icon  name="chatboxes" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
+            <ion-icon name="chatboxes" *ngIf="user.email !== ownerEmail" (click)="openChat()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
           </div> 
         </ng-container>
         <ng-container *ngIf="user.userType === 1 || user.userType === 2">
@@ -19,7 +19,6 @@
       <div class="profile-description">
         <div class="profile-description__title">
           <h2>{{user.name}} {{user.surname}}</h2>
-          <ion-icon name="chatboxes" *ngIf="user.email !== ownerEmail" (click)="openChat()"></ion-icon>
         </div>
         <ion-grid>
           <ion-row align-items-start justify-content-end>
