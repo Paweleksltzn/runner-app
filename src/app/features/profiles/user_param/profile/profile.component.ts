@@ -92,9 +92,9 @@ export class ProfileComponent implements OnInit {
     const profilePhoto = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.Base64
     });
-    this.imagePath =  profilePhoto.webPath;
+    this.imagePath =  'data: image/jpeg ;base64, ' + profilePhoto.base64String;
     this.store.dispatch(actions.profileAction.setImg({croppedImageUrl: this.imagePath}));
     this.displayCropper();
   }

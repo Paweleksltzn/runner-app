@@ -5,10 +5,11 @@ export const testWorkout: Workout = {
     excercises: [
         {
             name: 'Rozpiętki na płaskiej ławce',
+            breakTime: 20,
             series: [
                 {
                     repeats: 10,
-                    weight: 20
+                    weight: 20,
                 },
                 {
                     repeats: 12,
@@ -22,6 +23,7 @@ export const testWorkout: Workout = {
         },
         {
             name: 'Pompki na poręczach',
+            breakTime: 20,
             series: [
                 {
                     repeats: 10,
@@ -39,6 +41,7 @@ export const testWorkout: Workout = {
         },
         {
             name: 'Wyciskanie na klate leżąc',
+            breakTime: 20,
             series: [
                 {
                     repeats: 12,

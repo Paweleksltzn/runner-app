@@ -65,7 +65,7 @@ export class SingleWorkoutComponent implements OnInit {
     });
   }
 
-  private saveWorkoutState() {
+  public saveWorkoutState() {
     if (!this.isItemDeleted) {
       if (this.workoutMode === this.modes.trainingList) {
         this.store.dispatch(actions.myWorkoutActions.updateWorkoutListElement({

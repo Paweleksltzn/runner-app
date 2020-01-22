@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./image-cropper.component.scss'],
 })
 export class ImageCropperComponent implements OnInit {
-  public defaultImg = null;
+  public defaultImg: string;
   public croppedImg = null;
 
   constructor(private store: Store<Reducers>,
@@ -24,35 +24,10 @@ export class ImageCropperComponent implements OnInit {
     this.captureImage();
   }
 
-  public captureImage(){
-    
+  public captureImage(){  
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.defaultImg = state.croppedImageUrl;
     });
-    this.getBase64ImageFromUrl(this.defaultImg).subscribe(
-      base64 => {
-        this.defaultImg = base64;
-        alert(base64);
-      },
-      err => alert(err)
-    );
-  }
-
-  public getBase64ImageFromUrl(url: string){
-    const file = new Blob([url]);
-    return Observable.create(observer =>{
-        let reader: FileReader = new FileReader();
-        reader.onload = () =>{
-          
-        }
-        reader.onloadend = function() {
-          observer.next(reader.result);
-          observer.complete();
-        };
-        reader.readAsDataURL(file);
-      this.http.get(url,{responseType: "blob"});
-      
-    })
   }
 
   public imageCropped(event: ImageCroppedEvent){
