@@ -83,15 +83,14 @@ export class ProfileComponent implements OnInit {
   }
 
   public async takePhoto() {
-    let imagePath = 'assets/images/profile-picture.jpg';
-    let imageMimeType = 'data: image/png ;base64, ';
+    const imageMimeType = 'data: image/png ;base64, ';
     const { Camera } = Plugins;
     const profilePhoto = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Base64
     });
-    imagePath = imageMimeType  + profilePhoto.base64String;
+    const imagePath = imageMimeType  + profilePhoto.base64String;
     this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: imagePath}));
     this.displayCropper();
   }
