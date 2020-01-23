@@ -12,7 +12,6 @@ export const initialState: storeState.ProfileState = {
   userType: 1,
   isMyProfile: true,
   isMale: undefined,
-  croppedImageUrl: undefined, 
   accessLevel: undefined,
   friends: [],
   invitedToFriends: [],
@@ -78,7 +77,7 @@ const profileReducerOptions = createReducer(
     isMale: action.isMale,
     accessLevel: action.accessLevel
   })),
-  on(actions.profileAction.owenrImgUrl, (state, action) => ({ ...state, croppedImageUrl: action.croppedImageUrl})),
+  on(actions.profileAction.setImg, (state, action) => ({ ...state, ownerImgUrl: action.ownerImgUrl})),
   on(actions.profileAction.updateDescription, (state, action) => ({ ...state, ownerProfileDescription: action.newDescription})),
   on(actions.profileAction.setIsMyProfile, (state, action) => ({ ...state, isMyProfile: action.isMyProfile})),
   on(actions.profileAction.addFriend, (state, action) => {

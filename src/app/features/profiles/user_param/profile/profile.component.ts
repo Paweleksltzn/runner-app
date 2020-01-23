@@ -44,9 +44,6 @@ export class ProfileComponent implements OnInit {
       } else {
         this.loadOtherUserProperties(state);
       }
-      if (state.croppedImageUrl) {
-        this.user.imgUrl = state.croppedImageUrl;
-      }
     });
     this.getUnreadedMessagesAmount();
   }
@@ -95,7 +92,7 @@ export class ProfileComponent implements OnInit {
       resultType: CameraResultType.Base64
     });
     imagePath = imageMimeType  + profilePhoto.base64String;
-    this.store.dispatch(actions.profileAction.owenrImgUrl({croppedImageUrl: imagePath}));
+    this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: imagePath}));
     this.displayCropper();
   }
 

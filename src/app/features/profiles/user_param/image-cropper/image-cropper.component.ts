@@ -26,7 +26,7 @@ export class ImageCropperComponent implements OnInit {
 
   public captureImage() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-      this.defaultImg = state.croppedImageUrl;
+      this.defaultImg = state.ownerImgUrl;
     });
   }
 
@@ -35,7 +35,7 @@ export class ImageCropperComponent implements OnInit {
   }
 
   public dismissModalAndSendCroppedIamge() {
-    this.store.dispatch(actions.profileAction.owenrImgUrl({croppedImageUrl: this.croppedImg}));
+    this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: this.croppedImg}));
     this.modalController.dismiss();
   }
 
