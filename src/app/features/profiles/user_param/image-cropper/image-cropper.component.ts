@@ -17,20 +17,20 @@ export class ImageCropperComponent implements OnInit {
   public croppedImg = null;
 
   constructor(private store: Store<Reducers>,
-    private modalController: ModalController,
-    public http: HttpClient) { }
+              private modalController: ModalController,
+              public http: HttpClient) { }
 
   ngOnInit() {
     this.captureImage();
   }
 
-  public captureImage(){  
+  public captureImage() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       this.defaultImg = state.croppedImageUrl;
     });
   }
 
-  public imageCropped(event: ImageCroppedEvent){
+  public imageCropped(event: ImageCroppedEvent) {
     this.croppedImg = event.base64;
   }
 

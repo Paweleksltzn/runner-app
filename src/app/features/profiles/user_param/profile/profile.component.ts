@@ -46,8 +46,8 @@ export class ProfileComponent implements OnInit {
       } else {
         this.loadOtherUserProperties(state);
       }
-      if (state.croppedImageUrl){ 
-        this.user.imgUrl = state.croppedImageUrl
+      if (state.croppedImageUrl) {
+        this.user.imgUrl = state.croppedImageUrl;
       }
     });
     this.getUnreadedMessagesAmount();
@@ -88,7 +88,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public async takePhoto() {
-    let imageMimeType = 'data: image/png ;base64, ';
+    const imageMimeType = 'data: image/png ;base64, ';
     const { Camera } = Plugins;
     const profilePhoto = await Camera.getPhoto({
       quality: 90,
@@ -127,7 +127,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public scrollHandler(event) {
-    this.scrollYPos=event.detail.currentY;
+    this.scrollYPos = event.detail.currentY;
   }
 
 
