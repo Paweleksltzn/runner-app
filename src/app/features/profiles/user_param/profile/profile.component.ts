@@ -17,8 +17,6 @@ import { UserService } from '../../user/services/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  public currentModal: HTMLIonModalElement;
-  public imagePath = 'assets/images/profile-picture.jpg';
   public user: UserProfile = {} as any;
   public editMode = false;
   public selectedProfileTab: number;
@@ -88,15 +86,16 @@ export class ProfileComponent implements OnInit {
   }
 
   public async takePhoto() {
-    const imageMimeType = 'data: image/png ;base64, ';
+    let imagePath = 'assets/images/profile-picture.jpg';
+    let imageMimeType = 'data: image/png ;base64, ';
     const { Camera } = Plugins;
     const profilePhoto = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Base64
     });
-    this.imagePath = imageMimeType  + profilePhoto.base64String;
-    this.store.dispatch(actions.profileAction.owenrImgUrl({croppedImageUrl: this.imagePath}));
+    imagePath = imageMimeType  + profilePhoto.base64String;
+    this.store.dispatch(actions.profileAction.owenrImgUrl({croppedImageUrl: imagePath}));
     this.displayCropper();
   }
 
@@ -122,7 +121,6 @@ export class ProfileComponent implements OnInit {
         targetProfile: this.user
       }
     });
-    this.currentModal = conversationModal;
     return await conversationModal.present();
   }
 
