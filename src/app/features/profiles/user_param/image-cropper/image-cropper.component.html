@@ -1,0 +1,11 @@
+<ion-content>
+  <image-cropper
+  [imageBase64]="defaultImg"
+  [maintainAspectRatio]="true"
+  [aspectRatio]="1 / 1"
+  [resizeToWidth]="300"
+  format="png"
+  (imageCropped)="imageCropped($event)"
+></image-cropper>
+<ion-button (click)="dismissModalAndSendCroppedIamge()"><ion-icon name="crop"></ion-icon>Przytnij</ion-button>
+</ion-content>

@@ -18,6 +18,14 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <ion-grid class="justify-content-between" class="series-grid" [ngClass]="{'history-series-grid': workoutMode === modes.history}">
+                <ion-row>
+                  <ion-col>
+                    <h6 class="series-break">
+                      Przerwa miedzy seriami: <input type="number" [(ngModel)]="excercise.breakTime" class="result-input" name="repeats" [disabled]="workoutMode === modes.history"
+                      [ngClass]="{'input-in-history': workoutMode === modes.history}"> <span class="result-description">s.</span>
+                    </h6>
+                  </ion-col>
+                </ion-row>
                 <ion-row *ngFor="let singleSet of excercise.series; let i = index;">
                   <ion-col size="auto">
                     <span class="result-counter">Seria {{ i + 1 }}.</span>
@@ -65,6 +73,17 @@
     <ion-icon name="time" class="short-button-icon"></ion-icon>
   </button>
   <ion-button class="end-training" (click)="finishWorkout()" *ngIf="workoutMode === modes.training">Zakończ trening</ion-button>
-  <ion-button class="end-training delete-workout" (click)="removeWorkout()" *ngIf="workoutMode === modes.trainingList">Usuń trening</ion-button>
+  <ion-grid  *ngIf="workoutMode === modes.trainingList">
+    <ion-row class="ion-justify-content-between bottom-workout-row">
+      <ion-col size="6">
+        <ion-button class="save-workout" (click)="saveWorkoutState()">
+          Zapisz zmiany
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button class="delete-workout" (click)="removeWorkout()">Usuń trening</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-button class="end-training delete-workout delete-from-history" (click)="removeWorkoutFromHistory()" *ngIf="workoutMode === modes.history">Usuń z histori</ion-button>
 </ion-content>

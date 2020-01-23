@@ -8,6 +8,7 @@ import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 import {Plugins, CameraResultType} from '@capacitor/core';
 import { Router } from '@angular/router';
 import { ConversationComponent } from '../chat/conversation/conversation.component';
+import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
 import { UserService } from '../../user/services/user.service';
 
 @Component({
@@ -16,13 +17,13 @@ import { UserService } from '../../user/services/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  public currentModal: HTMLIonModalElement;
   public user: UserProfile = {} as any;
   public editMode = false;
   public selectedProfileTab: number;
   public imageAttributes: ImageAttribute[] = [];
   public ownerEmail: string;
   public unreadedMessagesAmount = 0;
+  public scrollYPos: number;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -37,7 +38,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-      this.ownerEmail = state.ownerEmail;
+      this.user.isMyProfile = state.isMyProfile;
       if (state.isMyProfile) {
         this.loadOwnerProperties(state);
       } else {
@@ -82,13 +83,16 @@ export class ProfileComponent implements OnInit {
   }
 
   public async takePhoto() {
+    const imageMimeType = 'data: image/png ;base64, ';
     const { Camera } = Plugins;
     const profilePhoto = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.Base64
     });
-    this.user.imgUrl =  profilePhoto.webPath;
+    const imagePath = imageMimeType  + profilePhoto.base64String;
+    this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: imagePath}));
+    this.displayCropper();
   }
 
   public exitDisplayOtherProfileMode() {
@@ -113,12 +117,19 @@ export class ProfileComponent implements OnInit {
         targetProfile: this.user
       }
     });
-    this.currentModal = conversationModal;
     return await conversationModal.present();
   }
 
   public scrollHandler(event) {
-    this.scrollYPos=event.detail.currentY;
+    this.scrollYPos = event.detail.currentY;
+  }
+
+
+  public async displayCropper() {
+    const cropperModal = await this.modalController.create({
+      component: ImageCropperComponent
+    });
+    return await cropperModal.present();
   }
 
   private getUnreadedMessagesAmount() {

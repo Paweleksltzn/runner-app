@@ -6,17 +6,23 @@ import { Store, select } from '@ngrx/store';
 import { actions, Reducers } from 'src/app/store';
 import { Subscription } from 'rxjs';
 import * as storeState from 'src/app/shared/interfaces/store/index';
+import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyWorkoutService {
 
-  constructor(private http: HttpClient, private store: Store<Reducers>) { }
+  constructor(private http: HttpClient,
+              private store: Store<Reducers>,
+              private toastGeneratorService: ToastGeneratorService
+              ) { }
 
   public saveUserWorkouts(workouts: Workout[]) {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.workout}/list`, { workouts }).subscribe(response => {
-      // brak reakcji -> success
+      this.toastGeneratorService.presentToast('Lista treningów została zapisana', 'success');
+    }, err => {
+      this.toastGeneratorService.presentToast('Nie udało się zapisać zmian', 'error');
     });
   }
 

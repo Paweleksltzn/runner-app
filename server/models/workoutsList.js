@@ -17,6 +17,7 @@ const workoutListSchema = new Schema({
           excercises: {
             type: [{
                 name: String,
+                breakTime: Number,
                 series: [{
                     repeats: Number,
                     weight:Number

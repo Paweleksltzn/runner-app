@@ -56,7 +56,7 @@ ion-reorder-group {
 .history-series-grid {
     margin-bottom: 0;
 }
-.series-grid ion-row:not(:last-child) {
+.series-grid ion-row:not(:last-child):not(:first-child) {
     border-bottom: 1px solid lightgrey;
     padding-bottom: .5rem;
     margin-bottom: .5rem;
@@ -102,13 +102,29 @@ ion-content {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+.bottom-workout-row {
+    width: 100%;
+}
 .delete-workout {
     --background: linear-gradient(to right top, #f41919, #f41b25, #f41f2f, #f32338, #f22840, #f32b43, #f32e45, #f43148, #f73346, #fa3543, #fc3741, #ff393e);
     --color: white;
+    margin-left: auto;
+    display: block;
 }
 .input-in-history {
     border-bottom: none;
     color: $mixed-main-colours;
+}
+.series-break {
+    font-weight: 400;
+    margin-bottom: 2rem;
+    .result-input {
+        margin-left: 1rem;
+    }
+}
+.save-workout {
+    --background: linear-gradient(to right top, #15e6b5, #39e9b1, #4fecad, #61efaa, #71f2a6, #6af2ae, #63f3b6, #5cf3be, #3ef0d1, #22ede2, #1ce8f0, #34e3fa);
+    --color: #555;
 }
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 

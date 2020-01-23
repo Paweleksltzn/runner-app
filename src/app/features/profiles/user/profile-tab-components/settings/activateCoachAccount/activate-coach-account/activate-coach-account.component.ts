@@ -17,7 +17,7 @@ export class ActivateCoachAccountComponent implements OnInit {
     this.modalController.dismiss({});
   }
 
-  private activateCoachAccount() {
+  public activateCoachAccount() {
     this.areTermsOfUseAccepted = true; 
 
   }
