@@ -78,7 +78,7 @@ const profileReducerOptions = createReducer(
     isMale: action.isMale,
     accessLevel: action.accessLevel
   })),
-  on(actions.profileAction.setImg, (state, action) => ({ ...state, croppedImageUrl: action.croppedImageUrl})),
+  on(actions.profileAction.owenrImgUrl, (state, action) => ({ ...state, croppedImageUrl: action.croppedImageUrl})),
   on(actions.profileAction.updateDescription, (state, action) => ({ ...state, ownerProfileDescription: action.newDescription})),
   on(actions.profileAction.setIsMyProfile, (state, action) => ({ ...state, isMyProfile: action.isMyProfile})),
   on(actions.profileAction.addFriend, (state, action) => {

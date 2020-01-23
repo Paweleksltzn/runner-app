@@ -96,7 +96,7 @@ export class ProfileComponent implements OnInit {
       resultType: CameraResultType.Base64
     });
     this.imagePath = imageMimeType  + profilePhoto.base64String;
-    this.store.dispatch(actions.profileAction.setImg({croppedImageUrl: this.imagePath}));
+    this.store.dispatch(actions.profileAction.owenrImgUrl({croppedImageUrl: this.imagePath}));
     this.displayCropper();
   }
 
@@ -135,7 +135,6 @@ export class ProfileComponent implements OnInit {
     const cropperModal = await this.modalController.create({
       component: ImageCropperComponent
     });
-    this.currentModal = cropperModal;
     return await cropperModal.present();
   }
 
