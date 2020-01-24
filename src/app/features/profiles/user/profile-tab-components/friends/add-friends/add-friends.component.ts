@@ -71,18 +71,9 @@ export class AddFriendsComponent implements OnInit {
       this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: false}));
       this.store.dispatch(actions.profileAction.loadProfile({userProfile: user.userProfile}));
       this.accessLevel = user.accessLevel;
-      this.checkIfNormalUser();
       this.router.navigateByUrl('/user/profile/friends');
       this.dismissModal();
     });
-  }
-
-  public checkIfNormalUser() {
-    if (this.accessLevel === 1) {
-      this.store.dispatch(actions.profileAction.setUserType({userType: 3}));
-    } else {
-      this.store.dispatch(actions.profileAction.setUserType({userType: 4}));
-    }
   }
 
   public addToFriends(user: UserSearcherResponse) {

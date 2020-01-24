@@ -9,7 +9,6 @@ export const initialState: storeState.ProfileState = {
   name: undefined,
   surname: undefined,
   profileDescription: '',
-  userType: 1,
   isMyProfile: true,
   isMale: undefined,
   accessLevel: undefined,
@@ -24,7 +23,6 @@ export const initialState: storeState.ProfileState = {
   ownerName: undefined,
   ownerSurname: undefined,
   ownerProfileDescription: '',
-  ownerUserType: 1,
   ownerIsMale: undefined,
   ownerAccessLevel: undefined,
   ownerFriends: [],
@@ -67,7 +65,6 @@ const profileReducerOptions = createReducer(
     }
   )),
   on(actions.profileAction.setTheme, (state, action) => ({ ...state, ownerGradient: action.gradient})),
-  on(actions.profileAction.setUserType, (state, action) => ({ ...state, userType: action.userType})),
   on(actions.profileAction.setIsMyProfile, (state, action) =>({ ...state, isMyProfile: action.isMyProfile})),
   on(actions.profileAction.profileData, (state, action) =>({ 
     ...state, 
