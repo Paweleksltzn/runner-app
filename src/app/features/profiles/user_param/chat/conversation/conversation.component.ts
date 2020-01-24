@@ -47,7 +47,9 @@ export class ConversationComponent implements OnInit {
       let isCorrectConversation = true;
       if (conversation.members.length > 1) {
         conversation.members.forEach(member => {
-          isCorrectConversation = member.userProfile.email === this.targetProfile.email || member.userProfile.email === this.ownerEmail;
+          if (member.userProfile.email !== this.targetProfile.email && member.userProfile.email !== this.ownerEmail) {
+            isCorrectConversation = false;
+          }
         });
         if (isCorrectConversation) {
           this.conversation = conversation;

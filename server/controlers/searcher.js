@@ -3,6 +3,8 @@ const User = require('../models/user');
 exports.searchUsers = async function(req, res, next) {
     try {
         let searchString = req.query.searchString;
+        const limit = +req.query.limit;
+        const offset = +req.query.offset;
         let users;
         if (searchString.split(' ').length === 2) {
             const name = searchString.split(' ')[0];
@@ -11,21 +13,20 @@ exports.searchUsers = async function(req, res, next) {
                 name: new RegExp(name, 'i'),
                 surname: new RegExp(surname, 'i'),
                 isActive: true
-            }).populate('userProfile');
+            }).limit(limit).skip(offset).populate('userProfile');
             const usersSecondArr = await User.find({
                 name: new RegExp(surname, 'i'),
                 surname: new RegExp(name, 'i'),
                 isActive: true
-            }).populate('userProfile');
+            }).limit(limit).skip(offset).populate('userProfile');
             users = [...usersFirstArr, ...usersSecondArr];
         } else {
             searchString = searchString.split(' ').join('');
-            users = await User.find({ nameAndSurname: new RegExp(searchString, 'i'), isActive: true }).populate('userProfile');
+            users = await User.find({ nameAndSurname: new RegExp(searchString, 'i'), isActive: true }).limit(limit).skip(offset).populate('userProfile');
         }
         const usersToMap = users.filter(user => {
             return user.email !== req.token.email;
         });
-        // console.log(usersToMap);
         const usersToReturn = usersToMap.map(user => {
             return {
                 email: user.email,
