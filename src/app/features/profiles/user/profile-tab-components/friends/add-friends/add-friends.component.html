@@ -34,5 +34,11 @@
         </ion-row>
       </ion-grid>
     </div>
+    <ion-infinite-scroll threshold="10px" (ionInfinite)="showPlayers($event)" [disabled]="scrollDisabled">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Ładowanie...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </ion-list>
 </ion-content>

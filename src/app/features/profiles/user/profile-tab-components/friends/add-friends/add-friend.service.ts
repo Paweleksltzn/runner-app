@@ -12,10 +12,12 @@ export class AddFriendService {
   constructor(private http: HttpClient) { }
 
 
-  public getPalyerSearcherResponse(searchString: string): Observable<UserSearcherResponse[]> {
+  public getPalyerSearcherResponse(searchString: string, limit: number, offset: number): Observable<UserSearcherResponse[]> {
     const queryParams = {
         params: {
-          searchString
+          searchString,
+          limit: limit.toString(),
+          offset: offset.toString()
         }
     };
     return this.http.get<UserSearcherResponse[]>(`${environment.srvAddress}/${environment.endpoints.searcher}/players`, queryParams);
