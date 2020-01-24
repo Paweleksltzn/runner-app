@@ -65,12 +65,10 @@ export class AddFriendsComponent implements OnInit {
       this.isLoaded = true;
       this.players = [...this.players, ...response];
       this.offset += this.limit;
-      if (event) {
-        if (response.length < this.limit) {
-          this.scrollDisabled = true;
-        } else {
-          this.scrollDisabled = false;
-        }
+      if (response.length < this.limit) {
+        this.scrollDisabled = true;
+      } else {
+        this.scrollDisabled = false;
       }
       this.players.forEach(player => {
         player.isInvitedToFriends = !!this.playerData.ownerInvitedToFriends.find(invitedPlayer => invitedPlayer.email === player.email);
