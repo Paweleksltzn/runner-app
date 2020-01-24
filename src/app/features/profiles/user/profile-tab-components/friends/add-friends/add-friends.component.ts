@@ -22,6 +22,9 @@ export class AddFriendsComponent implements OnInit {
   public searchSubscription;
   public players: Array<UserSearcherResponse> = [];
   public playerData: storeState.ProfileState;
+  public scrollDisabled = false;
+  private offset = 0;
+  private limit = 10;
 
   constructor(
     private modalController: ModalController,
@@ -44,25 +47,35 @@ export class AddFriendsComponent implements OnInit {
   public addSearchString(event) {
     this.searchString = event.target.value;
     this.isLoaded = false;
+    this.offset = 0;
+    this.scrollDisabled = false;
     this.showPlayers();
   }
 
-  public showPlayers() {
-    this.players = [];
+  public showPlayers(event?) {
+    if (!event) {
+      this.players = [];
+    }
     if (this.searchSubscription) {
       this.searchSubscription.unsubscribe();
       this.searchSubscription = undefined;
     }
-    this.searchSubscription = this.addFriendService.getPalyerSearcherResponse(this.searchString).pipe(delay(800)).subscribe(response => {
+    this.searchSubscription = this.addFriendService.getPalyerSearcherResponse(this.searchString, this.limit, this.offset)
+    .pipe(delay(800)).subscribe(response => {
       this.isLoaded = true;
-      this.players = response;
+      this.players = [...this.players, ...response];
+      this.offset += this.limit;
+      if (response.length < this.limit) {
+        this.scrollDisabled = true;
+      } else {
+        this.scrollDisabled = false;
+      }
       this.players.forEach(player => {
         player.isInvitedToFriends = !!this.playerData.ownerInvitedToFriends.find(invitedPlayer => invitedPlayer.email === player.email);
         player.isFriend = !!this.playerData.ownerFriends.find(invitedPlayer => invitedPlayer.email === player.email);
         player.didInvite = !!this.playerData.ownerFriendsInvitations.find(invitatingPlayer => invitatingPlayer.email === player.email);
       });
     });
-
   }
 
   public goToProfile(user: UserSearcherResponse) {
