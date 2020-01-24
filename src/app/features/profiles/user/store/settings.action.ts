@@ -14,5 +14,6 @@ export const profileAction = {
     inviteFriend: createAction('Invite friend', props<{invitedFriend: UserProfile}>()),
     rejectFriend: createAction('Friend invitation rejected', props<{rejectedFriend: UserProfile}>()),
     invitationRejected: createAction('Invitation rejected', props<{rejectingProfile: UserProfile}>()),
-    newInvitation: createAction('Received new invitation', props<{invitatingFriend: UserProfile}>())
+    newInvitation: createAction('Received new invitation', props<{invitatingFriend: UserProfile}>()),
+    setOwnerAccessLevel: createAction('User access level changed', props<{ownerAccessLevel: number}>())
 };

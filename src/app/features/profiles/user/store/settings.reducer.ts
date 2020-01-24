@@ -101,7 +101,11 @@ const profileReducerOptions = createReducer(
     return ({ ...state });
   }),
   on(actions.profileAction.inviteFriend, (state, action) =>
-   ({ ...state, ownerInvitedToFriends: [...state.ownerInvitedToFriends, action.invitedFriend]}))
+   ({ ...state, ownerInvitedToFriends: [...state.ownerInvitedToFriends, action.invitedFriend]})),
+   on(actions.profileAction.setOwnerAccessLevel, (state, action) => ({
+     ...state,
+     ownerAccessLevel: action.ownerAccessLevel
+   }))
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {
   return profileReducerOptions(state, action);
