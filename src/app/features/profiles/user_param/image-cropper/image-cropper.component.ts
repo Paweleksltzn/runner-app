@@ -5,7 +5,8 @@ import { Store, select } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { ModalController } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
+import { UserService } from '../../user/services/user.service';
+import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
 
 @Component({
   selector: 'app-image-cropper',
@@ -18,7 +19,8 @@ export class ImageCropperComponent implements OnInit {
 
   constructor(private store: Store<Reducers>,
               private modalController: ModalController,
-              public http: HttpClient) { }
+              private userService: UserService,
+              private toastGeneratorService: ToastGeneratorService) { }
 
   ngOnInit() {
     this.captureImage();
@@ -37,6 +39,17 @@ export class ImageCropperComponent implements OnInit {
   public dismissModalAndSendCroppedIamge() {
     this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: this.croppedImg}));
     this.modalController.dismiss();
+  }
+
+  private saveImage(image: File) {
+    const postData = new FormData();
+    postData.append('profileImage', image);
+    this.userService.changeProfileImage(postData).subscribe(res => {
+      this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: res.imgUrl}));
+      this.toastGeneratorService.presentToast('Zdjęcie profilowe zmienione pomyślnie', 'success');
+    }, err => {
+      this.toastGeneratorService.presentToast('Nie udało się zapisać zdjęcia profilowego', 'error');
+    });
   }
 
 }

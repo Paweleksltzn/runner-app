@@ -35,6 +35,10 @@ export class UserService {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.user}/changeDescription`, { newDescription });
   }
 
+  public changeProfileImage(profileImageData: FormData): Observable<any> {
+    return this.http.post(`${environment.srvAddress}/${environment.endpoints.user}/changeProfileImage`, profileImageData);
+  }
+
   public getFriendsForUserProfile(userProfile: UserProfile): Observable<any> {
     const queryParams = {
       params: {

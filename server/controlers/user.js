@@ -135,3 +135,30 @@ exports.changeDescription = async function (req, res, next) {
         return res.status(500).send('Wystąpił błąd podczas zmieniania gradientu');
     }
 }
+
+exports.changeProfileImage  = async function (req, res, next) {
+    try {
+        const user = await User.findById(req.token._id);
+        const userProfile = await UserProfile.findById(user.userProfile);
+        const profileImg = req.profileImg;
+        const protocol = req.protocol === 'http' ? 'https' : req.protocol;
+        const url = `${protocol}://${req.get('host')}`
+        const imagePath = `${url}/files/profile-images/${profileImg}`
+        const index = team.imagePath.indexOf('profile-images/') + 15;
+        if (index >= 0) {
+            const fileName = userProfile.imgUrl.substr(index, 100);
+            if (fileName) {
+                fs.unlink(`public/files/profile-images/${fileName}`,function(err){
+                    if(err) return console.log(err);
+                    console.log('file deleted successfully');
+                });  
+            }
+        }
+        userProfile.imgUrl = imagePath;
+        userProfile.save();
+        return res.json({imgUrl: imagePath});
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send('Wystąpił błąd podczas zmieniania gradientu');
+    }
+}
