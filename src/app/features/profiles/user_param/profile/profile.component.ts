@@ -46,6 +46,7 @@ export class ProfileComponent implements OnInit {
       }
     });
     this.getUnreadedMessagesAmount();
+    console.log(this.user.accessLevel);
   }
 
   ionViewWillEnter() {
@@ -97,7 +98,6 @@ export class ProfileComponent implements OnInit {
 
   public exitDisplayOtherProfileMode() {
     this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: true}));
-    this.store.dispatch(actions.profileAction.setUserType({userType: 1}));
   }
 
   public changeEditMode() {
@@ -153,7 +153,6 @@ export class ProfileComponent implements OnInit {
     this.user.name = user.ownerName;
     this.user.surname = user.ownerSurname;
     this.user.profileDescription = user.ownerProfileDescription;
-    this.user.userType = user.ownerUserType;
     this.user.isMyProfile = user.isMyProfile;
     this.user.isMale = user.ownerIsMale;
     this.user.accessLevel = user.ownerAccessLevel;
@@ -170,7 +169,6 @@ export class ProfileComponent implements OnInit {
     this.user.name = user.name;
     this.user.surname = user.surname;
     this.user.profileDescription = user.profileDescription;
-    this.user.userType = user.userType;
     this.user.isMyProfile = user.isMyProfile;
     this.user.isMale = user.isMale;
     this.user.accessLevel = user.accessLevel;

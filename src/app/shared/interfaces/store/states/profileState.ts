@@ -5,7 +5,6 @@ export interface ProfileState extends User {
     gradient: number;
     imgUrl: string;
     profileDescription: string;
-    userType: number;
     isMyProfile: boolean;
     accessLevel: number;
     croppedImageUrl?: string;
@@ -18,7 +17,6 @@ export interface ProfileState extends User {
     ownerName: string;
     ownerSurname: string;
     ownerProfileDescription: string;
-    ownerUserType: number;
     ownerIsMale: boolean;
     ownerAccessLevel: number;
     ownerFriends: UserProfile[];
