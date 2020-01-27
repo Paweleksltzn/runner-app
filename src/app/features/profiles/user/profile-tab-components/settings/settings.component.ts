@@ -1,10 +1,11 @@
 import { Component, OnInit} from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { actions, Reducers } from 'src/app/store';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ModalController } from '@ionic/angular';
 import { ActivateCoachAccountComponent } from './activateCoachAccount/activate-coach-account/activate-coach-account.component';
 import { UserService } from '../../services/user.service';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({
   selector: 'app-settings',
@@ -13,6 +14,7 @@ import { UserService } from '../../services/user.service';
 })
 export class SettingsComponent implements OnInit {
   public selectedGradient = 1;
+  public accessLevel: number;
   public currentModal: HTMLIonModalElement;
   constructor( private store: Store<Reducers>,
                private authService: AuthService,
@@ -20,7 +22,12 @@ export class SettingsComponent implements OnInit {
                private userService: UserService
                ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+      this.accessLevel = state.ownerAccessLevel;
+      this.selectedGradient = state.ownerGradient;
+    });
+  }
 
   public changeProfileTheme(selectedTheme: any) {
     this.selectedGradient = selectedTheme;
