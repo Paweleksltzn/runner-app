@@ -15,7 +15,7 @@
       </div>
     </ion-label>
   </ion-item>
-  <ion-item *ngIf="isMyProfile">
+  <ion-item *ngIf="accessLevel === 1">
     <ion-label>
       <h3>Jesteś trenerem?</h3>
       <ion-button (click)="displayCoachAccountActivationModal()" fill="outline" color="danger">Aktywuj konto trenera</ion-button>

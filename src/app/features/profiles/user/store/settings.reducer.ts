@@ -3,7 +3,7 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 import { actions } from 'src/app/store';
 
 export const initialState: storeState.ProfileState = {
-  gradient: 1,
+  gradient: undefined,
   imgUrl: undefined,
   email: undefined,
   name: undefined,
@@ -17,7 +17,7 @@ export const initialState: storeState.ProfileState = {
   friendsInvitations: [],
   profileId: '',
   ownerProfileId: '',
-  ownerGradient: 2,
+  ownerGradient: undefined,
   ownerImgUrl: 'assets/images/profile-picture.png',
   ownerEmail: undefined,
   ownerName: undefined,

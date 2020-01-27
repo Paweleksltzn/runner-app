@@ -46,6 +46,7 @@ export class ProfileComponent implements OnInit {
       }
     });
     this.getUnreadedMessagesAmount();
+    console.log(this.user.accessLevel);
   }
 
   ionViewWillEnter() {
