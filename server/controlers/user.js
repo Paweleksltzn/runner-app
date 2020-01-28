@@ -149,7 +149,7 @@ exports.changeProfileImage  = async function (req, res, next) {
             const fileName = userProfile.imgUrl.substr(index, 100);
             if (fileName) {
                 fs.unlink(`public/files/profile-images/${fileName}`,function(err){
-                    if(err) return console.log(err);
+                    if(err) {console.log(err);}
                     console.log('file deleted successfully');
                 });  
             }
