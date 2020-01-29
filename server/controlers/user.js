@@ -5,6 +5,7 @@ const Notification = require('../models/notification');
 const notificationsFactory = require('../util/notifications-factory');
 const notificationsOptions = require('../enums/notificationsOptions');
 const socketEvents = require('../util/socketEvents');
+const fs = require('fs');
 
 exports.addFriend = async function(req, res, next) {
     try {
@@ -144,7 +145,7 @@ exports.changeProfileImage  = async function (req, res, next) {
         const protocol = req.protocol === 'http' ? 'https' : req.protocol;
         const url = `${protocol}://${req.get('host')}`
         const imagePath = `${url}/files/profile-images/${profileImg}`
-        const index = team.imagePath.indexOf('profile-images/') + 15;
+        const index = userProfile.imgUrl.indexOf('profile-images/') + 15;
         if (index >= 0) {
             const fileName = userProfile.imgUrl.substr(index, 100);
             if (fileName) {
@@ -159,6 +160,6 @@ exports.changeProfileImage  = async function (req, res, next) {
         return res.json({imgUrl: imagePath});
     } catch (err) {
         console.log(err)
-        return res.status(500).send('Wystąpił błąd podczas zmieniania gradientu');
+        return res.status(500).send('Wystąpił błąd podczas zmiany zdjecia profilowego');
     }
 }

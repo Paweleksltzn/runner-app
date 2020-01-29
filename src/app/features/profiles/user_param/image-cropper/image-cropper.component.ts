@@ -42,9 +42,9 @@ export class ImageCropperComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  private convertBase64ToImage(base64: string){
+  private convertBase64ToImage(base64: string) {
     const blob = new Blob([base64], {type: 'image/png'});
-    const file = new File([blob],'file.png');
+    const file = new File([blob], 'file.png');
     this.saveImage(file);
   }
 

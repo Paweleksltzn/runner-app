@@ -26,7 +26,7 @@ exports.registerUser = async function(req, res, next) {
             isMale: req.body.isMale,
             accessLevel: 1,
             gradient: 1,
-            imgUrl: 'assets/images/profile-picture.png',
+            imgUrl: '',
             profileDescription: 'Wprowadź opis ...',
             invitedToFriends: [],
             friendsInvitations: [],
