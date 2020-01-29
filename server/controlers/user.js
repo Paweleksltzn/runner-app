@@ -143,8 +143,8 @@ exports.changeProfileImage  = async function (req, res, next) {
         const userProfile = await UserProfile.findById(user.userProfile);
         const profileImg = req.profileImg;
         const protocol = req.protocol === 'http' ? 'https' : req.protocol;
-        const url = `${protocol}://${req.get('host')}`
-        const imagePath = `${url}/files/profile-images/${profileImg}`
+        const url = `${protocol}://${req.get('host')}`;
+        const imagePath = `${url}/files/profile-images/${profileImg}`;
         const index = userProfile.imgUrl.indexOf('profile-images/') + 15;
         if (index >= 0) {
             const fileName = userProfile.imgUrl.substr(index, 100);
