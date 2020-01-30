@@ -49,9 +49,9 @@ export class ImageCropperComponent implements OnInit {
     postData.append('profileImage', image);
     this.userService.changeProfileImage(postData).subscribe(res => {
       this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: res.imgUrl}));
-      //this.toastGeneratorService.presentToast('Zdjęcie profilowe zmienione pomyślnie', 'success');
+      this.toastGeneratorService.presentToast('Zdjęcie profilowe zmienione pomyślnie', 'success');
     }, err => {
-      //this.toastGeneratorService.presentToast('Wystąpił bład przy zmianie zdjęcia profilowego', 'danger');
+      this.toastGeneratorService.presentToast('Wystąpił bład przy zmianie zdjęcia profilowego', 'danger');
     });
   }
 
