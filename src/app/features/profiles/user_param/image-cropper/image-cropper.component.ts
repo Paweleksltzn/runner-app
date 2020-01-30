@@ -38,9 +38,10 @@ export class ImageCropperComponent implements OnInit {
   }
 
   public dismissModalAndSendCroppedIamge() {
-    convertBase64ToImage(this.croppedImg);
+    const file = convertBase64ToImage(this.croppedImg);
     this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: this.croppedImg}));
     this.modalController.dismiss();
+    this.saveImage(file);
   }
 
   private saveImage(image: File) {
@@ -50,7 +51,7 @@ export class ImageCropperComponent implements OnInit {
       this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: res.imgUrl}));
       //this.toastGeneratorService.presentToast('Zdjęcie profilowe zmienione pomyślnie', 'success');
     }, err => {
-      alert(JSON.stringify(err));
+      //this.toastGeneratorService.presentToast('Wystąpił bład przy zmianie zdjęcia profilowego', 'danger');
     });
   }
 

@@ -6,7 +6,7 @@ export function convertBase64ToImage(base64: string) {
         ia[i] = byteString.charCodeAt(i);
     }
     const blob = new Blob([ab], {type: 'image/png'});
-    const file = new File([blob], 'file.png', {type:"image/png"});
-    this.saveImage(file);
+    return this.file = new File([blob], 'file.png', {type:"image/png"});
+    
   }
   
