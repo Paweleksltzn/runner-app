@@ -7,6 +7,7 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 import { ModalController } from '@ionic/angular';
 import { UserService } from '../../user/services/user.service';
 import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
+import { convertBase64ToImage } from './ImageTypeConverter';
 
 @Component({
   selector: 'app-image-cropper',
@@ -37,21 +38,9 @@ export class ImageCropperComponent implements OnInit {
   }
 
   public dismissModalAndSendCroppedIamge() {
-    this.convertBase64ToImage(this.croppedImg);
+    convertBase64ToImage(this.croppedImg);
     this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: this.croppedImg}));
     this.modalController.dismiss();
-  }
-
-  private convertBase64ToImage(base64: string) {
-    const byteString = atob(base64.split(',')[1]);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([ab], {type: 'image/png'});
-    const file = new File([blob], 'file.png', {type:"image/png"});
-    this.saveImage(file);
   }
 
   private saveImage(image: File) {
@@ -60,9 +49,7 @@ export class ImageCropperComponent implements OnInit {
     this.userService.changeProfileImage(postData).subscribe(res => {
       this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: res.imgUrl}));
       //this.toastGeneratorService.presentToast('Zdjęcie profilowe zmienione pomyślnie', 'success');
-      alert('success');
     }, err => {
-      //this.toastGeneratorService.presentToast('Nie udało się zapisać zdjęcia profilowego', 'error');
       alert(JSON.stringify(err));
     });
   }
