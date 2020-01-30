@@ -43,8 +43,14 @@ export class ImageCropperComponent implements OnInit {
   }
 
   private convertBase64ToImage(base64: string) {
-    const blob = new Blob([base64], {type: 'image/png'});
-    const file = new File([blob], 'file.png');
+    const byteString = atob(base64.split(',')[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ab], {type: 'image/png'});
+    const file = new File([blob], 'file.png', {type:"image/png"});
     this.saveImage(file);
   }
 
@@ -53,9 +59,10 @@ export class ImageCropperComponent implements OnInit {
     postData.append('profileImage', image);
     this.userService.changeProfileImage(postData).subscribe(res => {
       this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: res.imgUrl}));
-      this.toastGeneratorService.presentToast('Zdjęcie profilowe zmienione pomyślnie', 'success');
+      //this.toastGeneratorService.presentToast('Zdjęcie profilowe zmienione pomyślnie', 'success');
+      alert('success');
     }, err => {
-      this.toastGeneratorService.presentToast('Nie udało się zapisać zdjęcia profilowego', 'error');
+      //this.toastGeneratorService.presentToast('Nie udało się zapisać zdjęcia profilowego', 'error');
       alert(JSON.stringify(err));
     });
   }
