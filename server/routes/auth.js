@@ -41,6 +41,8 @@ router.post('/login', [
     check('email').normalizeEmail()
  ],authenticationController.login);
 
+ router.post('/autoLogin', authenticationController.autoLogin);
+
  router.post('/emailConfirmed', authenticationController.emailConfirmed);
  router.post('/password/reset', authenticationController.passwordReset);
  

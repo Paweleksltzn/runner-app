@@ -1,1 +1,1 @@
-export const credentials = 'workoutApp-credentials';
+export const authenticationToken = 'workoutApp-authentication-token';

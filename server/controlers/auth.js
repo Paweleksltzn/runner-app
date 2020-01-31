@@ -81,6 +81,27 @@ exports.login = async function(req, res, next) {
     return res.status(422).send('Nieprawidłowe dane logowania');
 }
 
+exports.autoLogin = async function(req, res, next) {
+    try {
+        const authToken = req.body.authToken;
+        const decodedToken = jwtManagment.autoLoginVerivier(authToken);
+        if (!decodedToken) {
+            return res.status(511).send('Brak autoryzacji');
+        }
+        const user = await User.findById(decodedToken._id).populate('userProfile');
+        const friends = await UserProfile.find({
+            '_id': {
+                '$in': user.userProfile.friends
+            }
+        });
+        const token = jwtManagment.jwtFactory(user);
+        return res.json({token, userProfile: user.userProfile, friends});
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send('Wystąpił błąd');
+    }
+}
+
 exports.emailConfirmed = async function(req, res, next) {
     try {
         const token = req.body.confirmToken;
