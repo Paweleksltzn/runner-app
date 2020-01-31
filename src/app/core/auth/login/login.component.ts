@@ -39,8 +39,7 @@ export class LoginComponent implements OnInit {
     this.authForm.value.email = this.authForm.value.email.trim();
     this.authService.postLogIn(this.authForm.value).pipe(take(1)).subscribe(
       (res: LoginResponse) => {
-        this.storageService.setObject(storageNames.credentials,
-         { email: this.authForm.value.email, password: this.authForm.value.password });
+        this.storageService.setItem(storageNames.authenticationToken, res.token);
         this.authForm.reset();
         this.authService.signIn(res.token);
         this.store.dispatch(actions.profileAction.loadOwnerProfile({userProfile: res.userProfile, friends: res.friends}));

@@ -4,7 +4,7 @@ const secret = 'secr3t';
 
 exports.jwtFactory = (user) => {
     return  jwt.sign({
-        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 14), // 2 tygodnie
+        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 5),// seconds * minutes * hours * days
         data: {
             email: user.email,
             name: user.name,
@@ -15,7 +15,7 @@ exports.jwtFactory = (user) => {
         }
       }, secret);
 }
-
+ 
 exports.jwtVerivier = (req, res, next) => {
     const bearerHeader = req.headers.authorization;
     if (req.method === 'OPTIONS') {
@@ -33,4 +33,13 @@ exports.jwtVerivier = (req, res, next) => {
     } else {
         return res.status(504).send('Brak autoryzacji');
     }
+}
+
+exports.autoLoginVerivier = (token) => {
+    return jwt.verify(token, secret, function(err, decoded) {
+        if (err) {
+            return false;
+        }
+        return decoded.data;
+    });
 }

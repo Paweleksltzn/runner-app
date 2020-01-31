@@ -51,6 +51,10 @@ export class AuthService {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.auth}/login`, loginData);
   }
 
+  public postAutoLogIn(authToken: string) {
+    return this.http.post(`${environment.srvAddress}/${environment.endpoints.auth}/autoLogin`, { authToken });
+  }
+
   public postSocketId(socketId: string) {
     return this.http.post(`${environment.srvAddress}/${environment.endpoints.socket}/socketRoom`, {socketId});
   }
@@ -72,17 +76,18 @@ export class AuthService {
 
   public signOut() {
     this.store.dispatch(actions.authActions.signOut({}));
-    this.storageService.setObject(storageNames.credentials, {});
+    this.storageService.setItem(storageNames.authenticationToken, '');
   }
 
   public async autoLogin() {
-    const credentials = await this.storageService.getObject(storageNames.credentials);
-    if (credentials.email && credentials.password) {
-      this.postLogIn(credentials).pipe(take(1)).subscribe((res: LoginResponse) => {
+    const authenticationToken = await this.storageService.getItem(storageNames.authenticationToken);
+    if (authenticationToken.value) {
+      this.postAutoLogIn(authenticationToken.value).pipe(take(1)).subscribe((res: LoginResponse) => {
         this.signIn(res.token);
         this.store.dispatch(actions.profileAction.loadOwnerProfile({userProfile: res.userProfile, friends: res.friends}));
       },
       err => {
+        this.storageService.setItem(storageNames.authenticationToken, '');
         this.navigateToLoginPage();
       });
     } else {
