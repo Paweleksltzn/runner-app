@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 
 module.exports =  (receiver, subject, confirmToken) => {
     const mailOptions = {
-        from: 'fitup@kontakt.com', // sender address
+        from: 'FitUp@kontakt.com', // sender address
         to: receiver, // list of receivers
         subject, // Subject line
         html: emailHtmlFactory(subject, confirmToken, receiver)// plain text body
@@ -24,19 +24,20 @@ module.exports =  (receiver, subject, confirmToken) => {
     return transporter.sendMail(mailOptions)
 }
 
+const environment = 'https://fitup3.szymonpawel123.usermd.net';
+
 const emailHtmlFactory = (subject, confirmToken, receiver) => {
     switch(subject) {
         case emailOptions.emailConfirmation: {
             return `
                 <h1>Link aktywacyjny: </h1>
-                <a href="localhost:4200/#/confirm/${confirmToken}">Aktywuj</a>
+                <a href="${environment}/#/confirm/${confirmToken}">Aktywuj</a>
             `
         }
         case emailOptions.passwordReset: {
             return `
                 <h1>Link resetujacy: </h1>
-                <a href="localhost:4200/#/reset-password/${confirmToken}">Reset</a>
-                <p>localhost:4200/#/reset-password/${confirmToken}">Reset</p>
+                <a href="${environment}/#/reset-password/${confirmToken}">Reset</a>
             `
         }
     }
