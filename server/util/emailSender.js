@@ -3,7 +3,7 @@ const emailOptions = require('../enums/emailOptions');
 const credentials = require('./credentials');
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.googlemail.com',
+    host: 'mail42.mydevil.net',
     secure: false,
     tls: {
         rejectUnauthorized: false
@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 
 module.exports =  (receiver, subject, confirmToken) => {
     const mailOptions = {
-        from: 'runnerapp123@gmail.com', // sender address
+        from: 'fitup@kontakt.com', // sender address
         to: receiver, // list of receivers
         subject, // Subject line
         html: emailHtmlFactory(subject, confirmToken, receiver)// plain text body
