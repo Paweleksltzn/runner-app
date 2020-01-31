@@ -34,6 +34,7 @@
     &-field {
         border-radius: 8px;
         padding: .75rem;
+        outline: none;
         &:focus {
             border: 2px solid $mixed-main-colours;
         }

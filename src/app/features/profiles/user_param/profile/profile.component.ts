@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ConversationComponent } from '../chat/conversation/conversation.component';
 import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
 import { UserService } from '../../user/services/user.service';
+const { Camera } = Plugins;
 
 @Component({
   selector: 'app-profile',
@@ -84,7 +85,6 @@ export class ProfileComponent implements OnInit {
 
   public async takePhoto() {
     const imageMimeType = 'data: image/png ;base64, ';
-    const { Camera } = Plugins;
     const profilePhoto = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,

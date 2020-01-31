@@ -63,25 +63,28 @@ export class ConversationComponent implements OnInit {
   }
 
   public async sendMessage() {
-    if (this.conversation.lastEditionDate) {
-      const newMessage = {
-        author: this.conversation.members[this.userProfileIndex].userProfile,
-        content: this.currentMessage
-      };
-      this.store.dispatch(actions.conversationActions.addMessage({ newMessage, conversationId: this.conversation._id }));
-      this.conversationService.sendMessage(this.currentMessage, this.conversation._id).subscribe((res: any) => {});
-    } else {
-      const loading = await this.loadingController.create({
-        message: 'Trwa wysyłanie',
-        duration: 5000
-      });
-      loading.present();
-      this.conversationService.createConversation(this.currentMessage, this.targetProfile.email).subscribe((conversation: Conversation) => {
-        this.store.dispatch(actions.conversationActions.addConversation({ conversation }));
-        loading.dismiss();
-      });
+    if (this.currentMessage) {
+      if (this.conversation.lastEditionDate) {
+        const newMessage = {
+          author: this.conversation.members[this.userProfileIndex].userProfile,
+          content: this.currentMessage
+        };
+        this.store.dispatch(actions.conversationActions.addMessage({ newMessage, conversationId: this.conversation._id }));
+        this.conversationService.sendMessage(this.currentMessage, this.conversation._id).subscribe((res: any) => {});
+      } else {
+        const loading = await this.loadingController.create({
+          message: 'Trwa wysyłanie',
+          duration: 5000
+        });
+        loading.present();
+        this.conversationService.createConversation(this.currentMessage, this.targetProfile.email)
+        .subscribe((conversation: Conversation) => {
+          this.store.dispatch(actions.conversationActions.addConversation({ conversation }));
+          loading.dismiss();
+        });
+      }
+      this.currentMessage = '';
     }
-    this.currentMessage = '';
   }
 
   private displayConversation() {

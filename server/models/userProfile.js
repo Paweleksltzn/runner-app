@@ -28,8 +28,7 @@ const userProfileSchema = new Schema({
         required: true
     },
     imgUrl: {
-        type: String,
-        required: true
+        type: String
     },
     profileDescription: {
         type: String,

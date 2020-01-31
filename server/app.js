@@ -23,6 +23,7 @@ const conversationRouter = require('./routes/conversation');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
+app.use('/files/profile-images', express.static(path.join('/files/profile-images')));
 
 app.use((req, res, next) => {
   // Website you wish to allow to connect
@@ -54,9 +55,7 @@ mongoose
   .then(result => {
     server = app.listen(process.env.PORT || 3000);
     const io = require('./util/socket').init(server);
-    io.on(socketEvents.connection, function (socket) {
-        io.emit('test', { socket: socket.id });
-    });
+    io.on(socketEvents.connection, function (socket) {});
   })
   .catch(err => {
     console.log(err);

@@ -14,7 +14,7 @@
             <span class="unreaded-messages__amount" *ngIf="unreadedMessagesAmount > 0">{{unreadedMessagesAmount}}</span>
           </div> 
         </ng-container>
-        <img-loader (click)="presentActionSheet()" [src]="user.imgUrl" [imgAttributes]="imageAttributes" useImg></img-loader>
+        <img-loader (click)="presentActionSheet()" [src]="user.imgUrl || 'assets/images/profile-picture.png'" [imgAttributes]="imageAttributes" useImg></img-loader>
       </div>
       <div class="profile-description">
         <div class="profile-description__title">
