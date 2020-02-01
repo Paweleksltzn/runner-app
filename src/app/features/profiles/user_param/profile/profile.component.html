@@ -29,7 +29,8 @@
           <ion-row>
             <ion-col >
               <textarea [(ngModel)]="user.profileDescription" maxlength="150" class="w-100" cols="30" rows="10" class="profile-description-field" *ngIf="editMode && user.isMyProfile"></textarea>
-              <p *ngIf="!editMode">{{user.profileDescription || 'Wprowadź opis ...'}} </p>
+              <p *ngIf="!editMode && user.isMyProfile">{{user.profileDescription || 'Wprowadź opis ...'}} </p>
+              <p *ngIf="!editMode && !user.isMyProfile">{{user.profileDescription}} </p>
             </ion-col>
           </ion-row>
           <ion-row>
