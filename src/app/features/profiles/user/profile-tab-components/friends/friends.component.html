@@ -6,7 +6,7 @@
 </div>
 <ion-item *ngFor="let friend of friends" (click)="visitFriend(friend)">
     <ion-avatar slot="start">
-      <img [src]="friend.imgUrl">
+      <img [src]="friend.imgUrl || 'assets/images/profile-picture.png'">
     </ion-avatar>
     <ion-label>
       <h3>{{friend.name}} {{friend.surname}}</h3>

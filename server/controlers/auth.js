@@ -27,7 +27,7 @@ exports.registerUser = async function(req, res, next) {
             accessLevel: 1,
             gradient: 1,
             imgUrl: '',
-            profileDescription: 'Wprowadź opis ...',
+            profileDescription: '',
             invitedToFriends: [],
             friendsInvitations: [],
             friends: []

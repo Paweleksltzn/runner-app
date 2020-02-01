@@ -15,7 +15,7 @@
           <ion-col size="10" (click)="goToProfile(pl)">
             <ion-item>
               <ion-avatar slot="start">
-                <img [src]="pl.userProfile.imgUrl">
+                <img [src]="pl.userProfile.imgUrl || 'assets/images/profile-picture.png'">
               </ion-avatar>
               <ion-label>
                 <h2>{{pl.name}} {{pl.surname}}</h2>
