@@ -9,7 +9,7 @@ const User = require('../models/user');
 router.post('/signup',[
     check('name').isLength({ min: 1 }).withMessage('Podaj imie'),
     check('surname').isLength({ min: 1 }).withMessage('Podaj nazwisko'),
-    check('email').isEmail().withMessage('Podaj poprawny adres email')
+    check('email').isEmail().withMessage('Podaj poprawny adres email').normalizeEmail()
     .custom((value, { req }) => {
         return User.findOne({ email: value }).then(userDoc => {
             if (userDoc) {
@@ -21,7 +21,7 @@ router.post('/signup',[
         }).catch(err=>{
             throw new Error(err);
         })
-    }).normalizeEmail(),
+    }),
     check('isMale').custom((value, { req })=> {
         if (value === undefined) {
             throw new Error('Wybierz płeć');
