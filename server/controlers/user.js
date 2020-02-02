@@ -54,7 +54,7 @@ exports.removeFriend = async function(req, res, next) {
         return res.json({});
     } catch (err) {
         console.log(err)
-        return res.status(500).send('Wystąpił błąd podczas dodawania uzytkownika do znajomych');
+        return res.status(500).send('Wystąpił błąd podczas usuwania użytkownika ze znajomych');
     }
 }
 
