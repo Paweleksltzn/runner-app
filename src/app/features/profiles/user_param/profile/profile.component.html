@@ -43,7 +43,6 @@
       </div> 
     </div>
     <div class="profile-tab">
-
       <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
         <ion-icon name="contacts"></ion-icon>
         <span>Znajomi</span>
@@ -56,23 +55,18 @@
         <ion-icon name="trophy"></ion-icon>
         <span>Osiągnięcia</span>
       </div>
-<ng-container *ngIf="user.accessLevel === 1">
-  <div *ngIf="!user.isMyProfile" class="trainings" routerLink="/user/profile/trainings" (click)="switchProfileTab(4)" [ngClass]="{'tab-select':selectedProfileTab  === 4}">
-    <ion-icon name="fitness"></ion-icon>
-    <span>Treningi</span>
-  </div>
-</ng-container>
-
-<ng-container *ngIf="user.accessLevel === 2">
-  <div *ngIf="user.isMyProfile" class="ratings" routerLink="/user/profile/rate" (click)="switchProfileTab(5)" [ngClass]="{'tab-select':selectedProfileTab  === 5}">
-    <ion-icon name="star-outline"></ion-icon>
-    <span>Ratings</span>
-  </div>
-  <div *ngIf="!user.isMyProfile" class="ratings" routerLink="/user/profile/rate-guest" (click)="switchProfileTab(6)" [ngClass]="{'tab-select':selectedProfileTab  === 6}">
-    <ion-icon name="star-outline"></ion-icon>
-    <span>Rate</span>
-  </div>
-</ng-container>
+      <div *ngIf="!user.isMyProfile && user.accessLevel === 1" class="trainings" routerLink="/user/profile/trainings" (click)="switchProfileTab(4)" [ngClass]="{'tab-select':selectedProfileTab  === 4}">
+        <ion-icon name="fitness"></ion-icon>
+        <span>Treningi</span>
+      </div>
+      <div *ngIf="user.isMyProfile && user.accessLevel === 2" class="ratings" routerLink="/user/profile/rate" (click)="switchProfileTab(5)" [ngClass]="{'tab-select':selectedProfileTab  === 5}">
+        <ion-icon name="star-outline"></ion-icon>
+        <span>Ratings</span>
+      </div>
+      <div *ngIf="!user.isMyProfile && user.accessLevel === 2" class="ratings" routerLink="/user/profile/rate-guest" (click)="switchProfileTab(6)" [ngClass]="{'tab-select':selectedProfileTab  === 6}">
+        <ion-icon name="star-outline"></ion-icon>
+        <span>Rate</span>
+      </div>
     </div>
     <router-outlet></router-outlet>
   </div>
