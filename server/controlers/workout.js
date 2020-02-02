@@ -22,6 +22,7 @@ exports.saveWorkoutsList = async function(req, res, next) {
         const newWorkoutList = req.body.workouts;
         newWorkoutList.forEach(singleWorkout => {
             if (!singleWorkout.author) singleWorkout.author = userVariable;
+            if (!singleWorkout.creationDate) singleWorkout.creationDate = new Date();
         });
         const workouts = await WorkoutsList.findOne({owner: userVariable});
         if (workouts) {

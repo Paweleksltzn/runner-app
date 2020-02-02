@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageAttribute, ImageLoaderConfigService } from 'ionic-image-loader';
-import { ActionSheetController, ModalController, Platform } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { Store, select } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ConversationComponent } from '../chat/conversation/conversation.component';
 import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
 import { UserService } from '../../user/services/user.service';
+import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
 const { Camera } = Plugins;
 
 @Component({
@@ -27,18 +28,20 @@ export class ProfileComponent implements OnInit {
   public scrollYPos: number;
 
   constructor(
-    public actionSheetController: ActionSheetController,
-    public imgSetConf: ImageLoaderConfigService,
-    public store: Store<Reducers>,
-    public router: Router,
-    public modalController: ModalController,
-    public platform: Platform,
-    private userService: UserService) {
+    private actionSheetController: ActionSheetController,
+    private imgSetConf: ImageLoaderConfigService,
+    private store: Store<Reducers>,
+    private router: Router,
+    private modalController: ModalController,
+    private userService: UserService,
+    private toastGeneratorService: ToastGeneratorService
+    ) {
     this.imageConfigure();
    }
 
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
+      this.ownerEmail = state.ownerEmail;
       this.user.isMyProfile = state.isMyProfile;
       if (state.isMyProfile) {
         this.loadOwnerProperties(state);
@@ -52,6 +55,20 @@ export class ProfileComponent implements OnInit {
   ionViewWillEnter() {
     this.router.navigate(['user', 'profile', 'friends']);
     this.selectedProfileTab = 1;
+  }
+
+  public deleteFriend() {
+    this.userService.removeFriend(this.user._id).subscribe(res => {
+      const index = this.user.friends.findIndex(friend => friend.email === this.ownerEmail);
+      this.user.friends.splice(index, 1);
+      this.user.isFriend = false;
+      this.store.dispatch(actions.profileAction.removeFriend({removedFriendId: this.user._id}));
+      this.toastGeneratorService.presentToast
+      (`Pomyślnie usunięto użytkownika ${this.user.name} ${this.user.surname} z listy znajomych`, 'success');
+    }, err => {
+      this.toastGeneratorService.presentToast
+      (`Usuwanie ze znajomych nie powiodło się`, 'danger');
+    });
   }
 
   public switchProfileTab(selectedTab: number) {
@@ -175,6 +192,7 @@ export class ProfileComponent implements OnInit {
     this.user.invitedToFriends = user.invitedToFriends;
     this.user.friendsInvitations = user.friendsInvitations;
     this.user._id = user.profileId;
+    this.user.isFriend = !!user.friends.find(friend => friend.email === this.ownerEmail);
   }
 
 }

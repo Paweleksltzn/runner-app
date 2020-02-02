@@ -7,6 +7,7 @@ export interface Workout {
     startTime?: number;
     title: string;
     excercises: Array<Excersise>;
+    creationDate?: Date;
     author?: User;
     _id?: string;
 }

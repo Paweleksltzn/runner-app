@@ -17,19 +17,19 @@ export class ActivateCoachAccountComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private coachAccountService: CoachAccountService,
-    private authService: AuthService, 
-    public store: Store<Reducers>) { }
+    private authService: AuthService,
+    private store: Store<Reducers>) { }
 
   ngOnInit() {}
 
-  public dismissModal() { 
+  public dismissModal() {
     this.modalController.dismiss({});
   }
 
   public activateCoachAccount() {
-    this.areTermsOfUseAccepted = true; 
+    this.areTermsOfUseAccepted = true;
     this.coachAccountService.setCoach().pipe().subscribe(
-      response => {this.authService.token = response}
+      response => {this.authService.token = response; }
     );
     this.store.dispatch(actions.profileAction.setOwnerAccessLevel({ownerAccessLevel: 2}));
   }

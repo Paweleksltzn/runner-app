@@ -14,7 +14,7 @@
                 <p>{{ notification.message.substr(0, 60) }}<ng-container *ngIf="notification.message.substr(0, 60).length === 60">...</ng-container></p>
               </ion-col>
               <ion-col size="auto">
-                  <h6 class="single-notification__date">{{ notification.dateString }}</h6>
+                  <h6 class="single-notification__date">{{ notification.creationDate | date: 'dd.MM.yyyy' }}</h6>
                   <ion-button class="unframed-primary-button" fill="clear">
                       Więcej
                       <ion-icon name="arrow-dropright"></ion-icon>

@@ -39,6 +39,11 @@
                     [ngClass]="{'input-in-history': workoutMode === modes.history}"> <span class="result-description">kg</span>
                   </ion-col>
                   <ion-col size="auto" *ngIf="workoutMode !== modes.history">
+                    <button class="short-button short-button-primary" (click)="cloneSingleSet(excercise, i)">
+                        <ion-icon name="add" class="short-button-icon"></ion-icon>
+                    </button>
+                  </ion-col>
+                  <ion-col size="auto" *ngIf="workoutMode !== modes.history">
                     <button class="short-button short-button-tertiary" (click)="deleteSingleSet(excercise, i)">
                         <ion-icon name="trash"></ion-icon>
                     </button>
