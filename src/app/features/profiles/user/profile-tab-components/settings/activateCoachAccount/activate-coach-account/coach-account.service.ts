@@ -10,12 +10,8 @@ export class CoachAccountService {
 
   constructor(private http: HttpClient) { }
 
-  public setCoach(accessLevel: number): Observable<any> {
-    const queryParams = {
-      params: {
-        accessLevel
-      }
-  };
-    return this.http.put(`${environment.srvAddress}/${environment.endpoints.trainer}/setTrainer`, queryParams);
+  public setCoach(): Observable<any> {
+
+    return this.http.put(`${environment.srvAddress}/${environment.endpoints.trainer}/setTrainer`, {});
   }
 }

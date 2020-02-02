@@ -13,7 +13,6 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 })
 export class ActivateCoachAccountComponent implements OnInit {
   public areTermsOfUseAccepted = false;
-  public newAccessLevel = 2;
 
   constructor(
     private modalController: ModalController,
@@ -29,10 +28,10 @@ export class ActivateCoachAccountComponent implements OnInit {
 
   public activateCoachAccount() {
     this.areTermsOfUseAccepted = true; 
-    this.coachAccountService.setCoach(this.newAccessLevel).pipe().subscribe(
+    this.coachAccountService.setCoach().pipe().subscribe(
       response => {this.authService.token = response}
     );
-    this.store.dispatch(actions.profileAction.setOwnerAccessLevel({ownerAccessLevel: this.newAccessLevel}));
+    this.store.dispatch(actions.profileAction.setOwnerAccessLevel({ownerAccessLevel: 2}));
   }
 
 }

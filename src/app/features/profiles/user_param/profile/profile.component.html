@@ -43,66 +43,44 @@
       </div> 
     </div>
     <div class="profile-tab">
-<ng-container *ngIf="user.accessLevel === 1">
-    <ng-container *ngIf="user.isMyProfile">
-        <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
-          <ion-icon name="contacts"></ion-icon>
-          <span>Znajomi</span>
-        </div>
-        <div class="achivments" routerLink="/user/profile/achivment" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
-          <ion-icon name="trophy"></ion-icon>
-          <span>Osiągnięcia</span>
-        </div>
-        <div class="settings" routerLink="/user/profile/settings" (click)="switchProfileTab(3)" [ngClass]="{'tab-select':selectedProfileTab  === 3}">
-          <ion-icon name="settings"></ion-icon>
-          <span>Ustawienia</span>
-        </div>
-    </ng-container>
 
-    <ng-container *ngIf="!user.isMyProfile">
-      <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
-        <ion-icon name="contacts"></ion-icon>
-        <span>Znajomi</span>
-      </div>
-      <div class="trainings" routerLink="/user/profile/trainings" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
-        <ion-icon name="fitness"></ion-icon>
-        <span>Treningi</span>
-      </div>
-      <div class="achivments" routerLink="/user/profile/achivment" (click)="switchProfileTab(3)" [ngClass]="{'tab-select':selectedProfileTab  === 3}">
-        <ion-icon name="trophy"></ion-icon>
-        <span>Osiągnięcia</span>
-      </div>
-  </ng-container>
+      
+<ng-container *ngIf="user.accessLevel === 1">
+  <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
+    <ion-icon name="contacts"></ion-icon>
+    <span>Znajomi</span>
+  </div>
+  <div class="achivments" routerLink="/user/profile/achivment" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
+    <ion-icon name="trophy"></ion-icon>
+    <span>Osiągnięcia</span>
+  </div>
+  <div *ngIf="user.isMyProfile" class="settings" routerLink="/user/profile/settings" (click)="switchProfileTab(3)" [ngClass]="{'tab-select':selectedProfileTab  === 3}">
+    <ion-icon name="settings"></ion-icon>
+    <span>Ustawienia</span>
+  </div>
+  <div *ngIf="!user.isMyProfile" class="trainings" routerLink="/user/profile/trainings" (click)="switchProfileTab(4)" [ngClass]="{'tab-select':selectedProfileTab  === 4}">
+    <ion-icon name="fitness"></ion-icon>
+    <span>Treningi</span>
+  </div>
 </ng-container>
 
 <ng-container *ngIf="user.accessLevel === 2">
-    <ng-container *ngIf="user.isMyProfile">
-        <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
-          <ion-icon name="contacts"></ion-icon>
-          <span>Znajomi</span>
-        </div>
-        <div class="settings" routerLink="/user/profile/settings" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
-          <ion-icon name="settings"></ion-icon>
-          <span>Ustawienia</span>
-        </div>
-        <div class="ratings" routerLink="/user/profile/rate" (click)="switchProfileTab(3)" [ngClass]="{'tab-select':selectedProfileTab  === 3}">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>Rateings</span>
-        </div>
-    </ng-container>
-
-
-
-    <ng-container *ngIf="!user.isMyProfile">
-        <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
-          <ion-icon name="contacts"></ion-icon>
-          <span>Znajomi</span>
-        </div>
-        <div class="ratings" routerLink="/user/profile/rate-guest" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
-          <ion-icon name="star-outline"></ion-icon>
-          <span>Rate</span>
-        </div>
-    </ng-container>
+  <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
+    <ion-icon name="contacts"></ion-icon>
+    <span>Znajomi</span>
+  </div>
+  <div *ngIf="user.isMyProfile" class="settings" routerLink="/user/profile/settings" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
+    <ion-icon name="settings"></ion-icon>
+    <span>Ustawienia</span>
+  </div>
+  <div *ngIf="user.isMyProfile" class="ratings" routerLink="/user/profile/rate" (click)="switchProfileTab(3)" [ngClass]="{'tab-select':selectedProfileTab  === 3}">
+    <ion-icon name="star-outline"></ion-icon>
+    <span>Ratings</span>
+  </div>
+  <div *ngIf="!user.isMyProfile" class="ratings" routerLink="/user/profile/rate-guest" (click)="switchProfileTab(4)" [ngClass]="{'tab-select':selectedProfileTab  === 4}">
+    <ion-icon name="star-outline"></ion-icon>
+    <span>Rate</span>
+  </div>
 </ng-container>
     </div>
     <router-outlet></router-outlet>
