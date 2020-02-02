@@ -68,9 +68,9 @@ const profileReducerOptions = createReducer(
   )),
   on(actions.profileAction.setTheme, (state, action) => ({ ...state, ownerGradient: action.gradient})),
   on(actions.profileAction.setUserType, (state, action) => ({ ...state, userType: action.userType})),
-  on(actions.profileAction.setIsMyProfile, (state, action) =>({ ...state, isMyProfile: action.isMyProfile})),
-  on(actions.profileAction.profileData, (state, action) =>({ 
-    ...state, 
+  on(actions.profileAction.setIsMyProfile, (state, action) => ({ ...state, isMyProfile: action.isMyProfile})),
+  on(actions.profileAction.profileData, (state, action) => ({
+    ...state,
     email: action.email,
     name: action.name,
     surname: action.surname,
@@ -86,6 +86,11 @@ const profileReducerOptions = createReducer(
     const otherIndex = state.ownerInvitedToFriends.indexOf(action.newFriend);
     state.ownerInvitedToFriends.splice(otherIndex, 1);
     return ({ ...state, ownerFriends: [...state.ownerFriends, action.newFriend]});
+  }),
+  on(actions.profileAction.removeFriend, (state, action) => {
+    const index = state.ownerFriends.findIndex(friend => friend._id === action.removedFriendId);
+    state.ownerFriends.splice(index, 1);
+    return ({ ...state });
   }),
   on(actions.profileAction.invitationRejected, (state, action) => {
     const index = state.ownerInvitedToFriends.indexOf(action.rejectingProfile);

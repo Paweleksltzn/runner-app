@@ -7,6 +7,7 @@ const storage = require('../util/files-savers/userProfileImage');
 const router = express.Router();
 
 router.post('/addFriend', userController.addFriend);
+router.delete('/deleteFriend/:removedFriendId', userController.removeFriend);
 router.post('/confirmFriendInvitation', userController.confirmFriendInvitation);
 router.post('/rejectFriendInvitation', userController.rejectFriendInvitation);
 router.post('/changeGradient', userController.changeGradient);

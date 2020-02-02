@@ -33,6 +33,31 @@ exports.addFriend = async function(req, res, next) {
     }
 }
 
+exports.removeFriend = async function(req, res, next) {
+    try {
+        const user = await User.findById(req.token._id);
+        const userProfile = await UserProfile.findById(user.userProfile);
+        const removedFriendProfile = await UserProfile.findById(req.params.removedFriendId);
+        const oldFriend = await User.findOne({userProfile: removedFriendProfile})
+        let removedFriendIndex = userProfile.friends.findIndex(friend => friend === req.params.removedFriendId);
+        userProfile.friends.splice(removedFriendIndex, 1);
+        removedFriendIndex =  removedFriendProfile.friends.findIndex(friend => friend === userProfile._id);
+        removedFriendProfile.friends.splice(removedFriendIndex, 1);
+        const newNotification = notificationsFactory.createNotification
+        (notificationsOptions.info, user, [oldFriend], `Użytkownik ${oldFriend.nameAndSurname} usunoł cię z listy znajomych`, 'Usunięcie z listy znajomych');
+        const io = require('../util/socket').getIO();
+        io.to(oldFriend._id).emit(socketEvents.newNotification, newNotification);
+        io.to(oldFriend._id).emit(socketEvents.friendDeletion, userProfile._id);
+        removedFriendProfile.save();
+        userProfile.save();
+        newNotification.save();
+        return res.json({});
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send('Wystąpił błąd podczas dodawania uzytkownika do znajomych');
+    }
+}
+
 exports.confirmFriendInvitation = async function(req, res, next) {
     try {
         const newFriendProfile = await UserProfile.findById(req.body.newFriendAcc.userProfile);

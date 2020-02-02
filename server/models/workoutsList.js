@@ -5,6 +5,10 @@ const Schema = mongoose.Schema;
 const workoutListSchema = new Schema({
   workoutsList: {
       type: [{
+        creationDate: {
+          type: Date,
+          required: true
+        },
         title: {
             type: String,
             required: true
@@ -30,7 +34,8 @@ const workoutListSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  }
+  },
+  
 });
 
 module.exports = mongoose.model('WorkoutList', workoutListSchema);

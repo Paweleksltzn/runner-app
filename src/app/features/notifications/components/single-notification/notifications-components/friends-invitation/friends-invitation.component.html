@@ -3,7 +3,7 @@
     <h3>{{ notification.author.name }} {{ notification.author.surname }}</h3>
   </ion-col>
   <ion-col size="auto">
-    <h3>{{ notification.dateString }}</h3>
+    <h3>{{ notification | date: 'dd.MM.yyyy' }}</h3>
   </ion-col>
 </ion-row>
 <ion-row>

@@ -13,13 +13,12 @@ export class ActivateCoachAccountComponent implements OnInit {
 
   ngOnInit() {}
 
-  public dismissModal() { 
+  public dismissModal() {
     this.modalController.dismiss({});
   }
 
   public activateCoachAccount() {
-    this.areTermsOfUseAccepted = true; 
-
+    this.areTermsOfUseAccepted = true;
   }
 
 }
