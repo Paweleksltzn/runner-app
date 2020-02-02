@@ -47,6 +47,8 @@
 .profile-tab{
     height: 15%;
     display: flex;
+    overflow-x: auto;
+    padding-bottom: .75rem;
 }
 .ratings, .friends, .achivments, .settings, .trainings{
     width: 33%;
