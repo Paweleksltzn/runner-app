@@ -3,13 +3,12 @@ import * as storeState from 'src/app/shared/interfaces/store/index';
 import { actions } from 'src/app/store';
 
 export const initialState: storeState.ProfileState = {
-  gradient: 1,
+  gradient: undefined,
   imgUrl: undefined,
   email: undefined,
   name: undefined,
   surname: undefined,
   profileDescription: '',
-  userType: 1,
   isMyProfile: true,
   isMale: undefined,
   accessLevel: undefined,
@@ -18,13 +17,12 @@ export const initialState: storeState.ProfileState = {
   friendsInvitations: [],
   profileId: '',
   ownerProfileId: '',
-  ownerGradient: 2,
+  ownerGradient: undefined,
   ownerImgUrl: 'assets/images/profile-picture.png',
   ownerEmail: undefined,
   ownerName: undefined,
   ownerSurname: undefined,
   ownerProfileDescription: '',
-  ownerUserType: 1,
   ownerIsMale: undefined,
   ownerAccessLevel: undefined,
   ownerFriends: [],
@@ -67,7 +65,6 @@ const profileReducerOptions = createReducer(
     }
   )),
   on(actions.profileAction.setTheme, (state, action) => ({ ...state, ownerGradient: action.gradient})),
-  on(actions.profileAction.setUserType, (state, action) => ({ ...state, userType: action.userType})),
   on(actions.profileAction.setIsMyProfile, (state, action) =>({ ...state, isMyProfile: action.isMyProfile})),
   on(actions.profileAction.profileData, (state, action) =>({ 
     ...state, 
@@ -101,7 +98,11 @@ const profileReducerOptions = createReducer(
     return ({ ...state });
   }),
   on(actions.profileAction.inviteFriend, (state, action) =>
-   ({ ...state, ownerInvitedToFriends: [...state.ownerInvitedToFriends, action.invitedFriend]}))
+   ({ ...state, ownerInvitedToFriends: [...state.ownerInvitedToFriends, action.invitedFriend]})),
+   on(actions.profileAction.setOwnerAccessLevel, (state, action) => ({
+     ...state,
+     ownerAccessLevel: action.ownerAccessLevel
+   }))
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {
   return profileReducerOptions(state, action);

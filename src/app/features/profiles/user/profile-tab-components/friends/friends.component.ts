@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class FriendsComponent implements OnInit {
   public numberOfFriends: number;
   public currentModal: HTMLIonModalElement;
-  public userType: number;
+  public isMyProfile: boolean;
   public friends: UserProfile[];
 
   constructor(private modalController: ModalController,
@@ -30,11 +30,10 @@ export class FriendsComponent implements OnInit {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       if (state.isMyProfile) {
         this.friends = state.ownerFriends;
-        this.userType = state.ownerUserType;
       } else {
         this.friends = state.friends;
-        this.userType = state.userType;
       }
+      this.isMyProfile = state.isMyProfile;
     });
   }
 
@@ -51,15 +50,6 @@ export class FriendsComponent implements OnInit {
       user.friends = friends;
       this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: false}));
       this.store.dispatch(actions.profileAction.loadProfile({userProfile: user}));
-      this.checkIfNormalUser(user.accessLevel);
     });
-  }
-
-  public checkIfNormalUser(accessLevel: number) {
-    if (accessLevel === 1) {
-      this.store.dispatch(actions.profileAction.setUserType({userType: 3}));
-    } else {
-      this.store.dispatch(actions.profileAction.setUserType({userType: 4}));
-    }
   }
 }

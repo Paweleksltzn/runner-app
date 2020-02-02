@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { CoachAccountService } from './coach-account.service';
+import { AuthService } from '../../../../../../../core/auth/services/auth.service';
+import { Store } from '@ngrx/store';
+import { Reducers, actions } from 'src/app/store';
+import * as storeState from 'src/app/shared/interfaces/store/index';
 
 @Component({
   selector: 'app-activate-coach-account',
@@ -9,7 +14,11 @@ import { ModalController } from '@ionic/angular';
 export class ActivateCoachAccountComponent implements OnInit {
   public areTermsOfUseAccepted = false;
 
-  constructor(private modalController: ModalController) { }
+  constructor(
+    private modalController: ModalController,
+    private coachAccountService: CoachAccountService,
+    private authService: AuthService, 
+    public store: Store<Reducers>) { }
 
   ngOnInit() {}
 
@@ -19,7 +28,10 @@ export class ActivateCoachAccountComponent implements OnInit {
 
   public activateCoachAccount() {
     this.areTermsOfUseAccepted = true; 
-
+    this.coachAccountService.setCoach().pipe().subscribe(
+      response => {this.authService.token = response}
+    );
+    this.store.dispatch(actions.profileAction.setOwnerAccessLevel({ownerAccessLevel: 2}));
   }
 
 }
