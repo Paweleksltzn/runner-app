@@ -5,5 +5,6 @@ export const socketEvents = {
     newFriendRejection: 'new-friend-rejection',
     connect: 'connect',
     newConversation: 'new-conversation',
-    newMessage: 'new-message'
+    newMessage: 'new-message',
+    friendDeletion: 'friendDeletion'
 };

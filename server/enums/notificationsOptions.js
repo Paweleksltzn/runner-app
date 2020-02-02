@@ -1,4 +1,5 @@
 module.exports = {
     friendInvitation: 'friendInvitation',
-    friendInvitationResponse: 'friendInvitationResponse'
+    friendInvitationResponse: 'friendInvitationResponse',
+    info: 'info'
 };

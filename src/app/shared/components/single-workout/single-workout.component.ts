@@ -112,6 +112,13 @@ export class SingleWorkoutComponent implements OnInit {
     excercise.series.splice(singleSetIndex, 1);
   }
 
+  public cloneSingleSet(excercise: Excersise, singleSetIndex: number) {
+    excercise.series.push({
+      repeats: excercise.series[singleSetIndex].repeats,
+      weight: excercise.series[singleSetIndex].weight,
+    });
+  }
+
   public async changeExerciseName(exercise: Excersise) {
     const alert = await this.alertController.create({
       header: 'Podaj nazwę ćwiczenia',

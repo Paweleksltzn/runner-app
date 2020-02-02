@@ -10,6 +10,7 @@ export interface UserProfile {
     imgUrl: string;
     userType: number;
     croppedImage: string;
+    isFriend?: boolean;
     friends?: UserProfile[];
     invitedToFriends?: UserProfile[];
     friendsInvitations?: UserProfile[];
