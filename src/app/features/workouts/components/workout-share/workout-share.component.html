@@ -8,12 +8,19 @@
 </ion-header>
 <ion-content>
   <ion-item>
-    <ion-label>Wybierz treningi, które chcesz udostępnić</ion-label>
-    <!-- <ion-select  interface="alert" multiple="false" placeholder="Wybierz" (ionChange)="optionSelected($event)" cancelText="Anuluj"> 
-      <ion-select-option value="-5" selected>Nowy trening</ion-select-option>
+    <ion-label>Wybierz treningi</ion-label>
+    <ion-select  interface="alert" multiple="true" placeholder="Wybierz" (ionChange)="workoutsSelected($event)" cancelText="Anuluj"> 
       <ion-select-option [value]="workoutIndex" *ngFor="let myWorkout of workoutsList;let workoutIndex = index;" >
         <p>{{myWorkout.title}}</p>
       </ion-select-option>
-    </ion-select> -->
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Wybierz komu udostępniasz</ion-label>
+    <ion-select  interface="alert" multiple="false" placeholder="Wybierz" (ionChange)="selectReceiver($event)" cancelText="Anuluj"> 
+      <ion-select-option [value]="workoutIndex" *ngFor="let friend of friends;let workoutIndex = index;" >
+        <p>{{friend.name}} {{friend.surname}}</p>
+      </ion-select-option>
+    </ion-select>
   </ion-item>
 </ion-content>

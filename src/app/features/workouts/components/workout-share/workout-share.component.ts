@@ -14,6 +14,8 @@ import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 export class WorkoutShareComponent implements OnInit {
   public workoutsList: Workout[];
   public friends: UserProfile[];
+  private transferTarget: UserProfile;
+  private selectedWorkoutsIndexes: number[];
 
   constructor(private modalController: ModalController,
               private store: Store<Reducers>) { }
@@ -29,6 +31,14 @@ export class WorkoutShareComponent implements OnInit {
 
   public dismissModal() {
     this.modalController.dismiss();
+  }
+
+  public workoutsSelected(event: any) {
+    this.selectedWorkoutsIndexes = event.detail.value;
+  }
+
+  public selectReceiver(event: any) {
+    this.transferTarget = this.friends[event.detail.value];
   }
 
 }
