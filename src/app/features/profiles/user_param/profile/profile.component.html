@@ -49,30 +49,44 @@
       </div> 
     </div>
     <div class="profile-tab">
+      <ion-slides  padding-bottom scrollbar="true" [options]="slideOpts">
+        <ion-slide>
       <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
         <ion-icon name="contacts"></ion-icon>
         <span>Znajomi</span>
       </div>
-      <div *ngIf="user.isMyProfile" class="settings" routerLink="/user/profile/settings" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
+    </ion-slide>
+    <ion-slide *ngIf="user.isMyProfile">
+      <div  class="settings" routerLink="/user/profile/settings" (click)="switchProfileTab(2)" [ngClass]="{'tab-select':selectedProfileTab  === 2}">
         <ion-icon name="settings"></ion-icon>
         <span>Ustawienia</span>
       </div>
+    </ion-slide>
+    <ion-slide>
       <div class="achivments" routerLink="/user/profile/achivment" (click)="switchProfileTab(3)" [ngClass]="{'tab-select':selectedProfileTab  === 3}">
         <ion-icon name="trophy"></ion-icon>
         <span>Osiągnięcia</span>
       </div>
-      <div *ngIf="!user.isMyProfile && user.accessLevel === 1" class="trainings" routerLink="/user/profile/trainings" (click)="switchProfileTab(4)" [ngClass]="{'tab-select':selectedProfileTab  === 4}">
+    </ion-slide>
+    <ion-slide *ngIf="!user.isMyProfile && user.accessLevel === 1">
+      <div  class="trainings" routerLink="/user/profile/trainings" (click)="switchProfileTab(4)" [ngClass]="{'tab-select':selectedProfileTab  === 4}">
         <ion-icon name="fitness"></ion-icon>
         <span>Treningi</span>
       </div>
-      <div *ngIf="user.isMyProfile && user.accessLevel === 2" class="ratings" routerLink="/user/profile/rate" (click)="switchProfileTab(5)" [ngClass]="{'tab-select':selectedProfileTab  === 5}">
+    </ion-slide>
+    <ion-slide *ngIf="user.isMyProfile && user.accessLevel === 2">
+      <div  class="ratings" routerLink="/user/profile/rate" (click)="switchProfileTab(5)" [ngClass]="{'tab-select':selectedProfileTab  === 5}">
         <ion-icon name="star-outline"></ion-icon>
         <span>Ratings</span>
       </div>
-      <div *ngIf="!user.isMyProfile && user.accessLevel === 2" class="ratings" routerLink="/user/profile/rate-guest" (click)="switchProfileTab(6)" [ngClass]="{'tab-select':selectedProfileTab  === 6}">
+    </ion-slide>
+    <ion-slide *ngIf="!user.isMyProfile && user.accessLevel === 2">
+      <div  class="ratings" routerLink="/user/profile/rate-guest" (click)="switchProfileTab(6)" [ngClass]="{'tab-select':selectedProfileTab  === 6}">
         <ion-icon name="star-outline"></ion-icon>
         <span>Rate</span>
       </div>
+    </ion-slide>
+    </ion-slides>
     </div>
     <router-outlet></router-outlet>
   </div>
