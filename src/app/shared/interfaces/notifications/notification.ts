@@ -6,7 +6,6 @@ export interface Notification {
     author: User;
     isDisplayed: boolean;
     type: string;
-    newFriendId?: string;
-    creationDate?: Date;
+    creationDate: Date;
     _id?: string;
 }
