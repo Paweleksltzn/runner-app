@@ -26,6 +26,10 @@ export class ProfileComponent implements OnInit {
   public ownerEmail: string;
   public unreadedMessagesAmount = 0;
   public scrollYPos: number;
+  public slideOpts = {
+    slidesPerView: 2,
+    width: 360
+  };
 
   constructor(
     private actionSheetController: ActionSheetController,
@@ -76,7 +80,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async presentActionSheet() {
-    if (this.user.userType === 1 || this.user.userType === 2) {
+    if (this.user.isMyProfile) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Zdjęcie profilowe',
       buttons: [{
