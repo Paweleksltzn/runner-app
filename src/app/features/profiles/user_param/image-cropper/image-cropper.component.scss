@@ -1,4 +1,13 @@
-ion-button{
-    margin: auto;
+.cut{
+    position: fixed;
+    left: 20px;
+    z-index: 10;
+    bottom: 30px;
     --background: linear-gradient(to left bottom, #15e6b5, #39e9b1, #4fecad, #61efaa,#71f2a6, #6ff19e, #6eef95, #6eee8c, #5ce87b, #49e268, #32dc55, #09d63f);
+}
+.dismiss{
+    position: fixed;
+    right: 20px;
+    z-index: 10;
+    bottom: 30px;
 }

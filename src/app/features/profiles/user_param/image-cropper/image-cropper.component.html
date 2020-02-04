@@ -7,5 +7,6 @@
   format="png"
   (imageCropped)="imageCropped($event)"
 ></image-cropper>
-<ion-button (click)="dismissModalAndSendCroppedIamge()"><ion-icon name="crop"></ion-icon>Przytnij</ion-button>
+<ion-button class="cut" (click)="dismissModalAndSendCroppedIamge()"><ion-icon name="crop"></ion-icon>Przytnij</ion-button>
+<ion-button color="danger" class="dismiss" (click)="dismissModal()"><ion-icon name="close"></ion-icon>Anuluj</ion-button>
 </ion-content>
