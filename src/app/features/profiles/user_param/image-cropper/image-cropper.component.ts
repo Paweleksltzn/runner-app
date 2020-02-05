@@ -29,7 +29,7 @@ export class ImageCropperComponent implements OnInit {
 
   public captureImage() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
-      this.defaultImg = state.ownerImgUrl;
+      this.defaultImg = state.croppedImageUrl;
     });
   }
 

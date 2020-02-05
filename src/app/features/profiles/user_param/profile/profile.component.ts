@@ -112,7 +112,7 @@ export class ProfileComponent implements OnInit {
       resultType: CameraResultType.Base64
     });
     const imagePath = imageMimeType  + profilePhoto.base64String;
-    this.store.dispatch(actions.profileAction.setImg({ownerImgUrl: imagePath}));
+    this.store.dispatch(actions.profileAction.setTemporaryImg({croppedImageUrl: imagePath}));
     this.displayCropper();
   }
 
