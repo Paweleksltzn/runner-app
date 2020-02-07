@@ -15,6 +15,8 @@ import { FriendsInvitationComponent } from './components/single-notification/not
 // tslint:disable-next-line: max-line-length
 import { FriendsInvitationResponseComponent } from './components/single-notification/notifications-components/friends-invitation-response/friends-invitation-response.component';
 import { InfoComponent } from './components/single-notification/notifications-components/info/info.component';
+// tslint:disable-next-line: max-line-length
+import { WorkoutShareNotificationComponent } from './components/single-notification/notifications-components/workout-share-notification/workout-share-notification.component';
 
 const routes: Routes = [
   {
@@ -35,7 +37,8 @@ const routes: Routes = [
                  SingleNotificationComponent,
                  FriendsInvitationComponent,
                  FriendsInvitationResponseComponent,
-                 InfoComponent
+                 InfoComponent,
+                 WorkoutShareNotificationComponent
   ],
   entryComponents: [SingleNotificationComponent],
   providers: [NotificationsService]

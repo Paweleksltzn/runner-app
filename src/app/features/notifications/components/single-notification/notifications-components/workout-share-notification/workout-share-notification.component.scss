@@ -1,0 +1,18 @@
+.workout__container {
+    padding: .7rem;
+    background-color: #fafafa;
+    &:nth-child(2n) {
+        background: #eee;
+    }
+    &--title {
+        margin-top: 0;
+    }
+    &--info {
+        margin-bottom: .5rem;
+        margin-top: .5rem;
+    }
+    &--button {
+        --background: linear-gradient(to right top, #15e6b5, #39e9b1, #4fecad, #61efaa, #71f2a6, #6af2ae, #63f3b6, #5cf3be, #3ef0d1, #22ede2, #1ce8f0, #34e3fa);
+        --color: #555;
+    }
+}

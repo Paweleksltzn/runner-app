@@ -1,0 +1,34 @@
+<ion-row>
+  <ion-col>
+    <h3>{{ sharedWorkoutNotification.author.name }} {{ sharedWorkoutNotification.author.surname }}</h3>
+  </ion-col>
+  <ion-col size="auto">
+    <h3>{{ sharedWorkoutNotification.creationDate | date: 'dd.MM.yyyy' }}</h3>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <p>
+      {{ sharedWorkoutNotification.message }}
+    </p>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <h4>Lista proponowanych treningów: </h4>
+  </ion-col>
+</ion-row>
+<div class="workout__container" *ngFor="let sharedWorkout of sharedWorkoutNotification.sharedWorkoutsList;let workoutIndex = index;">
+  <ion-row class="ion-align-items-end">
+    <ion-col>
+      <h6 class="workout__container--title">{{ workoutIndex + 1 }}. {{sharedWorkout.title}}</h6>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+        <p class="workout__container--info">Liczba ćwiczeń: {{ sharedWorkout.excercises.length }}</p>
+        <p class="workout__container--info">Liczba seri: {{ calcSeriesAmount(sharedWorkout) }}</p>
+    </ion-col>
+  </ion-row>
+</div>
+

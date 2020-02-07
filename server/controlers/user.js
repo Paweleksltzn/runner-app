@@ -19,7 +19,11 @@ exports.addFriend = async function(req, res, next) {
         const newFriendProfile = await UserProfile.findById(newFriend.userProfile);
         newFriendProfile.friendsInvitations.push(userProfile);
         userProfile.invitedToFriends.push(newFriendProfile);
-        const newNotification = notificationsFactory.createNotification(notificationsOptions.friendInvitation, user, [newFriend]);
+        const newNotification = notificationsFactory.createNotification({
+            notificationType: notificationsOptions.friendInvitation,  
+            author: user,
+            receivers: [newFriend]
+        });
         const io = require('../util/socket').getIO();
         io.to(newFriend._id).emit(socketEvents.newNotification, newNotification);
         io.to(newFriend._id).emit(socketEvents.newFriendInvitation, userProfile);
@@ -43,8 +47,13 @@ exports.removeFriend = async function(req, res, next) {
         userProfile.friends.splice(removedFriendIndex, 1);
         removedFriendIndex =  removedFriendProfile.friends.findIndex(friend => friend === userProfile._id);
         removedFriendProfile.friends.splice(removedFriendIndex, 1);
-        const newNotification = notificationsFactory.createNotification
-        (notificationsOptions.info, user, [oldFriend], `Użytkownik ${oldFriend.nameAndSurname} usunoł cię z listy znajomych`, 'Usunięcie z listy znajomych');
+        const newNotification = notificationsFactory.createNotification({
+            notificationType: notificationsOptions.info,  
+            author: user,
+            receivers: [oldFriend],
+            authorMessage: `Użytkownik ${oldFriend.nameAndSurname} usunoł cię z listy znajomych`,
+            definiedTitle: 'Usunięcie z listy znajomych'
+        });
         const io = require('../util/socket').getIO();
         io.to(oldFriend._id).emit(socketEvents.newNotification, newNotification);
         io.to(oldFriend._id).emit(socketEvents.friendDeletion, userProfile._id);
@@ -80,9 +89,12 @@ exports.confirmFriendInvitation = async function(req, res, next) {
         } else {
             notification.save();
         }
-        const newNotification = notificationsFactory.createNotification(notificationsOptions.friendInvitationResponse, user, [req.body.newFriendAcc], 
-            `Użytkownik ${user.name} ${user.surname} przyjął twoje zaproszenie do grona znajomych, możesz się z nim kontaktować`
-        );
+        const newNotification = notificationsFactory.createNotification({
+            notificationType: notificationsOptions.friendInvitationResponse,  
+            author: user,
+            receivers: [req.body.newFriendAcc],
+            authorMessage: `Użytkownik ${user.name} ${user.surname} przyjął twoje zaproszenie do grona znajomych, możesz się z nim kontaktować`
+        });
         const io = require('../util/socket').getIO();
         io.to(req.body.newFriendAcc._id).emit(socketEvents.newNotification, newNotification);
         io.to(req.body.newFriendAcc._id).emit(socketEvents.newFriend, userProfile);
@@ -105,9 +117,12 @@ exports.rejectFriendInvitation = async function(req, res, next) {
         userProfile.friendsInvitations.splice(index, 1);
         const otherIndex = rejectedFriendProfile.invitedToFriends.indexOf(userProfile._id);
         rejectedFriendProfile.invitedToFriends.splice(otherIndex, 1);
-        const newNotification = notificationsFactory.createNotification(notificationsOptions.friendInvitationResponse, user, [req.body.rejectedFriendAcc], 
-            `Użytkownik ${user.name} ${user.surname} odrzucił twoje zaproszenie do grona znajomych`
-        );
+        const newNotification = notificationsFactory.createNotification({
+            notificationType: notificationsOptions.friendInvitationResponse,  
+            author: user,
+            receivers: [req.body.rejectedFriendAcc],
+            authorMessage: `Użytkownik ${user.name} ${user.surname} odrzucił twoje zaproszenie do grona znajomych`
+        });
         const io = require('../util/socket').getIO();
         io.to(req.body.rejectedFriendAcc._id).emit(socketEvents.newNotification, newNotification);
         io.to(req.body.rejectedFriendAcc._id).emit(socketEvents.newFriendRejection, userProfile);

@@ -4,6 +4,7 @@ export const environment = {
   endpoints: {
     auth: 'api/auth',
     workout: 'api/workout',
+    workoutShare: 'api/workoutShare',
     notification: 'api/notification',
     searcher: 'api/searchers',
     trainer: 'api/trainer',
