@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import {EmailService} from '../components/email-confirm/email.service';
 import {ErrorComponent} from '../components/error/error.component';
+import { ProcessingErrorComponent } from '../components/error/processing-error/processing-error.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {ErrorComponent} from '../components/error/error.component';
     EmailConfirmComponent,
     PassChangeComponent,
     ErrorComponent,
+    ProcessingErrorComponent
   ],
   imports: [
     BrowserModule,
