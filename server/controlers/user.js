@@ -51,7 +51,7 @@ exports.removeFriend = async function(req, res, next) {
             notificationType: notificationsOptions.info,  
             author: user,
             receivers: [oldFriend],
-            authorMessage: `Użytkownik ${oldFriend.nameAndSurname} usunoł cię z listy znajomych`,
+            authorMessage: `Użytkownik ${user.nameAndSurname} usunoł cię z listy znajomych`,
             definiedTitle: 'Usunięcie z listy znajomych'
         });
         const io = require('../util/socket').getIO();

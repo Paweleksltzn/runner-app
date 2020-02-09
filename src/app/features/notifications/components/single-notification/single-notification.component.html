@@ -9,7 +9,7 @@
       <app-friends-invitation *ngSwitchCase="notificationTypes.friendInvitation" [notification]="notification" [index]="currentIndex"></app-friends-invitation>
       <app-friends-invitation-response *ngSwitchCase="notificationTypes.friendInvitationResponse" [notification]="notification"></app-friends-invitation-response>
       <app-info *ngSwitchCase="notificationTypes.info" [notification]="notification"></app-info>
-      <app-workout-share-notification *ngSwitchCase="notificationTypes.workoutsShare" [sharedWorkoutNotification]="notification"></app-workout-share-notification>
+      <app-workout-share-notification *ngSwitchCase="notificationTypes.workoutsShare" [sharedWorkoutNotification]="notification" [notificationIndex]="currentIndex"></app-workout-share-notification>
       <ion-row>
         <ion-col>
             <ion-button class="unframed-primary-button" fill="clear" (click)="closeModal()">

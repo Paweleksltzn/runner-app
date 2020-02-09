@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MyWorkoutService } from './services/my-workout.service';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { WorkoutShareComponent } from '../components/workout-share/workout-share.component';
+import { User } from 'src/app/shared/interfaces/auth/User';
 @Component({
   selector: 'app-my-workouts',
   templateUrl: './my-workouts.page.html',
@@ -15,6 +16,7 @@ import { WorkoutShareComponent } from '../components/workout-share/workout-share
 })
 export class MyWorkoutsPage implements OnInit {
   public myWorkouts: Workout[] = [];
+  private currentUserId: string;
 
   constructor(private store: Store<Reducers>,
               private alertController: AlertController,
@@ -26,6 +28,9 @@ export class MyWorkoutsPage implements OnInit {
     this.myWorkoutService.loadUserWorkoutsToStore();
     this.store.pipe(select('myWorkouts')).subscribe((state: storeState.MyWorkoutState) => {
       this.myWorkouts = state.workoutsList || [];
+    });
+    this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
+      this.currentUserId = state._id;
     });
   }
 
@@ -69,6 +74,8 @@ export class MyWorkoutsPage implements OnInit {
             if (newExerciseName) {
               const newTraining: Workout = {
                 title: newExerciseName,
+                creationDate: new Date(),
+                author: this.currentUserId,
                 excercises: []
               };
               this.store.dispatch(actions.myWorkoutActions.addWorkoutListElement({

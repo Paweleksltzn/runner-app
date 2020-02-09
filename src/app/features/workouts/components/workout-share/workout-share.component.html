@@ -23,15 +23,7 @@
       </ion-select-option>
     </ion-select>
   </ion-item>
-    <ion-item>
-    <ion-label>Wybierz tryb udostępniania</ion-label>
-    <ion-select  interface="alert" multiple="false" placeholder="Wybierz" (ionChange)="selectShareType($event)" cancelText="Anuluj"> 
-      <ion-select-option [value]="shareType" *ngFor="let shareType of workoutShareTypesArr;let workoutShareIndex = index;">
-        <p>{{shareType}}</p>
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
-    <ion-button class="share__confirm" (click)="confirmShare()">
+  <ion-button class="share__confirm" (click)="confirmShare()">
       Udostępnij
   </ion-button>
 </ion-content>

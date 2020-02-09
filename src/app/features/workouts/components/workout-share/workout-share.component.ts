@@ -21,7 +21,7 @@ export class WorkoutShareComponent implements OnInit {
   public workoutShareTypesArr = workoutShareTypesArr;
   private transferTarget: UserProfile;
   private selectedWorkoutsIndexes: number[] = [];
-  private shareType: string;
+  private shareType = workoutShareTypes.free;
 
   constructor(private modalController: ModalController,
               private store: Store<Reducers>,
@@ -58,22 +58,12 @@ export class WorkoutShareComponent implements OnInit {
       const workoutsToShare = this.workoutsList.filter((workout, index) => {
         return this.selectedWorkoutsIndexes.includes(index);
       });
-      switch (this.shareType) {
-        case workoutShareTypes.free: {
-          this.myWorkoutService.shareWorkoutsWithFriend('free', this.transferTarget._id, workoutsToShare).subscribe(res => {
-            this.toastGeneratorService.presentToast(`Trening został udostępniony poprawnie`, 'success');
-            this.modalController.dismiss();
-          }, err => {
-            this.toastGeneratorService.presentToast(`Nie udało się udostępnić treningu`, 'danger');
-          });
-
-          break;
-        }
-        case workoutShareTypes.pay: {
-          break;
-        }
-
-      }
+      this.myWorkoutService.shareWorkoutsWithFriend('free', this.transferTarget._id, workoutsToShare).subscribe(res => {
+        this.toastGeneratorService.presentToast(`Trening został udostępniony poprawnie`, 'success');
+        this.modalController.dismiss();
+      }, err => {
+        this.toastGeneratorService.presentToast(`Nie udało się udostępnić treningu`, 'danger');
+      });
     }
   }
 
