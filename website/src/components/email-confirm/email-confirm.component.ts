@@ -23,8 +23,7 @@ export class EmailConfirmComponent implements OnInit {
       if (err.status === 0){
         this.router.navigateByUrl('/error');
       } else {
-        this.router.navigateByUrl('/error');
-        console.log("XD");
+        this.router.navigateByUrl('/process-error');
       }
     });
   }

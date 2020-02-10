@@ -6,7 +6,7 @@
           <div class="iconbox" > 
             <ion-icon  name="arrow-round-back" (click)="exitDisplayOtherProfileMode()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
           </div> 
-          <div class="iconbox-2" >
+          <div class="iconbox--2" >
           <ion-icon name="chatboxes" class="guest-chatbox" *ngIf="user.email !== ownerEmail" (click)="openChat()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
           </div>
         </ng-container>
