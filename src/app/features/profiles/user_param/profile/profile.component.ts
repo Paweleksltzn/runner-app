@@ -109,6 +109,7 @@ export class ProfileComponent implements OnInit {
     const profilePhoto = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
+      saveToGallery: false,
       resultType: CameraResultType.Base64
     });
     const imagePath = imageMimeType  + profilePhoto.base64String;
