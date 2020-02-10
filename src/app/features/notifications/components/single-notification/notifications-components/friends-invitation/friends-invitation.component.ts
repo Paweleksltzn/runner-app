@@ -7,6 +7,7 @@ import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { NewFriendNotification } from 'src/app/shared/interfaces/notifications/newFriendNotification';
 
 @Component({
   selector: 'app-friends-invitation',
@@ -14,7 +15,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./friends-invitation.component.scss'],
 })
 export class FriendsInvitationComponent implements OnInit {
-  @Input() notification: Notification;
+  @Input() notification: NewFriendNotification;
   @Input() index: number;
 
   constructor(private store: Store<Reducers>,

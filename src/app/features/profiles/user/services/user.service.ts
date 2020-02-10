@@ -9,6 +9,7 @@ import { Reducers, actions } from 'src/app/store';
 import { User } from 'src/app/shared/interfaces/auth/User';
 import { Socket } from 'ngx-socket-io';
 import { socketEvents } from 'src/app/shared/entitys/sockets-events';
+import { Workout } from 'src/app/shared/interfaces/workout/workout';
 
 @Injectable({
   providedIn: 'root'

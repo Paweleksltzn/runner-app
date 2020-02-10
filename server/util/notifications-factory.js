@@ -2,37 +2,46 @@
 const Notification = require('../models/notification');
 const notificationsOptions = require('../enums/notificationsOptions');
 
-exports.createNotification = function(notificationType, author, receivers, authorMessage, definiedTitle) {
+// options propertys
+// notificationType, author, receivers, authorMessage, definiedTitle, sharedWorkoutsList
+
+exports.createNotification = function(options) {
     let title;
     let message;
     let newFriendId = '';
     const isDisplayed = false;
-    switch(notificationType) {
+    switch(options.notificationType) {
         case notificationsOptions.friendInvitation: {
             title = 'Zaproszenie do znajomych';
-            newFriendId = author.userProfile;
-            message = `Witaj ${receivers[0].name}, czy chciałbyś zostać moim znajomym ?`;
+            newFriendId = options.author.userProfile;
+            message = `Witaj ${options.receivers[0].name}, czy chciałbyś zostać moim znajomym ?`;
             break;
         }
         case notificationsOptions.info: {
-            message = authorMessage;
-            title = definiedTitle || 'Informacja';
+            message = options.authorMessage;
+            title = options.definiedTitle || 'Informacja';
             break;
         }
         case notificationsOptions.friendInvitationResponse: {
             title = 'Odpowiedź na zaproszenie';
-            message = authorMessage;
+            message = options.authorMessage;
+            break;
+        }
+        case notificationsOptions.workoutsShare: {
+            title = 'Propozycja nowych treningów';
+            message = `Witaj ${options.receivers[0].name}, zapraszam cię do użytkowania moich treningów.`;
             break;
         }
     }
     return new Notification({
         title,
-        type: notificationType,
+        type: options.notificationType,
         message,
         newFriendId,
         isDisplayed,
-        author,
-        receivers,
+        author: options.author,
+        receivers: options.receivers,
+        sharedWorkoutsList: options.sharedWorkoutsList || undefined,
         creationDate: new Date()
     });
 }

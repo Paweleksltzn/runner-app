@@ -4,7 +4,7 @@ import { Workout } from 'src/app/shared/interfaces/workout/workout';
 import { environment } from 'src/environments/environment';
 import { Store, select } from '@ngrx/store';
 import { actions, Reducers } from 'src/app/store';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
 
@@ -37,4 +37,20 @@ export class MyWorkoutService {
       storeSubscription.unsubscribe();
     });
   }
+
+  public shareWorkoutsWithFriend(shareMode: string, transferTargetId: string, workoutsList: Workout[]): Observable<any> {
+    return this.http.post
+    (`${environment.srvAddress}/${environment.endpoints.workoutShare}/${shareMode}/${transferTargetId}`, { workoutsList });
+  }
+
+  public acceptWorkoutShare(shareMode: string, workoutsList: Workout[], shareAuthorId: string): Observable<any> {
+    return this.http.post
+    (`${environment.srvAddress}/${environment.endpoints.workoutShare}/acceptShare/${shareMode}`, { workoutsList }, {
+      params: {
+        shareAuthorId
+      }
+    });
+  }
+
+
 }

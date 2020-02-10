@@ -34,6 +34,33 @@ const notificationSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+  sharedWorkoutsList: {
+      type: [{
+        creationDate: {
+          type: Date,
+          required: true
+        },
+        title: {
+            type: String,
+            required: true
+          },
+          author: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+          },
+          excercises: {
+            type: [{
+                name: String,
+                breakTime: Number,
+                series: [{
+                    repeats: Number,
+                    weight:Number
+                }]
+            }]
+          }
+      }]
   }
 });
 

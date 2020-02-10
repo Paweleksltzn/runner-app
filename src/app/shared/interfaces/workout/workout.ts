@@ -8,6 +8,6 @@ export interface Workout {
     title: string;
     excercises: Array<Excersise>;
     creationDate?: Date;
-    author?: User;
+    author?: User | string;
     _id?: string;
 }

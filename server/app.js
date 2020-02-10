@@ -13,6 +13,7 @@ const socketEvents = require('./util/socketEvents');
 
 const authRouter = require('./routes/auth');
 const workoutRouter = require('./routes/workout');
+const workoutShareRouter = require('./routes/workoutShare');
 const notificationRouter = require('./routes/notification');
 const searchersRouter = require('./routes/searcher');
 const trainerRouter = require('./routes/trainer');
@@ -41,6 +42,7 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', authRouter); 
 app.use('/api/workout', jwtManager.jwtVerivier, workoutRouter); 
+app.use('/api/workoutShare', jwtManager.jwtVerivier, workoutShareRouter);
 app.use('/api/notification', jwtManager.jwtVerivier, notificationRouter); 
 app.use('/api/trainer', jwtManager.jwtVerivier, trainerRouter); 
 app.use('/api/user', jwtManager.jwtVerivier, userRouter);
