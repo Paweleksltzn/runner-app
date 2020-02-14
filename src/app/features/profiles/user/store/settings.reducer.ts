@@ -19,6 +19,7 @@ export const initialState: storeState.ProfileState = {
   ownerProfileId: '',
   ownerGradient: undefined,
   ownerImgUrl: 'assets/images/profile-picture.png',
+  croppedImageUrl: '',
   ownerEmail: undefined,
   ownerName: undefined,
   ownerSurname: undefined,
@@ -107,7 +108,8 @@ const profileReducerOptions = createReducer(
    on(actions.profileAction.setOwnerAccessLevel, (state, action) => ({
      ...state,
      ownerAccessLevel: action.ownerAccessLevel
-   }))
+   })),
+   on(actions.profileAction.setTemporaryImg, (state, action) => ({ ...state, croppedImageUrl: action.croppedImageUrl}))
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {
   return profileReducerOptions(state, action);
