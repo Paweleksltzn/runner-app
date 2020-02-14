@@ -2,9 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const fs = require('fs');
 
-const credentials = require('./util/credentials');
+const databaseCredentials = require('./util/databaseCredentials');
 
 const app = express();
 
@@ -53,7 +52,7 @@ app.use('/api/conversation',jwtManager.jwtVerivier, conversationRouter);
 let server;
 
 mongoose
-  .connect(credentials.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+  .connect(databaseCredentials.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(result => {
     server = app.listen(process.env.PORT || 3000);
     const io = require('./util/socket').init(server);

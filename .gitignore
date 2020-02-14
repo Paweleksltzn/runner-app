@@ -13,6 +13,7 @@
 /website/node_modules
 /node_modules
 /server/util/credentials.js
+/server/util/databaseCredentials.js
 /nodemon.json
 /plugins
 /android
