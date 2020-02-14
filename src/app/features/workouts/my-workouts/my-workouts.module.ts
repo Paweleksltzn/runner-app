@@ -8,6 +8,7 @@ import { MyWorkoutComponent } from './my-workout/my-workout.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { myWorkoutReducer } from './store/my-workout-store';
+import { WorkoutShareComponent } from '../components/workout-share/workout-share.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
     SharedModule,
     StoreModule.forFeature('myWorkouts', myWorkoutReducer)
   ],
-  declarations: [MyWorkoutsPage, MyWorkoutComponent]
+  declarations: [MyWorkoutsPage, MyWorkoutComponent, WorkoutShareComponent],
+  entryComponents: [WorkoutShareComponent]
 })
 export class MyWorkoutsPageModule {}

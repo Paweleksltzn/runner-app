@@ -2,9 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const fs = require('fs');
 
-const credentials = require('./util/credentials');
+const databaseCredentials = require('./util/databaseCredentials');
 
 const app = express();
 
@@ -13,6 +12,7 @@ const socketEvents = require('./util/socketEvents');
 
 const authRouter = require('./routes/auth');
 const workoutRouter = require('./routes/workout');
+const workoutShareRouter = require('./routes/workoutShare');
 const notificationRouter = require('./routes/notification');
 const searchersRouter = require('./routes/searcher');
 const trainerRouter = require('./routes/trainer');
@@ -41,6 +41,7 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', authRouter); 
 app.use('/api/workout', jwtManager.jwtVerivier, workoutRouter); 
+app.use('/api/workoutShare', jwtManager.jwtVerivier, workoutShareRouter);
 app.use('/api/notification', jwtManager.jwtVerivier, notificationRouter); 
 app.use('/api/trainer', jwtManager.jwtVerivier, trainerRouter); 
 app.use('/api/user', jwtManager.jwtVerivier, userRouter);
@@ -51,7 +52,7 @@ app.use('/api/conversation',jwtManager.jwtVerivier, conversationRouter);
 let server;
 
 mongoose
-  .connect(credentials.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+  .connect(databaseCredentials.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(result => {
     server = app.listen(process.env.PORT || 3000);
     const io = require('./util/socket').init(server);

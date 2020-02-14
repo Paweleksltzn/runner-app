@@ -58,13 +58,12 @@ exports.login = async function(req, res, next) {
     const password = req.body.password;
     try {
         const user = await User.findOne({email}).populate('userProfile');
-        const friends = await UserProfile.find({
-            '_id': {
-                '$in': user.userProfile.friends
-            }
-        });
-
         if (user) {
+            const friends = await UserProfile.find({
+                '_id': {
+                    '$in': user.userProfile.friends
+                }
+            });
             if (!user.isActive) {
                 return res.status(422).send('Email nie został potwierdzony');
             }

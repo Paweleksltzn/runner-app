@@ -7,7 +7,8 @@ export const initialState: storeState.AuthState = {
     name: '',
     surname: '',
     isMale: undefined,
-    accessLevel: undefined
+    accessLevel: undefined,
+    _id: ''
 };
 
 const authReducerOptions = createReducer(initialState,
@@ -17,7 +18,8 @@ const authReducerOptions = createReducer(initialState,
          surname: action.surname,
          email: action.email,
          isMale: action.isMale,
-         accessLevel: action.accessLevel
+         accessLevel: action.accessLevel,
+         _id: action._id
     })),
     on(actions.authActions.signOut, ( state, action ) => ({
         ...state,
@@ -25,7 +27,8 @@ const authReducerOptions = createReducer(initialState,
         name: '',
         surname: '',
         isMale: undefined,
-        accessLevel: undefined
+        accessLevel: undefined,
+        _id: ''
     })),
 
 );
