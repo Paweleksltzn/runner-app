@@ -17,7 +17,7 @@ export class HistoryPage implements OnInit {
   public workoutsHistory: Workout[] = [];
   public isStoreLoaded = false;
 
-  @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   constructor(private historyService: HistoryService, private router: Router,
               private store: Store<Reducers>) { }
