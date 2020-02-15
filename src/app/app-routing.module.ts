@@ -4,14 +4,14 @@ import { FirstLevelGuard } from 'src/app/core/auth/authGuards/firstLevelGuard';
 import { NotLoggedGuard } from './core/auth/authGuards/notLoggedGuard';
 
 const routes: Routes = [
-  { path: 'auth', loadChildren: './core/auth/auth.module#AuthModule', canActivate: [NotLoggedGuard] },
-  { path: 'user/profile', loadChildren: './features/profiles/user/user.module#UserModule', canActivate: [FirstLevelGuard]},
-  { path: 'chat', loadChildren: './features/profiles/user_param/chat/chat/chat.module#ChatModule', canActivate: [FirstLevelGuard]},
-  { path: 'workout', loadChildren: './features/workouts/active-workout/active-workout.module#ActiveWorkoutPageModule',
+  { path: 'auth', loadChildren: () => import('./core/auth/auth.module').then(m => m.AuthModule), canActivate: [NotLoggedGuard] },
+  { path: 'user/profile', loadChildren: () => import('./features/profiles/user/user.module').then(m => m.UserModule), canActivate: [FirstLevelGuard]},
+  { path: 'chat', loadChildren: () => import('./features/profiles/user_param/chat/chat/chat.module').then(m => m.ChatModule), canActivate: [FirstLevelGuard]},
+  { path: 'workout', loadChildren: () => import('./features/workouts/active-workout/active-workout.module').then(m => m.ActiveWorkoutPageModule),
    canActivate: [FirstLevelGuard] },
-  { path: 'my-workouts', loadChildren: './features/workouts/my-workouts/my-workouts.module#MyWorkoutsPageModule',
+  { path: 'my-workouts', loadChildren: () => import('./features/workouts/my-workouts/my-workouts.module').then(m => m.MyWorkoutsPageModule),
    canActivate: [FirstLevelGuard] },
-  { path: 'workouts-history', loadChildren: './features/workouts/history/history.module#HistoryPageModule',
+  { path: 'workouts-history', loadChildren: () => import('./features/workouts/history/history.module').then(m => m.HistoryPageModule),
    canActivate: [FirstLevelGuard] }
 
 ];
