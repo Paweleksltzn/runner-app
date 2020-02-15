@@ -9,6 +9,10 @@
     "src/polyfills.ts"
   ],
   "include": [
-    "src/**/*.d.ts"
-  ]
+    "src/**/*.d.ts",
+    "src/zone-flags.ts"
+  ],
+  "angularCompilerOptions": {
+    "enableIvy": false
+  }
 }
