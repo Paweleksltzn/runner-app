@@ -26,6 +26,9 @@ module.exports =  (receiver, subject, confirmToken) => {
 
 const environment = 'https://fitup3.szymonpawel123.usermd.net';
 
+// const environment = 'localhost:4200';
+
+
 const emailHtmlFactory = (subject, confirmToken, receiver) => {
     switch(subject) {
         case emailOptions.emailConfirmation: {

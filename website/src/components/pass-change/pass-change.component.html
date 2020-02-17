@@ -17,5 +17,7 @@
   </div>
   <div *ngIf="isFormValid === false" ><p>Hasło musi zawierać conajmniej 8 znaków</p></div>
   <div *ngIf="passForm.value.pass !== passForm.value.passChk  " ><p>Wpisane hasła muszą być takie same</p></div>
+  <div *ngIf="errorMessage" ><p>{{errorMessage}}</p></div>
+  <div *ngIf="successMessage" ><p class="success">{{successMessage}}</p></div>
 
 </div>
