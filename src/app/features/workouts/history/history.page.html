@@ -3,7 +3,6 @@
     <ion-title>Historia treningów</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
     <div *ngIf="workoutsHistory.length === 0">
         <h5 class="empty-trainings">Historia jest pusta</h5>
@@ -25,7 +24,7 @@
             <ion-col>
                 <ion-button class="workout__container--button ion-float-right" (click)="openWorkoutDetails(historyWorkout, workoutIndex)">
                     Więcej
-                  <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+                  <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
                 </ion-button>
             </ion-col>
           </ion-row>
