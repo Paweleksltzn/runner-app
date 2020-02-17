@@ -49,6 +49,11 @@
         background: $red-gradient;
     }
 }
+.short-button.short-button-tertiary-outline {
+    background: transparent;
+    border: 1px solid red;
+    color: red;
+}
 .short-button.bigger {
     ion-icon {
         background-size: 20px 30px;
