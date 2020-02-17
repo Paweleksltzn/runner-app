@@ -10,11 +10,12 @@ import { FormGroup, FormControl , Validators , FormBuilder } from '@angular/form
   styleUrls: ['./pass-change.component.css']
 })
 export class PassChangeComponent implements OnInit {
-  public newPassword: string;
-  public newPasswordCheck: string;
   public passForm: FormGroup;
   public isFormValid: boolean;
   public tokenString;
+  public errorMessage = '';
+  public successMessage = '';
+
   constructor(
     private passwordService: PasswordService,
     private activatedRoute: ActivatedRoute,
@@ -27,22 +28,23 @@ export class PassChangeComponent implements OnInit {
   }
 
   public onSubmit() {
-    const password: PasswordResetData = ({
-      password: this.newPassword,
-      confirmPassword: this.newPasswordCheck,
+    const password: PasswordResetData = {
+      password: this.passForm.value.pass,
+      confirmPassword: this.passForm.value.passChk,
       token: this.tokenString
-    });
+    };
     this.isFormValid = this.passForm.valid;
-    console.log(this.isFormValid);
     if (this.isFormValid && this.passForm.value.pass === this.passForm.value.passChk ) {
       this.passwordService.changedPassword(password).subscribe((res: any) => {
+        this.successMessage = 'Hasło zmienione pomyślnie';
       },
-      err =>{
-        if (err.status === 0){
+      err => {
+        this.errorMessage = 'Nie udało się zmienić hasła, spróbój ponownie później';
+        if (err.status === 0) {
           this.router.navigateByUrl('/error');
         }
       });
-    } else{
+    } else {
       this.isFormValid = false;
     }
   }

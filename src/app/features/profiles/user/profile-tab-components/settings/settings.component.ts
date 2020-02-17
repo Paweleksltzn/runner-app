@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { ActivateCoachAccountComponent } from './activateCoachAccount/activate-coach-account/activate-coach-account.component';
 import { UserService } from '../../services/user.service';
 import * as storeState from 'src/app/shared/interfaces/store/index';
+import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +20,8 @@ export class SettingsComponent implements OnInit {
   constructor( private store: Store<Reducers>,
                private authService: AuthService,
                private modalController: ModalController,
-               private userService: UserService
+               private userService: UserService,
+               private toastGeneratorService: ToastGeneratorService
                ) { }
 
   ngOnInit() {
@@ -46,6 +48,12 @@ export class SettingsComponent implements OnInit {
     });
     this.currentModal = coachAccountActivation;
     return await coachAccountActivation.present();
+  }
+
+  public changePassword() {
+    this.authService.changePassword().subscribe(
+      (res: string) => this.toastGeneratorService.presentToast(res, 'success'),
+      err => this.toastGeneratorService.presentToast(err.error, 'success'));
   }
 
 }

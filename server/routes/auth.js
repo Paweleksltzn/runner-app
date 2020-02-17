@@ -4,6 +4,7 @@ const { check, body } = require('express-validator');
 const authenticationController = require('../controlers/auth');
 
 const router = express.Router();
+const jwtManager = require('../auth-guards/jwt-managment');
 const User = require('../models/user');
 
 router.post('/signup',[
@@ -44,7 +45,7 @@ router.post('/login', [
  router.post('/autoLogin', authenticationController.autoLogin);
 
  router.post('/emailConfirmed', authenticationController.emailConfirmed);
- router.post('/password/reset', authenticationController.passwordReset);
+ router.put('/password/reset', jwtManager.jwtVerivier, authenticationController.passwordReset);
  
  router.post('/password/reset/attempt', [
      check('password').isLength({ min: 8 }).withMessage('Haslo musi miec conajmniej 8 znakow'),
@@ -54,7 +55,6 @@ router.post('/login', [
            }
          return true;
      }),
- ],authenticationController.passwordResetAttempt)
-
+ ], authenticationController.passwordResetAttempt)
 
 module.exports = router;

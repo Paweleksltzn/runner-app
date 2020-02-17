@@ -121,13 +121,12 @@ exports.emailConfirmed = async function(req, res, next) {
 }
 
 exports.passwordReset = async function(req, res, next) {
-    const email = req.body.email;
     const buffer = crypto.randomBytes(256);
     const confirmationToken = buffer.toString('hex');
-    const  resetPasswordUser = await User.findOne({ email, isActive: true });
+    const resetPasswordUser = await User.findById(req.token._id);
     try {
         if (resetPasswordUser) {
-            await emailSender(email, emailOptions.passwordReset, confirmationToken);
+            await emailSender(req.token.email, emailOptions.passwordReset, confirmationToken);
         } else {
             return res.status(422).send('Nieprawidłowy adres email');
         }

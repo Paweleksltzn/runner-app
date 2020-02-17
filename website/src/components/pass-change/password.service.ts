@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 export class PasswordService {
 
   constructor(private http: HttpClient) { }
-  public changedPassword(newPassword: PasswordResetData): Observable<string>{
+  public changedPassword(newPassword: PasswordResetData): Observable<string> {
     return this.http.post<string>(`${environment.srvAddress}/${environment.endpoints.auth}/password/reset/attempt`, newPassword);
   }
 }

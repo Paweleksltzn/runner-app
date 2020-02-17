@@ -54,6 +54,9 @@ button{
 p{
   color: red;
 }
+.success {
+  color: green;
+}
 button:focus{
   border-bottom: solid 4px;
 }
