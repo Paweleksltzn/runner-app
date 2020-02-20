@@ -4,7 +4,7 @@
       <div class="profile-picture"  [ngClass]="{'gradient-1':user.gradient  === 1, 'gradient-2':user.gradient  === 2, 'gradient-3':user.gradient  === 3}">
         <ng-container *ngIf="!user.isMyProfile">
           <div class="iconbox" > 
-            <ion-icon  name="arrow-back-outline" (click)="exitDisplayOtherProfileMode()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
+            <ion-icon  name="arrow-back" (click)="exitDisplayOtherProfileMode()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
           </div> 
           <div class="iconbox--2" >
           <ion-icon name="chatboxes" class="guest-chatbox" *ngIf="user.email !== ownerEmail" (click)="openChat()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
@@ -12,7 +12,7 @@
         </ng-container>
         <ng-container *ngIf="user.isMyProfile">
           <div class="iconbox" routerLink="/chat"> 
-            <ion-icon  name="chatbox-outline" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
+            <ion-icon  name="chatboxes" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
             <span class="unreaded-messages__amount" *ngIf="unreadedMessagesAmount > 0">{{unreadedMessagesAmount}}</span>
           </div> 
         </ng-container>
@@ -54,7 +54,7 @@
       <ion-slides  padding-bottom scrollbar="true" [options]="slideOpts">
         <ion-slide>
       <div class="friends" routerLink="/user/profile/friends" (click)="switchProfileTab(1)" [ngClass]="{'tab-select':selectedProfileTab  === 1}">
-        <ion-icon name="people-outline"></ion-icon>
+        <ion-icon name="people"></ion-icon>
         <span>Znajomi</span>
       </div>
     </ion-slide>
