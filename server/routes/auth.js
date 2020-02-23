@@ -7,7 +7,7 @@ const router = express.Router();
 const jwtManager = require('../auth-guards/jwt-managment');
 const User = require('../models/user');
 
-router.post('/signup',[
+router.post('/signup', [
     check('name').isLength({ min: 1 }).withMessage('Podaj imie'),
     check('surname').isLength({ min: 1 }).withMessage('Podaj nazwisko'),
     check('email').isEmail().withMessage('Podaj poprawny adres email').normalizeEmail()

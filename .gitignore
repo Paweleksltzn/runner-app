@@ -18,6 +18,7 @@
 /plugins
 /android
 /server/node_modules
+/final-after-S06/node_modules
 /resources
 /www
 /config.xml

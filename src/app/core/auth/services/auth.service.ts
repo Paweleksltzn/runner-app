@@ -31,7 +31,7 @@ export class AuthService {
               private store: Store<Reducers>,
               private notificationsService: NotificationsService,
               private socket: Socket,
-              private conversationsService: ConversationService
+              private conversationsService: ConversationService,
               ) {
                 this.socket.fromEvent(socketEvents.connect).subscribe((newFriend: UserProfile) => {
                   if (this.token) {
