@@ -9,7 +9,6 @@ import { ToastGeneratorService } from './services/toast-generator.service';
 import { StorageService } from './services/storage.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
-
 @NgModule({
   declarations: [TabsNavComponent],
   imports: [

@@ -332,7 +332,8 @@ body {
     .card__heading-span--3 {
       background-image: linear-gradient(to right bottom, rgba(41, 152, 255, 0.85), rgba(86, 67, 250, 0.85)); }
   .card__details {
-    padding: 3rem; }
+    padding: 3rem;
+    margin-top: 5rem; }
     .card__details ul {
       list-style: none;
       width: 80%;
@@ -654,7 +655,6 @@ body {
         transform: translateX(-3rem) skewX(0); } }
   .story__img {
     height: 100%;
-    transform: translateX(-4rem) scale(1.4);
     backface-visibility: hidden;
     transition: all .5s; }
   .story__text {
@@ -678,7 +678,7 @@ body {
     opacity: 1;
     transform: translate(-50%, -50%); }
   .story:hover .story__img {
-    transform: translateX(-4rem) scale(1);
+    transform: scale(1.2);
     filter: blur(3px) brightness(80%); }
 
 .footer {
