@@ -35,6 +35,19 @@
         }
     }
 
+    &__response {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-left: 2rem;
+    }
+
+    &__response--success {
+        color: $color-primary;
+    }
+
+    &__response--error {
+        color: #ff0033;
+    }
 
     &__label {
         font-size: 1.2rem;

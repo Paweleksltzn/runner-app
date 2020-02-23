@@ -488,6 +488,17 @@ body {
   .form__input::-webkit-input-placeholder {
     color: #999; }
 
+.form__response {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-left: 2rem; }
+
+.form__response--success {
+  color: #55c57a; }
+
+.form__response--error {
+  color: #ff0033; }
+
 .form__label {
   font-size: 1.2rem;
   font-weight: 700;

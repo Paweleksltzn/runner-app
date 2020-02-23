@@ -1,5 +1,6 @@
 (function(){
     calcFeatureBoxesHeight();
+    document.querySelector('#section-book .book__form .btn--green').addEventListener('click', saveForNewsletter)
     document.querySelectorAll('.navigation .navigation__nav .navigation__list .navigation__item').forEach(link => {
         link.addEventListener('click', closeMenuAfterNavigate);
     });
@@ -22,4 +23,28 @@ function calcFeatureBoxesHeight() {
             featureBox.style.height = `${height}px`;
         }
     });
+}
+
+async function saveForNewsletter(e) {
+    e.preventDefault();
+    const responseContainer = document.getElementById('form-response');
+    const nameAndSurname = document.getElementById('name').value || '';
+    const email = document.getElementById('email').value || '';
+    const serverAddress = `http://localhost:3000/api/public/subscribe-newsletter`; 
+    const response = await fetch(serverAddress, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            nameAndSurname,
+            email
+        })
+    });
+    responseContainer.classList.remove('form__response--success', 'form__response--error')
+    responseContainer.classList.add(
+        response.status === 200 ? 'form__response--success' : 'form__response--error'
+    );
+    const { message } = await response.json()
+    responseContainer.textContent = message;
 }
