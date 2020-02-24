@@ -709,6 +709,10 @@ body {
   .footer__logo {
     width: 15rem;
     height: auto; }
+  .footer__navigation {
+    border-top: 1px solid #777;
+    padding-top: 2rem;
+    display: inline-block; }
   .footer__contact {
     border-top: 1px solid #777;
     padding-top: 2rem;
