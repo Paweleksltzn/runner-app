@@ -28,8 +28,10 @@ function calcFeatureBoxesHeight() {
 async function saveForNewsletter(e) {
     e.preventDefault();
     const responseContainer = document.getElementById('form-response');
-    const nameAndSurname = document.getElementById('name').value || '';
-    const email = document.getElementById('email').value || '';
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const nameAndSurname =  nameInput.value || '';
+    const email = emailInput.value || '';
     const serverAddress = `http://localhost:3000/api/public/subscribe-newsletter`; 
     const response = await fetch(serverAddress, {
         method: 'POST',
@@ -45,6 +47,10 @@ async function saveForNewsletter(e) {
     responseContainer.classList.add(
         response.status === 200 ? 'form__response--success' : 'form__response--error'
     );
+    if (response.status === 200) {
+        nameInput.value = '';
+        emailInput.value = '';
+    }
     const { message } = await response.json()
     responseContainer.textContent = message;
 }
