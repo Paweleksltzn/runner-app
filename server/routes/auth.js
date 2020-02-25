@@ -48,7 +48,7 @@ router.post('/login', [
  router.put('/password/reset', jwtManager.jwtVerivier, authenticationController.passwordReset);
  
  router.post('/password/reset/attempt', [
-     check('password').isLength({ min: 8 }).withMessage('Haslo musi miec conajmniej 8 znakow'),
+     check('password').isLength({ min: 8 }).withMessage('Hasło musi mieć co najmniej 8 znaków'),
      check('confirmPassword').custom((value, { req }) => {
          if (value !== req.body.password) {
              throw new Error('Hasła muszą być identyczne!');
