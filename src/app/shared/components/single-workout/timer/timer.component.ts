@@ -20,9 +20,12 @@ export class TimerComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select('singleWorkout')).subscribe((state: storeState.WorkoutState) => {
+      if (!state.currentWorkout) {
+        this.timerSubscription.unsubscribe();
+      }
+      this.shouldStartTimer = state.isTimerOn;
       this.timerSubscription = state.timerSubscription;
       this.trainingTime = state.trainingTime;
-      this.shouldStartTimer = state.isTimerOn;
     });
   }
 

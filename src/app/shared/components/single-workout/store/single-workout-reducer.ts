@@ -52,7 +52,9 @@ const singleWorkoutReducerOptions = createReducer(initialState,
       }),
 
       on(actions.singleWorkoutActions.finishWorkout, ( state, action ) =>
-      ({...state, currentWorkout: undefined })),
+      ({...state, currentWorkout: undefined, timerSubscription: undefined, isTimerOn: false, trainingTime: {
+        ...startingTrainingTime
+      },  })),
 
       on(actions.singleWorkoutActions.loadTrainingToHistory, ( state, action ) => {
         const newWorkout = JSON.parse(JSON.stringify(action.newTrainingToShow)) || [];
