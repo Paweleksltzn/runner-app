@@ -13,6 +13,7 @@ router.post('/rejectFriendInvitation', userController.rejectFriendInvitation);
 router.post('/changeGradient', userController.changeGradient);
 router.post('/changeDescription', userController.changeDescription);
 router.post('/changeProfileImage', multer({storage}).single('profileImage'), userController.changeProfileImage);
+router.delete('/deleteProfileImage', userController.removeProfileImage);
 router.get('/getFriendsForUserProfile', userController.getFriendsForUserProfile);
 
 module.exports = router;
