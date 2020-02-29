@@ -59,7 +59,7 @@ export class UserService {
     return this.http.get(`${environment.srvAddress}/${environment.endpoints.user}/getFriendsForUserProfile`, queryParams);
   }
   
-  public deleteProfilePhoto(){
+  public deleteProfilePhoto(): Observable<any> {
     return this.http.delete(`${environment.srvAddress}/${environment.endpoints.user}/deleteProfileImage`);
   }
 
