@@ -217,7 +217,7 @@ exports.removeProfileImage  = async function (req, res, next) {
                     console.log('file deleted successfully');
                 });  
             }
-            userProfile.imgUrl = imagePath;
+            userProfile.imgUrl = '';
             userProfile.save();
         }
         return res.json({message: 'Pomyślnie usunięto zdjęcie profilowe'});
