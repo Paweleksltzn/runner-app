@@ -118,7 +118,6 @@ export class ProfileComponent implements OnInit {
     },
     err=>{
       this.toastGeneratorService.presentToast('Wystąpił bład podczas usuwania zdjęcia profilowego', 'danger');
-      alert(JSON.stringify(err));
     })
     
   }
