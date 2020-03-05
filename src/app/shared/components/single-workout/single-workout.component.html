@@ -15,6 +15,12 @@
                 <mat-panel-title>
                   <ion-reorder slot="start"></ion-reorder>
                   <span class="exercise-name">{{ excercise.name }}</span>
+                  <div>
+                    <a class="short-button short-button-tertiary-outline" target="blank"
+                    [href]="'https://www.youtube.com/results?search_query=' + excercise.name">
+                      <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                  </div>
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <ion-grid class="justify-content-between" class="series-grid" [ngClass]="{'history-series-grid': workoutMode === modes.history}">
@@ -26,11 +32,10 @@
                       onkeyup="this.value=this.value.replace(/[^\d]/,'')"> <span class="result-description">s.</span>
                     </h6>
                   </ion-col>
-                  <ion-col size="auto">
-                    <a class="short-button short-button-tertiary-outline" target="blank"
-                    [href]="'https://www.youtube.com/results?search_query=' + excercise.name">
-                      <ion-icon name="play"></ion-icon>
-                    </a>
+                  <ion-col size="auto" >
+                    <button class="short-button short-button-secondary timer" (click)="openTimer()" *ngIf="workoutMode === modes.training">
+                      <ion-icon name="time" class="short-button-icon"></ion-icon>
+                    </button>
                   </ion-col>
                 </ion-row>
                 <ion-row *ngFor="let singleSet of excercise.series; let i = index;">
@@ -81,9 +86,6 @@
   </mat-accordion>  
   <button class="short-button short-button-primary add-exercise" (click)="addExercise()" *ngIf="workoutMode !== modes.history">
     <ion-icon name="add" class="short-button-icon"></ion-icon>
-  </button>
-  <button class="short-button short-button-secondary add-exercise" (click)="openTimer()" *ngIf="workoutMode === modes.training">
-    <ion-icon name="time" class="short-button-icon"></ion-icon>
   </button>
   <ion-button class="end-training" (click)="finishWorkout()" *ngIf="workoutMode === modes.training">Zakończ trening</ion-button>
   <ion-grid  *ngIf="workoutMode === modes.trainingList">
