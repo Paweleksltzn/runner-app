@@ -58,6 +58,10 @@ export class UserService {
     };
     return this.http.get(`${environment.srvAddress}/${environment.endpoints.user}/getFriendsForUserProfile`, queryParams);
   }
+  
+  public deleteProfilePhoto(): Observable<any> {
+    return this.http.delete(`${environment.srvAddress}/${environment.endpoints.user}/deleteProfileImage`);
+  }
 
   private subscribeOnFriendDeletion() {
     this.socket.fromEvent(socketEvents.friendDeletion).subscribe((oldFriendId: string) => {

@@ -88,8 +88,14 @@ export class ProfileComponent implements OnInit {
         icon: 'photos',
         handler: () => {
           this.takePhoto();
-        }
-      }]
+        }},
+        {
+          text: 'Usuń zdjęcie',
+          icon: 'photos',
+          handler: () => {
+            this.removePhoto();
+          }}
+        ]
     });
     await actionSheet.present();
     } else {
@@ -102,6 +108,18 @@ export class ProfileComponent implements OnInit {
       element: 'class',
       value: 'image',
       });
+  }
+
+  public removePhoto() {
+    const imagePath = '';
+    this.userService.deleteProfilePhoto().subscribe(res =>{
+      this.store.dispatch(actions.profileAction.setTemporaryImg({croppedImageUrl: imagePath}));
+      this.toastGeneratorService.presentToast('Zdjęcie profilowe usunięte pomyślnie', 'success');
+    },
+    err=>{
+      this.toastGeneratorService.presentToast('Wystąpił bład podczas usuwania zdjęcia profilowego', 'danger');
+    })
+    
   }
 
   public async takePhoto() {

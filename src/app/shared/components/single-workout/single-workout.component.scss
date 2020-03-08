@@ -67,7 +67,11 @@ ion-reorder-group {
 }
 .add-exercise {
     float: right;
-    margin:1.75rem 1.75rem 1.75rem 0
+    margin: 1.75rem 1.75rem 0
+}
+.timer {
+    margin-top: .75rem;
+    float: right;
 }
 .end-training {
     --background: linear-gradient(to right top, #15e6b5, #39e9b1, #4fecad, #61efaa, #71f2a6, #6af2ae, #63f3b6, #5cf3be, #3ef0d1, #22ede2, #1ce8f0, #34e3fa);
@@ -125,6 +129,9 @@ ion-content {
 .save-workout {
     --background: linear-gradient(to right top, #15e6b5, #39e9b1, #4fecad, #61efaa, #71f2a6, #6af2ae, #63f3b6, #5cf3be, #3ef0d1, #22ede2, #1ce8f0, #34e3fa);
     --color: #555;
+}
+.youtube-icon {
+    font-size: 1.4rem;
 }
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 

@@ -203,3 +203,26 @@ exports.changeProfileImage  = async function (req, res, next) {
         return res.status(500).send('Wystąpił błąd podczas zmiany zdjecia profilowego');
     }
 }
+
+exports.removeProfileImage  = async function (req, res, next) {
+    try {
+        const user = await User.findById(req.token._id);
+        const userProfile = await UserProfile.findById(user.userProfile);
+        if (userProfile.imgUrl) {
+            const index = userProfile.imgUrl.indexOf('profile-images/') + 15;
+            const fileName = userProfile.imgUrl.substr(index, 100);
+            if (fileName) {
+                fs.unlink(`public/files/profile-images/${fileName}`,function(err){
+                    if(err) {console.log(err);}
+                    console.log('file deleted successfully');
+                });  
+            }
+            userProfile.imgUrl = '';
+            userProfile.save();
+        }
+        return res.json({message: 'Pomyślnie usunięto zdjęcie profilowe'});
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send('Wystąpił błąd podczas usuwania zdjecia profilowego');
+    }
+}
