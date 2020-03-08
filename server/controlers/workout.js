@@ -143,7 +143,8 @@ const createNewHistoryWorkout = (newWorkoutInHistory, userVariable, author) => {
             trainingDate: newWorkoutInHistory.trainingDate,
             durationInMs,
             duration: finalDurationString,
-            excercises: newWorkoutInHistory.excercises
+            excercises: newWorkoutInHistory.excercises,
+            creationDate: new Date()
         }]
     }
 }

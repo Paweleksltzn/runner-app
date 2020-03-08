@@ -7,7 +7,6 @@ const workoutListSchema = new Schema({
       type: [{
         creationDate: {
           type: Date,
-          required: true
         },
         title: {
             type: String,
