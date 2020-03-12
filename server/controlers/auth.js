@@ -155,7 +155,8 @@ exports.passwordResetAttempt = async function(req, res, next) {
             resetPasswordUser.save();
             return res.json('Twoje hasło zostało zmienione');
         } else {
-            return res.status(422).send('Wystąpił błąd');
+            console.log('Nieprawidłowe dane użytkownika');
+            return res.status(400).send('Wystąpił błąd');
         }
     } catch(err) {
         return res.status(500).send('Wystąpił błąd');
