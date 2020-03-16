@@ -15,5 +15,11 @@ export interface UserProfile {
     invitedToFriends?: UserProfile[];
     friendsInvitations?: UserProfile[];
     isMyProfile: boolean;
+    ratesAmount: number;
+    ratesSum: number;
+    ratedTrainers: {
+        trainer: UserProfile,
+        rate: number
+    }[];
     _id?: string;
 }

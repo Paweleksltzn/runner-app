@@ -2,6 +2,6 @@
     <h3>Oceń trenera</h3>
     <ion-icon name="star" *ngFor="let star of ratingTab" (click)="starRated(star)" [ngClass]="{'star-color': star <= starRate}" >
     </ion-icon>
-    <ion-button>Prześlij opinie</ion-button>
+    <ion-button (click)="rateTrainer()">Prześlij opinie</ion-button>
 </div>
     

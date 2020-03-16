@@ -1,7 +1,7 @@
 <ion-content [scrollEvents]="true" (ionScroll)="scrollHandler($event)">
   <div class="main-container">
     <div class="main-container-profile" >
-      <div class="profile-picture"  [ngClass]="{'gradient-1':user.gradient  === 1, 'gradient-2':user.gradient  === 2, 'gradient-3':user.gradient  === 3}">
+      <div class="profile-picture"  [ngClass]="{'gradient-1':user.gradient  === 1 , 'gradient-2':user.gradient  === 2, 'gradient-3':user.gradient  === 3}">
         <ng-container *ngIf="!user.isMyProfile">
           <div class="iconbox" > 
             <ion-icon  name="arrow-back" (click)="exitDisplayOtherProfileMode()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
@@ -22,11 +22,12 @@
         <div class="profile-description__title">
           <h2>{{user.name}} {{user.surname}}</h2>
         </div>
-        <span>X ocen:</span>
-        <div class="rate">
-          
-          <ion-icon class="stars" name="star" *ngFor="let star of ratingTab"></ion-icon>
-        </div>
+        <ng-container *ngIf="user.accessLevel === 2">
+          <div class="rate">
+            <ion-icon class="stars" name="star" *ngFor="let star of ratingTab" [ngClass]="{'star-color': star <= user.ratesSum / user.ratesAmount}"></ion-icon>
+          </div>
+          <span class="rate-amount">{{user.isMyProfile ?  (user.ratesAmount || 0) + ' osoby oceniły twój profil' : (user.ratesAmount || 0) + ' osoby oceniły tego trenera'}}</span>
+        </ng-container>
         <ion-grid>
           <ion-row align-items-start justify-content-end>
             <ion-col size="2">

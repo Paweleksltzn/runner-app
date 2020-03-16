@@ -17,6 +17,11 @@
     width: 60vw;
     margin: 0 auto;
     padding: 1rem;
+    padding-bottom: 0;
+}
+.rate-amount {
+    margin-bottom: 1rem;
+    font-size: .8rem;
 }
 .stars{
     font-size: 30px;
@@ -127,4 +132,7 @@ span{
     .ratings, .friends, .achivments, .settings, .trainings{
         font-size: 12px;
     }
+}
+.star-color{
+    color: $mixed-main-colours;
 }

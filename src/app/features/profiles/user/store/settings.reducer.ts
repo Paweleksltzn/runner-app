@@ -26,6 +26,11 @@ export const initialState: storeState.ProfileState = {
   ownerProfileDescription: '',
   ownerIsMale: undefined,
   ownerAccessLevel: undefined,
+  ratesAmount: undefined,
+  ratesSum: 0,
+  ownerRatesSum: 0,
+  ownerRatesAmount: 0,
+  ratedTrainers: undefined,
   ownerFriends: [],
   ownerInvitedToFriends: [],
   ownerFriendsInvitations: []
@@ -46,7 +51,10 @@ const profileReducerOptions = createReducer(
     ownerFriends: action.friends || [],
     ownerGradient: action.userProfile.gradient,
     ownerInvitedToFriends: action.userProfile.invitedToFriends || [],
-    ownerFriendsInvitations: action.userProfile.friendsInvitations || []
+    ownerFriendsInvitations: action.userProfile.friendsInvitations || [],
+    ownerRatesAmount: action.userProfile.ratesAmount,
+    ownerRatesSum: action.userProfile.ratesSum,
+    ratedTrainers: action.userProfile.ratedTrainers
     }
   )),
   on(actions.profileAction.loadProfile, (state, action) => ({
@@ -62,7 +70,9 @@ const profileReducerOptions = createReducer(
     profileDescription: action.userProfile.profileDescription,
     friends: action.userProfile.friends || [],
     invitedToFriends: action.userProfile.invitedToFriends || [],
-    friendsInvitations: action.userProfile.friendsInvitations || []
+    friendsInvitations: action.userProfile.friendsInvitations || [],
+    ratesAmount: action.userProfile.ratesAmount,
+    ratesSum: action.userProfile.ratesSum
     }
   )),
   on(actions.profileAction.setTheme, (state, action) => ({ ...state, ownerGradient: action.gradient})),
@@ -109,7 +119,10 @@ const profileReducerOptions = createReducer(
      ...state,
      ownerAccessLevel: action.ownerAccessLevel
    })),
-   on(actions.profileAction.setTemporaryImg, (state, action) => ({ ...state, croppedImageUrl: action.croppedImageUrl}))
+   on(actions.profileAction.setTemporaryImg, (state, action) => ({ ...state, croppedImageUrl: action.croppedImageUrl})),
+   on(actions.profileAction.loadRates, (state, action) => {
+    return ({ ...state, ratesAmount: action.newRatesAmount, ratesSum: action.newRatesSum });
+   })
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {
   return profileReducerOptions(state, action);

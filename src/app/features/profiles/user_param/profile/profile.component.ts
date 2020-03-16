@@ -113,14 +113,13 @@ export class ProfileComponent implements OnInit {
 
   public removePhoto() {
     const imagePath = '';
-    this.userService.deleteProfilePhoto().subscribe(res =>{
+    this.userService.deleteProfilePhoto().subscribe(res => {
       this.store.dispatch(actions.profileAction.setTemporaryImg({croppedImageUrl: imagePath}));
       this.toastGeneratorService.presentToast('Zdjęcie profilowe usunięte pomyślnie', 'success');
     },
-    err=>{
+    err => {
       this.toastGeneratorService.presentToast('Wystąpił bład podczas usuwania zdjęcia profilowego', 'danger');
-    })
-    
+    });
   }
 
   public async takePhoto() {
@@ -138,6 +137,7 @@ export class ProfileComponent implements OnInit {
 
   public exitDisplayOtherProfileMode() {
     this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: true}));
+    this.router.navigate(['user', 'profile', 'friends']);
   }
 
   public changeEditMode() {
@@ -186,10 +186,6 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  public starRated() {
-    
-  }
-
   private loadOwnerProperties(user: storeState.ProfileState) {
     this.user.gradient = user.ownerGradient;
     this.user.imgUrl = user.ownerImgUrl;
@@ -204,6 +200,9 @@ export class ProfileComponent implements OnInit {
     this.user.invitedToFriends = user.ownerInvitedToFriends;
     this.user.friendsInvitations = user.ownerFriendsInvitations;
     this.user._id = user.ownerProfileId;
+    this.user.ratedTrainers = user.ratedTrainers;
+    this.user.ratesAmount = user.ownerRatesAmount;
+    this.user.ratesSum = user.ownerRatesSum;
   }
 
   private loadOtherUserProperties(user: storeState.ProfileState) {
@@ -220,6 +219,8 @@ export class ProfileComponent implements OnInit {
     this.user.invitedToFriends = user.invitedToFriends;
     this.user.friendsInvitations = user.friendsInvitations;
     this.user._id = user.profileId;
+    this.user.ratesAmount = user.ratesAmount;
+    this.user.ratesSum = user.ratesSum;
     this.user.isFriend = !!user.friends.find(friend => friend.email === this.ownerEmail);
   }
 

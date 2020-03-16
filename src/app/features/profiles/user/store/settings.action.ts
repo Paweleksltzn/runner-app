@@ -4,6 +4,7 @@ import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 export const profileAction = {
     loadOwnerProfile: createAction('Load profile for owner', props<{userProfile: UserProfile, friends: UserProfile[]}>()),
     loadProfile: createAction('Load profile for user', props<{userProfile: UserProfile}>()),
+    loadRates: createAction('Load rates', props<{newRatesSum: number, newRatesAmount: number}>()),
     setTheme: createAction('[Gradient Page] Set Gradients', props<{gradient: number}>()),
     updateDescription: createAction('Update user profile', props<{newDescription: string}>()),
     setIsMyProfile: createAction('Profile is mein', props<{isMyProfile: boolean}>()),

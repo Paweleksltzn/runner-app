@@ -41,7 +41,7 @@ exports.registerUser = async function(req, res, next) {
             nameAndSurname: req.body.name + req.body.surname,
             accessLevel: 1,
             confirmationToken,
-            isActive: false,
+            isActive: true,
             userProfile
         });
         userProfile.save();
