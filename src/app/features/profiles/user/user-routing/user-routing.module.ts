@@ -4,7 +4,6 @@ import { TrainingsComponent  } from '../profile-tab-components/trainings/trainin
 import { AchivmentsComponent } from '../profile-tab-components/achivments/achivments.component';
 import { FriendsComponent } from '../profile-tab-components/friends/friends.component';
 import { SettingsComponent } from '../profile-tab-components/settings/settings.component';
-import { RatingComponent } from '../profile-tab-components/rating/rating.component';
 import { RatingGuestComponent } from '../profile-tab-components/rating/rating-guest/rating-guest.component';
 import { Routes, RouterModule} from '@angular/router';
 import { ProfileComponent } from '../../user_param/profile/profile.component';
@@ -16,8 +15,7 @@ const routes: Routes = [
     {path: 'trainings', component: TrainingsComponent},
     {path: 'achivment', component: AchivmentsComponent},
     {path: 'rate-guest' , component: RatingGuestComponent},
-    {path: 'settings', component: SettingsComponent},
-    {path: 'rate', component: RatingComponent},
+    {path: 'settings', component: SettingsComponent}
   ]
   },
 

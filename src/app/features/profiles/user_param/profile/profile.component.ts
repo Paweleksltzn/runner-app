@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   public ownerEmail: string;
   public unreadedMessagesAmount = 0;
   public scrollYPos: number;
+  public ratingTab: number [] = [1, 2, 3, 4, 5];
   public slideOpts = {
     slidesPerView: 2,
     width: 360
@@ -183,6 +184,10 @@ export class ProfileComponent implements OnInit {
         });
       });
     });
+  }
+
+  public starRated() {
+    
   }
 
   private loadOwnerProperties(user: storeState.ProfileState) {

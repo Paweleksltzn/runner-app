@@ -12,6 +12,17 @@
     background-repeat: no-repeat;
     background-image: $green-teal-gradient;
 }
+.rate{
+    text-align: center;
+    width: 60vw;
+    margin: 0 auto;
+    padding: 1rem;
+}
+.stars{
+    font-size: 30px;
+    color: #555;
+    margin: 0;
+}
 .profile-description{
     width: 90%;
     margin: 0 auto;

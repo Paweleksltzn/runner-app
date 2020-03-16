@@ -22,6 +22,11 @@
         <div class="profile-description__title">
           <h2>{{user.name}} {{user.surname}}</h2>
         </div>
+        <span>X ocen:</span>
+        <div class="rate">
+          
+          <ion-icon class="stars" name="star" *ngFor="let star of ratingTab"></ion-icon>
+        </div>
         <ion-grid>
           <ion-row align-items-start justify-content-end>
             <ion-col size="2">
@@ -76,16 +81,10 @@
         <span>Treningi</span>
       </div>
     </ion-slide>
-    <ion-slide *ngIf="user.isMyProfile && user.accessLevel === 2">
-      <div  class="ratings" routerLink="/user/profile/rate" (click)="switchProfileTab(5)" [ngClass]="{'tab-select':selectedProfileTab  === 5}">
-        <ion-icon name="star-outline"></ion-icon>
-        <span>Ratings</span>
-      </div>
-    </ion-slide>
     <ion-slide *ngIf="!user.isMyProfile && user.accessLevel === 2">
       <div  class="ratings" routerLink="/user/profile/rate-guest" (click)="switchProfileTab(6)" [ngClass]="{'tab-select':selectedProfileTab  === 6}">
         <ion-icon name="star-outline"></ion-icon>
-        <span>Rate</span>
+        <span>Ocena</span>
       </div>
     </ion-slide>
     </ion-slides>

@@ -10,7 +10,6 @@ import { FriendsComponent } from './profile-tab-components/friends/friends.compo
 import { AchivmentsComponent } from './profile-tab-components/achivments/achivments.component';
 import { TrainingsComponent } from './profile-tab-components/trainings/trainings.component';
 import { SettingsComponent } from './profile-tab-components/settings/settings.component';
-import { RatingComponent } from './profile-tab-components/rating/rating.component';
 import { RatingGuestComponent } from './profile-tab-components/rating/rating-guest/rating-guest.component';
 import { ProfileComponent } from '../user_param/profile/profile.component';
 import { AddFriendsComponent } from './profile-tab-components/friends/add-friends/add-friends.component';
@@ -26,7 +25,6 @@ import { FormsModule } from '@angular/forms';
     AchivmentsComponent,
     TrainingsComponent,
     SettingsComponent,
-    RatingComponent,
     RatingGuestComponent,
     ProfileComponent,
     AddFriendsComponent,
