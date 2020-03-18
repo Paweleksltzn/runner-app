@@ -33,8 +33,8 @@ exports.rateTrainer  = async function(req, res, next) {
             }
         });
         if (!wasRaited) {
-            trainer.ratesSum = trainer.rateSum || 0 + req.body.rate;
-            trainer.ratesAmount = trainer.ratesAmount || 0 + 1;
+            trainer.ratesSum = (trainer.ratesSum || 0) + req.body.rate;
+            trainer.ratesAmount = (trainer.ratesAmount || 0) + 1;
             userProfile.ratedTrainers.push({
                 trainer,
                 rate: newRate
