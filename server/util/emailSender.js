@@ -24,7 +24,7 @@ module.exports =  (receiver, subject, confirmToken) => {
     return transporter.sendMail(mailOptions)
 }
 
-const environment = 'https://fitup3.szymonpawel123.usermd.net';
+const environment = 'https://api.fit-up.com.pl';
 
 // const environment = 'localhost:4200';
 

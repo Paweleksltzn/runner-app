@@ -34,6 +34,17 @@ const userProfileSchema = new Schema({
         type: String,
         required: String
     },
+    ratedTrainers: [
+        {
+            trainer: {
+                type: Schema.Types.ObjectId,
+                ref: 'UserProfile'
+            },
+            rate: Number
+        }
+    ],
+    ratesAmount: Number,
+    ratesSum: Number,
     invitedToFriends: [{
         type: Schema.Types.ObjectId,
         ref: 'User'

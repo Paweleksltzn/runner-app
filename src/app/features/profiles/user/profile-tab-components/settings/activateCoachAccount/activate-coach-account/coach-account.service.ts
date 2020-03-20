@@ -11,7 +11,11 @@ export class CoachAccountService {
   constructor(private http: HttpClient) { }
 
   public setCoach(): Observable<any> {
-
     return this.http.put(`${environment.srvAddress}/${environment.endpoints.trainer}/setTrainer`, {});
   }
+
+  public rateCoach(rate: number, trainerId: string): Observable<any> {
+    return this.http.post(`${environment.srvAddress}/${environment.endpoints.trainer}/rateCoach`, {rate, trainerId});
+  }
+
 }

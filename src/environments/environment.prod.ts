@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  srvAddress: 'https://fitup3.szymonpawel123.usermd.net',
+  srvAddress: 'https://api.fit-up.com.pl',
   endpoints: {
     auth: 'api/auth',
     workout: 'api/workout',

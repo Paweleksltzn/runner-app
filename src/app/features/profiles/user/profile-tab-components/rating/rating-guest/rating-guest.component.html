@@ -2,16 +2,6 @@
     <h3>Oceń trenera</h3>
     <ion-icon name="star" *ngFor="let star of ratingTab" (click)="starRated(star)" [ngClass]="{'star-color': star <= starRate}" >
     </ion-icon>
-    <ion-textarea placeholder="Napisz opinie..."></ion-textarea>
-    <ion-button>Prześlij opinie</ion-button>
-    </div>
-    <ion-list>
-    <ion-item>
-      <ion-label>
-        <h2>Szymon Stawski</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-           Vestibulum rutrum congue facilisis.</p>
-      </ion-label>
-    </ion-item>
-    </ion-list>
+    <ion-button (click)="rateTrainer()">Prześlij opinie</ion-button>
+</div>
     

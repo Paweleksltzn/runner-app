@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.put('/setTrainer', trainerController.setTrainer);
 
-module.exports = router;
+router.post('/rateCoach', trainerController.rateTrainer);
 
+module.exports = router;
