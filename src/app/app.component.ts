@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './core/auth/services/auth.service';
 import { TabsNavLink } from './shared/interfaces/tabsNavLink';
 import { tabNavOptions } from './shared/components/tabs-nav/tabs-nav-options';
+import { Plugins } from '@capacitor/core';
+const { AdMob } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,7 @@ export class AppComponent {
   ) {
     this.tabLinks = tabNavOptions;
     this.initializeApp();
+    AdMob.initialize("ca-app-pub-5176326537772909~2303840659");
   }
 
   initializeApp() {

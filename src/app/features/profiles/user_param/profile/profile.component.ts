@@ -11,6 +11,9 @@ import { ConversationComponent } from '../chat/conversation/conversation.compone
 import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
 import { UserService } from '../../user/services/user.service';
 import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
+import { AdOptions, AdSize, AdPosition } from "capacitor-admob";
+ 
+const { AdMob } = Plugins;
 const { Camera } = Plugins;
 
 @Component({
@@ -19,6 +22,11 @@ const { Camera } = Plugins;
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  options: AdOptions = {
+    adId: "ca-app-pub-5176326537772909/7922519914",
+    adSize: AdSize.BANNER,
+    position: AdPosition.BOTTOM_CENTER
+  };
   public user: UserProfile = {} as any;
   public editMode = false;
   public selectedProfileTab: number;
@@ -42,6 +50,7 @@ export class ProfileComponent implements OnInit {
     private toastGeneratorService: ToastGeneratorService
     ) {
     this.imageConfigure();
+    this.adsConfiguration();
    }
 
   ngOnInit() {
@@ -224,5 +233,22 @@ export class ProfileComponent implements OnInit {
     this.user.isFriend = !!user.friends.find(friend => friend.email === this.ownerEmail);
   }
 
-}
+  private adsConfiguration(){
+    AdMob.showInterstitial(this.options).then(
+      value => {
+        alert("jest git"); // true
+      },
+      error => {
+        alert("cos sie spierdoliło"); // show error
+      }
+    );
+ 
+    // Subscibe Banner Event Listener
+    AdMob.addListener("onAdLoaded", (info: boolean) => {
+      alert("Banner Ad Loaded");
+    });
+  }
+  
 
+
+}
