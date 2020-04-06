@@ -234,7 +234,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private adsConfiguration(){
-    AdMob.showInterstitial(this.options).then(
+    AdMob.showBanner(this.options).then(
       value => {
         alert("jest git"); // true
       },
@@ -246,6 +246,9 @@ export class ProfileComponent implements OnInit {
     // Subscibe Banner Event Listener
     AdMob.addListener("onAdLoaded", (info: boolean) => {
       alert("Banner Ad Loaded");
+    });
+    AdMob.addListener("onAdFailedToLoad", (info: boolean) => {
+      alert(info);
     });
   }
   
