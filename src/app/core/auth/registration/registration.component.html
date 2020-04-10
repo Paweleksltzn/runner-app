@@ -83,7 +83,7 @@
               <ion-col> 
                 <p class="response" *ngIf="validationMessage" [ngClass]="messageClass"> {{validationMessage}} </p>    
                 <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w 
-                  <span class="policy">umowie</span>
+                  <span class="policy" (click)="openPolicy()">regulaminie</span>
                 </div>
               </ion-col>
             </ion-row>

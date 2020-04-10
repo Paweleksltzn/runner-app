@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { ModalController } from '@ionic/angular';
+import { PolicyComponent } from './policy/policy.component';
 
 @Component({
   selector: 'app-registration',
@@ -14,7 +16,7 @@ export class RegistrationComponent implements OnInit {
   public validationMessage = '';
   public messageClass = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private modalController: ModalController) { }
 
   ngOnInit() {
     this.createForm();
@@ -32,6 +34,13 @@ export class RegistrationComponent implements OnInit {
 
   switchSex(sexState: boolean): void {
     this.isMale = sexState;
+  }
+
+  public async openPolicy() {
+    const policyModal = await this.modalController.create({
+      component: PolicyComponent
+    });
+    return await policyModal.present();
   }
 
   public onSubmit() {

@@ -12,6 +12,7 @@ import { authReducer } from './store/auth.reducer';
 import { JwtInterceptor } from 'src/app/core/auth/interceptors/tokenInterceptor';
 import { ErrorStatementComponent } from './error-statement/error-statement.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { PolicyComponent } from './registration/policy/policy.component';
 
 @NgModule({
   imports: [
@@ -27,8 +28,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   declarations: [
     LoginComponent,
+    PolicyComponent,
     RegistrationComponent,
     ErrorStatementComponent
+  ],
+  entryComponents: [
+    PolicyComponent
   ],
   providers: [
     NativeStorage,

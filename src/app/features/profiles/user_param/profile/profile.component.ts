@@ -248,7 +248,7 @@ export class ProfileComponent implements OnInit {
       alert("Banner Ad Loaded");
     });
     AdMob.addListener("onAdFailedToLoad", (info: boolean) => {
-      alert(info);
+      alert(JSON.stringify(info));
     });
   }
   
