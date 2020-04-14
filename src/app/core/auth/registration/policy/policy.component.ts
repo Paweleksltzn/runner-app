@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-policy',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PolicyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {}
 
+  public dismissModal() {
+    this.modalController.dismiss({});
+  }
 }
