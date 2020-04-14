@@ -23,9 +23,11 @@ const { Camera } = Plugins;
 })
 export class ProfileComponent implements OnInit {
   options: AdOptions = {
-    adId: "ca-app-pub-5176326537772909/7922519914",
-    adSize: AdSize.BANNER,
-    position: AdPosition.BOTTOM_CENTER
+    adId: "ca-app-pub-3940256099942544/1033173712",
+    adSize: AdSize.SMART_BANNER,
+    position: AdPosition.BOTTOM_CENTER,
+    hasTabBar: false, 
+    tabBarHeight: 56
   };
   public user: UserProfile = {} as any;
   public editMode = false;
@@ -50,7 +52,7 @@ export class ProfileComponent implements OnInit {
     private toastGeneratorService: ToastGeneratorService
     ) {
     this.imageConfigure();
-    this.adsConfiguration();
+    
    }
 
   ngOnInit() {
@@ -64,6 +66,7 @@ export class ProfileComponent implements OnInit {
       }
     });
     this.getUnreadedMessagesAmount();
+    this.adsConfiguration();
   }
 
   ionViewWillEnter() {
@@ -234,21 +237,29 @@ export class ProfileComponent implements OnInit {
   }
 
   private adsConfiguration(){
-    AdMob.showBanner(this.options).then(
+    AdMob.prepareInterstitial(this.options).then(
       value => {
-        alert("jest git"); // true
+        
       },
       error => {
-        alert("cos sie spierdoliło"); // show error
+        
       }
     );
+
  
     // Subscibe Banner Event Listener
     AdMob.addListener("onAdLoaded", (info: boolean) => {
-      alert("Banner Ad Loaded");
+      AdMob.showInterstitial().then(
+        value => {
+         
+        },
+        error => {
+          
+        }
+      );
     });
     AdMob.addListener("onAdFailedToLoad", (info: boolean) => {
-      alert(JSON.stringify(info));
+      
     });
   }
   
