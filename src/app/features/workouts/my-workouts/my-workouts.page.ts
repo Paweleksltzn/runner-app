@@ -9,12 +9,23 @@ import { MyWorkoutService } from './services/my-workout.service';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { WorkoutShareComponent } from '../components/workout-share/workout-share.component';
 import { User } from 'src/app/shared/interfaces/auth/User';
+import { AdOptions, AdSize, AdPosition } from 'capacitor-admob';
+import { Plugins } from '@capacitor/core';
+
+const { AdMob } = Plugins;
 @Component({
   selector: 'app-my-workouts',
   templateUrl: './my-workouts.page.html',
   styleUrls: ['./my-workouts.page.scss'],
 })
 export class MyWorkoutsPage implements OnInit {
+  options: AdOptions = {
+    adId: "ca-app-pub-3940256099942544/8691691433",
+    adSize: AdSize.SMART_BANNER,
+    position: AdPosition.BOTTOM_CENTER,
+    hasTabBar: false,
+    tabBarHeight: 56
+  };
   public myWorkouts: Workout[] = [];
   private currentUserId: string;
 
@@ -32,6 +43,7 @@ export class MyWorkoutsPage implements OnInit {
     this.store.pipe(select('auth')).subscribe((state: storeState.AuthState) => {
       this.currentUserId = state._id;
     });
+    this.adsConfiguration();
   }
 
   ionViewWillEnter() {
@@ -95,6 +107,34 @@ export class MyWorkoutsPage implements OnInit {
       component: WorkoutShareComponent
     });
     return await conversationModal.present();
+  }
+
+  private adsConfiguration(){
+    AdMob.prepareInterstitial(this.options).then(
+      value => {
+        
+      },
+      error => {
+        
+      }
+    );
+
+ 
+    // Subscibe Banner Event Listener
+    AdMob.addListener("onAdLoaded", (info: boolean) => {
+      
+      AdMob.showInterstitial().then(
+        value => {
+          
+        },
+        error => {
+          
+        }
+      );
+    });
+    AdMob.addListener("onAdFailedToLoad", (info: boolean) => {
+      
+    });
   }
 
 }
