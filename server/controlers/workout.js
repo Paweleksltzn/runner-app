@@ -1,6 +1,11 @@
 const User = require('../models/user');
 const WorkoutsList = require('../models/workoutsList');
 const WorkoutHistory = require('../models/workoutHistory');
+const achievmentsController = require('../util/achievements');
+const UserProfile = require('../models/userProfile');
+const socketEvents = require('../util/socketEvents');
+const notificationsFactory = require('../util/notifications-factory');
+const notificationsOptions = require('../enums/notificationsOptions');
 
 exports.getWorkoutsList = async function(req, res, next) {
     try {
@@ -58,6 +63,7 @@ exports.addWorkoutToHistory = async function(req, res, next) {
         const userVariable = await User.findById(req.token._id);
         const authorId = req.body.workout.author;
         const author = await User.findById(authorId);
+        const profile = await UserProfile.findById(userVariable.userProfile);
         const userWorkoutsHistory = await WorkoutHistory.findOne({owner: userVariable});
         const newWorkoutInHistory = req.body.workout;
         if (userWorkoutsHistory) {
@@ -96,6 +102,24 @@ exports.addWorkoutToHistory = async function(req, res, next) {
                 newUserWorkoutsList.save();
             }
         }
+        const profileNewAchievment = await achievmentsController.checkFirstWorkoutAchievment(profile);
+        if (profileNewAchievment) {
+            if (!profile.achievments) {
+                profile.achievments = [];
+            }
+            profile.achievments.push(profileNewAchievment);
+            profile.save();
+            
+            const newNotification = notificationsFactory.createNotification({
+                notificationType: notificationsOptions.info,  
+                author: userVariable,
+                receivers: [req.body.userVariable],
+                authorMessage: `Udało ci się zdobyć osiągnięcie ${profileNewAchievment.title}`
+            });
+            const io = require('../util/socket').getIO();
+            io.to(userVariable._id).emit(socketEvents.newNotification, newNotification);
+            io.to(userVariable._id).emit(socketEvents.newAchievment, profileNewAchievment);
+        }
         return res.json('Trening zapisany');
     } catch(err) {
         console.log(err);
@@ -108,7 +132,7 @@ exports.removeWorkoutFromHistory = async function(req, res, next) {
     const duration = req.query.duration;
     const trainingDate = req.query.trainingDate;
     try {
-        const owner = await User.findById(req.token._id);
+    const owner = await User.findById(req.token._id);
         const history = await WorkoutHistory.findOne({
             owner
         });

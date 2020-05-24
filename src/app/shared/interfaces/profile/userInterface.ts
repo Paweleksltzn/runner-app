@@ -1,3 +1,4 @@
+import { Achievment } from './achievment';
 
 export interface UserProfile {
     profileDescription: string;
@@ -17,6 +18,7 @@ export interface UserProfile {
     isMyProfile: boolean;
     ratesAmount: number;
     ratesSum: number;
+    achievments: Achievment[];
     ratedTrainers: {
         trainer: UserProfile,
         rate: number

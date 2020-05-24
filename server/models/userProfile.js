@@ -34,6 +34,11 @@ const userProfileSchema = new Schema({
         type: String,
         required: String
     },
+    achievments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Achievment',
+        autopopulate: true
+    }],
     ratedTrainers: [
         {
             trainer: {
@@ -59,5 +64,5 @@ const userProfileSchema = new Schema({
         ref: 'User'
     }]
 });
-
+userProfileSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('UserProfile', userProfileSchema);
