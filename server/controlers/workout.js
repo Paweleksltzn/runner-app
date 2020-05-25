@@ -3,9 +3,6 @@ const WorkoutsList = require('../models/workoutsList');
 const WorkoutHistory = require('../models/workoutHistory');
 const achievmentsController = require('../util/achievements');
 const UserProfile = require('../models/userProfile');
-const socketEvents = require('../util/socketEvents');
-const notificationsFactory = require('../util/notifications-factory');
-const notificationsOptions = require('../enums/notificationsOptions');
 
 exports.getWorkoutsList = async function(req, res, next) {
     try {
@@ -24,6 +21,7 @@ exports.getWorkoutsList = async function(req, res, next) {
 exports.saveWorkoutsList = async function(req, res, next) {
     try {
         const userVariable = await User.findById(req.token._id);
+        const profile = await UserProfile.findById(userVariable.userProfile);
         const newWorkoutList = req.body.workouts;
         newWorkoutList.forEach(singleWorkout => {
             if (!singleWorkout.author) singleWorkout.author = userVariable;
@@ -40,6 +38,7 @@ exports.saveWorkoutsList = async function(req, res, next) {
             });
             newWorkouts.save(); 
         }
+        achievmentsController.checkFirstWorkoutAchievment(profile, userVariable, achievmentsController.achievmentsData.firstWorkoutCreated);
         return res.json('Poprawnie zapisane dane');
     } catch(err) {
         console.log(err);
@@ -68,6 +67,9 @@ exports.addWorkoutToHistory = async function(req, res, next) {
         const newWorkoutInHistory = req.body.workout;
         if (userWorkoutsHistory) {
             userWorkoutsHistory.workoutsHistory = [createNewHistoryWorkout(newWorkoutInHistory, userVariable, author).workoutsHistory[0], ...userWorkoutsHistory.workoutsHistory];
+            if (workoutsHistory.length === 10) {
+                achievmentsController.checkFirstWorkoutAchievment(profile, userVariable, achievmentsController.achievmentsData.tenWorkoutsDone);
+            }
             userWorkoutsHistory.save();
         } else {
             const newWorkoutsHistory = new WorkoutHistory(createNewHistoryWorkout(newWorkoutInHistory, userVariable, author));
@@ -101,25 +103,9 @@ exports.addWorkoutToHistory = async function(req, res, next) {
                 })
                 newUserWorkoutsList.save();
             }
+            achievmentsController.checkFirstWorkoutAchievment(profile, userVariable, achievmentsController.achievmentsData.firstWorkoutCreated);
         }
-        const profileNewAchievment = await achievmentsController.checkFirstWorkoutAchievment(profile);
-        if (profileNewAchievment) {
-            if (!profile.achievments) {
-                profile.achievments = [];
-            }
-            profile.achievments.push(profileNewAchievment);
-            profile.save();
-            
-            const newNotification = notificationsFactory.createNotification({
-                notificationType: notificationsOptions.info,  
-                author: userVariable,
-                receivers: [req.body.userVariable],
-                authorMessage: `Udało ci się zdobyć osiągnięcie ${profileNewAchievment.title}`
-            });
-            const io = require('../util/socket').getIO();
-            io.to(userVariable._id).emit(socketEvents.newNotification, newNotification);
-            io.to(userVariable._id).emit(socketEvents.newAchievment, profileNewAchievment);
-        }
+        achievmentsController.checkFirstWorkoutAchievment(profile, userVariable, achievmentsController.achievmentsData.firstWorkout);
         return res.json('Trening zapisany');
     } catch(err) {
         console.log(err);

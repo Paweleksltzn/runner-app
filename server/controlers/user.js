@@ -170,6 +170,7 @@ exports.changeDescription = async function (req, res, next) {
         const userProfile = await UserProfile.findById(user.userProfile);
         userProfile.profileDescription = req.body.newDescription;
         userProfile.save();
+        achievmentsController.checkFirstWorkoutAchievment(userProfile, user, achievmentsController.achievmentsData.profileDescription);
         return res.json({});
     } catch (err) {
         console.log(err)
@@ -197,6 +198,7 @@ exports.changeProfileImage  = async function (req, res, next) {
         }
         userProfile.imgUrl = imagePath;
         userProfile.save();
+        achievmentsController.checkFirstWorkoutAchievment(userProfile, user, achievmentsController.achievmentsData.profileImage);
         return res.json({imgUrl: imagePath});
     } catch (err) {
         console.log(err)
