@@ -42,6 +42,7 @@ exports.rateTrainer  = async function(req, res, next) {
         }
         userProfile.save();
         trainer.save();
+        achievmentsController.checkFirstWorkoutAchievment(userProfile, user, achievmentsController.achievmentsData.coachRateAdded);
         return res.json({ratesSum: trainer.ratesSum, ratesAmount: trainer.ratesAmount});
     } catch(err) {
         console.log(err);

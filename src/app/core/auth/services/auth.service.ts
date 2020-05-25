@@ -18,6 +18,7 @@ import { socketEvents } from 'src/app/shared/entitys/sockets-events';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
 import { ConversationService } from 'src/app/features/profiles/user_param/chat/services/conversation.service';
 import { Conversation } from 'src/app/shared/interfaces/conversation/conversation';
+import { Achievment } from 'src/app/shared/interfaces/profile/achievment';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,7 @@ export class AuthService {
                   this.subscribeNewFriend();
                   this.subscribeNewFriendInvitation();
                   this.subscribeNewFriendRejection();
+                  this.subscribeNewAchievment();
                 });
               }
 
@@ -134,6 +136,12 @@ export class AuthService {
   private subscribeNewFriendRejection() {
     this.socket.fromEvent(socketEvents.newFriendRejection).subscribe((rejectingProfile: UserProfile) => {
       this.store.dispatch(actions.profileAction.invitationRejected({ rejectingProfile }));
+    });
+  }
+
+  private subscribeNewAchievment() {
+    this.socket.fromEvent(socketEvents.newAchievment).subscribe((newAchievment: Achievment) => {
+      this.store.dispatch(actions.profileAction.getAchievment({ newAchievment }));
     });
   }
 

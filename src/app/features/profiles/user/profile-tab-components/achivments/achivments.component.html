@@ -4,7 +4,7 @@
     </ion-list-header>
     <ion-item *ngFor="let achievment of achievments">
       <ion-avatar slot="start">
-        <img [src]="achievment.icon">
+        <ion-icon [name]="achievment.icon"></ion-icon>
       </ion-avatar>
       <ion-label>
         <h2>{{achievment.title}}</h2>
