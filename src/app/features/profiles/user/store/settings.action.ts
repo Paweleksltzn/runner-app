@@ -1,5 +1,6 @@
 import { createAction, props} from '@ngrx/store';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
+import { Achievment } from 'src/app/shared/interfaces/profile/achievment';
 
 export const profileAction = {
     loadOwnerProfile: createAction('Load profile for owner', props<{userProfile: UserProfile, friends: UserProfile[]}>()),
@@ -18,5 +19,6 @@ export const profileAction = {
     invitationRejected: createAction('Invitation rejected', props<{rejectingProfile: UserProfile}>()),
     newInvitation: createAction('Received new invitation', props<{invitatingFriend: UserProfile}>()),
     setOwnerAccessLevel: createAction('User access level changed', props<{ownerAccessLevel: number}>()),
-    setTemporaryImg: createAction('img set', props<{croppedImageUrl: string}>())
+    setTemporaryImg: createAction('img set temporary', props<{croppedImageUrl: string}>()),
+    getAchievment: createAction('Get achievment', props<{newAchievment: Achievment}>())
 };

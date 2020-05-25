@@ -33,7 +33,9 @@ export const initialState: storeState.ProfileState = {
   ratedTrainers: undefined,
   ownerFriends: [],
   ownerInvitedToFriends: [],
-  ownerFriendsInvitations: []
+  ownerFriendsInvitations: [],
+  ownerAchievments: [],
+  achievments: []
 };
 
 const profileReducerOptions = createReducer(
@@ -54,7 +56,8 @@ const profileReducerOptions = createReducer(
     ownerFriendsInvitations: action.userProfile.friendsInvitations || [],
     ownerRatesAmount: action.userProfile.ratesAmount,
     ownerRatesSum: action.userProfile.ratesSum,
-    ratedTrainers: action.userProfile.ratedTrainers
+    ratedTrainers: action.userProfile.ratedTrainers,
+    ownerAchievments: action.userProfile.achievments
     }
   )),
   on(actions.profileAction.loadProfile, (state, action) => ({
@@ -72,7 +75,8 @@ const profileReducerOptions = createReducer(
     invitedToFriends: action.userProfile.invitedToFriends || [],
     friendsInvitations: action.userProfile.friendsInvitations || [],
     ratesAmount: action.userProfile.ratesAmount,
-    ratesSum: action.userProfile.ratesSum
+    ratesSum: action.userProfile.ratesSum,
+    achievments: action.userProfile.achievments
     }
   )),
   on(actions.profileAction.setTheme, (state, action) => ({ ...state, ownerGradient: action.gradient})),
@@ -122,6 +126,9 @@ const profileReducerOptions = createReducer(
    on(actions.profileAction.setTemporaryImg, (state, action) => ({ ...state, croppedImageUrl: action.croppedImageUrl})),
    on(actions.profileAction.loadRates, (state, action) => {
     return ({ ...state, ratesAmount: action.newRatesAmount, ratesSum: action.newRatesSum });
+   }),
+   on(actions.profileAction.getAchievment, (state, action) => {
+    return ({ ...state, ownerAchievments: [...state.ownerAchievments, action.newAchievment] });
    })
 );
 export function profileReducer(state: storeState.ProfileState | undefined, action: Action) {

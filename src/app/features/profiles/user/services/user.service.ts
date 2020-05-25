@@ -10,6 +10,7 @@ import { User } from 'src/app/shared/interfaces/auth/User';
 import { Socket } from 'ngx-socket-io';
 import { socketEvents } from 'src/app/shared/entitys/sockets-events';
 import { Workout } from 'src/app/shared/interfaces/workout/workout';
+import { Achievment } from 'src/app/shared/interfaces/profile/achievment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class UserService {
               private store: Store<Reducers>,
               private socket: Socket) {
                 this.subscribeOnFriendDeletion();
+                this.subscribeNewAchievment();
   }
 
   public addFriend(newFriend: UserSearcherResponse): Observable<any> {
@@ -66,6 +68,12 @@ export class UserService {
   private subscribeOnFriendDeletion() {
     this.socket.fromEvent(socketEvents.friendDeletion).subscribe((oldFriendId: string) => {
       this.store.dispatch(actions.profileAction.removeFriend({removedFriendId: oldFriendId}));
+    });
+  }
+
+  private subscribeNewAchievment() {
+    this.socket.fromEvent(socketEvents.newAchievment).subscribe((newAchievment: Achievment) => {
+      this.store.dispatch(actions.profileAction.getAchievment({ newAchievment }));
     });
   }
 

@@ -6,5 +6,6 @@ export const socketEvents = {
     connect: 'connect',
     newConversation: 'new-conversation',
     newMessage: 'new-message',
-    friendDeletion: 'friendDeletion'
+    friendDeletion: 'friendDeletion',
+    newAchievment: 'new-achievment'
 };

@@ -1,5 +1,6 @@
 import { User } from '../../auth/User';
 import { UserProfile } from '../../profile/userInterface';
+import { Achievment } from '../../profile/achievment';
 
 export interface ProfileState extends User {
     gradient: number;
@@ -28,6 +29,8 @@ export interface ProfileState extends User {
     ratesSum: number;
     ownerRatesAmount: number;
     ownerRatesSum: number;
+    ownerAchievments: Achievment[];
+    achievments: Achievment[],
     ratedTrainers: {
         trainer: UserProfile,
         rate: number

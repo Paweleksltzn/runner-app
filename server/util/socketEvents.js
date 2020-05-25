@@ -6,5 +6,6 @@ module.exports = {
     friendDeletion: 'friendDeletion',
     connection: 'connection',
     newConversation: 'new-conversation',
-    newMessage: 'new-message'
+    newMessage: 'new-message',
+    newAchievment: 'new-achievment'
 };
