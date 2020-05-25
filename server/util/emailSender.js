@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 
 module.exports =  (receiver, subject, confirmToken) => {
     const mailOptions = {
-        from: 'FitUp@kontakt.com', // sender address
+        from: 'kontakt@fit-up.com.pl', // sender address
         to: receiver, // list of receivers
         subject, // Subject line
         html: emailHtmlFactory(subject, confirmToken, receiver)// plain text body
