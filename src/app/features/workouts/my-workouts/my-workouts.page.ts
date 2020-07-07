@@ -20,7 +20,7 @@ const { AdMob } = Plugins;
 })
 export class MyWorkoutsPage implements OnInit {
   options: AdOptions = {
-    adId: "ca-app-pub-3940256099942544/8691691433",
+    adId: "ca-app-pub-5176326537772909/9803775270",
     adSize: AdSize.SMART_BANNER,
     position: AdPosition.BOTTOM_CENTER,
     hasTabBar: false,
