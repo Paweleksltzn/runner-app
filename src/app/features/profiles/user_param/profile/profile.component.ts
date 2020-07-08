@@ -11,9 +11,7 @@ import { ConversationComponent } from '../chat/conversation/conversation.compone
 import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
 import { UserService } from '../../user/services/user.service';
 import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
-import { AdOptions, AdSize, AdPosition } from "capacitor-admob";
- 
-const { AdMob } = Plugins;
+
 const { Camera } = Plugins;
 
 @Component({
@@ -22,13 +20,6 @@ const { Camera } = Plugins;
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  options: AdOptions = {
-    adId: "ca-app-pub-3940256099942544/1033173712",
-    adSize: AdSize.SMART_BANNER,
-    position: AdPosition.BOTTOM_CENTER,
-    hasTabBar: false, 
-    tabBarHeight: 56
-  };
   public user: UserProfile = {} as any;
   public editMode = false;
   public selectedProfileTab: number;
@@ -66,7 +57,6 @@ export class ProfileComponent implements OnInit {
       }
     });
     this.getUnreadedMessagesAmount();
-    this.adsConfiguration();
   }
 
   ionViewWillEnter() {
@@ -235,34 +225,5 @@ export class ProfileComponent implements OnInit {
     this.user.ratesSum = user.ratesSum;
     this.user.isFriend = !!user.friends.find(friend => friend.email === this.ownerEmail);
   }
-
-  private adsConfiguration(){
-    AdMob.prepareInterstitial(this.options).then(
-      value => {
-        
-      },
-      error => {
-        
-      }
-    );
-
- 
-    // Subscibe Banner Event Listener
-    AdMob.addListener("onAdLoaded", (info: boolean) => {
-      AdMob.showInterstitial().then(
-        value => {
-         
-        },
-        error => {
-          
-        }
-      );
-    });
-    AdMob.addListener("onAdFailedToLoad", (info: boolean) => {
-      
-    });
-  }
-  
-
 
 }
