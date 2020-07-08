@@ -6,10 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { Reducers, actions } from 'src/app/store';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { NotificationsService } from './services/notifications.service';
-import { Plugins } from '@capacitor/core';
-import { AdOptions, AdSize, AdPosition } from 'capacitor-admob';
 
-const { AdMob } = Plugins;
 
 @Component({
   selector: 'app-notifications',
@@ -17,13 +14,6 @@ const { AdMob } = Plugins;
   styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage implements OnInit {
-  options: AdOptions = {
-    adId: "ca-app-pub-3940256099942544/1033173712",
-    adSize: AdSize.SMART_BANNER,
-    position: AdPosition.BOTTOM_CENTER,
-    hasTabBar: false, 
-    tabBarHeight: 56
-  };
   public notifications: Notification[] = [];
 
   constructor(public modalController: ModalController,
@@ -35,7 +25,6 @@ export class NotificationsPage implements OnInit {
     this.store.pipe(select('notifications')).subscribe((state: storeState.NotificationsState) => {
       this.notifications = state.notifications;
     });
-    this.adsConfiguration();
   }
 
   ionViewWillEnter() {
@@ -51,33 +40,6 @@ export class NotificationsPage implements OnInit {
       componentProps: {...notification, index}
     });
     return await modal.present();
-  }
-
-  private adsConfiguration(){
-    AdMob.prepareInterstitial(this.options).then(
-      value => {
-        
-      },
-      error => {
-        
-      }
-    );
-
- 
-    // Subscibe Banner Event Listener
-    AdMob.addListener("onAdLoaded", (info: boolean) => {
-      AdMob.showInterstitial().then(
-        value => {
-          
-        },
-        error => {
-          
-        }
-      );
-    });
-    AdMob.addListener("onAdFailedToLoad", (info: boolean) => {
-
-    });
   }
 
 }
