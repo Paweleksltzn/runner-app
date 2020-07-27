@@ -32,7 +32,7 @@
   input:focus ~ label, input:valid ~ label 		{
     top:-20px;
     font-size:14px;
-    color: $secondary-color;
+    color: #13986B;
   }
   
   /* BOTTOM BARS ================================= */
@@ -53,7 +53,7 @@
     width:0;
     bottom: 0px; 
     position:absolute;
-    background: $green-blue-gradient;
+    background: #13986B;
     transition:0.2s ease all; 
     -moz-transition:0.2s ease all; 
     -webkit-transition:0.2s ease all;
