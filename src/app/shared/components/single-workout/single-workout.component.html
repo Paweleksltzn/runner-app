@@ -1,11 +1,4 @@
-<ion-header>
-  <ion-toolbar class="header__bar" *ngIf="currentWorkout">
-      <ion-buttons slot="start" *ngIf="workoutMode !== modes.training">
-          <ion-back-button defaultHref="my-workouts"></ion-back-button>
-      </ion-buttons>
-      <input type="text" [(ngModel)]="currentWorkout.title" class="title-input" name="repeats" (blur)="titleChanged()">
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="currentWorkout?.title || ''" [backButtonVisible]="true" [titlEditable]="workoutMode !== modes.history" (titleChanged)="currentWorkout.title = $event;"></app-header>
 <ion-content [ngStyle]="{'height': deviceHeight + 'px'}">
   <mat-accordion *ngIf="currentWorkout">
     <ion-reorder-group [disabled]="workoutMode === modes.history" (ionItemReorder)="doReorder($event)">

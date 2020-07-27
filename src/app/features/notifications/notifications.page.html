@@ -1,8 +1,4 @@
-<ion-header>
-  <ion-toolbar class="header__bar">
-    <ion-title>Powiadomienia</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="'Powiadomienia'"></app-header>
 <ion-content>
   <h6 *ngIf="notifications.length <= 0" class="empty-notifications">Brak dostępnych powiadomień</h6>
   <ion-grid>

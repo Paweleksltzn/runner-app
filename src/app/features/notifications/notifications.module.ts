@@ -17,6 +17,7 @@ import { FriendsInvitationResponseComponent } from './components/single-notifica
 import { InfoComponent } from './components/single-notification/notifications-components/info/info.component';
 // tslint:disable-next-line: max-line-length
 import { WorkoutShareNotificationComponent } from './components/single-notification/notifications-components/workout-share-notification/workout-share-notification.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('notifications', notificationsReducer)
   ],

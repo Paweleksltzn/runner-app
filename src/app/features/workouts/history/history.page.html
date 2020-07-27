@@ -1,8 +1,4 @@
-<ion-header>
-  <ion-toolbar class="header__bar">
-    <ion-title>Historia treningów</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="'Historia treningów'"></app-header>
 <ion-content>
     <div *ngIf="workoutsHistory.length === 0">
         <h5 class="empty-trainings">Historia jest pusta</h5>

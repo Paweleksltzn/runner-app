@@ -1,8 +1,9 @@
-<ion-header>
-  <ion-toolbar class="header__bar">
-    <ion-title>Moje Treningi</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="'Moje treningi'" [additionalTemplate]="additionalButton"></app-header>
+<ng-template #additionalButton>
+  <ion-button class="short-button short-button-primary" (click)="addNewWorkout()">
+    <ion-icon name="add" class="short-button-icon"></ion-icon>
+  </ion-button>
+</ng-template>
 <ion-content>
   <div *ngIf="myWorkouts.length === 0">
     <h5 class="empty-trainings">Brak zapisanych treningów</h5>
@@ -28,10 +29,6 @@
       </ion-row>
     </ion-grid>
   </div>
-  <ion-button class="workout__container--button workout-adder" (click)="addNewWorkout()">
-      Dodaj nowy trening
-      <ion-icon slot="end" name="add"></ion-icon>
-  </ion-button>
   <ion-button class="workout__container--button workout-adder" (click)="shareWorkouts()" expand="block">
     Udostępnij treningi
   </ion-button>

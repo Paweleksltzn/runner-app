@@ -1,0 +1,13 @@
+.title-input {
+    background-color: transparent;
+    width: 90%;
+    border: none;
+    font-size: 1.1rem;
+    margin-left: .7rem;
+    font-weight: bold;
+    overflow: hidden;
+    outline: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}

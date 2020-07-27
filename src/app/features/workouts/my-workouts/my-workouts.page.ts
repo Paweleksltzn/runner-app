@@ -57,7 +57,7 @@ export class MyWorkoutsPage implements OnInit {
 
   public async addNewWorkout() {
     const alert = await this.alertController.create({
-      header: 'Podaj nazwę ćwiczenia',
+      header: 'Podaj nazwę treningu',
       inputs: [
         {
           name: 'newExerciseName',
