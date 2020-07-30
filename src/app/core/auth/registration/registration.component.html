@@ -4,7 +4,7 @@
       <ion-row>
         <ion-col>
           <div class="main-container--logo">
-              <ion-img src="assets/images/logo.png"></ion-img>
+              <ion-img src="assets/images/Asset 12.svg"></ion-img>
           </div>
         </ion-col>
       </ion-row>
@@ -32,7 +32,6 @@
             <ion-col>
               <div class="group-reg">      
                 <input class ="reg-input" type="text" required formControlName="email" id="email">
-                <ion-icon name="mail" class="main-container--form-icon"></ion-icon>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>Email</label>
@@ -43,7 +42,6 @@
             <ion-col>
               <div class="group-reg">      
                 <input class ="reg-input" type="password" required formControlName="password">
-                <ion-icon name="lock" class="main-container--form-icon"></ion-icon>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>Hasło</label>
@@ -54,7 +52,6 @@
             <ion-col>
               <div  class="group-reg">      
                 <input class ="reg-input" type="password" required formControlName="confirmedPassword">
-                <ion-icon name="lock" class="main-container--form-icon"></ion-icon>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>Powtórz hasło</label>
@@ -80,6 +77,11 @@
             </ion-row>
             <ion-row>
               <ion-col> 
+                <div class="has-account">
+                  <span class="has-account-message">Masz już konto?  
+                    <span class="has-account-login" routerLink="../login" routerLinkActive="active"> Zaloguj się </span> 
+                  </span>
+                </div>
                 <p class="response" *ngIf="validationMessage" [ngClass]="messageClass"> {{validationMessage}} </p>    
                 <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w 
                   <span class="policy" (click)="openPolicy()">regulaminie</span>
@@ -87,11 +89,7 @@
               </ion-col>
             </ion-row>
         </form>
-        <div class="has-account">
-            <span class="has-account-message">Masz już konto?  
-              <span class="has-account-login" routerLink="../login" routerLinkActive="active"> Zaloguj się </span> 
-            </span>
-        </div>
+
     </div>
     </ion-grid>
   </div>
