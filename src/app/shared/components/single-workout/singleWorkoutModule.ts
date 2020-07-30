@@ -7,10 +7,10 @@ import { SingleWorkoutComponent } from './single-workout.component';
 import { TimerComponent } from './timer/timer.component';
 import { StoreModule } from '@ngrx/store';
 import { singleWorkoutReducer } from './store/single-workout-reducer';
-import { ScrollingModule } from '@angular/cdk/scrolling';
+import { HeaderComponent } from '../header/header.component';
 
 @NgModule({
-  declarations: [SingleWorkoutComponent, TimerComponent],
+  declarations: [SingleWorkoutComponent, TimerComponent, HeaderComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -19,7 +19,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     StoreModule.forFeature('singleWorkout', singleWorkoutReducer)
   ],
   exports: [
-    SingleWorkoutComponent
+    SingleWorkoutComponent,
+    HeaderComponent
   ],
   providers: [
     AlertController
