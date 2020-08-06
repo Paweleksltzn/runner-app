@@ -8,9 +8,11 @@ import { TimerComponent } from './timer/timer.component';
 import { StoreModule } from '@ngrx/store';
 import { singleWorkoutReducer } from './store/single-workout-reducer';
 import { HeaderComponent } from '../header/header.component';
+import { MenuComponent } from '../menu/menu.component';
+import { MenuButtonComponent } from '../menu-button/menu-button.component';
 
 @NgModule({
-  declarations: [SingleWorkoutComponent, TimerComponent, HeaderComponent],
+  declarations: [SingleWorkoutComponent, TimerComponent, HeaderComponent, MenuComponent, MenuButtonComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -20,7 +22,9 @@ import { HeaderComponent } from '../header/header.component';
   ],
   exports: [
     SingleWorkoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    MenuComponent,
+    MenuButtonComponent
   ],
   providers: [
     AlertController

@@ -1,4 +1,7 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane>
+    <app-menu></app-menu>
+    <ion-router-outlet id="main"></ion-router-outlet>
+  </ion-split-pane>
   <app-tabs-nav [navLinks]="tabLinks"></app-tabs-nav>
 </ion-app>

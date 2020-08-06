@@ -25,7 +25,7 @@ export class AppComponent {
   ) {
     this.tabLinks = tabNavOptions;
     this.initializeApp();
-    AdMob.initialize("ca-app-pub-5176326537772909~2303840659");
+    AdMob.initialize('ca-app-pub-5176326537772909~2303840659');
   }
 
   initializeApp() {
