@@ -1,22 +1,7 @@
 <ion-tabs *ngIf="accessLevel">
-  <ion-tab-bar slot="bottom" class="ion-tab-bar" *ngIf="childrenTab.length > 0">
-    <ng-container>
-      <ion-tab-button [tab]="navLink.link" class="ion-tab-bar-button" *ngFor="let navLink of childrenTab">
-        <ion-icon [name]="navLink.iconName"></ion-icon>
-        <ion-label>{{ navLink.label }}</ion-label>
-      </ion-tab-button>
-    </ng-container>
-  </ion-tab-bar>
   <ion-tab-bar slot="bottom" class="ion-tab-bar">
-    <ng-container>
-        <ion-tab-button [tab]="navLink.link" class="ion-tab-bar-button" *ngFor="let navLink of navLinks" (click)="checkIfSecondaryTabVisible(navLink)"
-        [selected]="activeNavLinkLabel === navLink.label">
-            <ion-icon [name]="navLink.iconName"></ion-icon>
-            <ion-label>{{ navLink.label }}</ion-label>
-        </ion-tab-button>
-    </ng-container>
-    <ion-tab-button tab="notifications" class="ion-tab-bar-button" (click)="checkIfSecondaryTabVisible('')"
-    [selected]="activeNavLinkLabel === ''">
+    <ion-tab-button tab="notifications" class="ion-tab-bar-button"
+    [selected]="activeNavLinkLabel === ''" layout="icon-end">
         <ion-icon name="notifications"></ion-icon>
         <span class="notifications__amount" [@zoomIn]="zoomIn" *ngIf="notDisplayedNotificationsAmount > 0">{{ notDisplayedNotificationsAmount }}</span>
     </ion-tab-button>

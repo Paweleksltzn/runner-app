@@ -37,11 +37,6 @@ export class SettingsComponent implements OnInit {
     this.userService.changeGradient(selectedTheme).subscribe(res => {});
   }
 
-  public logOut() {
-    this.authService.signOut();
-    window.location.reload();
-  }
-
   public async displayCoachAccountActivationModal() {
     const coachAccountActivation = await this.modalController.create({
       component: ActivateCoachAccountComponent
