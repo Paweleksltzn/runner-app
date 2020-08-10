@@ -1,0 +1,23 @@
+.fitup-menu {
+    --width: 15.625em;
+
+    &__title {
+        padding: 0;
+    }
+
+    &__list {
+        min-height: 90%;
+    }
+
+    .menuItemSelected {
+        --color: green !important;
+        .menu-icon {
+            color: green;
+        }
+    }
+    
+    .menu-icon {
+        margin-right: 1rem;
+    }
+    
+}

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="header__bar">
     <ion-buttons slot="start" >
-      <ion-menu-button autoHide="false" class="site-menu-icon" *ngIf="!backButtonVisible"></ion-menu-button>
+      <app-menu-button *ngIf="!backButtonVisible"></app-menu-button>
       <ion-back-button defaultHref="my-workouts" *ngIf="backButtonVisible"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">

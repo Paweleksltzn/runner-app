@@ -8,19 +8,25 @@ import { TimerComponent } from './timer/timer.component';
 import { StoreModule } from '@ngrx/store';
 import { singleWorkoutReducer } from './store/single-workout-reducer';
 import { HeaderComponent } from '../header/header.component';
+import { MenuComponent } from '../menu/menu.component';
+import { MenuButtonComponent } from '../menu-button/menu-button.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [SingleWorkoutComponent, TimerComponent, HeaderComponent],
+  declarations: [SingleWorkoutComponent, TimerComponent, HeaderComponent, MenuComponent, MenuButtonComponent],
   imports: [
     CommonModule,
     IonicModule,
     MaterialModule,
+    RouterModule,
     FormsModule,
     StoreModule.forFeature('singleWorkout', singleWorkoutReducer)
   ],
   exports: [
     SingleWorkoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    MenuComponent,
+    MenuButtonComponent
   ],
   providers: [
     AlertController

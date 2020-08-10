@@ -1,6 +1,11 @@
 import { TabsNavLink } from 'src/app/shared/interfaces/tabsNavLink';
 
-export const tabNavWorkoutOptions: TabsNavLink[] = [
+export const menuLinks: TabsNavLink[] = [
+    {
+        label: 'Profil',
+        iconName: 'person',
+        link: 'user/profile'
+    },
     {
         label: 'Nowy Trening',
         iconName: 'flash',

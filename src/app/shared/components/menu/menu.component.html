@@ -1,0 +1,29 @@
+<ion-menu side="start" menuId="first" contentId="main" class="fitup-menu">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title class="fitup-menu__title"> 
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="imgUrl || 'assets/images/profile-picture.png'">
+          </ion-avatar>
+          <ion-label>
+            <h3>{{name}}</h3>
+            <h3>{{surName}}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list class="fitup-menu__list">
+      <ion-item *ngFor="let navLink of menuLinks; let i = index;" lines="none" [routerLink]="navLink.link" routerLinkActive="menuItemSelected" routerDirection="forward">
+        <ion-icon [name]="navLink.iconName" class="menu-icon"></ion-icon>
+        <ion-label>{{ navLink.label }}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-item lines="none" routerDirection="forward" class="fitup-menu__sign-out" (click)="logOut()">
+      <ion-icon name="power" class="menu-icon"></ion-icon>
+      <ion-label>Wyloguj</ion-label>
+    </ion-item>
+  </ion-content>
+</ion-menu>
