@@ -1,3 +1,4 @@
+<app-header [title]="'Profil'"></app-header>
 <ion-content [scrollEvents]="true" (ionScroll)="scrollHandler($event)">
   <div class="main-container">
     <div class="main-container-profile" >
@@ -11,10 +12,6 @@
           </div>
         </ng-container>
         <ng-container *ngIf="user.isMyProfile">
-          <div class="iconbox" routerLink="/chat"> 
-            <ion-icon  name="chatboxes" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
-            <span class="unreaded-messages__amount" *ngIf="unreadedMessagesAmount > 0">{{unreadedMessagesAmount}}</span>
-          </div> 
         </ng-container>
         <img-loader (click)="presentActionSheet()" [src]="user.imgUrl || 'assets/images/profile-picture.png'" [imgAttributes]="imageAttributes" useImg></img-loader>
       </div>
@@ -37,7 +34,7 @@
           <ion-row>
             <ion-col >
               <textarea [(ngModel)]="user.profileDescription" maxlength="150" class="w-100" cols="30" rows="10" class="profile-description-field" *ngIf="editMode && user.isMyProfile"></textarea>
-              <p *ngIf="!editMode && user.isMyProfile">{{user.profileDescription || 'Wprowadź opis ...'}} </p>
+              <p *ngIf="!editMode && user.isMyProfile">{{user.profileDescription || 'Napisz coś o sobie ...'}} </p>
               <p *ngIf="!editMode && !user.isMyProfile">{{user.profileDescription}} </p>
             </ion-col>
           </ion-row>
