@@ -110,6 +110,9 @@ export class ProfileComponent implements OnInit {
     this.imageAttributes.push({
       element: 'class',
       value: 'image',
+      },{
+        element: 'style',
+        value: 'border-radius: 50%'
       });
   }
 
