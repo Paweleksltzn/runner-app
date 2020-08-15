@@ -1,8 +1,8 @@
 @import '../../../../../styles/variables';
-.main-container{
+.main-container{ 
     &-profile{
         height: 60%;
-        display: block;     
+        display: block;   
     }
 }
 .profile-picture{
@@ -65,8 +65,8 @@
 .description-edit {
     position: absolute;
     font-size: 25px;
-    right: -5;
-    top: 2rem;
+    right: 0.25rem;
+    top: 0.25rem;
 }
 .profile-tab{
     height: 15%;

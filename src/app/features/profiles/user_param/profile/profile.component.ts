@@ -112,7 +112,7 @@ export class ProfileComponent implements OnInit {
       value: 'image',
       },{
         element: 'style',
-        value: 'border-radius: 50%'
+        value: 'border-radius: 50%',  
       });
   }
 
