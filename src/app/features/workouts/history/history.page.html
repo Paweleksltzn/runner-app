@@ -4,31 +4,30 @@
         <h5 class="empty-trainings">Historia jest pusta</h5>
       </div>
       <div class="workout__container" *ngFor="let historyWorkout of workoutsHistory;let workoutIndex = index;">
-        <ion-grid>
-          <ion-row class="ion-align-items-end">
-            <ion-col>
-              <h5 class="workout__container--title to-left">{{ workoutIndex + 1 }}. {{historyWorkout.title}} 
-                <span class="to-right">{{historyWorkout.trainingDate}}</span>
-              </h5>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-                <p class="workout__container--info">Liczba ćwiczeń: {{ historyWorkout.excercises.length }}</p>
-                <p class="workout__container--info">Liczba seri: {{ calcSeriesAmount(historyWorkout) }}</p>
-            </ion-col>
-            <ion-col>
-                <ion-button class="workout__container--button ion-float-right" (click)="openWorkoutDetails(historyWorkout, workoutIndex)">
-                    Więcej
-                  <ion-icon slot="end" name="arrow-forward"></ion-icon>
-                </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-                <p class="workout__container--info">Czas trwania: {{ historyWorkout.duration }}</p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+        <div class="workout__item">
+          <ion-grid>
+            <ion-row class="ion-align-items-end">
+              <ion-col>
+                <h5 class="workout__container--title to-left">{{ workoutIndex + 1 }}. {{historyWorkout.title}} 
+                  <span class="to-right">{{historyWorkout.trainingDate}}</span>
+                </h5>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                  <p class="workout__container--info">Liczba ćwiczeń: {{ historyWorkout.excercises.length }}</p>
+                  <p class="workout__container--info">Liczba seri: {{ calcSeriesAmount(historyWorkout) }}</p>
+              </ion-col>
+              <ion-col>
+                <ion-icon name="arrow-forward" class="workout__container--icon ion-float-right" (click)="openWorkoutDetails(historyWorkout, workoutIndex)"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                  <p class="workout__container--info">Czas trwania: {{ historyWorkout.duration }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
       </div>
 </ion-content>

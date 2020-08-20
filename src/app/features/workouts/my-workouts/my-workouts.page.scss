@@ -7,10 +7,13 @@
     color: #333;
 }
 .workout__container {
-    padding: .7rem;
-    background-color: #fafafa;
-    &:nth-child(2n) {
-        background: #eee;
+    padding: 1.2rem;
+    min-height: 85%;
+    .workout__item {
+        background-color: green;
+        border-left: .5rem solid lightgreen;
+        border-radius: 4px;
+        color: white;
     }
     &--title {
         margin-top: 0;
@@ -20,8 +23,13 @@
         margin-top: .5rem;
     }
     &--button {
-        --background: linear-gradient(to right top, #15e6b5, #39e9b1, #4fecad, #61efaa, #71f2a6, #6af2ae, #63f3b6, #5cf3be, #3ef0d1, #22ede2, #1ce8f0, #34e3fa);
-        --color: #555;
+        --background: orange;
+        --color: #fff;
+    }
+    &--icon {
+        box-shadow: none;
+        background: transparent;
+        font-size: 2rem;
     }
 }
 .workout-adder {
