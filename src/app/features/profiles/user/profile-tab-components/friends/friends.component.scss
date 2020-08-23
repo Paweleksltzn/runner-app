@@ -1,3 +1,8 @@
+.header{
+    color: #555;
+    padding: .5rem;
+    display: flex;
+}
 .summary{
     padding: .5rem;
     display: flex;
@@ -6,7 +11,7 @@
 }
 .add-friend{
     font-size: 2rem;
-    position: absolute;
     right: 2rem;
-    top: 1rem;
+    position: absolute;
+    margin: .75rem;
 }
