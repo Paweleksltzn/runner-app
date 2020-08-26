@@ -20,5 +20,10 @@ export const menuLinks: TabsNavLink[] = [
         label: 'Historia treningow',
         iconName: 'menu',
         link: 'workouts-history'
+    },
+    {
+        label: 'Ustawienia',
+        iconName: 'settings',
+        link: ''
     }
 ];

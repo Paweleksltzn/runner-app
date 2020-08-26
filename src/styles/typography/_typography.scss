@@ -1,1 +1,9 @@
-
+ion-content {
+    min-height: 100vh;
+}
+.mat-expansion-indicator {
+    &::after {
+        color: white !important;
+        border-width:  0 4px 4px 0 !important;
+    }
+}
