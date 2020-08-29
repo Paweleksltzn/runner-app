@@ -1,1 +1,1 @@
-<ion-menu-button autoHide="false" class="site-menu-icon" (click)="openMenu()"></ion-menu-button>
+<ion-menu-button ngDefaultControl name="button" [(ngModel)]="isProfileTabButton"  [ngClass]="{'profile-tab-button':this.isProfileTabButton}" autoHide="false" class="site-menu-icon" (click)="openMenu()"></ion-menu-button>

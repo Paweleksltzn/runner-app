@@ -5,12 +5,19 @@
         display: block;   
     }
 }
+.background-profile{
+    position:absolute;
+    height: 30%;
+    width: 100%;
+    background-color: #13986B;
+    z-index: 0;
+    top:0;
+}
 .profile-picture{
     height: 60%;
     text-align: center;
-    background-size: 100% 70%;
-    background-repeat: no-repeat;
-    background-image: $green-teal-gradient;
+    background-color: transparent;
+    position: relative;
 }
 .rate{
     text-align: center;
@@ -91,7 +98,7 @@ span{
     margin: 1rem;
 }
 .gradient-1{
-    background-image: $green-teal-gradient;
+    background-color: #13986B;
 }
 .gradient-2{
     background-image: $blue-purple-gradient;

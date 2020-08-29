@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   @Input()
   public titlEditable = false;
   @Input()
-  public bckColor = 'red';
+  public isProfileTab = false;
   @Output()
   public titleChanged = new EventEmitter();
   constructor() { }

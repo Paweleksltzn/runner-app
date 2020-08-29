@@ -1,13 +1,13 @@
-<ion-header>
-  <ion-toolbar ngDefaultControl name="toolbar" class="header__bar" [(ngModel)]="bckColor" [ngStyle]="{'--background':this.bckColor}">
+<ion-header no-border>
+  <ion-toolbar no-border ngDefaultControl name="toolbar" class="header__bar" [(ngModel)]="isProfileTab" [ngClass]="{'profile-tab':this.isProfileTab}">
     <ion-buttons slot="start" >
-      <app-menu-button *ngIf="!backButtonVisible"></app-menu-button>
+      <app-menu-button  [isProfileTabButton]="this.isProfileTab" *ngIf="!backButtonVisible"></app-menu-button>
       <ion-back-button defaultHref="my-workouts" *ngIf="backButtonVisible"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ng-container [ngTemplateOutlet]="additionalTemplate"></ng-container>
     </ion-buttons>
-    <ion-title *ngIf="!titlEditable">{{ title }}</ion-title>
+    <ion-title [ngClass]="{'profile-tab-text':this.isProfileTab}" *ngIf="!titlEditable">{{ title }}</ion-title>
     <input type="text" [(ngModel)]="title" class="title-input" name="repeats" (change)="titleChange()" *ngIf="titlEditable">
   </ion-toolbar>
 </ion-header>
