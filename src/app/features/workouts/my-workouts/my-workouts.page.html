@@ -5,27 +5,29 @@
   </ion-button>
 </ng-template>
 <ion-content>
-  <div *ngIf="myWorkouts.length === 0">
-    <h5 class="empty-trainings">Brak zapisanych treningów</h5>
-  </div>
-  <div class="workout__container" *ngFor="let myWorkout of myWorkouts;let workoutIndex = index;">
-    <div class="workout__item">
-      <ion-grid>
-        <ion-row class="ion-align-items-end">
-          <ion-col>
-            <h5 class="workout__container--title">{{ workoutIndex + 1 }}. {{myWorkout.title}}</h5>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-              <p class="workout__container--info">Liczba ćwiczeń: {{ myWorkout.excercises.length }}</p>
-              <p class="workout__container--info">Liczba seri: {{ calcSeriesAmount(myWorkout) }}</p>
-          </ion-col>
-          <ion-col>
-            <ion-icon class="workout__container--icon ion-float-right" name="arrow-forward" (click)="openWorkoutDetails(myWorkout, workoutIndex)"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+  <div class="main-workout-container">
+    <div *ngIf="myWorkouts.length === 0">
+      <h5 class="empty-trainings">Brak zapisanych treningów</h5>
+    </div>
+    <div class="workout__container" *ngFor="let myWorkout of myWorkouts;let workoutIndex = index;">
+      <div class="workout__item">
+        <ion-grid>
+          <ion-row class="ion-align-items-end">
+            <ion-col>
+              <h5 class="workout__container--title">{{ workoutIndex + 1 }}. {{myWorkout.title}}</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <p class="workout__container--info">Liczba ćwiczeń: {{ myWorkout.excercises.length }}</p>
+                <p class="workout__container--info">Liczba seri: {{ calcSeriesAmount(myWorkout) }}</p>
+            </ion-col>
+            <ion-col>
+              <ion-icon class="workout__container--icon ion-float-right" name="arrow-forward" (click)="openWorkoutDetails(myWorkout, workoutIndex)"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
     </div>
   </div>
   <ion-button class="workout__container--button workout-adder" (click)="shareWorkouts()" expand="block">

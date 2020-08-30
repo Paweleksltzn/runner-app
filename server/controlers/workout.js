@@ -67,7 +67,7 @@ exports.addWorkoutToHistory = async function(req, res, next) {
         const newWorkoutInHistory = req.body.workout;
         if (userWorkoutsHistory) {
             userWorkoutsHistory.workoutsHistory = [createNewHistoryWorkout(newWorkoutInHistory, userVariable, author).workoutsHistory[0], ...userWorkoutsHistory.workoutsHistory];
-            if (workoutsHistory.length === 10) {
+            if (userWorkoutsHistory.workoutsHistory && userWorkoutsHistory.workoutsHistory.length === 10) {
                 achievmentsController.checkFirstWorkoutAchievment(profile, userVariable, achievmentsController.achievmentsData.tenWorkoutsDone);
             }
             userWorkoutsHistory.save();
