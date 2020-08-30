@@ -14,6 +14,8 @@ export class HeaderComponent implements OnInit {
   public additionalTemplate: TemplateRef<any>;
   @Input()
   public titlEditable = false;
+  @Input()
+  public isProfileTab = false;
   @Output()
   public titleChanged = new EventEmitter();
   constructor() { }

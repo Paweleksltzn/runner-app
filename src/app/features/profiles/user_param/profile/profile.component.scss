@@ -1,16 +1,23 @@
 @import '../../../../../styles/variables';
-.main-container{
+.main-container{ 
     &-profile{
         height: 60%;
-        display: block;     
+        display: block;   
     }
+}
+.background-profile{
+    position:absolute;
+    height: 30%;
+    width: 100%;
+    background-color: #13986B;
+    z-index: 0;
+    top:0;
 }
 .profile-picture{
     height: 60%;
     text-align: center;
-    background-size: 100% 70%;
-    background-repeat: no-repeat;
-    background-image: $green-teal-gradient;
+    background-color: transparent;
+    position: relative;
 }
 .rate{
     text-align: center;
@@ -64,8 +71,9 @@
 }
 .description-edit {
     position: absolute;
-    right: 0;
-    top: -2rem;
+    font-size: 25px;
+    right: 0.25rem;
+    top: 0.25rem;
 }
 .profile-tab{
     height: 15%;
@@ -90,7 +98,7 @@ span{
     margin: 1rem;
 }
 .gradient-1{
-    background-image: $green-teal-gradient;
+    background-color: #13986B;
 }
 .gradient-2{
     background-image: $blue-purple-gradient;
@@ -110,7 +118,7 @@ span{
         width: 50%; 
     }
 }
-.guest-chatbox{
+.chatbox{
     position: absolute;
     right: 0px;
 }
@@ -136,3 +144,4 @@ span{
 .star-color{
     color: $mixed-main-colours;
 }
+
