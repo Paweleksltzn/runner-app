@@ -14,7 +14,7 @@
         </ng-container>
         <ng-container *ngIf="user.isMyProfile">
           <div class="iconbox--2" routerLink="/chat">
-            <ion-icon name="chatboxes" class="chatbox" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
+            <img src="../../../../../assets/custom_icons/svg/chat.svg" class="chatbox" alt="chat" [ngClass]="{'scrolled-icon':scrollYPos > 10}">
             <span class="unreaded-messages__amount" *ngIf="unreadedMessagesAmount > 0">{{unreadedMessagesAmount}}</span>
           </div>
         </ng-container>
