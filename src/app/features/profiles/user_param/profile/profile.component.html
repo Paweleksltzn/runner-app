@@ -33,7 +33,7 @@
         <ion-grid>
           <ion-row align-items-start justify-content-end>
             <ion-col size="2">
-              <ion-icon name="create" *ngIf="!editMode && user.isMyProfile" (click)="changeEditMode()" class="description-edit"></ion-icon>
+              <img src="../../../../../assets/custom_icons/svg/pencil.svg" *ngIf="!editMode && user.isMyProfile" (click)="changeEditMode()" class="description-edit" alt="edit">
             </ion-col>
           </ion-row>
           <ion-row>
