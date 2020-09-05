@@ -14,7 +14,7 @@
         </ng-container>
         <ng-container *ngIf="user.isMyProfile">
           <div class="iconbox--2" routerLink="/chat">
-            <img src="../../../../../assets/custom_icons/svg/chat.svg" class="chatbox" alt="chat" [ngClass]="{'scrolled-icon':scrollYPos > 10}">
+            <img src="assets/custom_icons/svg/chat.svg" class="chatbox" alt="chat" [ngClass]="{'scrolled-icon':scrollYPos > 10}">
             <span class="unreaded-messages__amount" *ngIf="unreadedMessagesAmount > 0">{{unreadedMessagesAmount}}</span>
           </div>
         </ng-container>
@@ -33,7 +33,7 @@
         <ion-grid>
           <ion-row align-items-start justify-content-end>
             <ion-col size="2">
-              <img src="../../../../../assets/custom_icons/svg/pencil.svg" *ngIf="!editMode && user.isMyProfile" (click)="changeEditMode()" class="description-edit" alt="edit">
+              <img src="assets/custom_icons/svg/pencil.svg" *ngIf="!editMode && user.isMyProfile" (click)="changeEditMode()" class="description-edit" alt="edit">
             </ion-col>
           </ion-row>
           <ion-row>
