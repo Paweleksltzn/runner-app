@@ -82,7 +82,8 @@ export class MyWorkoutsPage implements OnInit {
                 excercises: []
               };
               this.store.dispatch(actions.myWorkoutActions.addWorkoutListElement({
-                workoutsListItem: newTraining
+                workoutsListItem: newTraining,
+                isNewWorkout: true
               }));
             }
             this.saveMyWorkoutsStage();

@@ -20,7 +20,7 @@ const myWorkoutReducerOptions = createReducer(initialState,
               index = workoutIndex;
            }
         });
-        if (index >= 0) {
+        if (index >= 0 && !action.isNewWorkout) {
             workoutListClone[index] = action.workoutsListItem;
         } else {
             workoutListClone.push(action.workoutsListItem);
