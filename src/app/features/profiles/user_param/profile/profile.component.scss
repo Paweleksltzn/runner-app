@@ -115,7 +115,7 @@ span{
         display: flex;
         position: fixed;
         right: 0px;
-        width: 50%; 
+        width: 30%; 
     }
 }
 .chatbox{
@@ -123,6 +123,10 @@ span{
     right: 0px;
     height: 2rem;
     margin: .75rem;
+    color: #fff;
+}
+.notify{
+    height: 2rem;
     color: #fff;
 }
 .scrolled-icon{

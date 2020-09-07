@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
   public ownerEmail: string;
   public unreadedMessagesAmount = 0;
   public scrollYPos: number;
+  public notDisplayedNotificationsAmount = 1;
   public ratingTab: number [] = [1, 2, 3, 4, 5];
   public slideOpts = {
     slidesPerView: 2,

@@ -1,4 +1,10 @@
-<app-header [isProfileTab]="true" [title]="'Profil'"></app-header>
+<app-header [isProfileTab]="true" [title]="'Profil'" [additionalTemplate]="additionalButton"></app-header>
+<ng-template #additionalButton>
+<ion-button class="short-button short-button-primary">
+  <img src="assets/custom_icons/svg/notification.svg" class="notify">
+  <span class="notifications__amount" *ngIf="notDisplayedNotificationsAmount > 0">{{ notDisplayedNotificationsAmount }}</span>
+</ion-button>
+</ng-template>
 <ion-content [scrollEvents]="true" (ionScroll)="scrollHandler($event)">
   <div class="main-container">
     <div class="main-container-profile" >
@@ -9,7 +15,7 @@
             <ion-icon  name="arrow-back" (click)="exitDisplayOtherProfileMode()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
           </div> 
           <div class="iconbox--2" >
-          <ion-icon name="chatboxes" class="chatbox" *ngIf="user.email !== ownerEmail" (click)="openChat()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
+            <ion-icon name="chatboxes" class="chatbox" *ngIf="user.email !== ownerEmail" (click)="openChat()" [ngClass]="{'scrolled-icon':scrollYPos > 10}"></ion-icon>
           </div>
         </ng-container>
         <ng-container *ngIf="user.isMyProfile">
