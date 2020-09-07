@@ -60,8 +60,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.router.navigate(['user', 'profile', 'friends']);
-    this.selectedProfileTab = 1;
   }
 
   public deleteFriend() {
@@ -76,10 +74,6 @@ export class ProfileComponent implements OnInit {
       this.toastGeneratorService.presentToast
       (`Usuwanie ze znajomych nie powiodło się`, 'danger');
     });
-  }
-
-  public switchProfileTab(selectedTab: number) {
-    this.selectedProfileTab = selectedTab;
   }
 
   async presentActionSheet() {
@@ -110,6 +104,9 @@ export class ProfileComponent implements OnInit {
     this.imageAttributes.push({
       element: 'class',
       value: 'image',
+      },{
+        element: 'style',
+        value: 'border-radius: 50%; z-index: 6;',  
       });
   }
 

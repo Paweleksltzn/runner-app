@@ -11,9 +11,9 @@ import { ProfileComponent } from '../../user_param/profile/profile.component';
 const routes: Routes = [
   {path: '', component: ProfileComponent,
   children: [
-    {path: 'friends', component: FriendsComponent},
+    {path: '', component: FriendsComponent,outlet: 'router1'},
     {path: 'trainings', component: TrainingsComponent},
-    {path: 'achivment', component: AchivmentsComponent},
+    {path: '', component: AchivmentsComponent,outlet: 'router2'},
     {path: 'rate-guest' , component: RatingGuestComponent},
     {path: 'settings', component: SettingsComponent}
   ]

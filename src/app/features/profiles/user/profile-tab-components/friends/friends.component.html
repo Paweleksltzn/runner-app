@@ -1,8 +1,12 @@
-<div class="summary">
-  <p>Liczba znajomych: {{ friends.length }}</p>
+<div class="header">
+  <h2>Znajomi</h2>
   <ng-container *ngIf="isMyProfile">
-    <ion-icon class="add-friend" (click)="displayAddFriends()" name="person-add"></ion-icon>
+    <img src="assets/custom_icons/svg/add_friend.svg" class="add-friend" (click)="displayAddFriends()" alt="chat">
   </ng-container>
+</div>
+
+<div class="summary">
+  <ion-searchbar placeholder="{{ friends.length }} kontaktów"></ion-searchbar>
 </div>
 <ion-item *ngFor="let friend of friends" (click)="visitFriend(friend)">
     <ion-avatar slot="start">

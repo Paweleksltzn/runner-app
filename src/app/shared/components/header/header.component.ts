@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, TemplateRef, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +15,11 @@ export class HeaderComponent implements OnInit {
   public additionalTemplate: TemplateRef<any>;
   @Input()
   public titlEditable = false;
+  @Input()
+  public isProfileTab = false;
   @Output()
   public titleChanged = new EventEmitter();
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {}
 
