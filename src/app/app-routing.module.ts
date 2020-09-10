@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./core/auth/auth.module').then(m => m.AuthModule), canActivate: [NotLoggedGuard] },
   { path: 'user/profile', loadChildren: () => import('./features/profiles/user/user.module').then(m => m.UserModule), canActivate: [FirstLevelGuard]},
   { path: 'chat', loadChildren: () => import('./features/profiles/user_param/chat/chat/chat.module').then(m => m.ChatModule), canActivate: [FirstLevelGuard]},
+  { path: 'notifications', loadChildren: () => import('./features/notifications/notifications.module').then(m => m.NotificationsPageModule), canActivate: [FirstLevelGuard]},
   { path: 'workout', loadChildren: () => import('./features/workouts/active-workout/active-workout.module').then(m => m.ActiveWorkoutPageModule),
    canActivate: [FirstLevelGuard] },
   { path: 'my-workouts', loadChildren: () => import('./features/workouts/my-workouts/my-workouts.module').then(m => m.MyWorkoutsPageModule),

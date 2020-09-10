@@ -21,7 +21,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
-    path: 'notifications',
+    path: '',
     component: NotificationsPage
   }
 ];

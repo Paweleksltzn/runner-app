@@ -1,6 +1,6 @@
 <app-header [isProfileTab]="true" [title]="'Profil'" [additionalTemplate]="additionalButton"></app-header>
 <ng-template #additionalButton>
-<ion-button class="short-button short-button-primary">
+<ion-button routerLink="/notifications" class="short-button short-button-primary">
   <img src="assets/custom_icons/svg/notification.svg" class="notify">
   <span class="notifications__amount" *ngIf="notDisplayedNotificationsAmount > 0">{{ notDisplayedNotificationsAmount }}</span>
 </ion-button>
