@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule, AlertController, ToastController } from '@ionic/angular';
-import { TabsNavComponent } from './components/tabs-nav/tabs-nav.component';
 import { MaterialModule } from './modules/material.module';
 import { FormsModule } from '@angular/forms';
 import { SingleWorkoutModule } from './components/single-workout/singleWorkoutModule';
@@ -10,7 +9,7 @@ import { StorageService } from './services/storage.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @NgModule({
-  declarations: [TabsNavComponent],
+  declarations: [],
   imports: [
     CommonModule,
     IonicModule,
@@ -19,7 +18,6 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     SingleWorkoutModule
   ],
   exports: [
-    TabsNavComponent,
     SingleWorkoutModule
   ],
   providers: [

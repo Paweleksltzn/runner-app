@@ -1,10 +1,4 @@
-<app-header [isProfileTab]="true" [title]="'Profil'" [additionalTemplate]="additionalButton"></app-header>
-<ng-template #additionalButton>
-<ion-button routerLink="/notifications" class="short-button short-button-primary">
-  <img src="assets/custom_icons/svg/notification.svg" class="notify">
-  <span class="notifications__amount" *ngIf="notDisplayedNotificationsAmount > 0">{{ notDisplayedNotificationsAmount }}</span>
-</ion-button>
-</ng-template>
+<app-header [isProfileTab]="true" [title]="'Profil'"></app-header>
 <ion-content [scrollEvents]="true" (ionScroll)="scrollHandler($event)">
   <div class="main-container">
     <div class="main-container-profile" >
