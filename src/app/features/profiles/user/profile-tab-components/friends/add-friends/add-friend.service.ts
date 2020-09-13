@@ -22,4 +22,5 @@ export class AddFriendService {
     };
     return this.http.get<UserSearcherResponse[]>(`${environment.srvAddress}/${environment.endpoints.searcher}/players`, queryParams);
   }
+
 }
