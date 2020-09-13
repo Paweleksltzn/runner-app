@@ -6,7 +6,7 @@
 </div>
 
 <div class="summary">
-  <ion-searchbar placeholder="{{ friends.length }} kontaktów"></ion-searchbar>
+  <ion-searchbar placeholder="{{ friends.length }} kontaktów" (ionChange)="addSearchString($event)"></ion-searchbar>
 </div>
 <ion-item *ngFor="let friend of friends" (click)="visitFriend(friend)">
     <ion-avatar slot="start">
