@@ -1,4 +1,5 @@
 <div class="header">
+  
   <h2>Znajomi</h2>
   <ng-container *ngIf="isMyProfile">
     <img src="assets/custom_icons/svg/add_friend.svg" class="add-friend" (click)="displayAddFriends()" alt="chat">
@@ -8,7 +9,8 @@
 <div class="summary">
   <ion-searchbar placeholder="{{ friends.length }} kontaktów" (ionChange)="addSearchString($event)"></ion-searchbar>
 </div>
-<ion-item *ngFor="let friend of friends" (click)="visitFriend(friend)">
+<ion-list>
+  <ion-item *ngFor="let friend of friends" (click)="visitFriend(friend)">
     <ion-avatar slot="start">
       <img [src]="friend.imgUrl || 'assets/images/profile-picture.png'">
     </ion-avatar>
@@ -16,4 +18,12 @@
       <h3>{{friend.name}} {{friend.surname}}</h3>
       <p>{{ friend.profileDescription.substr(0, 60) }}<ng-container *ngIf="friend.profileDescription.substr(0, 60).length === 60">...</ng-container></p>
     </ion-label>
-</ion-item>
+    <ion-infinite-scroll threshold="10px" (ionInfinite)="showFriends($event)" [disabled]="scrollDisabled">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Ładowanie...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-item>
+</ion-list>
+

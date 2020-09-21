@@ -25,7 +25,6 @@ export class FriendsComponent implements OnInit {
   public scrollDisabled = false;
   public searchString: string;
   public isLoaded =  true;
-  private fullFriendsArr: UserProfile[];
   constructor(private modalController: ModalController,
               private store: Store<Reducers>,
               private userService: UserService,
@@ -35,11 +34,14 @@ export class FriendsComponent implements OnInit {
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       if (state.isMyProfile) {
-        this.friends = state.ownerFriends;
+        if (!this.friends) {
+          this.friends = state.ownerFriends;
+        }
       } else {
-        this.friends = state.friends;
+        if (!this.friends) {
+          this.friends = state.friends;
+        }
       }
-      this.fullFriendsArr = this.friends;
       this.isMyProfile = state.isMyProfile;
       this.searchString = '';
     });
@@ -62,15 +64,11 @@ export class FriendsComponent implements OnInit {
   }
 
   public addSearchString(event) {
-    if (event.target.value) {
-      this.searchString = event.target.value;
-      this.isLoaded = false;
-      this.offset = 0;
-      this.scrollDisabled = false;
-      this.showFriends();
-    } else {
-      this.friends = this.fullFriendsArr;
-    }
+    this.searchString = event.target.value;
+    this.isLoaded = false;
+    this.offset = 0;
+    this.scrollDisabled = false;
+    this.showFriends();
   }
 
   public showFriends(event?) {
