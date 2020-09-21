@@ -83,7 +83,7 @@ export class FriendsComponent implements OnInit {
     this.userService.getFriendSearcherResponse(this.searchString, this.limit, this.offset)
     .pipe(delay(800)).subscribe(response => {
       this.isLoaded = true;
-      this.friends = [...this.friends, ...response];
+      this.friends = [ ...response ]; //overwriting friends bug fixed
       this.offset += this.limit;
       if (response.length < this.limit) {
         this.scrollDisabled = true;

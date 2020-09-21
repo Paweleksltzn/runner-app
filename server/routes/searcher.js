@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.get('/players', searchersController.searchUsers);
 
+router.get('/friends', searchersController.searchFriends);
+
 module.exports = router;
