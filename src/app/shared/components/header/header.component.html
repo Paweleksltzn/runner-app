@@ -6,6 +6,10 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ng-container [ngTemplateOutlet]="additionalTemplate"></ng-container>
+      <ion-button routerLink="/notifications" class="short-button short-button-primary">
+        <img [src]="isProfileTab ? 'assets/custom_icons/svg/notification-profile.svg' : 'assets/custom_icons/svg/notification.svg'" class="notify">
+        <span class="notifications__amount" *ngIf="notDisplayedNotificationsAmount > 0">{{ notDisplayedNotificationsAmount }}</span>
+      </ion-button>
     </ion-buttons>
     <ion-title [ngClass]="{'profile-tab-text': isProfileTab}" *ngIf="!titlEditable">{{ title }}</ion-title>
     <input type="text" [(ngModel)]="title" class="title-input" name="repeats" (change)="titleChange()" *ngIf="titlEditable">

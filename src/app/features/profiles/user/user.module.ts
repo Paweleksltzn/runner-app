@@ -14,6 +14,7 @@ import { RatingGuestComponent } from './profile-tab-components/rating/rating-gue
 import { ProfileComponent } from '../user_param/profile/profile.component';
 import { AddFriendsComponent } from './profile-tab-components/friends/add-friends/add-friends.component';
 import { ChatModule } from '../user_param/chat/chat/chat.module';
+import { NotificationsPageModule } from '../../notifications/notifications.module'
 import { ActivateCoachAccountComponent } from '../user/profile-tab-components/settings/activateCoachAccount/activate-coach-account/activate-coach-account.component';
 import { ImageCropperComponent } from '../user_param/image-cropper/image-cropper.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -40,7 +41,8 @@ import { FormsModule } from '@angular/forms';
     UserRoutingModule,
     ChatModule,
     ImageCropperModule,
-    FormsModule
+    FormsModule,
+    NotificationsPageModule
   ],
   entryComponents: [
     AddFriendsComponent,
