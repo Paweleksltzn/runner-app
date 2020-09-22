@@ -24,7 +24,7 @@ export class PassResetComponent implements OnInit {
   public onSubmit(){
     const resetEmail = this.passResetForm.value
     resetEmail.toString();
-    this.authService.changePassword(resetEmail);
+    this.authService.changePassword(resetEmail).subscribe();    
   }
  
 }
