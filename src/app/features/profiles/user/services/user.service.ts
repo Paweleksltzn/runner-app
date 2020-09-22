@@ -64,17 +64,6 @@ export class UserService {
     return this.http.delete(`${environment.srvAddress}/${environment.endpoints.user}/deleteProfileImage`);
   }
 
-  public getFriendSearcherResponse(searchString: string, limit: number, offset: number): Observable<UserProfile[]> {
-    const queryParams = {
-        params: {
-          searchString,
-          limit: limit.toString(),
-          offset: offset.toString()
-        }
-    };
-    return this.http.get<UserProfile[]>(`${environment.srvAddress}/${environment.endpoints.searcher}/friends`, queryParams);
-  }
-
   private subscribeOnFriendDeletion() {
     this.socket.fromEvent(socketEvents.friendDeletion).subscribe((oldFriendId: string) => {
       this.store.dispatch(actions.profileAction.removeFriend({removedFriendId: oldFriendId}));

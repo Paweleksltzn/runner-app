@@ -63,7 +63,7 @@ exports.login = async function(req, res, next) {
                 '_id': {
                     '$in': user.userProfile.friends
                 }
-            }).limit(10);
+            });
             if (!user.isActive) {
                 return res.status(422).send('Email nie został potwierdzony');
             }

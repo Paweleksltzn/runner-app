@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Reducers, actions } from 'src/app/store';
 import { Store, select } from '@ngrx/store';
-import { ModalController } from '@ionic/angular';
+import { ModalController, IonInfiniteScroll } from '@ionic/angular';
 import { AddFriendsComponent } from './add-friends/add-friends.component';
 import * as storeState from 'src/app/shared/interfaces/store/index';
 import { UserProfile } from 'src/app/shared/interfaces/profile/userInterface';
@@ -18,13 +18,14 @@ export class FriendsComponent implements OnInit {
   public numberOfFriends: number;
   public currentModal: HTMLIonModalElement;
   public isMyProfile: boolean;
-  public friends: UserProfile[];
+  public friends: UserProfile[] = [];
   private offset = 0;
   private limit = 10;
-  public searchSubscription;
   public scrollDisabled = false;
   public searchString: string;
-  public isLoaded =  true;
+  public fullFriendsArr: UserProfile[];
+  @ViewChild('infiniteScroll') infiniteScroll: IonInfiniteScroll;
+
   constructor(private modalController: ModalController,
               private store: Store<Reducers>,
               private userService: UserService,
@@ -34,13 +35,9 @@ export class FriendsComponent implements OnInit {
   ngOnInit() {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       if (state.isMyProfile) {
-        if (!this.friends) {
-          this.friends = state.ownerFriends;
-        }
+        this.fullFriendsArr = state.ownerFriends;
       } else {
-        if (!this.friends) {
-          this.friends = state.friends;
-        }
+        this.fullFriendsArr = state.friends;
       }
       this.isMyProfile = state.isMyProfile;
       this.searchString = '';
@@ -65,7 +62,7 @@ export class FriendsComponent implements OnInit {
 
   public addSearchString(event) {
     this.searchString = event.target.value;
-    this.isLoaded = false;
+    this.friends = [];
     this.offset = 0;
     this.scrollDisabled = false;
     this.showFriends();
@@ -75,22 +72,39 @@ export class FriendsComponent implements OnInit {
     if (!event) {
       this.friends = [];
     }
-    if (this.searchSubscription) {
-      this.searchSubscription.unsubscribe();
-      this.searchSubscription = undefined;
+    let friends;
+    if (this.searchString) {
+      if (this.searchString.split(' ').length === 2) {
+        const name = this.searchString.split(' ')[0];
+        const surname = this.searchString.split(' ')[1];
+        const usersFirstArr =  this.fullFriendsArr.filter((friend => {
+          return friend.name.match(new RegExp(name, 'i')) && friend.surname.match(new RegExp(surname, 'i'));
+        }));
+        const usersSecondArr =  this.fullFriendsArr.filter((friend => {
+          return friend.name.match(new RegExp(surname, 'i')) && friend.surname.match(new RegExp(name, 'i'));
+        }));
+        friends = [...usersFirstArr, ...usersSecondArr];
+      } else {
+          const searchString = this.searchString.split(' ').join('');
+          friends = this.fullFriendsArr.filter((friend => {
+            return (friend.name + friend.surname).match(new RegExp(searchString, 'i'));
+          }));
+      }
+    } else {
+      friends = this.fullFriendsArr;
     }
 
-    this.userService.getFriendSearcherResponse(this.searchString, this.limit, this.offset)
-    .pipe(delay(800)).subscribe(response => {
-      this.isLoaded = true;
-      this.friends = [ ...response ]; //overwriting friends bug fixed
+    setTimeout(() => {
+      const slicedFriends = friends.slice(this.offset, this.limit + this.offset);
+      this.friends = [...this.friends, ...slicedFriends];
       this.offset += this.limit;
-      if (response.length < this.limit) {
+      if (slicedFriends.length < this.limit) {
         this.scrollDisabled = true;
       } else {
         this.scrollDisabled = false;
       }
-    });
+      this.infiniteScroll.complete();
+    }, this.searchString ? 0 : 100);
   }
 
 }

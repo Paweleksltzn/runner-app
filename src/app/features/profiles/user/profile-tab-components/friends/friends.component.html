@@ -1,29 +1,27 @@
 <div class="header">
-  
   <h2>Znajomi</h2>
   <ng-container *ngIf="isMyProfile">
     <img src="assets/custom_icons/svg/add_friend.svg" class="add-friend" (click)="displayAddFriends()" alt="chat">
   </ng-container>
 </div>
-
 <div class="summary">
-  <ion-searchbar placeholder="{{ friends.length }} kontaktów" (ionChange)="addSearchString($event)"></ion-searchbar>
+  <ion-searchbar placeholder="{{ fullFriendsArr.length }} kontaktów" (ionChange)="addSearchString($event)"></ion-searchbar>
 </div>
 <ion-list>
-  <ion-item *ngFor="let friend of friends" (click)="visitFriend(friend)">
+  <ion-item class="friend-item" (click)="visitFriend(friend)" *ngFor="let friend of friends">
     <ion-avatar slot="start">
       <img [src]="friend.imgUrl || 'assets/images/profile-picture.png'">
     </ion-avatar>
-    <ion-label>
+    <ion-label >
       <h3>{{friend.name}} {{friend.surname}}</h3>
       <p>{{ friend.profileDescription.substr(0, 60) }}<ng-container *ngIf="friend.profileDescription.substr(0, 60).length === 60">...</ng-container></p>
     </ion-label>
-    <ion-infinite-scroll threshold="10px" (ionInfinite)="showFriends($event)" [disabled]="scrollDisabled">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="Ładowanie...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
   </ion-item>
+  <ion-infinite-scroll threshold="10px" (ionInfinite)="showFriends($event)" [disabled]="scrollDisabled" #infiniteScroll>
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Ładowanie...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-list>
 
