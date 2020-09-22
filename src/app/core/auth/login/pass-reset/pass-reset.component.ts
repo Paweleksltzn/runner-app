@@ -26,5 +26,5 @@ export class PassResetComponent implements OnInit {
     resetEmail.toString();
     this.authService.changePassword(resetEmail);
   }
-
+ 
 }
