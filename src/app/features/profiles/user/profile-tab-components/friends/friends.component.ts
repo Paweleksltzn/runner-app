@@ -36,8 +36,13 @@ export class FriendsComponent implements OnInit {
     this.store.pipe(select('profile')).subscribe((state: storeState.ProfileState) => {
       if (state.isMyProfile) {
         this.fullFriendsArr = state.ownerFriends;
+        this.resetFriends('');
       } else {
         this.fullFriendsArr = state.friends;
+        this.resetFriends('');
+      }
+      if (this.offset === 0) {
+        this.showFriends();
       }
       this.isMyProfile = state.isMyProfile;
       this.searchString = '';
@@ -45,6 +50,7 @@ export class FriendsComponent implements OnInit {
   }
 
   public async displayAddFriends() {
+    this.resetFriends('');
     const addFriendsModal = await this.modalController.create({
       component: AddFriendsComponent
     });
@@ -53,25 +59,21 @@ export class FriendsComponent implements OnInit {
   }
 
   public visitFriend(user: UserProfile) {
+    this.resetFriends('');
     this.userService.getFriendsForUserProfile(user).subscribe((friends: UserProfile[]) => {
       user.friends = friends;
       this.store.dispatch(actions.profileAction.setIsMyProfile({isMyProfile: false}));
       this.store.dispatch(actions.profileAction.loadProfile({userProfile: user}));
     });
+
   }
 
   public addSearchString(event) {
-    this.searchString = event.target.value;
-    this.friends = [];
-    this.offset = 0;
-    this.scrollDisabled = false;
+    this.resetFriends(event.target.value);
     this.showFriends();
   }
 
   public showFriends(event?) {
-    if (!event) {
-      this.friends = [];
-    }
     let friends;
     if (this.searchString) {
       if (this.searchString.split(' ').length === 2) {
@@ -105,6 +107,23 @@ export class FriendsComponent implements OnInit {
       }
       this.infiniteScroll.complete();
     }, this.searchString ? 0 : 100);
+  }
+
+  private resetFriends(searchString: string) {
+    if (searchString) {
+      this.searchString = searchString;
+      this.friends = [];
+      this.offset = 0;
+      this.scrollDisabled = false;
+    } else {
+      setTimeout(() => {
+        this.searchString = searchString;
+        this.friends = [];
+        this.offset = 0;
+        this.scrollDisabled = false;
+      }, 100);
+    }
+
   }
 
 }
