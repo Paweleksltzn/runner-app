@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const UserProfile = require('../models/userProfile');
 
 exports.searchUsers = async function(req, res, next) {
     try {
