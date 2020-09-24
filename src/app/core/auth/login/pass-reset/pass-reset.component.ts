@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,7 +11,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class PassResetComponent implements OnInit {
   public passResetForm: FormGroup;
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  public validationMessage = '';
+  public messageClass = '';
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.createForm();
@@ -24,7 +28,19 @@ export class PassResetComponent implements OnInit {
   public onSubmit(){
     const resetEmail = this.passResetForm.value
     resetEmail.toString();
-    this.authService.changePassword(resetEmail).subscribe();    
+    this.authService.changePassword(resetEmail).subscribe(
+      (res: string)=>{
+        this.validationMessage = res;
+        this.messageClass = 'valid-response';
+      },
+      err => {
+        this.validationMessage = err.error;
+        this.messageClass = 'invalid-response';
+        if (err.status === 0) {
+          this.router.navigateByUrl('/error');
+        }
+      }
+      );    
   }
  
 }

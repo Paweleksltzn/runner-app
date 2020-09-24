@@ -4,7 +4,7 @@
     </div>
     <div class="container">
         <form [formGroup]="passResetForm" (ngSubmit)="onSubmit()">
-            <div class="group">      
+            <div class="input-container">      
                 <input class="password-reset-input" placeholder="Email" type="text" required formControlName="email" id="email">
                 <span class="highlight"></span>
                 <span class="bar"></span>
@@ -14,6 +14,7 @@
             </div>
         </form>
         <p class="info">Na twojego maila wyślemy link do zresetowania hasła.</p>
+        <p class="response" *ngIf="validationMessage" [ngClass]="messageClass"> {{validationMessage}} </p> 
     </div>
 </ion-content>
  
