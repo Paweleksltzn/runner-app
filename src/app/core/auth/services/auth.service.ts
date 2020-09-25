@@ -45,8 +45,8 @@ export class AuthService {
                 });
               }
 
-  public changePassword() {
-    return this.http.put(`${environment.srvAddress}/${environment.endpoints.auth}/password/reset`, {});
+  public changePassword(email: string) {
+    return this.http.put(`${environment.srvAddress}/${environment.endpoints.auth}/password/reset`, email);
   }
 
   public postSignUp(userData: UserRegistrationData) {

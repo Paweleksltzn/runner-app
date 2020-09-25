@@ -45,7 +45,7 @@ router.post('/login', [
  router.post('/autoLogin', authenticationController.autoLogin);
 
  router.post('/emailConfirmed', authenticationController.emailConfirmed);
- router.put('/password/reset', jwtManager.jwtVerivier, authenticationController.passwordReset);
+ router.put('/password/reset', authenticationController.passwordReset);
  
  router.post('/password/reset/attempt', [
      check('password').isLength({ min: 8 }).withMessage('Hasło musi mieć co najmniej 8 znaków'),

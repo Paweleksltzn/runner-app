@@ -13,6 +13,7 @@ import { JwtInterceptor } from 'src/app/core/auth/interceptors/tokenInterceptor'
 import { ErrorStatementComponent } from './error-statement/error-statement.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PolicyComponent } from './registration/policy/policy.component';
+import { PassResetComponent } from './login/pass-reset/pass-reset.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { PolicyComponent } from './registration/policy/policy.component';
     LoginComponent,
     PolicyComponent,
     RegistrationComponent,
-    ErrorStatementComponent
+    ErrorStatementComponent,
+    PassResetComponent,
   ],
   entryComponents: [
     PolicyComponent

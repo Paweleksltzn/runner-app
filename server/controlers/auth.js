@@ -123,10 +123,10 @@ exports.emailConfirmed = async function(req, res, next) {
 exports.passwordReset = async function(req, res, next) {
     const buffer = crypto.randomBytes(256);
     const confirmationToken = buffer.toString('hex');
-    const resetPasswordUser = await User.findById(req.token._id);
+    const resetPasswordUser = await User.findOne({email: req.body.email});
     try {
         if (resetPasswordUser) {
-            await emailSender(req.token.email, emailOptions.passwordReset, confirmationToken);
+            await emailSender(req.body.email, emailOptions.passwordReset, confirmationToken);
         } else {
             return res.status(422).send('Nieprawidłowy adres email');
         }

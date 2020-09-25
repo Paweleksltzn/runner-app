@@ -45,10 +45,4 @@ export class SettingsComponent implements OnInit {
     return await coachAccountActivation.present();
   }
 
-  public changePassword() {
-    this.authService.changePassword().subscribe(
-      (res: string) => this.toastGeneratorService.presentToast(res, 'success'),
-      err => this.toastGeneratorService.presentToast(err.error, 'success'));
-  }
-
 }
