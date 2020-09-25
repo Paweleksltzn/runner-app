@@ -46,7 +46,7 @@ export class AuthService {
               }
 
   public changePassword(email: string) {
-    return this.http.put(`http://localhost:3000/api/auth/password/reset`, email);
+    return this.http.put(`${environment.srvAddress}/${environment.endpoints.auth}/password/reset`, email);
   }
 
   public postSignUp(userData: UserRegistrationData) {

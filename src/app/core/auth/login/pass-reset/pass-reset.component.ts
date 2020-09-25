@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { ToastGeneratorService } from 'src/app/shared/services/toast-generator.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class PassResetComponent implements OnInit {
   public passResetForm: FormGroup;
   public validationMessage = '';
   public messageClass = '';
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private toastGeneratorService: ToastGeneratorService) { }
 
   ngOnInit() {
     this.createForm();
@@ -29,17 +29,8 @@ export class PassResetComponent implements OnInit {
     const resetEmail = this.passResetForm.value
     resetEmail.toString();
     this.authService.changePassword(resetEmail).subscribe(
-      (res: string)=>{
-        this.validationMessage = res;
-        this.messageClass = 'valid-response';
-      },
-      err => {
-        this.validationMessage = err.error;
-        this.messageClass = 'invalid-response';
-        if (err.status === 0) {
-          this.router.navigateByUrl('/error');
-        }
-      }
+      (res: string) => this.toastGeneratorService.presentToast(res, 'success'),
+      err => this.toastGeneratorService.presentToast(err.error, 'success')
       );    
   }
  
