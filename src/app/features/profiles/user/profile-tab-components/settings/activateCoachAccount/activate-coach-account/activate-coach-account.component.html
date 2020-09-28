@@ -1,7 +1,5 @@
 <ion-content>
-  <ion-toolbar class="header__bar">
-    <ion-icon (click)="dismissModal()" class="back-button" name="arrow-back"></ion-icon>
-  </ion-toolbar>
+  <app-header  [title]="'Zostań trenerem z Fitup'"></app-header>
   <ng-container *ngIf="areTermsOfUseAccepted; else TermsOfUse">
   <div class="approval">
     <ion-icon class="approval-icon" name="fitness"></ion-icon>

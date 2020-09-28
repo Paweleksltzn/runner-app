@@ -22,8 +22,8 @@ export const menuLinks: TabsNavLink[] = [
         link: 'workouts-history'
     },
     {
-        label: 'Ustawienia',
-        iconName: 'settings',
-        link: ''
+        label: 'Zostań trenerem',
+        iconName: 'menu',
+        link: 'activate-coach'
     }
 ];

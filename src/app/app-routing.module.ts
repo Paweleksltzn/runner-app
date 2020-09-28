@@ -13,7 +13,9 @@ const routes: Routes = [
   { path: 'my-workouts', loadChildren: () => import('./features/workouts/my-workouts/my-workouts.module').then(m => m.MyWorkoutsPageModule),
    canActivate: [FirstLevelGuard] },
   { path: 'workouts-history', loadChildren: () => import('./features/workouts/history/history.module').then(m => m.HistoryPageModule),
-   canActivate: [FirstLevelGuard] }
+   canActivate: [FirstLevelGuard] },
+  { path: 'activate-coach', loadChildren: () => import('./features/profiles/user/profile-tab-components/settings/activateCoachAccount/coach-account.module').then(m => m.CoachModule),
+  canActivate: [FirstLevelGuard] }
 
 ];
 @NgModule({
