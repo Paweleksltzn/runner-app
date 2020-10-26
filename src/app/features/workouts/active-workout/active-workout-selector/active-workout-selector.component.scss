@@ -1,8 +1,8 @@
 @import "../../../../../styles/variables";
 .start-training {
-    --background: linear-gradient(to right top, #15e6b5, #39e9b1, #4fecad, #61efaa, #71f2a6, #6af2ae, #63f3b6, #5cf3be, #3ef0d1, #22ede2, #1ce8f0, #34e3fa);
+    --background: #13986B;
     margin-top: 6rem;
-    --color: black;
+    --color: white;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -11,7 +11,7 @@
 }
 .amount {
     font-size: 1.25rem;
-    color: $mixed-main-colours;
+    color: #13986B;
     font-weight: bold;
 }
 .title-input {
@@ -27,7 +27,7 @@
         border-bottom-color: #444;
     }
     &:focus {
-        border-bottom-color: $mixed-main-colours;
-        color: $mixed-main-colours;
+        border-bottom-color: #13986B;
+        color: #13986B;
     }
 }
