@@ -71,9 +71,12 @@ export class AddFriendsComponent implements OnInit {
         this.scrollDisabled = false;
       }
       this.players.forEach(player => {
-        player.isInvitedToFriends = !!this.playerData.ownerInvitedToFriends.find(invitedPlayer => invitedPlayer.email === player.email);
-        player.isFriend = !!this.playerData.ownerFriends.find(invitedPlayer => invitedPlayer.email === player.email);
-        player.didInvite = !!this.playerData.ownerFriendsInvitations.find(invitatingPlayer => invitatingPlayer.email === player.email);
+        player.isInvitedToFriends = !!this.playerData.ownerInvitedToFriends.find(
+        invitedPlayer => invitedPlayer.email === player.email || (invitedPlayer as any) === player.userProfile._id);
+        player.isFriend = !!this.playerData.ownerFriends.find(
+          invitedPlayer => invitedPlayer.email === player.email || (invitedPlayer as any) === player.userProfile._id);
+        player.didInvite = !!this.playerData.ownerFriendsInvitations.find(
+          invitatingPlayer => invitatingPlayer.email === player.email || (invitatingPlayer as any) === player.userProfile._id);
       });
     });
   }

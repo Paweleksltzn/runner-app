@@ -8,8 +8,8 @@ const jwtManager = require('../auth-guards/jwt-managment');
 const User = require('../models/user');
 
 router.post('/signup', [
-    check('name').isLength({ min: 1 }).withMessage('Podaj imie'),
-    check('surname').isLength({ min: 1 }).withMessage('Podaj nazwisko'),
+    check('name').isLength({ min: 3 }).withMessage('Podaj prawidłowe imie'),
+    check('surname').isLength({ min: 3 }).withMessage('Podaj prawidłowe nazwisko'),
     check('email').isEmail().withMessage('Podaj poprawny adres email').normalizeEmail()
     .custom((value, { req }) => {
         return User.findOne({ email: value }).then(userDoc => {

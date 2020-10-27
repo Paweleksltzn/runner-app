@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ModalController } from '@ionic/angular';
 import { PolicyComponent } from './policy/policy.component';
+import { charsTypes } from 'src/app/shared/entitys/chars-guard-directive-types';
 
 @Component({
   selector: 'app-registration',
@@ -15,6 +16,7 @@ export class RegistrationComponent implements OnInit {
   public authForm: FormGroup;
   public validationMessage = '';
   public messageClass = '';
+  charsTypes = charsTypes;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private modalController: ModalController) { }
 
@@ -67,6 +69,17 @@ export class RegistrationComponent implements OnInit {
         }
       }
     );
+  }
+
+  normalizaNameAndSurname() {
+    this.authForm.patchValue({
+      name: this.transformStringToStartWithCapitalThenLower(this.authForm.controls.name.value),
+      surname: this.transformStringToStartWithCapitalThenLower(this.authForm.controls.surname.value)
+    });
+  }
+
+  transformStringToStartWithCapitalThenLower(stringToTransform: string) {
+    return `${stringToTransform.substr(0, 1).toUpperCase()}${stringToTransform.substr(1, stringToTransform.length).toLowerCase()}`;
   }
 
 }
