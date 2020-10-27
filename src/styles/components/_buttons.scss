@@ -31,22 +31,24 @@
     }
 }
 .short-button.short-button-primary {
-    background: $green-teal-gradient;
+    background: $tertiary-color;
+    color: white;
     &::after {
-        background: $green-teal-gradient;
+        background: $tertiary-color;
     }
 }
 .short-button.short-button-secondary {
-    background: $green-blue-gradient;
+    background: $tertiary-color;
+    color: white;
     &::after {
-        background: $green-blue-gradient;
+        background: $tertiary-color;
     }
 }
 .short-button.short-button-tertiary {
-    background: $red-gradient;
+    background: $secondary-color;
     color: white;
     &::after {
-        background: $red-gradient;
+        background: $secondary-color;
     }
 }
 .short-button.short-button-tertiary-outline {
