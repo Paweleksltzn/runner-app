@@ -61,7 +61,7 @@ export class SingleWorkoutComponent implements OnInit {
 
    private loadViewHeight() {
     this.platform.ready().then((readySource) => {
-      this.deviceHeight = this.platform.height() - 169;
+      this.deviceHeight = this.platform.height() - 56;
     });
   }
 
