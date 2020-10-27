@@ -14,13 +14,13 @@
             <ion-col>
               <div class="name-surname-cont">
                 <div class="group-reg-2">      
-                  <input class ="reg-input-2" type="text" required formControlName="name">
+                  <input class ="reg-input-2" type="text" minlength="3" required formControlName="name" (input)="normalizaNameAndSurname()" appInputCharsGuard [charFilterType]="charsTypes.letterChar">
                   <span class="highlight"></span>
                   <span class="bar-name"></span>
                   <label>Imie</label>
                 </div>
                 <div class="group-reg-2-right">      
-                  <input class ="reg-input-2" type="text" required formControlName="surname">
+                  <input class ="reg-input-2" type="text" required minlength="3" formControlName="surname" (input)="normalizaNameAndSurname()" appInputCharsGuard [charFilterType]="charsTypes.letterChar">
                   <span class="highlight"></span>
                  <span class="bar-name"></span>
                   <label>Nazwisko</label>
@@ -77,12 +77,14 @@
             </ion-row>
             <ion-row>
               <ion-col> 
+                <div class="response-container">
+                  <span class="response" *ngIf="validationMessage" [ngClass]="messageClass"> {{validationMessage}} </span>    
+                </div>
                 <div class="has-account">
                   <span class="has-account-message">Masz już konto?  
                     <span class="has-account-login" routerLink="../login" routerLinkActive="active"> Zaloguj się </span> 
                   </span>
                 </div>
-                <p class="response" *ngIf="validationMessage" [ngClass]="messageClass"> {{validationMessage}} </p>    
                 <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w 
                   <span class="policy" (click)="openPolicy()">regulaminie</span>
                 </div>

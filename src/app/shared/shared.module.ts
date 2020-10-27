@@ -7,9 +7,10 @@ import { SingleWorkoutModule } from './components/single-workout/singleWorkoutMo
 import { ToastGeneratorService } from './services/toast-generator.service';
 import { StorageService } from './services/storage.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { InputCharsGuardDirective } from './directives/input-chars-guard.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [InputCharsGuardDirective, InputCharsGuardDirective],
   imports: [
     CommonModule,
     IonicModule,
@@ -18,7 +19,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     SingleWorkoutModule
   ],
   exports: [
-    SingleWorkoutModule
+    SingleWorkoutModule,
+    InputCharsGuardDirective
   ],
   providers: [
     AlertController,
