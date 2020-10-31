@@ -8,7 +8,7 @@ const jwtManager = require('../auth-guards/jwt-managment');
 const User = require('../models/user');
 
 router.post('/signup', [
-    check('name').isLength({ min: 3 }).withMessage('Podaj prawidłowe imie'),
+    check('name').isLength({ min: 3 }).withMessage('Podaj prawidłowe imię'),
     check('surname').isLength({ min: 3 }).withMessage('Podaj prawidłowe nazwisko'),
     check('email').isEmail().withMessage('Podaj poprawny adres email').normalizeEmail()
     .custom((value, { req }) => {
@@ -29,7 +29,7 @@ router.post('/signup', [
         }
         return true;
     }),
-    check('password').isLength({ min: 8 }).withMessage('Haslo musi miec conajmniej 8 znakow'),
+    check('password').isLength({ min: 8 }).withMessage('Hasło musi mieć co najmniej 8 znaków'),
     check('confirmedPassword').custom((value, { req }) => {
         if (value !== req.body.password) {
             throw new Error('Hasła muszą być identyczne!');
