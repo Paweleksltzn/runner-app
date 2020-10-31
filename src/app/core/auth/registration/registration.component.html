@@ -17,7 +17,7 @@
                   <input class ="reg-input-2" type="text" minlength="3" required formControlName="name" (input)="normalizaNameAndSurname()" appInputCharsGuard [charFilterType]="charsTypes.letterChar">
                   <span class="highlight"></span>
                   <span class="bar-name"></span>
-                  <label>Imie</label>
+                  <label>Imię</label>
                 </div>
                 <div class="group-reg-2-right">      
                   <input class ="reg-input-2" type="text" required minlength="3" formControlName="surname" (input)="normalizaNameAndSurname()" appInputCharsGuard [charFilterType]="charsTypes.letterChar">
@@ -72,7 +72,7 @@
             </ion-row>
             <ion-row>
               <ion-col> 
-                <ion-button expand="block" class="reg-submit" type="submit">Zarejstruj się</ion-button>
+                <ion-button expand="block" class="reg-submit" type="submit">Zarejestruj się</ion-button>
               </ion-col>
             </ion-row>
             <ion-row>
@@ -85,7 +85,7 @@
                     <span class="has-account-login" routerLink="../login" routerLinkActive="active"> Zaloguj się </span> 
                   </span>
                 </div>
-                <div class="reg-policy">Rejstrując się do naszego seriwsu zgadzasz się na warunki podane w 
+                <div class="reg-policy">Rejestrując się do naszego serwisu zgadzasz się na warunki podane w 
                   <span class="policy" (click)="openPolicy()">regulaminie</span>
                 </div>
               </ion-col>
