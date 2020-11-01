@@ -1,8 +1,8 @@
-.group 			  { 
+.group { 
     position:relative; 
     margin-bottom: 2.5rem;
   }
-  input 	{
+  input {
     background-color: transparent;
     font-size:18px;
     padding:10px 10px 10px 5px;
@@ -45,7 +45,7 @@
   .bar-name{
     position:relative; 
     display:block; 
-    width:7.125rem; 
+    width:8.75rem; 
   }
   .bar:before, .bar:after , .bar-name:before, .bar-name:after	{
     content:'';
