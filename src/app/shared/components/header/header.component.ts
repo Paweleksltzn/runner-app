@@ -22,6 +22,8 @@ export class HeaderComponent implements OnInit {
   public titlEditable = false;
   @Input()
   public isProfileTab = false;
+  @Input()
+  public isNotificationsTab = false;
   @Output()
   public titleChanged = new EventEmitter();
   constructor(public router: Router, private store: Store<Reducers>) { }

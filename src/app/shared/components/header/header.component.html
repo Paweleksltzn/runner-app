@@ -1,12 +1,12 @@
 <ion-header [ngClass]="{'profile-header': isProfileTab}">
-  <ion-toolbar ngDefaultControl name="toolbar" class="header__bar" [(ngModel)]="isProfileTab" [ngClass]="{'profile-tab': isProfileTab}">
+  <ion-toolbar ngDefaultControl name="toolbar" class="header__bar" [(ngModel)]="isNotificationsTab" [(ngModel)]="isProfileTab" [ngClass]="{'profile-tab': isProfileTab}">
     <ion-buttons slot="start" >
       <app-menu-button  [isProfileTabButton]=" isProfileTab" *ngIf="!backButtonVisible"></app-menu-button>
       <ion-back-button defaultHref="my-workouts" *ngIf="backButtonVisible"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ng-container [ngTemplateOutlet]="additionalTemplate"></ng-container>
-      <ion-button routerLink="/notifications" class="short-button short-button-primary">
+      <ion-button *ngIf="!isNotificationsTab" routerLink="/notifications" class="short-button short-button-primary">
         <img [src]="isProfileTab ? 'assets/custom_icons/svg/notification-profile.svg' : 'assets/custom_icons/svg/notification.svg'" class="notify">
         <span class="notifications__amount" *ngIf="notDisplayedNotificationsAmount > 0">{{ notDisplayedNotificationsAmount }}</span>
       </ion-button>
