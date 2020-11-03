@@ -48,11 +48,8 @@ export class PassChangeComponent implements OnInit {
       });
     } else if (this.passForm.value.pass !== this.passForm.value.passChk){
         this.errorMessage = 'Wpisane hasła muszą być takie same';
-        if(!this.isFormValid){
-          this.errorMessage = 'Hasło musi zawierać co najmniej 8 znaków w tym minimum: 1 duża literę, 1 małą literę, 1 cyfrę, 1 znak specjalny';
-        }
     } else {
-      this.errorMessage = 'Hasło musi zawierać co najmniej 8 znaków w tym minimum: 1 duża literę, 1 małą literę, 1 cyfrę, 1 znak specjalny';
+        this.errorMessage = 'Hasło musi zawierać co najmniej 8 znaków w tym minimum: 1 duża literę, 1 małą literę, 1 cyfrę, 1 znak specjalny';
     }
   }
 
