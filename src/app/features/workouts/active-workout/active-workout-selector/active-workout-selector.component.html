@@ -13,7 +13,7 @@
   <ion-grid >
     <ion-row *ngIf="selectedWorkout" class="ion-justify-content-around">
       <ion-col size="auto"><p class="workout__container--info">Liczba ćwiczeń: <span class="amount">{{ selectedWorkout.excercises.length }}</span> </p></ion-col>
-      <ion-col size="auto"><p class="workout__container--info">Liczba seri: <span class="amount">{{ calcSeriesAmount(selectedWorkout) }}</span> </p></ion-col>
+      <ion-col size="auto"><p class="workout__container--info">Liczba serii: <span class="amount">{{ calcSeriesAmount(selectedWorkout) }}</span> </p></ion-col>
     </ion-row>
   </ion-grid>
   <ion-button class="start-training" (click)="startTraining()">Rozpocznij trening</ion-button>

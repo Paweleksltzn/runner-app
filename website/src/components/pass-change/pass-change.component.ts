@@ -34,8 +34,10 @@ export class PassChangeComponent implements OnInit {
       token: this.tokenString
     };
     this.isFormValid = this.passForm.valid;
+    this.errorMessage = '';
     if (this.isFormValid && this.passForm.value.pass === this.passForm.value.passChk ) {
       this.passwordService.changedPassword(password).subscribe((res: any) => {
+        this.errorMessage = '';
         this.successMessage = 'Hasło zmienione pomyślnie';
       },
       err => {
@@ -44,15 +46,17 @@ export class PassChangeComponent implements OnInit {
           this.router.navigateByUrl('/error');
         }
       });
+    } else if (this.passForm.value.pass !== this.passForm.value.passChk){
+        this.errorMessage = 'Wpisane hasła muszą być takie same';
     } else {
-      this.isFormValid = false;
+        this.errorMessage = 'Hasło musi zawierać co najmniej 8 znaków w tym minimum: 1 duża literę, 1 małą literę, 1 cyfrę, 1 znak specjalny';
     }
   }
 
   public createForm() {
     this.passForm = this.fb.group({
-       pass: ['', [Validators.required, Validators.minLength(8)]],
-       passChk: ['', [Validators.required, Validators.minLength(8)]]
+       pass: ['', [Validators.required, Validators.pattern('^(?=.*?[A-ZĄĆĘŁŃÓŚŹŻ])(?=.*?[a-ząćęłńóśźż])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
+       passChk: ['', [Validators.required, Validators.pattern('^(?=.*?[A-ZĄĆĘŁŃÓŚŹŻ])(?=.*?[a-ząćęłńóśźż])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
     });
   }
   }

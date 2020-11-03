@@ -62,18 +62,18 @@ $primary-kolor2:#555;
     }
 }
 .group-reg { 
-    position:relative; 
-    margin-bottom:30px; 
+    position: relative; 
+    margin-bottom: 30px; 
   }
 .group-reg-2{
-    position:relative; 
-    margin-bottom:30px; 
+    position: relative; 
+    margin-bottom: 30px; 
     width: 40vw;
     &-right {
-        position:relative; 
-        margin-bottom:30px; 
+        position: relative; 
+        margin-bottom: 30px; 
         width: 40vw;
-        margin-left:2vw;
+        margin-left: 2vw;
     }
     
 }
@@ -88,7 +88,7 @@ $primary-kolor2:#555;
 .sex-m , .sex-w {
     width: 50%;
     height: 100%;
-    text-align:center;
+    text-align: center;
     font-size: 2rem;
     transition: all .5s;
 }
@@ -96,7 +96,7 @@ $primary-kolor2:#555;
     color: #FB7D4E;
 }
 .reg-policy{
-    text-align:center;
+    text-align: center;
     font-size: 11px;
     margin-top: 2rem;
 }
@@ -109,17 +109,17 @@ $primary-kolor2:#555;
     cursor: pointer;
 }
 .reg-input-2{
-    width:40vw;
-    color:$primary-kolor2;
+    width: 8.75rem;
+    color: $primary-kolor2;
 }
 
 .reg-input{
-    color:$primary-kolor2;
+    color: $primary-kolor2;
     &:focus{
         
-        -webkit-animation:inputHighlighter 0.1s ease;
-        -moz-animation:inputHighlighter 0.1s ease;
-        animation:inputHighlighter 0.1s ease;
+        -webkit-animation: inputHighlighter 0.1s ease;
+        -moz-animation: inputHighlighter 0.1s ease;
+        animation: inputHighlighter 0.1s ease;
     }
 }
 .response {
