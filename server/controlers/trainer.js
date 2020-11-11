@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const UserProfile = require('../models/userProfile');
-
+const achievmentsController = require('../util/achievements');
 const jwtManagment = require('../auth-guards/jwt-managment');
 
 exports.setTrainer = async function(req, res, next) {
