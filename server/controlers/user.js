@@ -5,6 +5,7 @@ const Notification = require('../models/notification');
 const notificationsFactory = require('../util/notifications-factory');
 const notificationsOptions = require('../enums/notificationsOptions');
 const socketEvents = require('../util/socketEvents');
+const achievmentsController = require('../util/achievements');
 const fs = require('fs');
 
 exports.addFriend = async function(req, res, next) {
