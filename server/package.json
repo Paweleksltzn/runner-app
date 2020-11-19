@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "missin-dependencies": "npm install nodemailer bcrypt express-validator jsonwebtoken mongoose multer"
   },
   "author": "",
   "license": "ISC",
